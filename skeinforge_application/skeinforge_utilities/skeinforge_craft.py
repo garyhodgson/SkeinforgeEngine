@@ -20,9 +20,9 @@ import sys
 import time
 import re
 from config import config
+from datetime import timedelta
 import logging
 import traceback
-
 
 __author__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
 __date__ = '$Date: 2008/21/04 $'
@@ -52,11 +52,10 @@ def getChainTextFromProcedures(fileName, procedures, text):
 		if craftModule != None:
 			text = craftModule.getCraftedText(fileName, text)
 			if text == '':
-				print('Warning, the text was not recognized in getChainTextFromProcedures in skeinforge_craft for')
-				print(fileName)
+				logger.warning('The text was not recognized in getChainTextFromProcedures in skeinforge_craft for %s',fileName)
 				return ''
 			if gcodec.isProcedureDone( text, procedure ):
-				print('%s procedure took %s.' % (procedure.capitalize(), euclidean.getDurationString(time.time() - lastProcedureTime)))
+				logger.info('%s procedure took %s seconds.', procedure.capitalize(), timedelta(seconds=time.time()-lastProcedureTime).total_seconds())
 				lastProcedureTime = time.time()
 	return text
 

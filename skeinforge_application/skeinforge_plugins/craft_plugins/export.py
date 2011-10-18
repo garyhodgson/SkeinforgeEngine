@@ -1,5 +1,4 @@
 """
-This page is in the table of contents.
 Export is a script to pick an export plugin and optionally print the output to a file.
 """
 
