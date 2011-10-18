@@ -2,20 +2,14 @@
 Raft is a script to create a raft, elevate the nozzle and set the temperature.
 """
 
-from fabmetheus_utilities.fabmetheus_tools import fabmetheus_interpret
 from fabmetheus_utilities.geometry.solids import triangle_mesh
 from fabmetheus_utilities.vector3 import Vector3
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import gcodec
 from fabmetheus_utilities import intercircle
-from fabmetheus_utilities import settings
-from skeinforge_application.skeinforge_utilities import skeinforge_craft
-from skeinforge_application.skeinforge_utilities import skeinforge_polyfile
-from skeinforge_application.skeinforge_utilities import skeinforge_profile
 import math
 import os
-import sys
 from config import config
 import logging
 
@@ -534,8 +528,12 @@ class RaftSkein:
 
 	def getCraftedGcode(self, gcodeText):
 		'Parse gcode text and store the raft gcode.'
-		self.supportEndLines = settings.getLinesInAlterationsOrGivenDirectory(self.nameOfSupportEndFile)
-		self.supportStartLines = settings.getLinesInAlterationsOrGivenDirectory(self.nameOfSupportStartFile)
+		
+		if self.supportChoice != 'None':
+			absoluteSupportEndFilePath = os.path.join( archive.getSkeinforgePath('alterations'),  self.nameOfSupportEndFile)
+			self.supportEndLines = archive.getFileText(absoluteSupportEndFilePath)
+			absoluteSupportStartFilePath = os.path.join( archive.getSkeinforgePath('alterations'),  self.nameOfSupportStartFile)
+			self.supportStartLines = archive.getFileText(absoluteSupportStartFilePath)
 		self.lines = archive.getTextLines(gcodeText)
 		self.parseInitialization()
 		self.temperatureChangeTimeBeforeRaft = 0.0
@@ -709,7 +707,7 @@ class RaftSkein:
 			self.extrusionStart = False
 			self.gcode.addLine(self.operatingLayerEndLine)
 		elif firstWord == '(<layer>':
-			settings.printProgress(self.layerIndex, 'raft')
+			logger.info('%s layer count %s', name, self.layerIndex + 1)
 			self.layerIndex += 1
 			boundaryLayer = None
 			layerZ = self.extrusionTop + float(splitLine[1])
