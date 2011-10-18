@@ -15,8 +15,6 @@ from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import gcodec
 from fabmetheus_utilities import settings
 from skeinforge_application.skeinforge_utilities import skeinforge_analyze
-from skeinforge_application.skeinforge_utilities import skeinforge_polyfile
-from skeinforge_application.skeinforge_utilities import skeinforge_profile
 import os
 import sys
 import time
@@ -91,27 +89,6 @@ def writeChainTextWithNounMessage(fileName, procedure, shouldAnalyze=True):
 	logger.info('It took %s to craft the file.', euclidean.getDurationString(time.time() - startTime))
 	return window
 
-
-def writeSVGTextWithNounMessage(fileName, repository, shouldAnalyze=True):
-	'Get and write an svg text and print messages.'
-	print('')
-	print('The %s tool is parsing the file:' % repository.lowerName)
-	print(os.path.basename(fileName))
-	print('')
-	startTime = time.time()
-	fileNameSuffix = fileName[: fileName.rfind('.')] + '_' + repository.lowerName + '.svg'
-	craftText = getChainText(fileName, repository.lowerName)
-	if craftText == '':
-		return
-	archive.writeFileText(fileNameSuffix, craftText)
-	print('')
-	print('The %s tool has created the file:' % repository.lowerName)
-	print(fileNameSuffix)
-	print('')
-	print('It took %s to craft the file.' % euclidean.getDurationString(time.time() - startTime))
-	if shouldAnalyze:
-		settings.getReadRepository(repository)
-		settings.openSVGPage(fileNameSuffix, repository.svgViewer.value)
 
 def getProcedures( procedure, text ):
 	"Get the procedures up to and including the given procedure."

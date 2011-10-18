@@ -1,4 +1,3 @@
-#! /usr/bin/env python
 """
 This page is in the table of contents.
 Inset will inset the outside outlines by half the perimeter width, and outset the inside outlines by the same amount.

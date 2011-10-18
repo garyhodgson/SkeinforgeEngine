@@ -85,7 +85,7 @@ def writeOutput(fileName, shouldAnalyze=True):
 	if config.getboolean(name, 'gcode.penultimate.save'):
 		archive.writeFileText(fileNamePenultimate, gcodeText)
 		filePenultimateWritten = True
-		print('The penultimate file is saved as ' + archive.getSummarizedFileName(fileNamePenultimate))
+		logger.info('The penultimate file is saved as %s', fileNamePenultimate)
 	exportGcode = getCraftedTextFromText(gcodeText)
 	window = None
 	if shouldAnalyze:

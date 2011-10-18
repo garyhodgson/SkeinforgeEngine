@@ -1,4 +1,3 @@
-#! /usr/bin/env python
 """
 This page is in the table of contents.
 Preface converts the svg slices into gcode extrusion layers, optionally prefaced with some gcode commands.
@@ -19,6 +18,7 @@ __date__ = '$Date: 2008/02/05 $'
 __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
 
 logger = logging.getLogger(__name__)
+name = __name__
 
 def getCraftedText(fileName, text=''):
 	"Preface and convert an svg file or text."
