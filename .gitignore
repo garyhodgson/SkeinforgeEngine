@@ -1,0 +1,5 @@
+*.pyc
+*.gcode
+sfact_profiles
+*.stl
+*.STL
