@@ -8,17 +8,12 @@ try:
 except:
 	pass
 
-from fabmetheus_utilities.fabmetheus_tools import fabmetheus_interpret
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import gcodec
 from fabmetheus_utilities import intercircle
 from fabmetheus_utilities import settings
-from skeinforge_application.skeinforge_utilities import skeinforge_craft
-from skeinforge_application.skeinforge_utilities import skeinforge_polyfile
-from skeinforge_application.skeinforge_utilities import skeinforge_profile
 import math
-import sys
 from config import config
 import logging
 
@@ -37,46 +32,6 @@ def getCraftedText(fileName, text):
 	if not config.getboolean(name, 'active'):
 		return gcodeText
 	return CombSkein().getCraftedGcode(gcodeText)
-
-def getInsideness(path, loop):
-	"Get portion of the path which is inside the loop."
-	if len(path) < 2:
-		return 0.0
-	pathLength = euclidean.getPathLength(path)
-	if pathLength <= 0.0:
-		return 0.0
-	incrementRatio = 0.017
-	increment = incrementRatio * pathLength
-	oldPoint = path[0]
-	numberOfPointsInside = float(euclidean.isPointInsideLoop(loop, oldPoint))
-	for point in path[1 :]:
-		segment = point - oldPoint
-		distance = abs(segment)
-		numberOfPosts = int(math.ceil(distance / increment))
-		if numberOfPosts > 0:
-			segmentIncrement = segment / float(numberOfPosts)
-			for post in xrange(numberOfPosts):
-				postPoint = oldPoint + float(post) * segmentIncrement
-				numberOfPointsInside += float(euclidean.isPointInsideLoop(loop, postPoint))
-			oldPoint = point
-	return incrementRatio * numberOfPointsInside
-
-def getPathsByIntersectedLoop(begin, end, loop):
-	"Get both paths along the loop from the point nearest to the begin to the point nearest to the end."
-	nearestBeginDistanceIndex = euclidean.getNearestDistanceIndex(begin, loop)
-	nearestEndDistanceIndex = euclidean.getNearestDistanceIndex(end, loop)
-	beginIndex = (nearestBeginDistanceIndex.index + 1) % len(loop)
-	endIndex = (nearestEndDistanceIndex.index + 1) % len(loop)
-	nearestBegin = euclidean.getNearestPointOnSegment(loop[ nearestBeginDistanceIndex.index ], loop[ beginIndex ], begin)
-	nearestEnd = euclidean.getNearestPointOnSegment(loop[ nearestEndDistanceIndex.index ], loop[ endIndex ], end)
-	clockwisePath = [ nearestBegin ]
-	widdershinsPath = [ nearestBegin ]
-	if nearestBeginDistanceIndex.index != nearestEndDistanceIndex.index:
-		widdershinsPath += euclidean.getAroundLoop(beginIndex, endIndex, loop)
-		clockwisePath += euclidean.getAroundLoop(endIndex, beginIndex, loop)[: :-1]
-	clockwisePath.append(nearestEnd)
-	widdershinsPath.append(nearestEnd)
-	return [ clockwisePath, widdershinsPath ]
 
 class CombSkein:
 	"A class to comb a skein of extrusions."
@@ -170,9 +125,26 @@ class CombSkein:
 		pathAround[-1] = jumpStartPoint
 		return True
 
+	def getPathsByIntersectedLoop(self, begin, end, loop):
+		"Get both paths along the loop from the point nearest to the begin to the point nearest to the end."
+		nearestBeginDistanceIndex = euclidean.getNearestDistanceIndex(begin, loop)
+		nearestEndDistanceIndex = euclidean.getNearestDistanceIndex(end, loop)
+		beginIndex = (nearestBeginDistanceIndex.index + 1) % len(loop)
+		endIndex = (nearestEndDistanceIndex.index + 1) % len(loop)
+		nearestBegin = euclidean.getNearestPointOnSegment(loop[ nearestBeginDistanceIndex.index ], loop[ beginIndex ], begin)
+		nearestEnd = euclidean.getNearestPointOnSegment(loop[ nearestEndDistanceIndex.index ], loop[ endIndex ], end)
+		clockwisePath = [ nearestBegin ]
+		widdershinsPath = [ nearestBegin ]
+		if nearestBeginDistanceIndex.index != nearestEndDistanceIndex.index:
+			widdershinsPath += euclidean.getAroundLoop(beginIndex, endIndex, loop)
+			clockwisePath += euclidean.getAroundLoop(endIndex, beginIndex, loop)[: :-1]
+		clockwisePath.append(nearestEnd)
+		widdershinsPath.append(nearestEnd)
+		return [ clockwisePath, widdershinsPath ]
+
 	def getPathBetween(self, loop, points):
 		"Add a path between the perimeter and the fill."
-		paths = getPathsByIntersectedLoop(points[1], points[2], loop)
+		paths = self.getPathsByIntersectedLoop(points[1], points[2], loop)
 		shortestPath = paths[int(euclidean.getPathLength(paths[1]) < euclidean.getPathLength(paths[0]))]
 		if len(shortestPath) < 2:
 			return shortestPath
