@@ -1,60 +1,6 @@
 """
-This page is in the table of contents.
 Stretch is a script to stretch the threads to partially compensate for filament shrinkage when extruded.
-
-The stretch manual page is at:
-http://fabmetheus.crsndoo.com/wiki/index.php/Skeinforge_Stretch
-
-All the defaults assume that the thread sequence choice setting in fill is the perimeter being extruded first, then the loops, then the infill.  If the thread sequence choice is different, the optimal thread parameters will also be different.  In general, if the infill is extruded first, the infill would have to be stretched more so that even after the filament shrinkage, it would still be long enough to connect to the loop or perimeter.
-
-==Operation==
-The default 'Activate Stretch' checkbox is off.  When it is on, the functions described below will work, when it is off, the functions will not be called.
-
-==Settings==
-===Loop Stretch Over Perimeter Width===
-Default is 0.1.
-
-Defines the ratio of the maximum amount the loop aka inner shell threads will be stretched compared to the perimeter width, in general this value should be the same as the 'Perimeter Outside Stretch Over Perimeter Width' setting.
-
-===Path Stretch Over Perimeter Width===
-Default is zero.
-
-Defines the ratio of the maximum amount the threads which are not loops, like the infill threads, will be stretched compared to the perimeter width.
-
-===Perimeter===
-====Perimeter Inside Stretch Over Perimeter Width====
-Default is 0.32.
-
-Defines the ratio of the maximum amount the inside perimeter thread will be stretched compared to the perimeter width, this is the most important setting in stretch.  The higher the value the more it will stretch the perimeter and the wider holes will be.  If the value is too small, the holes could be drilled out after fabrication, if the value is too high, the holes would be too wide and the part would have to junked.
-
-====Perimeter Outside Stretch Over Perimeter Width====
-Default is 0.1.
-
-Defines the ratio of the maximum amount the outside perimeter thread will be stretched compared to the perimeter width, in general this value should be around a third of the 'Perimeter Inside Stretch Over Perimeter Width' setting.
-
-===Stretch from Distance over Perimeter Width===
-Default is two.
-
-In general, stretch will widen holes and push corners out.  The algorithm works by checking at each turning point on the extrusion path what the direction of the thread is at a distance of 'Stretch from Distance over Perimeter Width' times the perimeter width, on both sides, and moves the thread in the opposite direction.  The magnitude of the stretch increases with the amount that the direction of the two threads is similar and by the '..Stretch Over Perimeter Width' ratio.  In practice the filament contraction will be similar but different from the algorithm, so even once the optimal parameters are determined, the stretch script will not be able to eliminate the inaccuracies caused by contraction, but it should reduce them.
-
-==Examples==
-The following examples stretch the file Screw Holder Bottom.stl.  The examples are run in a terminal in the folder which contains Screw Holder Bottom.stl and stretch.py.
-
-> python stretch.py
-This brings up the stretch dialog.
-
-> python stretch.py Screw Holder Bottom.stl
-The stretch tool is parsing the file:
-Screw Holder Bottom.stl
-..
-The stretch tool has created the file:
-.. Screw Holder Bottom_stretch.gcode
-
 """
-
-from __future__ import absolute_import
-#Init has to be imported first because it has code to workaround the python bug where relative imports don't work if the module is imported as a main module.
-import __init__
 
 from fabmetheus_utilities.fabmetheus_tools import fabmetheus_interpret
 from fabmetheus_utilities.vector3 import Vector3
@@ -67,35 +13,24 @@ from skeinforge_application.skeinforge_utilities import skeinforge_craft
 from skeinforge_application.skeinforge_utilities import skeinforge_polyfile
 from skeinforge_application.skeinforge_utilities import skeinforge_profile
 import sys
-
+from config import config
+import logging
 
 __author__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
 __date__ = '$Date: 2008/21/04 $'
 __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
 
+logger = logging.getLogger(__name__)
+name = __name__
 
-#maybe speed up feedRate option
-def getCraftedText( fileName, gcodeText, stretchRepository = None ):
+def getCraftedText( fileName, gcodeText):
 	"Stretch a gcode linear move text."
-	return getCraftedTextFromText( archive.getTextIfEmpty(fileName, gcodeText), stretchRepository )
-
-def getCraftedTextFromText( gcodeText, stretchRepository = None ):
-	"Stretch a gcode linear move text."
+	gcodeText = archive.getTextIfEmpty(fileName, gcodeText)
 	if gcodec.isProcedureDoneOrFileIsEmpty( gcodeText, 'stretch'):
 		return gcodeText
-	if stretchRepository == None:
-		stretchRepository = settings.getReadRepository( StretchRepository() )
-	if not stretchRepository.activateStretch.value:
+	if not config.getboolean(name, 'active'):
 		return gcodeText
-	return StretchSkein().getCraftedGcode( gcodeText, stretchRepository )
-
-def getNewRepository():
-	'Get new repository.'
-	return StretchRepository()
-
-def writeOutput(fileName, shouldAnalyze=True):
-	"Stretch a gcode linear move file.  Chain stretch the gcode if it is not already stretched."
-	skeinforge_craft.writeChainTextWithNounMessage(fileName, 'stretch', shouldAnalyze)
+	return StretchSkein().getCraftedGcode( gcodeText)
 
 
 class LineIteratorBackward:
@@ -202,33 +137,6 @@ class LineIteratorForward:
 				return line
 		raise StopIteration, "You've reached the end of the line."
 
-
-class StretchRepository:
-	"A class to handle the stretch settings."
-	def __init__(self):
-		"Set the default settings, execute title & settings fileName."
-		skeinforge_profile.addListsToCraftTypeRepository('skeinforge_application.skeinforge_plugins.craft_plugins.stretch.html', self )
-		self.fileNameInput = settings.FileNameInput().getFromFileName( fabmetheus_interpret.getGNUTranslatorGcodeFileTypeTuples(), 'Open File for Stretch', self, '')
-		self.openWikiManualHelpPage = settings.HelpPage().getOpenFromAbsolute('http://fabmetheus.crsndoo.com/wiki/index.php/Skeinforge_Stretch')
-		self.activateStretch = settings.BooleanSetting().getFromValue('Activate Stretch to correct for diameter shrink in small diameter holes', self, False )
-		self.crossLimitDistanceOverPerimeterWidth = settings.FloatSpin().getFromValue( 3.0, 'Cross Limit Distance Over Perimeter Width (ratio):', self, 10.0, 5.0 )
-		self.loopStretchOverPerimeterWidth = settings.FloatSpin().getFromValue( 0.05, 'Loop Stretch Over Perimeter Width (ratio):', self, 0.25, 0.11 )
-		self.pathStretchOverPerimeterWidth = settings.FloatSpin().getFromValue( 0.0, 'Path Stretch Over Perimeter Width (ratio):', self, 0.2, 0.0 )
-		settings.LabelSeparator().getFromRepository(self)
-		settings.LabelDisplay().getFromName('- Perimeter -', self )
-		self.perimeterInsideStretchOverPerimeterWidth = settings.FloatSpin().getFromValue( 0.12, 'Perimeter Inside Stretch Over Perimeter Width (ratio):', self, 0.52, 0.32 )
-		self.perimeterOutsideStretchOverPerimeterWidth = settings.FloatSpin().getFromValue( 0.05, 'Perimeter Outside Stretch Over Perimeter Width (ratio):', self, 0.25, 0.1 )
-		settings.LabelSeparator().getFromRepository(self)
-		self.stretchFromDistanceOverPerimeterWidth = settings.FloatSpin().getFromValue( 1.0, 'Stretch From Distance Over Perimeter Width (ratio):', self, 3.0, 2.0 )
-		self.executeTitle = 'Stretch'
-
-	def execute(self):
-		"Stretch button has been clicked."
-		fileNames = skeinforge_polyfile.getFileOrDirectoryTypesUnmodifiedGcode(self.fileNameInput.value, fabmetheus_interpret.getImportPluginFileNames(), self.fileNameInput.wasCancelled)
-		for fileName in fileNames:
-			writeOutput(fileName)
-
-
 class StretchSkein:
 	"A class to stretch a skein of extrusions."
 	def __init__(self):
@@ -240,11 +148,18 @@ class StretchSkein:
 		self.lines = None
 		self.oldLocation = None
 		self.perimeterWidth = 0.4
+		
+		self.activateStretch = config.getboolean(name, 'active')
+		self.crossLimitDistanceOverPerimeterWidth = config.getfloat(name, 'cross.limit.distance.ratio')
+		self.loopStretchOverPerimeterWidth = config.getfloat(name, 'loop.stretch.ratio')
+		self.pathStretchOverPerimeterWidth = config.getfloat(name, 'path.stretch.ratio')
+		self.perimeterInsideStretchOverPerimeterWidth = config.getfloat(name, 'perimeter.inside.stretch.ratio')
+		self.perimeterOutsideStretchOverPerimeterWidth = config.getfloat(name, 'perimeter.outside.stretch.ratio')
+		self.stretchFromDistanceOverPerimeterWidth = config.getfloat(name, 'stretch.from.distance.ratio')
 
-	def getCraftedGcode( self, gcodeText, stretchRepository ):
+	def getCraftedGcode( self, gcodeText):
 		"Parse gcode text and store the stretch gcode."
 		self.lines = archive.getTextLines(gcodeText)
-		self.stretchRepository = stretchRepository
 		self.parseInitialization()
 		for self.lineIndex in xrange(self.lineIndex, len(self.lines)):
 			line = self.lines[self.lineIndex]
@@ -321,11 +236,8 @@ class StretchSkein:
 		locationComplex = location.dropAxis()
 		relativeStretch = self.getRelativeStretch( locationComplex, iteratorForward ) + self.getRelativeStretch( locationComplex, iteratorBackward )
 		relativeStretch *= 0.8
-#		print('relativeStretch')
-#		print( relativeStretch )
 		relativeStretch = self.getCrossLimitedStretch( relativeStretch, crossIteratorForward, locationComplex )
 		relativeStretch = self.getCrossLimitedStretch( relativeStretch, crossIteratorBackward, locationComplex )
-#		print( relativeStretch )
 		relativeStretchLength = abs( relativeStretch )
 		if relativeStretchLength > 1.0:
 			relativeStretch /= relativeStretchLength
@@ -343,7 +255,6 @@ class StretchSkein:
 				return False
 			if firstWord == 'M101':
 				return True
-#		print('This should never happen in isJustBeforeExtrusion in stretch, no activate or deactivate command was found for this thread.')
 		return False
 
 	def parseInitialization(self):
@@ -358,12 +269,12 @@ class StretchSkein:
 				return
 			elif firstWord == '(<perimeterWidth>':
 				perimeterWidth = float(splitLine[1])
-				self.crossLimitDistance = self.perimeterWidth * self.stretchRepository.crossLimitDistanceOverPerimeterWidth.value
-				self.loopMaximumAbsoluteStretch = self.perimeterWidth * self.stretchRepository.loopStretchOverPerimeterWidth.value
-				self.pathAbsoluteStretch = self.perimeterWidth * self.stretchRepository.pathStretchOverPerimeterWidth.value
-				self.perimeterInsideAbsoluteStretch = self.perimeterWidth * self.stretchRepository.perimeterInsideStretchOverPerimeterWidth.value
-				self.perimeterOutsideAbsoluteStretch = self.perimeterWidth * self.stretchRepository.perimeterOutsideStretchOverPerimeterWidth.value
-				self.stretchFromDistance = self.stretchRepository.stretchFromDistanceOverPerimeterWidth.value * perimeterWidth
+				self.crossLimitDistance = self.perimeterWidth * self.crossLimitDistanceOverPerimeterWidth
+				self.loopMaximumAbsoluteStretch = self.perimeterWidth * self.loopStretchOverPerimeterWidth
+				self.pathAbsoluteStretch = self.perimeterWidth * self.pathStretchOverPerimeterWidth
+				self.perimeterInsideAbsoluteStretch = self.perimeterWidth * self.perimeterInsideStretchOverPerimeterWidth
+				self.perimeterOutsideAbsoluteStretch = self.perimeterWidth * self.perimeterOutsideStretchOverPerimeterWidth
+				self.stretchFromDistance = self.stretchFromDistanceOverPerimeterWidth * perimeterWidth
 				self.threadMaximumAbsoluteStretch = self.pathAbsoluteStretch
 				self.crossLimitDistanceFraction = 0.333333333 * self.crossLimitDistance
 				self.crossLimitDistanceRemainder = self.crossLimitDistance - self.crossLimitDistanceFraction
@@ -400,14 +311,3 @@ class StretchSkein:
 		"Set the thread stretch to path stretch and is loop false."
 		self.isLoop = False
 		self.threadMaximumAbsoluteStretch = self.pathAbsoluteStretch
-
-
-def main():
-	"Display the stretch dialog."
-	if len(sys.argv) > 1:
-		writeOutput(' '.join(sys.argv[1 :]))
-	else:
-		settings.startMainLoopFromConstructor(getNewRepository())
-
-if __name__ == "__main__":
-	main()

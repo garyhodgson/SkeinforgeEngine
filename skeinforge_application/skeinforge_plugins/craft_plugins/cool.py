@@ -2,17 +2,11 @@
 Cool is a script to cool the shape.
 """
 
-from fabmetheus_utilities.fabmetheus_tools import fabmetheus_interpret
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import gcodec
 from fabmetheus_utilities import intercircle
-from fabmetheus_utilities import settings
-from skeinforge_application.skeinforge_utilities import skeinforge_craft
-from skeinforge_application.skeinforge_utilities import skeinforge_polyfile
-from skeinforge_application.skeinforge_utilities import skeinforge_profile
 import os
-import sys
 from config import config
 import logging
 
@@ -42,7 +36,7 @@ class CoolSkein:
 		self.highestZ = 1.0
 		self.isBridgeLayer = False
 		self.isExtruderActive = False
-		self.layerCount = settings.LayerCount()
+		self.layerCount = 0
 		self.lineIndex = 0
 		self.lines = None
 		self.multiplier = 1.0
@@ -137,8 +131,12 @@ class CoolSkein:
 
 	def getCraftedGcode(self, gcodeText):
 		'Parse gcode text and store the cool gcode.'
-		self.coolEndLines = settings.getLinesInAlterationsOrGivenDirectory(self.nameOfCoolEndFile)
-		self.coolStartLines = settings.getLinesInAlterationsOrGivenDirectory(self.nameOfCoolStartFile)
+		
+		absoluteCoolEndFilePath = os.path.join( archive.getSkeinforgePath('alterations'),  self.nameOfCoolEndFile)
+		self.coolEndLines = archive.getFileText(absoluteCoolEndFilePath,printWarning=False)
+		absoluteCoolStartFilePath = os.path.join( archive.getSkeinforgePath('alterations'),  self.nameOfCoolStartFile)
+		self.coolStartLines = archive.getFileText(absoluteCoolEndFilePath,printWarning=False)
+		
 		self.halfCorner = complex(self.minimumOrbitalRadius, self.minimumOrbitalRadius)
 		self.lines = archive.getTextLines(gcodeText)
 		self.minimumArea = 4.0 * self.minimumOrbitalRadius * self.minimumOrbitalRadius
@@ -223,7 +221,9 @@ class CoolSkein:
 		elif firstWord == '(<boundaryPoint>':
 			self.boundaryLoop.append(gcodec.getLocationFromSplitLine(None, splitLine).dropAxis())
 		elif firstWord == '(<layer>':
-			self.layerCount.printProgressIncrement('cool')
+			self.layerCount = self.layerCount +1
+			logger.info('layer: %s', self.layerCount)	
+			
 			self.gcode.addLine(line)
 			self.gcode.addLinesSetAbsoluteDistanceMode(self.coolStartLines)
 			layerTime = self.getLayerTime()

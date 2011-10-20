@@ -12,7 +12,6 @@ from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import gcodec
 from fabmetheus_utilities import intercircle
-from fabmetheus_utilities import settings
 import math
 from config import config
 import logging
@@ -43,7 +42,7 @@ class CombSkein:
 		self.gcode = gcodec.Gcode()
 		self.extruderActive = False
 		self.layer = None
-		self.layerCount = settings.LayerCount()
+		self.layerCount = 0
 		self.layerTable = {}
 		self.layerZ = None
 		self.lineIndex = 0
@@ -304,7 +303,8 @@ class CombSkein:
 		elif firstWord == '(</alteration>)':
 			self.isAlteration = False
 		elif firstWord == '(<layer>':
-			self.layerCount.printProgressIncrement('comb')
+			self.layerCount = self.layerCount + 1
+			logger.info('layer: %s', self.layerCount)
 			self.nextLayerZ = float(splitLine[1])
 			if self.layerZ == None:
 				self.layerZ = self.nextLayerZ
