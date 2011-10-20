@@ -1,42 +1,12 @@
 """
-This page is in the table of contents.
 Comb is a script to comb the extrusion hair of a gcode file.
-
-The comb manual page is at:
-http://fabmetheus.crsndoo.com/wiki/index.php/Skeinforge_Comb
-
-Comb bends the extruder travel paths around holes in the slices, to avoid stringers.  It moves the extruder to the inside of perimeters before turning the extruder on so any start up ooze will be inside the shape.
-
-==Operation==
-The default 'Activate Comb' checkbox is off.  When it is on, the functions described below will work, when it is off, the functions will not be called.
-
-==Settings==
-===Running Jump Space===
-Placeholder.
-
-==Examples==
-The following examples comb the file Screw Holder Bottom.stl.  The examples are run in a terminal in the folder which contains Screw Holder Bottom.stl and comb.py.
-
-> python comb.py
-This brings up the comb dialog.
-
-> python comb.py Screw Holder Bottom.stl
-The comb tool is parsing the file:
-Screw Holder Bottom.stl
-..
-The comb tool has created the file:
-.. Screw Holder Bottom_comb.gcode
-
 """
 
-from __future__ import absolute_import
 try:
 	import psyco
 	psyco.full()
 except:
 	pass
-#Init has to be imported first because it has code to workaround the python bug where relative imports don't work if the module is imported as a main module.
-import __init__
 
 from fabmetheus_utilities.fabmetheus_tools import fabmetheus_interpret
 from fabmetheus_utilities import archive
@@ -49,26 +19,24 @@ from skeinforge_application.skeinforge_utilities import skeinforge_polyfile
 from skeinforge_application.skeinforge_utilities import skeinforge_profile
 import math
 import sys
-
+from config import config
+import logging
 
 __author__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
 __date__ = '$Date: 2008/21/04 $'
 __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
 
+logger = logging.getLogger(__name__)
+name = __name__
 
-def getCraftedText( fileName, text, combRepository = None ):
+def getCraftedText(fileName, text):
 	"Comb a gcode linear move text."
-	return getCraftedTextFromText( archive.getTextIfEmpty(fileName, text), combRepository )
-
-def getCraftedTextFromText( gcodeText, combRepository = None ):
-	"Comb a gcode linear move text."
-	if gcodec.isProcedureDoneOrFileIsEmpty( gcodeText, 'comb'):
+	gcodeText = archive.getTextIfEmpty(fileName, text)
+	if gcodec.isProcedureDoneOrFileIsEmpty(gcodeText, name):
 		return gcodeText
-	if combRepository == None:
-		combRepository = settings.getReadRepository( CombRepository() )
-	if not combRepository.activateComb.value:
+	if not config.getboolean(name, 'active'):
 		return gcodeText
-	return CombSkein().getCraftedGcode( combRepository, gcodeText )
+	return CombSkein().getCraftedGcode(gcodeText)
 
 def getInsideness(path, loop):
 	"Get portion of the path which is inside the loop."
@@ -93,48 +61,22 @@ def getInsideness(path, loop):
 			oldPoint = point
 	return incrementRatio * numberOfPointsInside
 
-def getNewRepository():
-	'Get new repository.'
-	return CombRepository()
-
-def getPathsByIntersectedLoop( begin, end, loop ):
+def getPathsByIntersectedLoop(begin, end, loop):
 	"Get both paths along the loop from the point nearest to the begin to the point nearest to the end."
-	nearestBeginDistanceIndex = euclidean.getNearestDistanceIndex( begin, loop )
-	nearestEndDistanceIndex = euclidean.getNearestDistanceIndex( end, loop )
-	beginIndex = ( nearestBeginDistanceIndex.index + 1 ) % len(loop)
-	endIndex = ( nearestEndDistanceIndex.index + 1 ) % len(loop)
-	nearestBegin = euclidean.getNearestPointOnSegment( loop[ nearestBeginDistanceIndex.index ], loop[ beginIndex ], begin )
-	nearestEnd = euclidean.getNearestPointOnSegment( loop[ nearestEndDistanceIndex.index ], loop[ endIndex ], end )
+	nearestBeginDistanceIndex = euclidean.getNearestDistanceIndex(begin, loop)
+	nearestEndDistanceIndex = euclidean.getNearestDistanceIndex(end, loop)
+	beginIndex = (nearestBeginDistanceIndex.index + 1) % len(loop)
+	endIndex = (nearestEndDistanceIndex.index + 1) % len(loop)
+	nearestBegin = euclidean.getNearestPointOnSegment(loop[ nearestBeginDistanceIndex.index ], loop[ beginIndex ], begin)
+	nearestEnd = euclidean.getNearestPointOnSegment(loop[ nearestEndDistanceIndex.index ], loop[ endIndex ], end)
 	clockwisePath = [ nearestBegin ]
 	widdershinsPath = [ nearestBegin ]
 	if nearestBeginDistanceIndex.index != nearestEndDistanceIndex.index:
-		widdershinsPath += euclidean.getAroundLoop( beginIndex, endIndex, loop )
-		clockwisePath += euclidean.getAroundLoop( endIndex, beginIndex, loop )[: : -1]
-	clockwisePath.append( nearestEnd )
-	widdershinsPath.append( nearestEnd )
+		widdershinsPath += euclidean.getAroundLoop(beginIndex, endIndex, loop)
+		clockwisePath += euclidean.getAroundLoop(endIndex, beginIndex, loop)[: :-1]
+	clockwisePath.append(nearestEnd)
+	widdershinsPath.append(nearestEnd)
 	return [ clockwisePath, widdershinsPath ]
-
-def writeOutput(fileName, shouldAnalyze=True):
-	"Comb a gcode linear move file."
-	skeinforge_craft.writeChainTextWithNounMessage(fileName, 'comb', shouldAnalyze)
-
-
-class CombRepository:
-	"A class to handle the comb settings."
-	def __init__(self):
-		"Set the default settings, execute title & settings fileName."
-		skeinforge_profile.addListsToCraftTypeRepository('skeinforge_application.skeinforge_plugins.craft_plugins.comb.html', self )
-		self.fileNameInput = settings.FileNameInput().getFromFileName( fabmetheus_interpret.getGNUTranslatorGcodeFileTypeTuples(), 'Open File for Comb', self, '')
-		self.openWikiManualHelpPage = settings.HelpPage().getOpenFromAbsolute('http://fabmetheus.crsndoo.com/wiki/index.php/Skeinforge_Comb')
-		self.activateComb = settings.BooleanSetting().getFromValue('Activate Comb if you cant stop the extruder stringing', self, True )
-		self.executeTitle = 'Comb'
-
-	def execute(self):
-		"Comb button has been clicked."
-		fileNames = skeinforge_polyfile.getFileOrDirectoryTypesUnmodifiedGcode(self.fileNameInput.value, fabmetheus_interpret.getImportPluginFileNames(), self.fileNameInput.wasCancelled)
-		for fileName in fileNames:
-			writeOutput(fileName)
-
 
 class CombSkein:
 	"A class to comb a skein of extrusions."
@@ -157,18 +99,18 @@ class CombSkein:
 		self.operatingFeedRatePerMinute = None
 		self.travelFeedRateMinute = None
 
-	def addGcodePathZ( self, feedRateMinute, path, z ):
+	def addGcodePathZ(self, feedRateMinute, path, z):
 		"Add a gcode path, without modifying the extruder, to the output."
 		for point in path:
 			self.gcode.addGcodeMovementZWithFeedRate(feedRateMinute, point, z)
 
-	def addIfTravel( self, splitLine ):
+	def addIfTravel(self, splitLine):
 		"Add travel move around loops if the extruder is off."
 		location = gcodec.getLocationFromSplitLine(self.oldLocation, splitLine)
 		if not self.isAlteration and not self.extruderActive and self.oldLocation != None:
-			if len( self.getBoundaries() ) > 0:
-				highestZ = max( location.z, self.oldLocation.z )
-				self.addGcodePathZ( self.travelFeedRateMinute, self.getPathsBetween( self.oldLocation.dropAxis(), location.dropAxis() ), highestZ )
+			if len(self.getBoundaries()) > 0:
+				highestZ = max(location.z, self.oldLocation.z)
+				self.addGcodePathZ(self.travelFeedRateMinute, self.getPathsBetween(self.oldLocation.dropAxis(), location.dropAxis()), highestZ)
 		self.oldLocation = location
 
 	def addToLoop(self, location):
@@ -179,7 +121,7 @@ class CombSkein:
 			self.layer = self.layerTable[ self.oldZ ]
 		if self.boundaryLoop == None:
 			self.boundaryLoop = [] #starting with an empty array because a closed loop does not have to restate its beginning
-			self.layer.append( self.boundaryLoop )
+			self.layer.append(self.boundaryLoop)
 		if self.boundaryLoop != None:
 			self.boundaryLoop.append(location.dropAxis())
 
@@ -200,31 +142,30 @@ class CombSkein:
 			return self.layerTable[ self.layerZ ]
 		return []
 
-	def getCraftedGcode( self, combRepository, gcodeText ):
+	def getCraftedGcode(self, gcodeText):
 		"Parse gcode text and store the comb gcode."
-		self.combRepository = combRepository
 		self.lines = archive.getTextLines(gcodeText)
-		self.parseInitialization( combRepository )
+		self.parseInitialization()
 		for lineIndex in xrange(self.lineIndex, len(self.lines)):
 			line = self.lines[lineIndex]
-			self.parseBoundariesLayers( combRepository, line )
+			self.parseBoundariesLayers(line)
 		for lineIndex in xrange(self.lineIndex, len(self.lines)):
 			line = self.lines[lineIndex]
 			self.parseLine(line)
 		return self.gcode.output.getvalue()
 
-	def getIsAsFarAndNotIntersecting( self, begin, end ):
+	def getIsAsFarAndNotIntersecting(self, begin, end):
 		"Determine if the point on the line is at least as far from the loop as the center point."
 		if begin == end:
 			print('this should never happen but it does not really matter, begin == end in getIsAsFarAndNotIntersecting in comb.')
 			print(begin)
 			return True
-		return not euclidean.isLineIntersectingLoops( self.getBetweens(), begin, end )
+		return not euclidean.isLineIntersectingLoops(self.getBetweens(), begin, end)
 
-	def getIsRunningJumpPathAdded( self, betweens, end, lastPoint, nearestEndMinusLastSegment, pathAround, penultimatePoint, runningJumpSpace ):
+	def getIsRunningJumpPathAdded(self, betweens, end, lastPoint, nearestEndMinusLastSegment, pathAround, penultimatePoint, runningJumpSpace):
 		"Add a running jump path if possible, and return if it was added."
 		jumpStartPoint = lastPoint - nearestEndMinusLastSegment * runningJumpSpace
-		if euclidean.isLineIntersectingLoops( betweens, penultimatePoint, jumpStartPoint ):
+		if euclidean.isLineIntersectingLoops(betweens, penultimatePoint, jumpStartPoint):
 			return False
 		pathAround[-1] = jumpStartPoint
 		return True
@@ -278,7 +219,7 @@ class CombSkein:
 		lineX = []
 		switchX = []
 		segment = euclidean.getNormalized(end - begin)
-		segmentYMirror = complex(segment.real, - segment.imag)
+		segmentYMirror = complex(segment.real, -segment.imag)
 		beginRotated = segmentYMirror * begin
 		endRotated = segmentYMirror * end
 		y = beginRotated.imag
@@ -309,25 +250,14 @@ class CombSkein:
 				lineXIndex += 2
 			else:
 				lineXIndex += 1
-#			isLeavingPerimeter = False
-#			if lineXSecond.index != lineXFirst.index:
-#				isLeavingPerimeter = True
-#			pathBetween = self.getPathBetween( points[ lineXIndex + 1 ], points[ lineXIndex + 2 ], isLeavingPerimeter, loopFirst )
-#			if isLeavingPerimeter:
-#				pathBetweenAdded = True
-#			else:
-#				pathBetween = self.getSimplifiedAroundPath( points[ lineXIndex ], points[ lineXIndex + 3 ], loopFirst, pathBetween )
-#				pathBetweenAdded = True
-#			aroundBetweenPath += pathBetween
-#			lineXIndex += 2
 		return aroundBetweenPath
 
-	def getSimplifiedAroundPath( self, begin, end, loop, pathAround ):
+	def getSimplifiedAroundPath(self, begin, end, loop, pathAround):
 		"Get the simplified path between the perimeter and the fill."
 		pathAround = self.getSimplifiedBeginPath(begin, loop, pathAround)
 		return self.getSimplifiedEndPath(end, loop, pathAround)
 
-	def getSimplifiedBeginPath( self, begin, loop, pathAround ):
+	def getSimplifiedBeginPath(self, begin, loop, pathAround):
 		"Get the simplified begin path between the perimeter and the fill."
 		if len(pathAround) < 2:
 			return pathAround
@@ -349,7 +279,7 @@ class CombSkein:
 			pathIndex -= 1
 		return pathAround[: 1]
 
-	def parseBoundariesLayers( self, combRepository, line ):
+	def parseBoundariesLayers(self, line):
 		"Parse a gcode line."
 		splitLine = gcodec.getSplitLineBeforeBracketSemicolon(line)
 		if len(splitLine) < 1:
@@ -359,13 +289,13 @@ class CombSkein:
 			self.boundaryLoop = None
 		elif firstWord == '(<boundaryPoint>':
 			location = gcodec.getLocationFromSplitLine(None, splitLine)
-			self.addToLoop( location )
+			self.addToLoop(location)
 		elif firstWord == '(<layer>':
 			self.boundaryLoop = None
 			self.layer = None
 			self.oldZ = float(splitLine[1])
 
-	def parseInitialization( self, combRepository ):
+	def parseInitialization(self):
 		'Parse gcode initialization and store the parameters.'
 		for self.lineIndex in xrange(len(self.lines)):
 			line = self.lines[self.lineIndex]
@@ -380,7 +310,7 @@ class CombSkein:
 				self.combInset = 0.7 * perimeterWidth
 				self.betweenInset = 0.4 * perimeterWidth
 				self.uTurnWidth = 0.5 * self.betweenInset
-			elif firstWord == '(<travelFeedRatePerSecond>':
+			elif firstWord == '(<travelFeedRate>':
 				self.travelFeedRateMinute = 60.0 * float(splitLine[1])
 			self.gcode.addLine(line)
 
@@ -407,14 +337,3 @@ class CombSkein:
 			if self.layerZ == None:
 				self.layerZ = self.nextLayerZ
 		self.gcode.addLine(line)
-
-
-def main():
-	"Display the comb dialog."
-	if len(sys.argv) > 1:
-		writeOutput(' '.join(sys.argv[1 :]))
-	else:
-		settings.startMainLoopFromConstructor(getNewRepository())
-
-if __name__ == "__main__":
-	main()

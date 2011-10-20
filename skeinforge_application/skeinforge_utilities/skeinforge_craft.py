@@ -30,7 +30,7 @@ __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agp
 
 logger = logging.getLogger(__name__)
 
-__craft_sequence__ = ['carve', 'bottom', 'preface', 'inset', 'fill', 'multiply', 'speed', 'raft', 'dimension', 'export']
+__craft_sequence__ = ['carve', 'bottom', 'preface', 'inset', 'fill', 'multiply', 'speed', 'raft', 'comb',  'dimension', 'export']
 #__craft_sequence__ = ['carve', 'scale', 'bottom', 'preface', 'inset', 'fill', 'multiply', 'speed', 'temperature', 'clip', 'raft', 'skirt', 'chamber', 'jitter', 'stretch', 'leadin', 'skin', 'comb', 'cool', 'wipe', 'lash', 'limit', 'dimension', 'olddimension', 'export']
 #__craft_sequence__ = ['carve', 'bottom', 'preface', 'export']
 
