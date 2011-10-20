@@ -1,12 +1,10 @@
 """
-This page is in the table of contents.
 Preface converts the svg slices into gcode extrusion layers, optionally prefaced with some gcode commands.
 """
 
 from fabmetheus_utilities.svg_reader import SVGReader
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import gcodec
-from skeinforge_application.skeinforge_utilities import skeinforge_profile
 from time import strftime
 import os
 import sys
@@ -43,7 +41,7 @@ class PrefaceSkein:
 
 	def addFromUpperLowerFile(self, fileName):
 		"Add lines of text from the fileName or the lowercase fileName, if there is no file by the original fileName in the directory."
-		absoluteFilePath = os.path.join( archive.getSkeinforgePath('alterations'),  fileName)
+		absoluteFilePath = os.path.join('alterations',  fileName)
 		fileText = archive.getFileText(absoluteFilePath)
 		self.gcode.addLinesSetAbsoluteDistanceMode(archive.getTextLines(fileText))
 
@@ -71,7 +69,7 @@ class PrefaceSkein:
 		self.gcode.addTagRoundedLine('layerThickness', layerThickness)
 		perimeterWidth = float(self.svgReader.sliceDictionary['perimeterWidth'])
 		self.gcode.addTagRoundedLine('perimeterWidth', perimeterWidth)
-		self.gcode.addTagBracketedLine('profileName', skeinforge_profile.getProfileName('extrusion'))
+		self.gcode.addTagBracketedLine('profileName', 'Default')
 		self.gcode.addLine('(<settings>)')
 		self.gcode.addLine('(</settings>)')
 		self.gcode.addTagBracketedLine('timeStampPreface', strftime('%Y%m%d_%H%M%S'))

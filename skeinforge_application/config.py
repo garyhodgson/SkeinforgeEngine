@@ -1,4 +1,4 @@
 import ConfigParser
 
 config = ConfigParser.ConfigParser(allow_no_value=True)
-config.read('skeinforge_engine.cfg')
+config.read(['skeinforge_engine.cfg', 'default.profile'])

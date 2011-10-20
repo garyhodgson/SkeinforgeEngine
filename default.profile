@@ -1,6 +1,3 @@
-[general]
-log.level=DEBUG
-
 
 [export]
 active=true

@@ -8,10 +8,6 @@ from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import gcodec
 from fabmetheus_utilities import intercircle
-from fabmetheus_utilities import settings
-from skeinforge_application.skeinforge_utilities import skeinforge_craft
-from skeinforge_application.skeinforge_utilities import skeinforge_polyfile
-from skeinforge_application.skeinforge_utilities import skeinforge_profile
 import sys
 from config import config
 import logging

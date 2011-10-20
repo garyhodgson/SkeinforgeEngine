@@ -4,9 +4,6 @@ Export is a script to pick an export plugin and optionally print the output to a
 
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import gcodec
-from skeinforge_application.skeinforge_utilities import skeinforge_analyze
-from skeinforge_application.skeinforge_utilities import skeinforge_craft
-from skeinforge_application.skeinforge_utilities import skeinforge_profile
 import cStringIO
 import os
 import time
@@ -20,8 +17,8 @@ __credits__ = 'Gary Hodgson <http://garyhodgson.com/reprap/2011/06/hacking-skein
 __date__ = '$Date: 2008/21/04 $'
 __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
 
-logger = logging.getLogger(__name__)
-name = __name__
+logger = logging.getLogger('export')
+name = 'export'
 
 def getCraftedTextFromText(gcodeText):
 	'Export a gcode linear move text.'
@@ -33,7 +30,7 @@ def getCraftedTextFromText(gcodeText):
 
 def getReplaceableExportGcode(nameOfReplaceFile, replaceableExportGcode):
 	'Get text with strings replaced according to replace.csv file.'
-	fullReplaceFilePath = os.path.join( archive.getSkeinforgePath('alterations'),  nameOfReplaceFile)
+	fullReplaceFilePath = os.path.join('alterations',  nameOfReplaceFile)
 	fullReplaceText = archive.getFileText(fullReplaceFilePath)
 	replaceLines = archive.getTextLines(fullReplaceText)
 	if len(replaceLines) < 1:
@@ -56,29 +53,15 @@ def getSelectedPluginModule( plugins ):
 			return archive.getModuleWithDirectoryPath( exportStaticDirectoryPath, plugin )
 	return None
 
-def writeOutput(fileName, shouldAnalyze=True):
+def writeOutput(fileName, gcodeText, profileName, shouldAnalyze=True):
 	'Export a gcode linear move file.'
-	if fileName == '':
-		return None
 	
-	startTime = time.time()
-	logger.info('File %s is being chain exported.', fileName)
 	fileNameSuffix = fileName[: fileName.rfind('.')]
-	gcodeText = gcodec.getGcodeFileText(fileName, '')
 	
-	if config.getboolean(name, 'file.extension.profile'):
-		profileName = skeinforge_profile.getProfileName(skeinforge_profile.getCraftTypeName())
-		if profileName:
+	if config.getboolean(name, 'file.extension.profile') and profileName:
 			fileNameSuffix += '.' + string.replace(profileName, ' ', '_')
 	fileNameSuffix += '.' + config.get(name,'file.extension')
-	procedures = skeinforge_craft.getProcedures(name, gcodeText)
 	
-	logger.debug("procedures: %s", procedures)
-	
-	gcodeText = skeinforge_craft.getChainTextFromProcedures(fileName, procedures[: -1], gcodeText)
-	
-	if gcodeText == '':
-		return None
 	fileNamePenultimate = fileName[: fileName.rfind('.')] + '_penultimate.gcode'
 	filePenultimateWritten = False
 	if config.getboolean(name, 'gcode.penultimate.save'):
@@ -106,7 +89,7 @@ def writeOutput(fileName, shouldAnalyze=True):
 		archive.writeFileText( fileNameSuffix, replaceableExportGcode )
 		logger.info('The exported file is saved as %s', archive.getSummarizedFileName(fileNameSuffix))
 	
-	logger.info('It took %s seconds to export the file.', timedelta(seconds=time.time()-startTime).total_seconds())
+	
 	return window
 
 class ExportSkein:
