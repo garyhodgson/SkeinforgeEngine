@@ -11,6 +11,7 @@ A fork of Enrique's [Skeinforge](http://skeinforge.com), taken from ahmetcemtura
 
 ## Caveats
   * Functionality has been removed as part of the simplification process.  For a fully developed modular system with a working GUI please refer to the original Skeinforge or SFACT derivative.
+  * Only python 2.7 is supported
 
 ## Running
   * The GUI has been stripped out and so the program must be run from the command line. e.g. "python skeinforge_application/skeinforge_utilities/skeinforge_craft.py test.stl"

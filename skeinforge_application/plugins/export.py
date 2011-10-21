@@ -20,7 +20,7 @@ __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agp
 logger = logging.getLogger('export')
 name = 'export'
 
-def getCraftedTextFromText(gcodeText):
+def getCraftedText(gcodeText):
 	'Export a gcode linear move text.'
 	if gcodec.isProcedureDoneOrFileIsEmpty( gcodeText, name):
 		return gcodeText
@@ -53,45 +53,30 @@ def getSelectedPluginModule( plugins ):
 			return archive.getModuleWithDirectoryPath( exportStaticDirectoryPath, plugin )
 	return None
 
-def writeOutput(fileName, gcodeText, profileName, shouldAnalyze=True):
+def writeOutput(fileName, gcodeText, profileName):
 	'Export a gcode linear move file.'
 	
-	fileNameSuffix = fileName[: fileName.rfind('.')]
+	exportFileName = fileName[: fileName.rfind('.')]
 	
 	if config.getboolean(name, 'file.extension.profile') and profileName:
-			fileNameSuffix += '.' + string.replace(profileName, ' ', '_')
-	fileNameSuffix += '.' + config.get(name,'file.extension')
+			exportFileName += '.' + string.replace(profileName, ' ', '_')
+	exportFileName += '.' + config.get(name,'file.extension')
 	
-	fileNamePenultimate = fileName[: fileName.rfind('.')] + '_penultimate.gcode'
-	filePenultimateWritten = False
 	if config.getboolean(name, 'gcode.penultimate.save'):
+		fileNamePenultimate = fileName[: fileName.rfind('.')] + '_penultimate.gcode'
 		archive.writeFileText(fileNamePenultimate, gcodeText)
-		filePenultimateWritten = True
 		logger.info('The penultimate file is saved as %s', fileNamePenultimate)
-	exportGcode = getCraftedTextFromText(gcodeText)
-	window = None
-	if shouldAnalyze:
-		window = skeinforge_analyze.writeOutput(fileName, fileNamePenultimate, fileNameSuffix,
-			filePenultimateWritten, gcodeText)
-	replaceableExportGcode = None
-	selectedPluginModule = getSelectedPluginModule(config.get(name,'plugins').split(','))
-	
-	if selectedPluginModule == None:
-		replaceableExportGcode = exportGcode
-	else:
-		if selectedPluginModule.globalIsReplaceable:
-			replaceableExportGcode = selectedPluginModule.getOutput(exportGcode)
-		else:
-			selectedPluginModule.writeOutput(fileNameSuffix, exportGcode)
-	
-	if replaceableExportGcode != None:
-		replaceableExportGcode = getReplaceableExportGcode(config.get(name,'replace.filename'), replaceableExportGcode)
-		archive.writeFileText( fileNameSuffix, replaceableExportGcode )
-		logger.info('The exported file is saved as %s', archive.getSummarizedFileName(fileNameSuffix))
-	
-	
-	return window
+		
+	exportGcode = getCraftedText(gcodeText)
 
+	if config.has_option(name,'replace.filename') and config.get(name,'replace.filename') != '':
+		replaceableExportGcode = getReplaceableExportGcode(config.get(name,'replace.filename'), exportGcode)
+		archive.writeFileText( exportFileName, replaceableExportGcode )
+	else:
+		archive.writeFileText( exportFileName, exportGcode )
+		
+	logger.info('The exported file is saved as %s', archive.getSummarizedFileName(exportFileName))
+	
 class ExportSkein:
 	'A class to export a skein of extrusions.'
 	def __init__(self):

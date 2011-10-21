@@ -8,14 +8,12 @@ try:
 except:
 	pass
 
-from fabmetheus_utilities.fabmetheus_tools import fabmetheus_interpret
 from fabmetheus_utilities.geometry.solids import triangle_mesh
 from fabmetheus_utilities.vector3 import Vector3
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import gcodec
 from fabmetheus_utilities import intercircle
-from fabmetheus_utilities import settings
 import math
 import sys
 import logging
@@ -619,7 +617,6 @@ class FillSkein:
 
 	def addFill(self, layerIndex):
 		'Add fill to the carve layer.'
-		settings.printProgressByNumber(layerIndex, len(self.rotatedLayers), 'fill')
 		alreadyFilledArounds = []
 		pixelTable = {}
 		arounds = []

@@ -1,5 +1,5 @@
 """
-Craft is a script to access the plugins which craft a gcode file.
+Skeins a 3D model into gcode.
 """
 
 from plugins import *
@@ -41,7 +41,7 @@ def main():
 	startTime = time.time()
 	fileName = ' '.join(sys.argv[1 :])
 	if fileName == '':
-		logger.warning('No Filename given to write out in export module.')
+		logger.warning('No Filename given.')
 		return
 	gcodeText = ''
 	procedures = __craft_sequence__
@@ -52,7 +52,7 @@ def main():
 		logger.warning('No Gcode given to write out in export module.')
 		return
 	
-	export.writeOutput(fileName, gcodeText, 'Default', False)
+	export.writeOutput(fileName, gcodeText, 'Default')
 	logger.info('It took %s seconds to export the file.', timedelta(seconds=time.time()-startTime).total_seconds())
 
 def handleError(self, record):
