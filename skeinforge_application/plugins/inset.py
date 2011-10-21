@@ -2,12 +2,6 @@
 Inset will inset the outside outlines by half the perimeter width, and outset the inside outlines by the same amount.
 """
 
-try:
-	import psyco
-	psyco.full()
-except:
-	pass
-
 from fabmetheus_utilities.geometry.solids import triangle_mesh
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
@@ -19,12 +13,18 @@ import sys
 import logging
 from config import config
 
-__author__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
-__date__ = '$Date: 2008/02/05 $'
+__originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
 __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
 
 logger = logging.getLogger(__name__)
 name = __name__
+
+def getCraftedText( fileName, text=''):
+	"Inset the preface file or text."
+	gcodeText = archive.getTextIfEmpty(fileName, text)
+	if gcodec.isProcedureDoneOrFileIsEmpty( gcodeText, name):
+		return gcodeText
+	return InsetSkein().getCraftedGcode(gcodeText)
 
 def addAlreadyFilledArounds( alreadyFilledArounds, loop, radius ):
 	"Add already filled loops around loop to alreadyFilledArounds."
@@ -91,13 +91,6 @@ def addSegmentOutline( isThick, outlines, pointBegin, pointEnd, width ):
 		outline.append( outsideEndCenterDown )
 		outline.append( outsideBeginCenterDown )
 	outlines.append( euclidean.getPointsRoundZAxis( normalizedSegment, outline ) )
-
-def getCraftedText( fileName, text=''):
-	"Inset the preface file or text."
-	gcodeText = archive.getTextIfEmpty(fileName, text)
-	if gcodec.isProcedureDoneOrFileIsEmpty( gcodeText, __name__):
-		return gcodeText
-	return InsetSkein().getCraftedGcode(gcodeText)
 
 def getInteriorSegments(loops, segments):
 	'Get segments inside the loops.'

@@ -2,12 +2,6 @@
 Fill is a script to fill the perimeters of a gcode file.
 """
 
-try:
-	import psyco
-	psyco.full()
-except:
-	pass
-
 from fabmetheus_utilities.geometry.solids import triangle_mesh
 from fabmetheus_utilities.vector3 import Vector3
 from fabmetheus_utilities import archive
@@ -19,12 +13,22 @@ import sys
 import logging
 from config import config
 
-__author__ = 'Enrique Perez (perez_enrique@yahoo.com) modified by Action68 (ahmetcemturan@gmail.com) SFACT home at reprafordummies.net'
-__date__ = '$Date: 2008/28/04 $'
+__originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modified by Action68 (ahmetcemturan@gmail.com) SFACT home at reprafordummies.net'
 __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
 
 logger = logging.getLogger(__name__)
 name = __name__
+
+
+def getCraftedText(fileName, gcodeText=''):
+	'Fill the inset file or gcode text.'
+	gcodeText = archive.getTextIfEmpty(fileName, gcodeText)
+	if gcodec.isProcedureDoneOrFileIsEmpty(gcodeText, 'fill'):
+		return gcodeText
+	if not config.getboolean(name, 'active'):
+		logger.info("%s plugin is not active", name.capitalize())
+		return gcodeText
+	return FillSkein().getCraftedGcode(gcodeText)
 
 def addAroundGridPoint(arounds, gridPoint, gridPointInsetX, gridPointInsetY, gridPoints, gridSearchRadius, isBothOrNone, isDoubleJunction, isJunctionWide, paths, pixelTable, width):
 	'Add the path around the grid point.'
@@ -217,15 +221,6 @@ def getAdditionalLength(path, point, pointIndex):
 	if pointIndex == len(path):
 		return abs(point - path[-1])
 	return abs(point - path[pointIndex - 1]) + abs(point - path[pointIndex]) - abs(path[pointIndex] - path[pointIndex - 1])
-
-def getCraftedText(fileName, gcodeText=''):
-	'Fill the inset file or gcode text.'
-	gcodeText = archive.getTextIfEmpty(fileName, gcodeText)
-	if gcodec.isProcedureDoneOrFileIsEmpty(gcodeText, 'fill'):
-		return gcodeText
-	if not config.getboolean(name, 'active'):
-		return gcodeText
-	return FillSkein().getCraftedGcode(gcodeText)
 
 def getClosestOppositeIntersectionPaths(yIntersectionPaths):
 	'Get the close to center paths, starting with the first and an additional opposite if it exists.'

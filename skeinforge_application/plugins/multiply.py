@@ -9,8 +9,7 @@ from fabmetheus_utilities import gcodec
 from config import config
 import logging
 
-__author__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
-__date__ = '$Date: 2008/21/04 $'
+__originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
 __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
 
 logger = logging.getLogger(__name__)
@@ -22,6 +21,7 @@ def getCraftedText(fileName, text=''):
 	if gcodec.isProcedureDoneOrFileIsEmpty(gcodeText, name):
 		return gcodeText
 	if not config.getboolean(name, 'active'):
+		logger.info("%s plugin is not active", name.capitalize())
 		return gcodeText
 	return MultiplySkein().getCraftedGcode(gcodeText)
 

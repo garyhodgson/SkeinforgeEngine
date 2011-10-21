@@ -11,8 +11,7 @@ import sys
 from config import config
 import logging
 
-__author__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
-__date__ = '$Date: 2008/02/05 $'
+__originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
 __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
 
 logger = logging.getLogger(__name__)
@@ -50,8 +49,6 @@ class PrefaceSkein:
 		self.addFromUpperLowerFile(config.get('preface','start.file')) # Add a start file if it exists.
 		self.gcode.addTagBracketedLine('creation', 'skeinforge') # GCode formatted comment
 
-		versionText = archive.getFileText(archive.getVersionFileName())
-		self.gcode.addTagBracketedLine('version', versionText) # GCode formatted comment
 		self.gcode.addLine('(<extruderInitialization>)') # GCode formatted comment
 		if self.setPositioningToAbsolute:
 			self.gcode.addLine('G90 ;set positioning to absolute') # Set positioning to absolute.

@@ -24,6 +24,7 @@ def getCraftedText(fileName, gcodeText=''):
 	if gcodec.isProcedureDoneOrFileIsEmpty(gcodeText, name):
 		return gcodeText
 	if not config.getboolean(name, 'active'):
+		logger.info("%s plugin is not active", name.capitalize())
 		return gcodeText
 	return DimensionSkein().getCraftedGcode(gcodeText)
 

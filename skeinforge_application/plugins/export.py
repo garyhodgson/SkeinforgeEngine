@@ -24,8 +24,6 @@ def getCraftedText(gcodeText):
 	'Export a gcode linear move text.'
 	if gcodec.isProcedureDoneOrFileIsEmpty( gcodeText, name):
 		return gcodeText
-	if not config.getboolean(name, 'active'):
-		return gcodeText
 	return ExportSkein().getCraftedGcode(gcodeText)
 
 def getReplaceableExportGcode(nameOfReplaceFile, replaceableExportGcode):

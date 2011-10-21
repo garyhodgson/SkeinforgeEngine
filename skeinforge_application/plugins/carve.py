@@ -3,19 +3,12 @@ Carve is a script to carve a shape into svg slice layers.
 It creates the perimeter contours
 """
 
-try:
-	import psyco
-	psyco.full()
-except:
-	pass
-
 from fabmetheus_utilities import svg_writer
 import math
 import logging
 from config import config
 
-__author__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
-__date__ = '$Date: 2008/02/05 $'
+__originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
 __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
 
 logger = logging.getLogger(__name__)
