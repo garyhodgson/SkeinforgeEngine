@@ -31,14 +31,24 @@ def getCraftedTextFromPlugins(fileName, pluginSequence, text):
 
 def main():
 	"Starting point for skeinforge engine."
-	
 	parser = argparse.ArgumentParser(description='Skeins a 3D model into gcode.')
 	parser.add_argument('file', help='the file to skein')
-	parser.add_argument('-c', metavar='config', help='configuration for the skeining')
+	parser.add_argument('-c', metavar='config', help='configuration for skeinforge engine', default='skeinforge_engine.cfg')
+	parser.add_argument('-p', metavar='profile', help='profile for the skeining')
 	args = parser.parse_args()
 	
-	if (args.c != None):
-		config.read(args.c)
+	if args.c == None:
+		logger.error('Invalid or missing configuration file defined.')
+		return
+	config.read(args.c)
+	
+	defaultProfile = config.get('general', 'default.profile')
+	if defaultProfile != None:
+		config.read(defaultProfile)
+		
+	if args.p != None:
+		config.read(args.p)
+
 	inputFilename = args.file
 	logLevel = config.get('general', 'log.level')
 	logging.basicConfig(level=logLevel, format='%(asctime)s %(levelname)s (%(name)s) %(message)s')

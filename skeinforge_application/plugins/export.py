@@ -1,9 +1,10 @@
 """
-Export is a script to pick an export plugin and optionally print the output to a file.
+Export prints the output to a file.
 """
 
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import gcodec
+from fabmetheus_utilities import euclidean
 import cStringIO
 import os
 import time
@@ -12,44 +13,11 @@ from datetime import timedelta
 from config import config
 import logging
 
-__author__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
-__credits__ = 'Gary Hodgson <http://garyhodgson.com/reprap/2011/06/hacking-skeinforge-export-module/>'
-__date__ = '$Date: 2008/21/04 $'
+__originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
 __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
 
 logger = logging.getLogger('export')
 name = 'export'
-
-def getCraftedText(gcodeText):
-	'Export a gcode linear move text.'
-	if gcodec.isProcedureDoneOrFileIsEmpty( gcodeText, name):
-		return gcodeText
-	return ExportSkein().getCraftedGcode(gcodeText)
-
-def getReplaceableExportGcode(nameOfReplaceFile, replaceableExportGcode):
-	'Get text with strings replaced according to replace.csv file.'
-	fullReplaceFilePath = os.path.join('alterations',  nameOfReplaceFile)
-	fullReplaceText = archive.getFileText(fullReplaceFilePath)
-	replaceLines = archive.getTextLines(fullReplaceText)
-	if len(replaceLines) < 1:
-		return replaceableExportGcode
-	for replaceLine in replaceLines:
-		splitLine = replaceLine.replace('\\n', '\t').split('\t')
-		if len(splitLine) > 0:
-			replaceableExportGcode = replaceableExportGcode.replace(splitLine[0], '\n'.join(splitLine[1 :]))
-	output = cStringIO.StringIO()
-	gcodec.addLinesToCString(output, archive.getTextLines(replaceableExportGcode))
-	return output.getvalue()
-
-def getSelectedPluginModule( plugins ):
-	'Get the selected plugin module.'
-	logger.debug("plugins: %s",plugins)
-	for plugin in plugins:
-		if plugin:
-			exportPluginsFolderPath = archive.getAbsoluteFrozenFolderPath(__file__, 'export_plugins')
-			exportStaticDirectoryPath = os.path.join(exportPluginsFolderPath, 'static_plugins')
-			return archive.getModuleWithDirectoryPath( exportStaticDirectoryPath, plugin )
-	return None
 
 def writeOutput(fileName, gcodeText, profileName):
 	'Export a gcode linear move file.'
@@ -74,13 +42,39 @@ def writeOutput(fileName, gcodeText, profileName):
 		archive.writeFileText( exportFileName, exportGcode )
 		
 	logger.info('The exported file is saved as %s', archive.getSummarizedFileName(exportFileName))
+
+def getCraftedText(gcodeText):
+	'Export a gcode linear move text.'
+	if gcodec.isProcedureDoneOrFileIsEmpty( gcodeText, name):
+		return gcodeText
+	return ExportSkein().getCraftedGcode(gcodeText)
+
+def getReplaceableExportGcode(nameOfReplaceFile, replaceableExportGcode):
+	'Get text with strings replaced according to replace.csv file.'
+	fullReplaceFilePath = os.path.join('alterations',  nameOfReplaceFile)
+	fullReplaceText = archive.getFileText(fullReplaceFilePath)
+	replaceLines = archive.getTextLines(fullReplaceText)
+	if len(replaceLines) < 1:
+		return replaceableExportGcode
+	for replaceLine in replaceLines:
+		splitLine = replaceLine.replace('\\n', '\t').split('\t')
+		if len(splitLine) > 0:
+			replaceableExportGcode = replaceableExportGcode.replace(splitLine[0], '\n'.join(splitLine[1 :]))
+	output = cStringIO.StringIO()
+	gcodec.addLinesToCString(output, archive.getTextLines(replaceableExportGcode))
+	return output.getvalue()
 	
 class ExportSkein:
 	'A class to export a skein of extrusions.'
 	def __init__(self):
 		self.crafting = False
 		self.decimalPlacesExported = 2
-		self.output = cStringIO.StringIO()
+		self.output = cStringIO.StringIO()		
+		self.deleteComments  = config.getboolean(name, 'delete.comments')
+		self.fileExtension  = config.get(name, 'file.extension')
+		self.nameOfReplaceFile  = config.get(name, 'replace.filename')
+		self.savePenultimateGcode  = config.getboolean(name, 'gcode.penultimate.save')
+		self.addProfileExtension  = config.getboolean(name, 'file.extension.profile')
 
 	def addLine(self, line):
 		'Add a line of text and a newline to the output.'
@@ -99,7 +93,8 @@ class ExportSkein:
 		numberString = gcodec.getStringFromCharacterSplitLine(character, splitLine)
 		if numberString == None:
 			return line
-		return gcodec.getLineWithValueString(character, line, splitLine, str(round(float(numberString), self.decimalPlacesExported)))
+		roundedNumberString = euclidean.getRoundedToPlacesString(self.decimalPlacesExported, float(numberString))
+		return gcodec.getLineWithValueString(character, line, splitLine, roundedNumberString)
 
 	def parseLine(self, line):
 		'Parse a gcode line.'
@@ -111,7 +106,7 @@ class ExportSkein:
 			self.crafting = False
 		elif firstWord == '(<decimalPlacesCarried>':
 			self.decimalPlacesExported = int(splitLine[1]) - 1
-		if config.getboolean(name, 'comments.delete.all') or (config.getboolean(name, 'comments.delete.crafting') and self.crafting):
+		if self.deleteComments:
 			if firstWord[0] == '(':
 				return
 			else:
