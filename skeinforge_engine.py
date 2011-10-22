@@ -74,5 +74,5 @@ def main():
 def handleError(self, record):
 	traceback.print_stack()
 
-if __name__ == "__main__":	
+if __name__ == "__main__":
 	main()

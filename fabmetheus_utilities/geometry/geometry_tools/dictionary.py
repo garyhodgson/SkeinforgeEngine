@@ -12,7 +12,7 @@ from fabmetheus_utilities.geometry.geometry_utilities import evaluate
 from fabmetheus_utilities.geometry.geometry_utilities import matrix
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import xml_simple_writer
-import cStringIO
+import StringIO
 
 
 __author__ = 'Enrique Perez (perez_enrique@yahoo.com)'
@@ -70,7 +70,7 @@ class Dictionary:
 			attributeCopy = evaluate.getEvaluatedDictionaryByCopyKeys(['paths', 'target', 'vertexes'], self.xmlElement)
 		euclidean.removeElementsFromDictionary(attributeCopy, matrix.getKeysM())
 		euclidean.removeTrueFromDictionary(attributeCopy, 'visible')
-		innerOutput = cStringIO.StringIO()
+		innerOutput = StringIO.StringIO()
 		self.addXMLInnerSection(depth + 1, innerOutput)
 		self.addXMLArchivableObjects(depth + 1, innerOutput)
 		xml_simple_writer.addBeginEndInnerXMLTag(attributeCopy, depth, innerOutput.getvalue(), self.getXMLLocalName(), output)

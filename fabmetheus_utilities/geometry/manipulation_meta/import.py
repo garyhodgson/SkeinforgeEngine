@@ -14,7 +14,6 @@ from fabmetheus_utilities import xml_simple_writer
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import gcodec
-import cStringIO
 import os
 
 

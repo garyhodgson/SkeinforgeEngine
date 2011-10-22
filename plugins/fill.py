@@ -29,7 +29,7 @@ def getCraftedText(fileName, gcodeText=''):
 		logger.info("%s plugin is not active", name.capitalize())
 		return gcodeText
 	return FillSkein().getCraftedGcode(gcodeText)
-
+	
 def addAroundGridPoint(arounds, gridPoint, gridPointInsetX, gridPointInsetY, gridPoints, gridSearchRadius, isBothOrNone, isDoubleJunction, isJunctionWide, paths, pixelTable, width):
 	'Add the path around the grid point.'
 	closestPathIndex = None
@@ -875,8 +875,10 @@ class FillSkein:
 		self.doubleSolidSurfaceThickness = self.solidSurfaceThickness + self.solidSurfaceThickness
 		for lineIndex in xrange(self.lineIndex, len(self.lines)):
 			self.parseLine(lineIndex)
+			
 		for layerIndex in xrange(len(self.rotatedLayers)):
 			self.addFill(layerIndex)
+		
 		self.gcode.addLines(self.lines[ self.shutdownLineIndex : ])
 		return self.gcode.output.getvalue()
 

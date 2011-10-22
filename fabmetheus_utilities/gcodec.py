@@ -23,7 +23,7 @@ import __init__
 from fabmetheus_utilities.vector3 import Vector3
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
-import cStringIO
+import StringIO
 import math
 import os
 import sys
@@ -44,7 +44,7 @@ def addLineAndNewlineIfNecessary(line, output):
 		output.write('\n')
 
 def addLinesToCString(cString, lines):
-	'Add lines which have something to cStringIO.'
+	'Add lines which have something to StringIO.'
 	for line in lines:
 		if line != '':
 			cString.write(line + '\n')
@@ -250,7 +250,7 @@ class Gcode:
 	def __init__(self):
 		'Initialize.'
 		self.decimalPlacesCarried = 3
-		self.output = cStringIO.StringIO()
+		self.output = StringIO.StringIO()
 
 	def addGcodeFromFeedRateThreadZ(self, feedRateMinute, thread, travelFeedRateMinute, z):
 		'Add a thread to the output.'

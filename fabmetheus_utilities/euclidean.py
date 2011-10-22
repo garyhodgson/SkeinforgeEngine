@@ -32,7 +32,7 @@ import __init__
 
 from fabmetheus_utilities.vector3 import Vector3
 from fabmetheus_utilities import xml_simple_writer
-import cStringIO
+import StringIO
 import math
 import random
 
@@ -700,7 +700,7 @@ def getDiagonalFlippedLoops(loops):
 
 def getDictionaryString(dictionary):
 	'Get the dictionary string.'
-	output = cStringIO.StringIO()
+	output = StringIO.StringIO()
 	keys = dictionary.keys()
 	keys.sort()
 	for key in keys:

@@ -5,7 +5,7 @@ Export prints the output to a file.
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import gcodec
 from fabmetheus_utilities import euclidean
-import cStringIO
+import StringIO
 import os
 import time
 import string
@@ -60,7 +60,7 @@ def getReplaceableExportGcode(nameOfReplaceFile, replaceableExportGcode):
 		splitLine = replaceLine.replace('\\n', '\t').split('\t')
 		if len(splitLine) > 0:
 			replaceableExportGcode = replaceableExportGcode.replace(splitLine[0], '\n'.join(splitLine[1 :]))
-	output = cStringIO.StringIO()
+	output = StringIO.StringIO()
 	gcodec.addLinesToCString(output, archive.getTextLines(replaceableExportGcode))
 	return output.getvalue()
 	
@@ -69,7 +69,7 @@ class ExportSkein:
 	def __init__(self):
 		self.crafting = False
 		self.decimalPlacesExported = 2
-		self.output = cStringIO.StringIO()		
+		self.output = StringIO.StringIO()		
 		self.deleteComments  = config.getboolean(name, 'delete.comments')
 		self.fileExtension  = config.get(name, 'file.extension')
 		self.nameOfReplaceFile  = config.get(name, 'replace.filename')

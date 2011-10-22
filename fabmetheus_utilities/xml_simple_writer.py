@@ -8,7 +8,7 @@ from __future__ import absolute_import
 #Init has to be imported first because it has code to workaround the python bug where relative imports don't work if the module is imported as a main module.
 import __init__
 
-import cStringIO
+import StringIO
 
 
 __author__ = 'Enrique Perez (perez_enrique@yahoo.com)'
@@ -104,7 +104,7 @@ def getAttributesString(attributes):
 
 def getBeforeRootOutput(xmlParser):
 	'Get the output before the root and the root xml.'
-	output = cStringIO.StringIO()
+	output = StringIO.StringIO()
 	output.write(xmlParser.beforeRoot)
 	xmlParser.getRoot().addXML(0, output)
 	return output.getvalue()
@@ -121,7 +121,7 @@ def getBeginGeometryXMLOutput(xmlElement=None):
 
 def getBeginXMLOutput():
 	'Get the beginning of the string representation of this object info.'
-	output = cStringIO.StringIO()
+	output = StringIO.StringIO()
 	output.write("<?xml version='1.0' ?>\n")
 	return output
 

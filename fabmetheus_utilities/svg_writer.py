@@ -15,7 +15,7 @@ from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import xml_simple_reader
 from fabmetheus_utilities import xml_simple_writer
-import os, sys, math,cStringIO
+import os, sys, math, StringIO
 
 
 __author__ = 'Enrique Perez (perez_enrique@yahoo.com)'
@@ -139,10 +139,10 @@ class SVGWriter:
 			return
 		commentElement = xml_simple_reader.XMLElement()
 		commentElement.localName = 'comment'
-		xmlElementOutput = cStringIO.StringIO()
+		xmlElementOutput = StringIO.StringIO()
 		xmlElement.addXML(0, xmlElementOutput)
 		textLines = archive.getTextLines(xmlElementOutput.getvalue())
-		commentElementOutput = cStringIO.StringIO()
+		commentElementOutput = StringIO.StringIO()
 		isComment = False
 		for textLine in textLines:
 			lineStripped = textLine.strip()
@@ -228,7 +228,7 @@ class SVGWriter:
 			self.svgElement.getXMLElementByID('scrollControlBox').removeFromIDNameParent()
 		self.graphicsXMLElement.removeFromIDNameParent()
 		self.addOriginalAsComment(xmlElement)
-		output = cStringIO.StringIO()
+		output = StringIO.StringIO()
 		output.write(self.xmlParser.beforeRoot)
 		self.svgElement.addXML(0, output)
 		return xml_simple_writer.getBeforeRootOutput(self.xmlParser)

@@ -37,7 +37,7 @@ from fabmetheus_utilities.geometry.geometry_utilities import matrix
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import xml_simple_writer
-import cStringIO
+import StringIO
 
 
 __author__ = 'Enrique Perez (perez_enrique@yahoo.com)'
@@ -75,7 +75,7 @@ def getXMLLines(text):
 			firstCharacter = strippedLine[0]
 			lastCharacter = strippedLine[-1]
 		if firstCharacter == '<' and lastCharacter != '>' and accumulatedOutput == None:
-			accumulatedOutput = cStringIO.StringIO()
+			accumulatedOutput = StringIO.StringIO()
 			accumulatedOutput.write( textLine )
 			if strippedLine[ : len('<!--') ] == '<!--':
 				lastWord = '-->'
@@ -187,7 +187,7 @@ class XMLElement:
 		if self.localName == 'comment':
 			output.write( self.text )
 			return
-		innerOutput = cStringIO.StringIO()
+		innerOutput = StringIO.StringIO()
 		xml_simple_writer.addXMLFromObjects(depth + 1, self.childNodes, innerOutput)
 		innerText = innerOutput.getvalue()
 		xml_simple_writer.addBeginEndInnerXMLTag(self.attributeDictionary, depth, innerText, self.localName, output, self.text)

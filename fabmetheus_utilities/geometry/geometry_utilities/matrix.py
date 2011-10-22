@@ -12,7 +12,7 @@ from fabmetheus_utilities.vector3 import Vector3
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import xml_simple_writer
-import cStringIO
+import StringIO
 import math
 
 
@@ -413,7 +413,7 @@ class Matrix:
 
 	def __repr__(self):
 		'Get the string representation of this four by four matrix.'
-		output = cStringIO.StringIO()
+		output = StringIO.StringIO()
 		self.addXML(0, output)
 		return output.getvalue()
 
