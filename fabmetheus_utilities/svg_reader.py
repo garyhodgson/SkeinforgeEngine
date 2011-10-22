@@ -14,7 +14,6 @@ from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import gcodec
 from fabmetheus_utilities import intercircle
-from fabmetheus_utilities import settings
 from fabmetheus_utilities import svg_writer
 import math
 import os

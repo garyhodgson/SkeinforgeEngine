@@ -21,7 +21,6 @@ from fabmetheus_utilities.geometry.geometry_utilities import evaluate
 from fabmetheus_utilities.geometry.solids import triangle_mesh
 from fabmetheus_utilities.vector3 import Vector3
 from fabmetheus_utilities import euclidean
-from fabmetheus_utilities import settings
 from fabmetheus_utilities import xml_simple_writer
 import math
 
@@ -164,7 +163,7 @@ class BooleanGeometry:
 
 	def getZAddExtruderPaths(self, z):
 		'Get next z and add extruder loops.'
-		settings.printProgress(len(self.rotatedLoopLayers), 'slice')
+		#settings.printProgress(len(self.rotatedLoopLayers), 'slice')
 		rotatedLoopLayer = euclidean.RotatedLoopLayer(z)
 		rotatedLoopLayer.loops = getEmptyZLoops(self.archivableObjects, self.importRadius, True, z, self.zoneArrangement)
 		return triangle_mesh.getZAddExtruderPathsBySolidCarving(rotatedLoopLayer, self, z)

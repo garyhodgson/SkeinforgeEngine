@@ -2,13 +2,9 @@
 Stretch is a script to stretch the threads to partially compensate for filament shrinkage when extruded.
 """
 
-from fabmetheus_utilities.fabmetheus_tools import fabmetheus_interpret
-from fabmetheus_utilities.vector3 import Vector3
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import gcodec
-from fabmetheus_utilities import intercircle
-import sys
 from config import config
 import logging
 

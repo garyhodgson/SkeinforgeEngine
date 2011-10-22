@@ -11,13 +11,14 @@ __originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT b
 __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
 
 
-__plugins_path__ = 'skeinforge_application\plugins'
+__plugins_path__ = 'plugins'
 logger = logging.getLogger('engine')
 
 def getCraftedTextFromPlugins(fileName, pluginSequence, text):
 	'Get a crafted shape file from a list of pluginSequence.'
 	lastProcedureTime = time.time()
 	sys.path.insert(0, __plugins_path__)
+	runParams = {}
 	for plugin in pluginSequence:
 		pluginModule = __import__(plugin)
 		if pluginModule != None:

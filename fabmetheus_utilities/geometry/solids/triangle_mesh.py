@@ -18,7 +18,6 @@ from fabmetheus_utilities.vector3 import Vector3
 from fabmetheus_utilities.vector3index import Vector3Index
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import intercircle
-from fabmetheus_utilities import settings
 import cmath
 import math
 
@@ -847,7 +846,8 @@ class TriangleMesh( group.Group ):
 
 	def getZAddExtruderPaths(self, z):
 		'Get next z and add extruder loops.'
-		settings.printProgress(len(self.rotatedLoopLayers), 'slice')
+		#settings.printProgress(len(self.rotatedLoopLayers), 'slice')
+		
 		rotatedLoopLayer = euclidean.RotatedLoopLayer(z)
 		rotatedLoopLayer.loops = self.getLoopsFromMesh(self.zoneArrangement.getEmptyZ(z))
 		return getZAddExtruderPathsBySolidCarving(rotatedLoopLayer, self, z)

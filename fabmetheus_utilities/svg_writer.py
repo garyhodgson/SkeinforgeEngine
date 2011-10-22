@@ -9,17 +9,13 @@ from __future__ import absolute_import
 #Init has to be imported first because it has code to workaround the python bug where relative imports don't work if the module is imported as a main module.
 import __init__
 
-from fabmetheus_utilities.fabmetheus_tools import fabmetheus_interpret
 from fabmetheus_utilities.vector3 import Vector3
 from fabmetheus_utilities.xml_simple_reader import XMLSimpleReader
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
-from fabmetheus_utilities import gcodec
 from fabmetheus_utilities import xml_simple_reader
 from fabmetheus_utilities import xml_simple_writer
-import cStringIO
-import math
-import os
+import os, sys, math,cStringIO
 
 
 __author__ = 'Enrique Perez (perez_enrique@yahoo.com)'
@@ -29,10 +25,14 @@ __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agp
 
 globalOriginalTextString = '<!-- Original XML Text:\n'
 
+__interpret_plugins_path__ = 'fabmetheus_utilities/fabmetheus_tools/interpret_plugins'
 
 def getCarving(fileName):
 	'Get a carving for the file using an import plugin.'
-	pluginModule = fabmetheus_interpret.getInterpretPlugin(fileName)
+	
+	fileExtension = os.path.splitext(fileName)[1][1:]
+	sys.path.insert(0, __interpret_plugins_path__)
+	pluginModule = __import__(fileExtension)
 	if pluginModule == None:
 		return None
 	return pluginModule.getCarving(fileName)
