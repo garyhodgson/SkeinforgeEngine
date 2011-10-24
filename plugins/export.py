@@ -2,16 +2,14 @@
 Export prints the output to a file.
 """
 
-from fabmetheus_utilities import archive
-from fabmetheus_utilities import gcodec
-from fabmetheus_utilities import euclidean
-import StringIO
-import os
-import time
-import string
-from datetime import timedelta
 from config import config
+from datetime import timedelta
+from fabmetheus_utilities import archive, euclidean, gcodec
+import StringIO
 import logging
+import os
+import string
+import time
 
 __originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
 __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'

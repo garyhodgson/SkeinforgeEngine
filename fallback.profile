@@ -27,10 +27,10 @@ layer.print.to=912345678
 infill.bridge.direction=true
 mesh.correct=true
 mesh.unproven=false
-extra.decimal.places=3.0
 import.coarseness.ratio=1.0
 
 [inset]
+debug=true
 bridge.width.multiplier.ratio=1.0
 nozzle.diameter=0.5
 loop.order.preferloops=true

@@ -3,12 +3,20 @@
 Skeins a 3D model into gcode.
 """
 
-from plugins import *
 from config import config
 from datetime import timedelta
 from fabmetheus_utilities import archive
-import os, sys, time, re, logging, traceback, argparse
-from gcode import Gcode 
+from gcode import Gcode
+from importlib import import_module
+from plugins import *
+import os
+import sys
+import time
+import re
+import logging
+import traceback
+import argparse
+
 
 __plugins_path__ = 'plugins'
 logger = logging.getLogger('engine')
@@ -19,7 +27,7 @@ def getCraftedTextFromPlugins(fileName, pluginSequence, text, gcode):
 	sys.path.insert(0, __plugins_path__)
 	
 	for plugin in pluginSequence:
-		pluginModule = __import__(plugin)
+		pluginModule = import_module(plugin)
 		if pluginModule != None:
 			text = pluginModule.getCraftedText(fileName, text, gcode)
 			if text == '':

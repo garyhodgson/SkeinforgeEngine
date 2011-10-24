@@ -3,11 +3,10 @@ Carve is a script to carve a shape into svg slice layers.
 It creates the perimeter contours
 """
 
-from fabmetheus_utilities import svg_writer
-import math
-import logging
-from fabmetheus_utilities import archive
 from config import config
+from fabmetheus_utilities import archive, svg_writer
+import logging
+import math
 
 logger = logging.getLogger(__name__)
 name = __name__
@@ -34,7 +33,7 @@ class CarveSkein:
 		self.infillBridgeDirection = config.getboolean(name, 'infill.bridge.direction')
 		self.importCoarsenessRatio = config.getfloat(name, 'import.coarseness.ratio')
 		self.correctMesh = config.getboolean(name, 'mesh.correct')
-		self.extraDecimalPlaces = config.getfloat(name, 'extra.decimal.places')
+		self.decimalPlaces = config.getint('general', 'decimal.places')
 		self.layerPrintFrom = config.getint(name, 'layer.print.from')
 		self.layerPrintTo = config.getint(name, 'layer.print.to')
 				
@@ -52,10 +51,8 @@ class CarveSkein:
 		if len(rotatedLoopLayers) < 1:
 			logger.warning('There are no slices for the model, this could be because the model is too small for the Layer Thickness.')
 			return ''
-		
-		decimalPlacesCarried = max(0, 1 + int(math.ceil(self.extraDecimalPlaces - math.log10(self.layerHeight))))
 	
-		self.gcode.runtimeParameters.decimalPlacesCarried = decimalPlacesCarried
+		self.gcode.runtimeParameters.decimalPlaces = self.decimalPlaces
 		self.gcode.runtimeParameters.layerThickness = self.layerHeight
 		self.gcode.runtimeParameters.perimeterWidth = self.extrusionWidth
 	
@@ -63,7 +60,7 @@ class CarveSkein:
 			True,
 			carving.getCarveCornerMaximum(),
 			carving.getCarveCornerMinimum(),
-			decimalPlacesCarried,
+			self.decimalPlaces,
 			carving.getCarveLayerThickness(),
 			self.extrusionWidth)
 		

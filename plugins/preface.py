@@ -2,15 +2,17 @@
 Preface converts the svg slices into gcodecGcode extrusion layers, optionally prefaced with some gcodecGcode commands.
 """
 
+from config import config
+from decimal import *
+from fabmetheus_utilities import archive, euclidean, gcodec
 from fabmetheus_utilities.svg_reader import SVGReader
 from fabmetheus_utilities.vector3 import Vector3
-from fabmetheus_utilities import archive
-from fabmetheus_utilities import gcodec
-from fabmetheus_utilities import euclidean
-from time import strftime
 from gcode import GcodeCommand, Layer, BoundaryPerimeter
-from config import config
-import os, sys, logging, gcodes
+from time import strftime
+import gcodes
+import logging
+import os
+import sys
 
 logger = logging.getLogger(__name__)
 name = __name__
@@ -100,41 +102,16 @@ class PrefaceSkein:
 	
 	def addPrefaceToGcode(self, rotatedLoopLayer):
 		z = rotatedLoopLayer.z
-		layer = Layer(z)
-		decimalPlacesCarried = self.gcode.runtimeParameters.decimalPlacesCarried
+		layer = Layer(z, self.gcode)
+		decimalPlaces = self.gcode.runtimeParameters.decimalPlaces
+		getcontext().prec = decimalPlaces
 		if rotatedLoopLayer.rotation != None:
 			layer.bridgeRotation = str(rotatedLoopLayer.rotation)
-		for loop in rotatedLoopLayer.loops:
-			boundaryPerimeter = BoundaryPerimeter()
 			
-			'''SurroundingLoopBeginning'''
-			for point in loop:
-				pointVector3 = Vector3(point.real, point.imag, z)
-				boundaryPerimeter.boundaryPoints.append(pointVector3)
-				
-			'''addPerimeterBlock'''	
-			if len(loop) >= 2:
-				if euclidean.isWiddershins(loop):
-					boundaryPerimeter.perimeterType = 'outer'
-				else:
-					boundaryPerimeter.perimeterType = 'inner'
-				thread = loop + [loop[0]]
-				if len(thread) > 0:
-					point = thread[0]
-					boundaryPerimeter.perimeterGcodeCommands.append(
-						GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('X', round(point.real, decimalPlacesCarried)), ('Y', round(point.imag, decimalPlacesCarried)), ('Z', round(z, decimalPlacesCarried))]))
-				else:
-					logger.warning('Zero length vertex positions array which was skipped over, this should never happen.')
-				if len(thread) < 2:
-					logger.warning('Thread of only one point: %s, this should never happen.', thread)
-					break
-				for point in thread[1 :]:
-					boundaryPerimeter.perimeterGcodeCommands.append(
-						GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('X', round(point.real, decimalPlacesCarried)), ('Y', round(point.imag, decimalPlacesCarried)), ('Z', round(z, decimalPlacesCarried))]))
-				
-			layer.boundaryPerimeters.append(boundaryPerimeter)
+		for loop in rotatedLoopLayer.loops:			
+			layer.addBoundaryPerimeter(loop)
 
-		self.gcode.layers.append(layer)
+		self.gcode.layers[z] = layer
 
 	def addShutdownToOutput(self):
 		"Add shutdown gcodecGcode to the output."
@@ -169,7 +146,7 @@ class PrefaceSkein:
 			logger.warning('Nothing will be done because the sliceDictionary could not be found getCraftedGcode in preface.')
 			return ''
 		
-		self.gcodecGcode.decimalPlacesCarried = self.gcode.runtimeParameters.decimalPlacesCarried
+		self.gcodecGcode.decimalPlacesCarried = self.gcode.runtimeParameters.decimalPlaces
 		self.addInitializationToOutput()
 		
 		self.addStartCommandsToGcode()

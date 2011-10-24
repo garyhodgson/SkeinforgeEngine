@@ -16,7 +16,7 @@ from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import xml_simple_reader
 from fabmetheus_utilities import xml_simple_writer
 import os, sys, math, StringIO
-
+from importlib import import_module
 
 __author__ = 'Enrique Perez (perez_enrique@yahoo.com)'
 __date__ = '$Date: 2008/02/05 $'
@@ -30,9 +30,9 @@ __interpret_plugins_path__ = 'fabmetheus_utilities/fabmetheus_tools/interpret_pl
 def getCarving(fileName):
 	'Get a carving for the file using an import plugin.'
 	
-	fileExtension = os.path.splitext(fileName)[1][1:]
+	fileExtension = os.path.splitext(fileName)[1][1:].lower()
 	sys.path.insert(0, __interpret_plugins_path__)
-	pluginModule = __import__(fileExtension)
+	pluginModule = import_module(fileExtension)
 	if pluginModule == None:
 		return None
 	return pluginModule.getCarving(fileName)
