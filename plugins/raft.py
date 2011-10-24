@@ -19,15 +19,12 @@ __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agp
 logger = logging.getLogger(__name__)
 name = __name__
 
-def getCraftedText(fileName, text=''):
+def getCraftedText(fileName, text):
 	'Raft the file or text.'
-	gcodeText = archive.getTextIfEmpty(fileName, text)
-	if gcodec.isProcedureDoneOrFileIsEmpty(gcodeText, name):
-		return gcodeText
 	if not config.getboolean(name, 'active'):
 		logger.info("%s plugin is not active", name.capitalize())
-		return gcodeText
-	return RaftSkein().getCraftedGcode(gcodeText)
+		return text
+	return RaftSkein().getCraftedGcode(text)
 
 def getCrossHatchPointLine(crossHatchPointLineTable, y):
 	'Get the cross hatch point line.'
@@ -707,7 +704,7 @@ class RaftSkein:
 			self.extrusionStart = False
 			self.gcode.addLine(self.operatingLayerEndLine)
 		elif firstWord == '(<layer>':
-			logger.info('%s layer count %s', name, self.layerIndex + 1)
+			#logger.info('%s layer count %s', name, self.layerIndex + 1)
 			self.layerIndex += 1
 			boundaryLayer = None
 			layerZ = self.extrusionTop + float(splitLine[1])

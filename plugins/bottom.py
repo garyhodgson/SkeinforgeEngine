@@ -8,12 +8,8 @@ from fabmetheus_utilities.vector3 import Vector3
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import gcodec
 from fabmetheus_utilities import svg_writer
-import os
-import sys
-import time
-import math
+import os, sys, time, math, logging
 from config import config
-import logging
 
 __originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
 __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
@@ -21,15 +17,15 @@ __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agp
 logger = logging.getLogger(__name__)
 name = __name__
 
-def getCraftedText(fileName, svgText=''):
-	"Bottom and convert an svg file or svgText."
-	svgText = archive.getTextIfEmpty(fileName, svgText)
-	if gcodec.isProcedureDoneOrFileIsEmpty(svgText, name):
-		return svgText
+def getCraftedText(fileName, text):
+	"Bottom and convert an svg file or text."
 	if not config.getboolean(name,'active'):
 		logger.info("%s plugin is not active", name.capitalize())
-		return svgText
-	return BottomSkein().getCraftedGcode(fileName, svgText)
+		return text
+	archive.writeFileText( fileName[: fileName.rfind('.')]+'.pre.bottom', text )
+	x = BottomSkein().getCraftedGcode(fileName, text)
+	archive.writeFileText( fileName[: fileName.rfind('.')]+'.post.bottom', x )
+	return x
 
 class BottomSkein:
 	"A class to bottom a skein of extrusions."

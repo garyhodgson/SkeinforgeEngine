@@ -77,10 +77,6 @@ def getSVGByLoopLayers(addLayerTemplateToSVG, carving, rotatedLoopLayers):
 		carving.getCarveLayerThickness())
 	return svgWriter.getReplacedSVGTemplate(carving.fileName, 'basic', rotatedLoopLayers, carving.getFabmetheusXML())
 
-def getTruncatedRotatedBoundaryLayers(rotatedLoopLayers, layersFrom, layersTo):
-	'Get the truncated rotated boundary layers.'
-	return rotatedLoopLayers[layersFrom : layersTo]
-
 def setSVGCarvingCorners(cornerMaximum, cornerMinimum, layerThickness, rotatedLoopLayers):
 	'Parse SVG text and store the layers.'
 	for rotatedLoopLayer in rotatedLoopLayers:

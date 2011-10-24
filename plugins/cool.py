@@ -18,13 +18,10 @@ name = __name__
 
 def getCraftedText(fileName, text):
 	'Cool a gcode linear move text.'
-	gcodeText = archive.getTextIfEmpty(fileName, text)
-	if gcodec.isProcedureDoneOrFileIsEmpty(gcodeText, name):
-		return gcodeText
 	if not config.getboolean(name, 'active'):
 		logger.info("%s plugin is not active", name.capitalize())
-		return gcodeText
-	return CoolSkein().getCraftedGcode(gcodeText)
+		return text
+	return CoolSkein().getCraftedGcode(text)
 
 class CoolSkein:
 	'A class to cool a skein of extrusions.'
@@ -222,7 +219,7 @@ class CoolSkein:
 			self.boundaryLoop.append(gcodec.getLocationFromSplitLine(None, splitLine).dropAxis())
 		elif firstWord == '(<layer>':
 			self.layerCount = self.layerCount +1
-			logger.info('layer: %s', self.layerCount)	
+			#logger.info('layer: %s', self.layerCount)	
 			
 			self.gcode.addLine(line)
 			self.gcode.addLinesSetAbsoluteDistanceMode(self.coolStartLines)

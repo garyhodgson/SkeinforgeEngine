@@ -6,6 +6,7 @@ It creates the perimeter contours
 from fabmetheus_utilities import svg_writer
 import math
 import logging
+from fabmetheus_utilities import archive
 from config import config
 
 __originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
@@ -19,6 +20,10 @@ def getCraftedText(fileName, gcodeText=''):
 	carving = svg_writer.getCarving(fileName)
 	if carving == None:
 		return ''
+	if config.getboolean(name, 'export.carving'):
+		carvingFilename = fileName[: fileName.rfind('.')]+'.carving.xml'
+		archive.writeFileText( carvingFilename , str(carving) )
+		logger.info("Carving XML written to %s", carvingFilename)
 	return CarveSkein().getCarvedSVG(carving, fileName)
 
 class CarveSkein:
@@ -28,12 +33,13 @@ class CarveSkein:
 		'Initialize'
 		self.layerHeight = config.getfloat(name, 'layer.height')
 		self.extrusionWidth = config.getfloat(name, 'extrusion.width')
-		self.infillBridgeDirection = config.getboolean('carve', 'infill.bridge.direction')
+		self.infillBridgeDirection = config.getboolean(name, 'infill.bridge.direction')
 		self.importCoarsenessRatio = config.getfloat(name, 'import.coarseness.ratio')
 		self.correctMesh = config.getboolean(name, 'mesh.correct')
 		self.extraDecimalPlaces = config.getfloat(name, 'extra.decimal.places')
 		self.layerPrintFrom = config.getint(name, 'layer.print.from')
 		self.layerPrintTo = config.getint(name, 'layer.print.to')
+		self.exportSvg = config.getboolean(name, 'export.svg')
 		
 	def getCarvedSVG(self, carving, fileName):
 		"Parse gnu triangulated surface text and store the carved gcode."
@@ -57,7 +63,13 @@ class CarveSkein:
 			carving.getCarveLayerThickness(),
 			self.extrusionWidth)
 		
-		truncatedRotatedBoundaryLayers = svg_writer.getTruncatedRotatedBoundaryLayers(rotatedLoopLayers,
-																					self.layerPrintFrom,
-																					self.layerPrintTo)
-		return svgWriter.getReplacedSVGTemplate(fileName, name, truncatedRotatedBoundaryLayers, carving.getFabmetheusXML())
+		truncatedLayers = rotatedLoopLayers[self.layerPrintFrom : self.layerPrintTo]
+		
+		svgText = svgWriter.getReplacedSVGTemplate(fileName, name, truncatedLayers, carving.getFabmetheusXML())
+		
+		if self.exportSvg:
+			svgFilename = fileName[: fileName.rfind('.')]+'.svg'
+			archive.writeFileText( svgFilename , svgText )
+			logger.info("Carving SVG written to %s", svgFilename)
+		
+		return svgText

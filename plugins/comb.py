@@ -18,13 +18,10 @@ name = __name__
 
 def getCraftedText(fileName, text):
 	"Comb a gcode linear move text."
-	gcodeText = archive.getTextIfEmpty(fileName, text)
-	if gcodec.isProcedureDoneOrFileIsEmpty(gcodeText, name):
-		return gcodeText
 	if not config.getboolean(name, 'active'):
 		logger.info("%s plugin is not active", name.capitalize())
-		return gcodeText
-	return CombSkein().getCraftedGcode(gcodeText)
+		return text
+	return CombSkein().getCraftedGcode(text)
 
 class CombSkein:
 	"A class to comb a skein of extrusions."
@@ -298,7 +295,7 @@ class CombSkein:
 			self.isAlteration = False
 		elif firstWord == '(<layer>':
 			self.layerCount = self.layerCount + 1
-			logger.info('layer: %s', self.layerCount)
+			#logger.info('layer: %s', self.layerCount)
 			self.nextLayerZ = float(splitLine[1])
 			if self.layerZ == None:
 				self.layerZ = self.nextLayerZ

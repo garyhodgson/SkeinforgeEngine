@@ -15,15 +15,12 @@ __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agp
 logger = logging.getLogger(__name__)
 name = __name__
 
-def getCraftedText(fileName, text=''):
+def getCraftedText(fileName, text):
 	'Multiply the fill file or text.'
-	gcodeText = archive.getTextIfEmpty(fileName, text)
-	if gcodec.isProcedureDoneOrFileIsEmpty(gcodeText, name):
-		return gcodeText
 	if not config.getboolean(name, 'active'):
 		logger.info("%s plugin is not active", name.capitalize())
-		return gcodeText
-	return MultiplySkein().getCraftedGcode(gcodeText)
+		return text
+	return MultiplySkein().getCraftedGcode(text)
 
 class MultiplySkein:
 	'A class to multiply a skein of extrusions.'

@@ -8,9 +8,7 @@ from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import gcodec
 from fabmetheus_utilities import intercircle
-import math
-import sys
-import logging
+import math, sys, logging
 from config import config
 
 __originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modified by Action68 (ahmetcemturan@gmail.com) SFACT home at reprafordummies.net'
@@ -19,16 +17,12 @@ __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agp
 logger = logging.getLogger(__name__)
 name = __name__
 
-
-def getCraftedText(fileName, gcodeText=''):
+def getCraftedText(fileName, text):
 	'Fill the inset file or gcode text.'
-	gcodeText = archive.getTextIfEmpty(fileName, gcodeText)
-	if gcodec.isProcedureDoneOrFileIsEmpty(gcodeText, 'fill'):
-		return gcodeText
 	if not config.getboolean(name, 'active'):
 		logger.info("%s plugin is not active", name.capitalize())
-		return gcodeText
-	return FillSkein().getCraftedGcode(gcodeText)
+		return text
+	return FillSkein().getCraftedGcode(text)
 	
 def addAroundGridPoint(arounds, gridPoint, gridPointInsetX, gridPointInsetY, gridPoints, gridSearchRadius, isBothOrNone, isDoubleJunction, isJunctionWide, paths, pixelTable, width):
 	'Add the path around the grid point.'
@@ -624,7 +618,7 @@ class FillSkein:
 		reverseRotation = complex(layerRotation.real, -layerRotation.imag)
 		surroundingCarves = []
 		layerRemainder = layerIndex % self.diaphragmPeriod
-		logger.info('filling Layer %s', layerIndex + 1)
+		#logger.info('filling Layer %s', layerIndex + 1)
 		if layerRemainder >= self.diaphragmThickness and rotatedLayer.rotation == None:
 			for surroundingIndex in xrange(1, self.solidSurfaceThickness + 1):
 				self.addRotatedCarve(layerIndex, -surroundingIndex, reverseRotation, surroundingCarves)

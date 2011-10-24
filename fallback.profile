@@ -26,6 +26,8 @@ mesh.correct=true
 mesh.unproven=false
 extra.decimal.places=4.0
 import.coarseness.ratio=1.0
+export.svg=true
+export.carving=true
 
 [inset]
 bridge.width.multiplier.ratio=1.0

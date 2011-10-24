@@ -65,7 +65,7 @@ def addElementToListDictionaryIfNotThere(element, key, listDictionary):
 
 def addElementToPixelList( element, pixelDictionary, x, y ):
 	'Add an element to the pixel list.'
-	stepKey = getStepKey(x, y)
+	stepKey = (x, y)
 	addElementToListDictionary( element, stepKey, pixelDictionary )
 
 def addElementToPixelListFromPoint( element, pixelDictionary, point ):
@@ -117,7 +117,7 @@ def addPixelTableToPixelTable( fromPixelTable, intoPixelTable ):
 
 def addPixelToPixelTable( pixelDictionary, value, x, y ):
 	'Add pixel to the pixel table.'
-	pixelDictionary[getStepKey(x, y)] = value
+	pixelDictionary[(x, y)] = value
 
 def addPixelToPixelTableWithSteepness( isSteep, pixelDictionary, value, x, y ):
 	'Add pixels to the pixel table with steepness.'
@@ -189,7 +189,7 @@ def addSquareTwoToPixelDictionary(pixelDictionary, point, value, width):
 	y = int(round(point.imag))
 	for xStep in xrange(x - 2, x + 3):
 		for yStep in xrange(y - 2, y + 3):
-			pixelDictionary[getStepKey(xStep, yStep)] = value
+			pixelDictionary[(xStep, yStep)] = value
 
 def addSurroundingLoopBeginning( distanceFeedRate, loop, z ):
 	'Add surrounding loop beginning to gcode output.'
@@ -473,7 +473,7 @@ def getAwayPoints(points, radius):
 		y = int(point.imag * oneOverOverlapDistance)
 		if not getSquareIsOccupied(pixelDictionary, x, y):
 			away.append(point)
-			stepKey = getStepKey(x, y)
+			stepKey = (x, y)
 			pixelDictionary[stepKey] = None
 	return away
 
@@ -1602,7 +1602,7 @@ def getSquareIsOccupied( pixelDictionary, x, y ):
 	squareValues = []
 	for xStep in xrange(x - 1, x + 2):
 		for yStep in xrange(y - 1, y + 2):
-			stepKey = getStepKey(xStep, yStep)
+			stepKey = (xStep, yStep)
 			if stepKey in pixelDictionary:
 				return True
 	return False
@@ -1618,7 +1618,7 @@ def getSquareValues( pixelDictionary, x, y ):
 	squareValues = []
 	for xStep in xrange(x - 1, x + 2):
 		for yStep in xrange(y - 1, y + 2):
-			stepKey = getStepKey(xStep, yStep)
+			stepKey = (xStep, yStep)
 			if stepKey in pixelDictionary:
 				squareValues += pixelDictionary[ stepKey ]
 	return squareValues
@@ -1626,10 +1626,6 @@ def getSquareValues( pixelDictionary, x, y ):
 def getSquareValuesFromPoint( pixelDictionary, point ):
 	'Get a list of the values in a square around the point.'
 	return getSquareValues(pixelDictionary, int(round(point.real)), int(round(point.imag)))
-
-def getStepKey(x, y):
-	'Get step key for x and y.'
-	return (x, y)
 
 def getStepKeyFromPoint(point):
 	'Get step key for the point.'

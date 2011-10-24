@@ -7,10 +7,7 @@ from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import gcodec
 from fabmetheus_utilities import intercircle
-import math
-import os
-import sys
-import logging
+import math, os, sys, logging
 from config import config
 
 __originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
@@ -19,12 +16,12 @@ __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agp
 logger = logging.getLogger(__name__)
 name = __name__
 
-def getCraftedText( fileName, text=''):
+def getCraftedText( fileName, text):
 	"Inset the preface file or text."
-	gcodeText = archive.getTextIfEmpty(fileName, text)
-	if gcodec.isProcedureDoneOrFileIsEmpty( gcodeText, name):
-		return gcodeText
-	return InsetSkein().getCraftedGcode(gcodeText)
+	archive.writeFileText( fileName[: fileName.rfind('.')]+'.pre.inset', text )
+	x = InsetSkein().getCraftedGcode(text)
+	archive.writeFileText( fileName[: fileName.rfind('.')]+'.post.inset', x )
+	return x
 
 def addAlreadyFilledArounds( alreadyFilledArounds, loop, radius ):
 	"Add already filled loops around loop to alreadyFilledArounds."

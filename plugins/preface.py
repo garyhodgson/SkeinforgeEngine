@@ -17,12 +17,12 @@ __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agp
 logger = logging.getLogger(__name__)
 name = __name__
 
-def getCraftedText(fileName, text=''):
+def getCraftedText(fileName, text):
 	"Preface and convert an svg file or text."
-	text = archive.getTextIfEmpty(fileName, text)
-	if gcodec.isProcedureDoneOrFileIsEmpty(text, 'preface'):
-		return text
-	return PrefaceSkein().getCraftedGcode(text)
+	archive.writeFileText( fileName[: fileName.rfind('.')]+'.pre.preface', text )
+	x = PrefaceSkein().getCraftedGcode(text)
+	archive.writeFileText( fileName[: fileName.rfind('.')]+'.post.preface', x )
+	return x
 
 class PrefaceSkein:
 	"A class to preface a skein of extrusions."
@@ -101,7 +101,7 @@ class PrefaceSkein:
 		self.gcode.decimalPlacesCarried = int(self.svgReader.sliceDictionary['decimalPlacesCarried'])
 		self.addInitializationToOutput()
 		for rotatedLoopLayerIndex, rotatedLoopLayer in enumerate(self.svgReader.rotatedLoopLayers):
-			logger.info('layer: %s/%s', rotatedLoopLayerIndex+1, len(self.svgReader.rotatedLoopLayers))
+			#logger.info('layer: %s/%s', rotatedLoopLayerIndex+1, len(self.svgReader.rotatedLoopLayers))
 			self.addPreface(rotatedLoopLayer)
 		self.addShutdownToOutput()
 		return self.gcode.output.getvalue()

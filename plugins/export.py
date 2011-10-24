@@ -43,11 +43,9 @@ def writeOutput(fileName, gcodeText, profileName):
 		
 	logger.info('The exported file is saved as %s', archive.getSummarizedFileName(exportFileName))
 
-def getCraftedText(gcodeText):
+def getCraftedText(text):
 	'Export a gcode linear move text.'
-	if gcodec.isProcedureDoneOrFileIsEmpty( gcodeText, name):
-		return gcodeText
-	return ExportSkein().getCraftedGcode(gcodeText)
+	return ExportSkein().getCraftedGcode(text)
 
 def getReplaceableExportGcode(nameOfReplaceFile, replaceableExportGcode):
 	'Get text with strings replaced according to replace.csv file.'

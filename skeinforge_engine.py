@@ -1,3 +1,4 @@
+#!/usr/bin/python
 """
 Skeins a 3D model into gcode.
 """

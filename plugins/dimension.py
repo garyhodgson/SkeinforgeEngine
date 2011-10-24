@@ -18,15 +18,12 @@ __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agp
 logger = logging.getLogger(__name__)
 name = __name__
 
-def getCraftedText(fileName, gcodeText=''):
+def getCraftedText(fileName, text):
 	'Dimension a gcode file or text.'
-	gcodeText = archive.getTextIfEmpty(fileName, gcodeText)
-	if gcodec.isProcedureDoneOrFileIsEmpty(gcodeText, name):
-		return gcodeText
 	if not config.getboolean(name, 'active'):
 		logger.info("%s plugin is not active", name.capitalize())
-		return gcodeText
-	return DimensionSkein().getCraftedGcode(gcodeText)
+		return text
+	return DimensionSkein().getCraftedGcode(text)
 
 class DimensionSkein:
 	'A class to dimension a skein of extrusions.'
