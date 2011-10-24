@@ -6,24 +6,22 @@ Skeins a 3D model into gcode.
 from plugins import *
 from config import config
 from datetime import timedelta
+from fabmetheus_utilities import archive
 import os, sys, time, re, logging, traceback, argparse
-
-__originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
-__license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
-
+from gcode import Gcode 
 
 __plugins_path__ = 'plugins'
 logger = logging.getLogger('engine')
 
-def getCraftedTextFromPlugins(fileName, pluginSequence, text):
+def getCraftedTextFromPlugins(fileName, pluginSequence, text, gcode):
 	'Get a crafted shape file from a list of pluginSequence.'
 	lastProcedureTime = time.time()
 	sys.path.insert(0, __plugins_path__)
-	runParams = {}
+	
 	for plugin in pluginSequence:
 		pluginModule = __import__(plugin)
 		if pluginModule != None:
-			text = pluginModule.getCraftedText(fileName, text)
+			text = pluginModule.getCraftedText(fileName, text, gcode)
 			if text == '':
 				logger.warning('Procedure %s returned no text', plugin)
 				return ''
@@ -63,14 +61,20 @@ def main():
 	logger.info("Profile: %s", profileName)
 	logger.debug("Plugin Sequence: %s", pluginSequence)
 	
-	gcodeText = getCraftedTextFromPlugins(inputFilename, pluginSequence[:-1], gcodeText)
+	verbose = config.getboolean('general', 'verbose.gcode')
+	gcode = Gcode(verbose)
+	gcode.runtimeParameters.profileName = profileName
+	
+	gcodeText = getCraftedTextFromPlugins(inputFilename, pluginSequence[:-1], gcodeText, gcode)
+	
+	gcode.runtimeParameters.endTime = time.time()
 
 	if gcodeText == '':
 		logger.warning('No Gcode given to write out in export module.')
 		return
 	
-	export.writeOutput(inputFilename, gcodeText, profileName)
-	logger.info('It took %s seconds to export the file.', timedelta(seconds=time.time() - startTime).total_seconds())
+	export.writeOutput(inputFilename, gcodeText, gcode)
+	logger.info('It took %s seconds to export the file.', timedelta(seconds=gcode.runtimeParameters.endTime - gcode.runtimeParameters.startTime).total_seconds())
 
 def handleError(self, record):
 	traceback.print_stack()

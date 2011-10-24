@@ -18,3 +18,7 @@ A fork of Enrique's [Skeinforge](http://skeinforge.com), taken from ahmetcemtura
 
 ## Credit
   * Credit to Enrique and the original contributers in making Skeinforge available, and to Ahmet for his contributions through SFACT.
+
+## License
+[GNU Affero General Public License](http://www.gnu.org/licenses/agpl.html)
+  

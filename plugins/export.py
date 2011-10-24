@@ -19,14 +19,15 @@ __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agp
 logger = logging.getLogger('export')
 name = 'export'
 
-def writeOutput(fileName, gcodeText, profileName):
+def writeOutput(fileName, gcodeText, gcode):
 	'Export a gcode linear move file.'
 	
 	exportFileName = fileName[: fileName.rfind('.')]
-	
+	profileName = gcode.runtimeParameters.profileName
+
 	if config.getboolean(name, 'file.extension.profile') and profileName:
 			exportFileName += '.' + string.replace(profileName, ' ', '_')
-	exportFileName += '.' + config.get(name,'file.extension')
+	exportFileName += '.' + config.get(name, 'file.extension')
 	
 	if config.getboolean(name, 'gcode.penultimate.save'):
 		fileNamePenultimate = fileName[: fileName.rfind('.')] + '_penultimate.gcode'
@@ -35,11 +36,15 @@ def writeOutput(fileName, gcodeText, profileName):
 		
 	exportGcode = getCraftedText(gcodeText)
 
-	if config.has_option(name,'replace.filename') and config.get(name,'replace.filename') != '':
-		replaceableExportGcode = getReplaceableExportGcode(config.get(name,'replace.filename'), exportGcode)
-		archive.writeFileText( exportFileName, replaceableExportGcode )
+	if config.has_option(name, 'replace.filename') and config.get(name, 'replace.filename') != '':
+		replaceableExportGcode = getReplaceableExportGcode(config.get(name, 'replace.filename'), exportGcode)
+		archive.writeFileText(exportFileName, replaceableExportGcode)
 	else:
-		archive.writeFileText( exportFileName, exportGcode )
+		archive.writeFileText(exportFileName, exportGcode)
+	
+	if config.getboolean('export', 'debug'):
+		archive.writeFileText(fileName[: fileName.rfind('.')] + '.new.penultimate.gcode', str(gcode))
+		archive.writeFileText(fileName[: fileName.rfind('.')] + '.new.gcode', gcode.getGcodeText())
 		
 	logger.info('The exported file is saved as %s', archive.getSummarizedFileName(exportFileName))
 
@@ -49,7 +54,7 @@ def getCraftedText(text):
 
 def getReplaceableExportGcode(nameOfReplaceFile, replaceableExportGcode):
 	'Get text with strings replaced according to replace.csv file.'
-	fullReplaceFilePath = os.path.join('alterations',  nameOfReplaceFile)
+	fullReplaceFilePath = os.path.join('alterations', nameOfReplaceFile)
 	fullReplaceText = archive.getFileText(fullReplaceFilePath)
 	replaceLines = archive.getTextLines(fullReplaceText)
 	if len(replaceLines) < 1:
@@ -68,18 +73,19 @@ class ExportSkein:
 		self.crafting = False
 		self.decimalPlacesExported = 2
 		self.output = StringIO.StringIO()		
-		self.deleteComments  = config.getboolean(name, 'delete.comments')
-		self.fileExtension  = config.get(name, 'file.extension')
-		self.nameOfReplaceFile  = config.get(name, 'replace.filename')
-		self.savePenultimateGcode  = config.getboolean(name, 'gcode.penultimate.save')
-		self.addProfileExtension  = config.getboolean(name, 'file.extension.profile')
+		self.deleteComments = config.getboolean(name, 'delete.comments')
+		self.fileExtension = config.get(name, 'file.extension')
+		self.nameOfReplaceFile = config.get(name, 'replace.filename')
+		self.savePenultimateGcode = config.getboolean(name, 'gcode.penultimate.save')
+		self.addProfileExtension = config.getboolean(name, 'file.extension.profile')
+		
 
 	def addLine(self, line):
 		'Add a line of text and a newline to the output.'
 		if line != '':
 			self.output.write(line + '\n')
 
-	def getCraftedGcode( self, gcodeText ):
+	def getCraftedGcode(self, gcodeText):
 		'Parse gcode text and store the export gcode.'
 		lines = archive.getTextLines(gcodeText)
 		for line in lines:

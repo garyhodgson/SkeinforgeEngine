@@ -1,107 +1,186 @@
 """
-Preface converts the svg slices into gcode extrusion layers, optionally prefaced with some gcode commands.
+Preface converts the svg slices into gcodecGcode extrusion layers, optionally prefaced with some gcodecGcode commands.
 """
 
 from fabmetheus_utilities.svg_reader import SVGReader
+from fabmetheus_utilities.vector3 import Vector3
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import gcodec
+from fabmetheus_utilities import euclidean
 from time import strftime
-import os
-import sys
+from gcode import GcodeCommand, Layer, BoundaryPerimeter
 from config import config
-import logging
-
-__originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
-__license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
+import os, sys, logging, gcodes
 
 logger = logging.getLogger(__name__)
 name = __name__
 
-def getCraftedText(fileName, text):
+def getCraftedText(fileName, text, gcode):
 	"Preface and convert an svg file or text."
-	archive.writeFileText( fileName[: fileName.rfind('.')]+'.pre.preface', text )
-	x = PrefaceSkein().getCraftedGcode(text)
-	archive.writeFileText( fileName[: fileName.rfind('.')]+'.post.preface', x )
-	return x
+	if config.getboolean(name, 'debug'):
+		archive.writeFileText(fileName[: fileName.rfind('.')] + '.pre.preface', text)
+	craftedGcodeText = PrefaceSkein(gcode).getCraftedGcode(text)
+	if config.getboolean(name, 'debug'):
+		archive.writeFileText(fileName[: fileName.rfind('.')] + '.post.preface', craftedGcodeText)
+	return craftedGcodeText
 
 class PrefaceSkein:
 	"A class to preface a skein of extrusions."
-	def __init__(self):
-		self.gcode = gcodec.Gcode()
+	def __init__(self, gcode):
+		self.gcodecGcode = gcodec.Gcode()
+		self.gcode = gcode
 		self.extruderActive = False
 		self.lineIndex = 0
 		self.oldLocation = None
 		self.svgReader = SVGReader()
-		self.setPositioningToAbsolute = config.getboolean('preface','positioning.absolute')
-		self.setUnitsToMillimeters = config.getboolean('preface','units.millimeters')
-		self.startAtHome = config.getboolean('preface','startup.at.home')
-		self.resetExtruder = config.getboolean('preface','startup.extruder.reset')
-		self.setPositioningToAbsolute = config.getboolean('preface','positioning.absolute')
+		self.setPositioningToAbsolute = config.getboolean('preface', 'positioning.absolute')
+		self.setUnitsToMillimeters = config.getboolean('preface', 'units.millimeters')
+		self.startAtHome = config.getboolean('preface', 'startup.at.home')
+		self.resetExtruder = config.getboolean('preface', 'startup.extruder.reset')
+		self.setPositioningToAbsolute = config.getboolean('preface', 'positioning.absolute')
 
 	def addFromUpperLowerFile(self, fileName):
 		"Add lines of text from the fileName or the lowercase fileName, if there is no file by the original fileName in the directory."
-		absoluteFilePath = os.path.join('alterations',  fileName)
+		absoluteFilePath = os.path.join('alterations', fileName)
 		fileText = archive.getFileText(absoluteFilePath)
-		self.gcode.addLinesSetAbsoluteDistanceMode(archive.getTextLines(fileText))
+		self.gcodecGcode.addLinesSetAbsoluteDistanceMode(archive.getTextLines(fileText))
 
+	def getLinesFromFile(self, fileName):
+		lines = []
+		absPath = os.path.join('alterations', fileName)
+		try:			
+			f = open(absPath, 'r')
+			lines = f.read().replace('\r', '\n').replace('\n\n', '\n').split('\n')
+			f.close()
+		except IOError as e:
+			logger.warning("Unable to open file: %s", absPath)
+		return lines
+	
 	def addInitializationToOutput(self):
-		"Add initialization gcode to the output."
-		self.addFromUpperLowerFile(config.get('preface','start.file')) # Add a start file if it exists.
-		self.gcode.addTagBracketedLine('creation', 'skeinforge') # GCode formatted comment
+		"Add initialization gcodecGcode to the output."
+		self.addFromUpperLowerFile(config.get('preface', 'start.file')) # Add a start file if it exists.
+		self.gcodecGcode.addTagBracketedLine('creation', 'skeinforge') # GCode formatted comment
 
-		self.gcode.addLine('(<extruderInitialization>)') # GCode formatted comment
+		self.gcodecGcode.addLine('(<extruderInitialization>)') # GCode formatted comment
 		if self.setPositioningToAbsolute:
-			self.gcode.addLine('G90 ;set positioning to absolute') # Set positioning to absolute.
+			self.gcodecGcode.addLine('G90 ;set positioning to absolute') # Set positioning to absolute.
 		if self.setUnitsToMillimeters:
-			self.gcode.addLine('G21 ;set units to millimeters') # Set units to millimeters.
+			self.gcodecGcode.addLine('G21 ;set units to millimeters') # Set units to millimeters.
 		if self.startAtHome:
-			self.gcode.addLine('G28 ;start at home') # Start at home.
+			self.gcodecGcode.addLine('G28 ;start at home') # Start at home.
 		if self.resetExtruder:
-			self.gcode.addLine('G92 E0 ;reset extruder distance') # Start at home.
+			self.gcodecGcode.addLine('G92 E0 ;reset extruder distance') # Start at home.
 
 		
-		self.gcode.addTagBracketedLine('craftTypeName', 'extrusion')
-		self.gcode.addTagBracketedLine('decimalPlacesCarried', self.gcode.decimalPlacesCarried)
+		self.gcodecGcode.addTagBracketedLine('craftTypeName', 'extrusion')
+		self.gcodecGcode.addTagBracketedLine('decimalPlacesCarried', self.gcodecGcode.decimalPlacesCarried)
 		layerThickness = float(self.svgReader.sliceDictionary['layerThickness'])
-		self.gcode.addTagRoundedLine('layerThickness', layerThickness)
+		self.gcodecGcode.addTagRoundedLine('layerThickness', layerThickness)
 		perimeterWidth = float(self.svgReader.sliceDictionary['perimeterWidth'])
-		self.gcode.addTagRoundedLine('perimeterWidth', perimeterWidth)
-		self.gcode.addTagBracketedLine('profileName', 'Default')
-		self.gcode.addLine('(<settings>)')
-		self.gcode.addLine('(</settings>)')
-		self.gcode.addTagBracketedLine('timeStampPreface', strftime('%Y%m%d_%H%M%S'))
+		self.gcodecGcode.addTagRoundedLine('perimeterWidth', perimeterWidth)
+		self.gcodecGcode.addTagBracketedLine('profileName', 'Default')
+		self.gcodecGcode.addLine('(<settings>)')
+		self.gcodecGcode.addLine('(</settings>)')
+		self.gcodecGcode.addTagBracketedLine('timeStampPreface', strftime('%Y%m%d_%H%M%S'))
 		procedureNames = self.svgReader.sliceDictionary['procedureName'].replace(',', ' ').split()
 		for procedureName in procedureNames:
-			self.gcode.addTagBracketedLine('procedureName', procedureName)
-		self.gcode.addTagBracketedLine('procedureName', 'preface')
-		self.gcode.addLine('(</extruderInitialization>)') # Initialization is finished, extrusion is starting.
-		self.gcode.addLine('(<crafting>)') # Initialization is finished, crafting is starting.
+			self.gcodecGcode.addTagBracketedLine('procedureName', procedureName)
+		self.gcodecGcode.addTagBracketedLine('procedureName', 'preface')
+		self.gcodecGcode.addLine('(</extruderInitialization>)') # Initialization is finished, extrusion is starting.
+		self.gcodecGcode.addLine('(<crafting>)') # Initialization is finished, crafting is starting.
 
 	def addPreface(self, rotatedLoopLayer):
 		"Add preface to the carve layer."
-		self.gcode.addLine('(<layer> %s )' % rotatedLoopLayer.z) # Indicate that a new layer is starting.
+		self.gcodecGcode.addLine('(<layer> %s )' % rotatedLoopLayer.z) # Indicate that a new layer is starting.
 		if rotatedLoopLayer.rotation != None:
-			self.gcode.addTagBracketedLine('bridgeRotation', str(rotatedLoopLayer.rotation)) # Indicate the bridge rotation.
+			self.gcodecGcode.addTagBracketedLine('bridgeRotation', str(rotatedLoopLayer.rotation)) # Indicate the bridge rotation.
 		for loop in rotatedLoopLayer.loops:
-			self.gcode.addGcodeFromLoop(loop, rotatedLoopLayer.z)
-		self.gcode.addLine('(</layer>)')
+			self.gcodecGcode.addGcodeFromLoop(loop, rotatedLoopLayer.z)
+		self.gcodecGcode.addLine('(</layer>)')
+	
+	def addPrefaceToGcode(self, rotatedLoopLayer):
+		z = rotatedLoopLayer.z
+		layer = Layer(z)
+		decimalPlacesCarried = self.gcode.runtimeParameters.decimalPlacesCarried
+		if rotatedLoopLayer.rotation != None:
+			layer.bridgeRotation = str(rotatedLoopLayer.rotation)
+		for loop in rotatedLoopLayer.loops:
+			boundaryPerimeter = BoundaryPerimeter()
+			
+			'''SurroundingLoopBeginning'''
+			for point in loop:
+				pointVector3 = Vector3(point.real, point.imag, z)
+				boundaryPerimeter.boundaryPoints.append(pointVector3)
+				
+			'''addPerimeterBlock'''	
+			if len(loop) >= 2:
+				if euclidean.isWiddershins(loop):
+					boundaryPerimeter.perimeterType = 'outer'
+				else:
+					boundaryPerimeter.perimeterType = 'inner'
+				thread = loop + [loop[0]]
+				if len(thread) > 0:
+					point = thread[0]
+					boundaryPerimeter.perimeterGcodeCommands.append(
+						GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('X', round(point.real, decimalPlacesCarried)), ('Y', round(point.imag, decimalPlacesCarried)), ('Z', round(z, decimalPlacesCarried))]))
+				else:
+					logger.warning('Zero length vertex positions array which was skipped over, this should never happen.')
+				if len(thread) < 2:
+					logger.warning('Thread of only one point: %s, this should never happen.', thread)
+					break
+				for point in thread[1 :]:
+					boundaryPerimeter.perimeterGcodeCommands.append(
+						GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('X', round(point.real, decimalPlacesCarried)), ('Y', round(point.imag, decimalPlacesCarried)), ('Z', round(z, decimalPlacesCarried))]))
+				
+			layer.boundaryPerimeters.append(boundaryPerimeter)
+
+		self.gcode.layers.append(layer)
 
 	def addShutdownToOutput(self):
-		"Add shutdown gcode to the output."
-		self.gcode.addLine('(</crafting>)') # GCode formatted comment
-		self.addFromUpperLowerFile(config.get('preface','end.file')) # Add an end file if it exists.
+		"Add shutdown gcodecGcode to the output."
+		self.gcodecGcode.addLine('(</crafting>)') # GCode formatted comment
+		self.addFromUpperLowerFile(config.get('preface', 'end.file')) # Add an end file if it exists.
+		
+	def addStartCommandsToGcode(self):
+		
+		if config.get(name, 'start.file') != None:
+			for line in self.getLinesFromFile(config.get(name, 'start.file')):
+				self.gcode.startGcodeCommands.append(line)
+		
+		if self.setPositioningToAbsolute:
+			self.gcode.startGcodeCommands.append(GcodeCommand(gcodes.ABSOLUTE_POSITIONING))
+		if self.setUnitsToMillimeters:
+			self.gcode.startGcodeCommands.append(GcodeCommand(gcodes.UNITS_IN_MILLIMETERS))
+		if self.startAtHome:
+			self.gcode.startGcodeCommands.append(GcodeCommand(gcodes.START_AT_HOME))
+		if self.resetExtruder:
+			self.gcode.startGcodeCommands.append(GcodeCommand(gcodes.RESET_EXTRUDER_DISTANCE, [('E', '0')]))
 
+	def addEndCommandsToGcode(self):
+		if config.get(name, 'end.file') != None:
+			for line in self.getLinesFromFile(config.get(name, 'end.file')):
+				self.gcode.endGcodeCommands.append(line)
+				
 	def getCraftedGcode(self, gcodeText):
-		"Parse gcode text and store the bevel gcode."
+		"Parse gcodecGcode text and store the bevel gcodecGcode."
 		
 		self.svgReader.parseSVG('', gcodeText)
 		if self.svgReader.sliceDictionary == None:
 			logger.warning('Nothing will be done because the sliceDictionary could not be found getCraftedGcode in preface.')
 			return ''
-		self.gcode.decimalPlacesCarried = int(self.svgReader.sliceDictionary['decimalPlacesCarried'])
+		
+		self.gcodecGcode.decimalPlacesCarried = self.gcode.runtimeParameters.decimalPlacesCarried
 		self.addInitializationToOutput()
-		for rotatedLoopLayerIndex, rotatedLoopLayer in enumerate(self.svgReader.rotatedLoopLayers):
-			#logger.info('layer: %s/%s', rotatedLoopLayerIndex+1, len(self.svgReader.rotatedLoopLayers))
+		
+		self.addStartCommandsToGcode()
+		
+		for rotatedLoopLayerIndex, rotatedLoopLayer in enumerate(self.gcode.rotatedLoopLayers):
 			self.addPreface(rotatedLoopLayer)
+		
+		for rotatedLoopLayer in self.gcode.rotatedLoopLayers:
+			self.addPrefaceToGcode(rotatedLoopLayer)
+		
 		self.addShutdownToOutput()
-		return self.gcode.output.getvalue()
+		self.addEndCommandsToGcode()
+		
+		return self.gcodecGcode.output.getvalue()

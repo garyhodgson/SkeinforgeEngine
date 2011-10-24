@@ -2,6 +2,7 @@
 name=default
 
 [export]
+debug=true
 delete.comments=true
 file.extension=gcode
 replace.filename=replace.csv
@@ -9,6 +10,7 @@ gcode.penultimate.save=true
 file.extension.profile=true
 
 [preface]
+debug=true
 start.file=start.gmc
 end.file=end.gmc
 positioning.absolute=true
@@ -17,6 +19,7 @@ startup.at.home=false
 startup.extruder.reset=true
 
 [carve]
+debug=true
 layer.height=0.4
 extrusion.width=0.6
 layer.print.from=0
@@ -24,10 +27,8 @@ layer.print.to=912345678
 infill.bridge.direction=true
 mesh.correct=true
 mesh.unproven=false
-extra.decimal.places=4.0
+extra.decimal.places=3.0
 import.coarseness.ratio=1.0
-export.svg=true
-export.carving=true
 
 [inset]
 bridge.width.multiplier.ratio=1.0
