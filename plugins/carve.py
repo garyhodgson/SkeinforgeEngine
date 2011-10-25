@@ -51,7 +51,7 @@ class CarveSkein:
 		if len(rotatedLoopLayers) < 1:
 			logger.warning('There are no slices for the model, this could be because the model is too small for the Layer Thickness.')
 			return ''
-	
+		
 		self.gcode.runtimeParameters.decimalPlaces = self.decimalPlaces
 		self.gcode.runtimeParameters.layerThickness = self.layerHeight
 		self.gcode.runtimeParameters.perimeterWidth = self.extrusionWidth

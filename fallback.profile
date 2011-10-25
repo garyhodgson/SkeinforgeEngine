@@ -38,6 +38,7 @@ overlap.removal.scaler=1.0
 
 [bottom]
 active=true
+debug=true
 additional.height.ratio=0.5
 altitude=0.0
 

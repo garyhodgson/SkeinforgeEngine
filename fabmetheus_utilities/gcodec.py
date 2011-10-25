@@ -387,6 +387,7 @@ class Gcode:
 	def getRounded(self, number):
 		'Get number rounded to the number of carried decimal places as a string.'
 		return euclidean.getRoundedToPlacesString(self.decimalPlacesCarried, number)
+		
 
 	def parseSplitLine(self, firstWord, splitLine):
 		'Parse gcode split line and store the parameters.'

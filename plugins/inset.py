@@ -265,7 +265,7 @@ class InsetSkein:
 		z = rotatedLoopLayer.z
 		layer = self.gcode.layers[z]
 		layer.boundaryPerimeters = []
-		print "z",z
+		#print "z",z
 		for loop in extrudateLoops:
 			#self.addGcodeFromRemainingLoop(extrudateLoop, alreadyFilledArounds, halfWidth, rotatedLoopLayer)
 			#"Add the remainder of the loop which does not overlap the alreadyFilledArounds loops."
@@ -282,7 +282,7 @@ class InsetSkein:
 				break
 			isIntersectingSelf = isIntersectingItself(centerOutset.center, self.overlapRemovalWidth)
 			if isIntersectingWithinLists(centerOutset.center, alreadyFilledArounds) or isIntersectingSelf:
-				print "isIntersectingWithinLists"
+				#print "isIntersectingWithinLists"
 				self.addGcodeFromPerimeterPathsToGcode(layer, isIntersectingSelf, centerOutset.center, alreadyFilledArounds, halfWidth, rotatedLoopLayer)
 			else:
 				layer.addBoundaryPerimeter(centerOutset.center)

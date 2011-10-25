@@ -151,7 +151,7 @@ class PrefaceSkein:
 		
 		self.addStartCommandsToGcode()
 		
-		for rotatedLoopLayerIndex, rotatedLoopLayer in enumerate(self.gcode.rotatedLoopLayers):
+		for rotatedLoopLayerIndex, rotatedLoopLayer in enumerate(self.svgReader.rotatedLoopLayers):
 			self.addPreface(rotatedLoopLayer)
 		
 		for rotatedLoopLayer in self.gcode.rotatedLoopLayers:

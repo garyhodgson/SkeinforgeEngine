@@ -7,10 +7,17 @@ import gcodes
 import time
 import weakref
 from math import log10, floor
+from decimal import Decimal, ROUND_HALF_UP
+import decimal 
 
-def round_sig(x, s=2):
-    f = '%%.%gg' % s
-    return '%s' % float(f % x)
+def sa_round(f, digits=0):
+    """
+    Symmetric Arithmetic Rounding for decimal numbers
+    f       - float to round
+    digits  - number of digits after the point to leave
+    """
+    decimal.getcontext().prec = 12
+    return str(Decimal(str(f)).quantize(Decimal("1") / (Decimal('10') ** digits), ROUND_HALF_UP))
 
 class Gcode:
     '''Runtime data for conversion of 3D model to gcode.'''
@@ -161,9 +168,9 @@ class Layer:
             point = thread[0]
             boundaryPerimeter.perimeterGcodeCommands.append(
                 GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT,
-                            [('X', round_sig(point.real, decimalPlaces)),
-                            ('Y', round_sig(point.imag, decimalPlaces)),
-                            ('Z', round_sig(self.z, decimalPlaces))]))
+                            [('X', round(point.real, decimalPlaces)),
+                            ('Y', round(point.imag, decimalPlaces)),
+                            ('Z', round(self.z, decimalPlaces))]))
         else:
             logger.warning('Zero length vertex positions array which was skipped over, this should never happen.')
         if len(thread) < 2:
@@ -172,9 +179,9 @@ class Layer:
         for point in thread[1 :]:
             boundaryPerimeter.perimeterGcodeCommands.append(
                 GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT,
-                            [('X', round_sig(point.real, decimalPlaces)),
-                            ('Y', round_sig(point.imag, decimalPlaces)),
-                            ('Z', round_sig(self.z, decimalPlaces))]))
+                            [('X', round(point.real, decimalPlaces)),
+                            ('Y', round(point.imag, decimalPlaces)),
+                            ('Z', round(self.z, decimalPlaces))]))
             
         self.boundaryPerimeters.append(boundaryPerimeter)
 
