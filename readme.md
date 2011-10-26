@@ -14,7 +14,7 @@ A fork of Enrique's [Skeinforge](http://skeinforge.com), taken from ahmetcemtura
   * Only python 2.7 is supported
 
 ## Running
-  * The GUI has been stripped out and so the program must be run from the command line. e.g. "python skeinforge_application/skeinforge_utilities/skeinforge_craft.py test.stl"
+  * The GUI has been stripped out and so the program must be run from the command line. "python ./skeinforge_engine.py test.stl"
 
 ## Credit
   * Credit to Enrique and the original contributers in making Skeinforge available, and to Ahmet for his contributions through SFACT.
