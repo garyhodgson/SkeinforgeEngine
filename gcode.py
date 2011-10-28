@@ -1,14 +1,15 @@
 from collections import OrderedDict
 from config import config
+from decimal import Decimal, ROUND_HALF_UP
 from fabmetheus_utilities import euclidean2
 from fabmetheus_utilities.vector3 import Vector3
+from math import log10, floor
 import StringIO
+import decimal
 import gcodes
 import time
 import weakref
-from math import log10, floor
-from decimal import Decimal, ROUND_HALF_UP
-import decimal 
+from plugins.speed import SpeedSkein 
 
 def sa_round(f, digits=0):
     """
@@ -124,6 +125,11 @@ class NestedRing:
         self.lastFillLoops = None
         self.infillPaths = []
         self.infillGcodeCommands = []
+        self.activateSpeed = self.layer.gcode.runtimeParameters.activateSpeed
+        self.bridgeFeedRateMinute = self.layer.gcode.runtimeParameters.bridgeFeedRateRatio * self.layer.gcode.runtimeParameters.perimeterFeedRate * 60 # todo former reference to main feed now perimeter feed
+        self.perimeterFeedRateMinute = self.layer.gcode.runtimeParameters.perimeterFeedRate * 60
+        self.extrusionFeedRateMinute = 60.0 * self.layer.gcode.runtimeParameters.feedRate
+        self.travelFeedRateMinute = self.layer.gcode.runtimeParameters.travelFeedRate * 60
         
     def __str__(self):
         output = StringIO.StringIO()
@@ -170,7 +176,7 @@ class NestedRing:
             output.write(printCommand(x, self.verbose))
         return output.getvalue()
  
-    def addBoundaryPerimeter(self, boundaryPointsLoop, perimeterLoop = None):
+    def addBoundaryPerimeter(self, boundaryPointsLoop, perimeterLoop=None):
         boundaryPerimeter = BoundaryPerimeter(self)
         
         for point in boundaryPointsLoop:
@@ -196,11 +202,14 @@ class NestedRing:
         decimalPlaces = self.decimalPlaces
         if len(thread) > 0:
             point = thread[0]
+            gcodeArgs = [('X', round(point.real, decimalPlaces)),
+                ('Y', round(point.imag, decimalPlaces)),
+                ('Z', round(self.layer.z, decimalPlaces))]
+            if self.activateSpeed:
+                gcodeArgs.append(('F', self.travelFeedRateMinute))
+                
             boundaryPerimeter.perimeterGcodeCommands.append(
-                GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT,
-                            [('X', round(point.real, decimalPlaces)),
-                            ('Y', round(point.imag, decimalPlaces)),
-                            ('Z', round(self.layer.z, decimalPlaces))]))
+                GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
         else:
             logger.warning('Zero length vertex positions array which was skipped over, this should never happen.')
         if len(thread) < 2:
@@ -208,11 +217,15 @@ class NestedRing:
             return
         boundaryPerimeter.perimeterGcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_ON))
         for point in thread[1 :]:
+            gcodeArgs = [('X', round(point.real, decimalPlaces)),
+                         ('Y', round(point.imag, decimalPlaces)),
+                         ('Z', round(self.layer.z, decimalPlaces))]
+            
+            if self.activateSpeed:
+                gcodeArgs.append(('F', self.perimeterFeedRateMinute))
+                
             boundaryPerimeter.perimeterGcodeCommands.append(
-                GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT,
-                            [('X', round(point.real, decimalPlaces)),
-                            ('Y', round(point.imag, decimalPlaces)),
-                            ('Z', round(self.layer.z, decimalPlaces))]))
+                GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT,gcodeArgs))
         boundaryPerimeter.perimeterGcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_OFF))    
         self.boundaryPerimeters.append(boundaryPerimeter)
         
@@ -221,11 +234,13 @@ class NestedRing:
         decimalPlaces = self.decimalPlaces
         if len(thread) > 0:
             point = thread[0]
-            self.infillGcodeCommands.append(
-                GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT,
-                            [('X', round(point.real, decimalPlaces)),
+            gcodeArgs = [('X', round(point.real, decimalPlaces)),
                             ('Y', round(point.imag, decimalPlaces)),
-                            ('Z', round(self.layer.z, decimalPlaces))]))
+                            ('Z', round(self.layer.z, decimalPlaces))]
+            if self.activateSpeed:
+                gcodeArgs.append(('F', self.travelFeedRateMinute))
+            self.infillGcodeCommands.append(
+                GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
         else:
             logger.warning('Zero length vertex positions array which was skipped over, this should never happen.')
         if len(thread) < 2:
@@ -233,11 +248,17 @@ class NestedRing:
             return
         self.infillGcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_ON))
         for point in thread[1 :]:
-            self.infillGcodeCommands.append(
-                GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT,
-                            [('X', round(point.real, decimalPlaces)),
+            gcodeArgs = [('X', round(point.real, decimalPlaces)),
                             ('Y', round(point.imag, decimalPlaces)),
-                            ('Z', round(self.layer.z, decimalPlaces))]))
+                            ('Z', round(self.layer.z, decimalPlaces))]
+            if self.activateSpeed:
+                if self.layer.bridgeRotation == None:
+                    feedRate = self.extrusionFeedRateMinute
+                else:
+                    feedRate = self.bridgeFeedRateMinute
+                gcodeArgs.append(('F', feedRate))
+            self.infillGcodeCommands.append(
+                GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT,gcodeArgs))
         self.infillGcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_OFF))    
 
     def getLoopsToBeFilled(self):
@@ -292,7 +313,7 @@ class NestedRing:
             euclidean2.transferPathsToSurroundingLoops(nestedRing.innerNestedRings, paths)
         self.infillPaths = euclidean2.getTransferredPaths(paths, self.getXYBoundaries())
         
-    def addToThreads(self, extrusionHalfWidth, oldOrderedLocation,  threadSequence):
+    def addToThreads(self, extrusionHalfWidth, oldOrderedLocation, threadSequence):
         'Add to paths from the last location. perimeter>inner >fill>paths or fill> perimeter>inner >paths'
         # not necessary as already there??????????????
         #addSurroundingLoopBeginning(skein.gcodeCodec, self.boundary, self.z)
@@ -308,10 +329,10 @@ class NestedRing:
         
     def transferClosestFillLoops(self, extrusionHalfWidth, oldOrderedLocation, threadSequence):
         'Transfer closest fill loops.'
-        if len( self.extraLoops ) < 1:
+        if len(self.extraLoops) < 1:
             return
         remainingFillLoops = self.extraLoops[:]
-        while len( remainingFillLoops ) > 0:
+        while len(remainingFillLoops) > 0:
             euclidean2.transferClosestFillLoop(extrusionHalfWidth, oldOrderedLocation, remainingFillLoops, self)
 
     def transferInfillPaths(self, extrusionHalfWidth, oldOrderedLocation, threadSequence):
@@ -371,6 +392,7 @@ class RuntimeParameters:
     def __init__(self):
         self.startTime = time.time()
         self.endTime = None
+        
         self.decimalPlaces = None
         self.layerThickness = None
         self.perimeterWidth = None
@@ -384,8 +406,32 @@ class RuntimeParameters:
         self.operatingFlowRate = None
         self.perimeterFlowRate = None
         self.orbitalFeedRatePerSecond = None
-        self.travelFeedRate = None
         
+        self.overlapRemovalWidthOverPerimeterWidth = config.getfloat('inset', 'overlap.removal.scaler')
+        self.nozzleDiameter = config.getfloat('inset', 'nozzle.diameter')
+        self.bridgeWidthMultiplier = config.getfloat('inset', 'bridge.width.multiplier.ratio')
+        self.loopOrderAscendingArea = config.getboolean('inset', 'loop.order.preferloops')
+        
+        self.layerHeight = config.getfloat('carve', 'layer.height')
+        self.extrusionWidth = config.getfloat('carve', 'extrusion.width')
+        self.infillBridgeDirection = config.getboolean('carve', 'infill.bridge.direction')
+        self.importCoarsenessRatio = config.getfloat('carve', 'import.coarseness.ratio')
+        self.correctMesh = config.getboolean('carve', 'mesh.correct')
+        self.decimalPlaces = config.getint('general', 'decimal.places')
+        self.layerPrintFrom = config.getint('carve', 'layer.print.from')
+        self.layerPrintTo = config.getint('carve', 'layer.print.to')
+        
+        self.activateSpeed = config.getboolean('speed', 'active')
+        self.addFlowRate = config.getboolean('speed', 'add.flow.rate')
+        self.addAccelerationRate = config.getboolean('speed', 'add.acceleration.rate')
+        self.feedRate = config.getfloat('speed', 'feed.rate')
+        self.flowRate = config.getfloat('speed', 'flow.rate')
+        self.accelerationRate = config.getfloat('speed', 'acceleration.rate')
+        self.orbitalFeedRateRatio = config.getfloat('speed', 'feed.rate.orbiting.ratio')
+        self.perimeterFeedRate = config.getfloat('speed', 'feed.rate.perimeter')
+        self.perimeterFlowRate = config.getfloat('speed', 'flow.rate.perimeter')
+        self.bridgeFeedRateRatio = config.getfloat('speed', 'feed.rate.bridge.ratio')
+        self.travelFeedRate = config.getfloat('speed', 'feed.rate.travel')
 
 class GcodeCommand:
     def __init__(self, commandLetter, parameters=None):

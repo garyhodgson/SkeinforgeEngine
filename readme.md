@@ -15,6 +15,7 @@ A fork of Enrique's [Skeinforge](http://skeinforge.com), taken from ahmetcemtura
     * The following plugins are currently available: carve,bottom,preface,inset,fill,multiply,speed,raft,stretch,comb,cool,dimension,export
   * Only python 2.7 is supported.
   * No GUI.
+  * Supports only stepper extruders and volumetric extrusion.
 
 ## Running
   * python ./skeinforge_engine.py [-h] [-c config] [-p profile] file

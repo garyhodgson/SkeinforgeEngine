@@ -1,5 +1,13 @@
 """
 Speed is a script to set the feed rate, and flow rate.
+
+Original author 
+	'Enrique Perez (perez_enrique@yahoo.com) 
+	modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
+	
+license 
+	'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
+
 """
 
 from fabmetheus_utilities import archive
@@ -9,11 +17,9 @@ import math
 from config import config
 import logging
 
-__originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
-__license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
 
 logger = logging.getLogger(__name__)
-name = __name__
+name = 'speed'
 
 def getCraftedText(fileName, text, gcode):
 	"Speed the file or text."
@@ -50,7 +56,21 @@ class SpeedSkein:
 		self.travelFeedRate = config.getfloat(name, 'feed.rate.travel')
 		self.dutyCycleAtBeginning = config.getfloat(name, 'dc.duty.cycle.beginning')
 		self.dutyCycleAtEnding = config.getfloat(name, 'dc.duty.cycle.end')
-
+		
+		runtimeParameters = self.gcode.runtimeParameters
+		runtimeParameters.operatingFeedRatePerSecond = self.feedRate
+		runtimeParameters.perimeterFeedRatePerSecond = self.perimeterFeedRate
+		
+		if self.addFlowRate:
+			runtimeParameters.operatingFlowRate = self.flowRate * self.feedRate
+			runtimeParameters.perimeterFlowRate = self.perimeterFlowRate * self.perimeterFeedRate
+		runtimeParameters.orbitalFeedRatePerSecond = self.feedRate * self.orbitalFeedRateRatio
+		runtimeParameters.travelFeedRate = self.travelFeedRate
+		
+		self.travelFeedRateMinute = 60.0 * self.travelFeedRate
+		self.absolutePerimeterWidth = abs(config.getfloat('carve', 'extrusion.width'))
+		self.layerThickness = config.getfloat('carve', 'layer.height')
+		self.nozzleDiameter = config.getfloat('inset', 'nozzle.diameter')
 
 	def addFlowRateLineIfNecessary(self):
 		"Add flow rate line."
@@ -75,18 +95,9 @@ class SpeedSkein:
 
 	def getCraftedGcode(self, gcodeText):
 		"Parse gcodeCodec text and store the speed gcodeCodec."
-		self.travelFeedRateMinute = 60.0 * self.travelFeedRate
+		
 		self.lines = archive.getTextLines(gcodeText)
-		self.parseInitialization()
 		
-		self.gcode.runtimeParameters.operatingFeedRatePerSecond = self.feedRate
-		self.gcode.runtimeParameters.perimeterFeedRatePerSecond = self.perimeterFeedRate
-		
-		self.gcode.runtimeParameters.operatingFlowRate = self.flowRate * self.feedRate
-		self.gcode.runtimeParameters.perimeterFlowRate = self.perimeterFlowRate * self.perimeterFeedRate
-		self.gcode.runtimeParameters.orbitalFeedRatePerSecond = self.feedRate * self.orbitalFeedRateRatio
-		self.gcode.runtimeParameters.travelFeedRate = self.travelFeedRate
-				
 		for line in self.lines[self.lineIndex :]:
 			self.parseLine(line)
 		self.addParameterString('M113', self.dutyCycleAtEnding) # Set duty cycle .
@@ -132,34 +143,6 @@ class SpeedSkein:
 		self.addFlowRateLineIfNecessary()
 		self.addAccelerationRateLineIfNecessary()
 		return self.gcodeCodec.getLineWithFeedRate(feedRateMinute, line, splitLine)
-
-	def parseInitialization(self):
-		'Parse gcodeCodec initialization and store the parameters.'
-		for self.lineIndex in xrange(len(self.lines)):
-			line = self.lines[self.lineIndex]
-			splitLine = gcodec.getSplitLineBeforeBracketSemicolon(line)
-			firstWord = gcodec.getFirstWord(splitLine)
-			self.gcodeCodec.parseSplitLine(firstWord, splitLine)
-			if firstWord == '(<layerThickness>':
-				self.layerThickness = float(splitLine[1])
-			elif firstWord == '(</extruderInitialization>)':
-				self.gcodeCodec.addLine('(<procedureName> speed </procedureName>)')
-				return
-			elif firstWord == '(<perimeterWidth>':
-				self.absolutePerimeterWidth = abs(float(splitLine[1]))
-				self.gcodeCodec.addTagBracketedLine('operatingFeedRatePerSecond', self.feedRate)
-								
-				self.gcodeCodec.addTagBracketedLine('PerimeterFeedRatePerSecond', self.perimeterFeedRate)
-				
-				if self.addFlowRate:
-					self.gcodeCodec.addTagBracketedLine('operatingFlowRate', self.flowRate * self.feedRate)
-					self.gcodeCodec.addTagBracketedLine('PerimeterFlowRate', self.perimeterFlowRate * self.perimeterFeedRate)
-				orbitalFeedRatePerSecond = self.feedRate * self.orbitalFeedRateRatio
-				self.gcodeCodec.addTagBracketedLine('orbitalFeedRatePerSecond', orbitalFeedRatePerSecond)
-				self.gcodeCodec.addTagBracketedLine('travelFeedRate', self.travelFeedRate)
-			elif firstWord == '(<nozzleDiameter>':
-				self.nozzleDiameter = abs(float(splitLine[1]))
-			self.gcodeCodec.addLine(line)
 
 	def parseLine(self, line):
 		"Parse a gcodeCodec line and add it to the speed skein."
