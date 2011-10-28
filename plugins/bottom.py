@@ -11,9 +11,6 @@ from fabmetheus_utilities import svg_writer
 import os, sys, time, math, logging
 from config import config
 
-__originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
-__license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
-
 logger = logging.getLogger(__name__)
 name = __name__
 

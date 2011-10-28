@@ -1,6 +1,6 @@
 from collections import OrderedDict
 from config import config
-from fabmetheus_utilities import euclidean
+from fabmetheus_utilities import euclidean2
 from fabmetheus_utilities.vector3 import Vector3
 import StringIO
 import gcodes
@@ -19,6 +19,12 @@ def sa_round(f, digits=0):
     decimal.getcontext().prec = 12
     return str(Decimal(str(f)).quantize(Decimal("1") / (Decimal('10') ** digits), ROUND_HALF_UP))
 
+def printCommand(x, verbose=False):
+    if isinstance(x, GcodeCommand):
+        return'%s\n' % x.str(verbose)
+    else:
+        return '%s\n' % x
+            
 class Gcode:
     '''Runtime data for conversion of 3D model to gcode.'''
     
@@ -26,7 +32,7 @@ class Gcode:
         self.verbose = verbose
         self.runtimeParameters = RuntimeParameters()
         self.rotatedLoopLayers = []
-        self.layers = {}
+        self.layers = OrderedDict()
         
         self.startGcodeCommands = []
         self.endGcodeCommands = []
@@ -43,22 +49,16 @@ class Gcode:
             
         output.write("\nstartGcodeCommands:\n")
         for x in self.startGcodeCommands:
-            if isinstance(x, GcodeCommand):
-                output.write('%s\n' % x.str(self.verbose))
-            else:
-                output.write('%s\n' % x)
-        
-        output.write("\nendGcodeCommands:\n")
-        for x in self.endGcodeCommands:
-            if isinstance(x, GcodeCommand):
-                output.write('%s\n' % x.str(self.verbose))
-            else:
-                output.write('%s\n' % x)
+            output.write(printCommand(x, self.verbose))
         
         output.write("\nlayers:\n")
         for key in sorted(self.layers.iterkeys()):
             output.write('%s\n' % self.layers[key])
-        
+       
+        output.write("\nendGcodeCommands:\n")
+        for x in self.endGcodeCommands:
+            output.write(printCommand(x, self.verbose))
+             
         return output.getvalue()
     
     def getGcodeText(self):
@@ -66,21 +66,306 @@ class Gcode:
         output = StringIO.StringIO()
         
         for x in self.startGcodeCommands:
-            if isinstance(x, GcodeCommand):
-                output.write('%s\n' % x.str(self.verbose))
-            else:
-                output.write('%s\n' % x)
+            output.write(printCommand(x, self.verbose))
 
         for key in sorted(self.layers.iterkeys()):
             output.write('%s' % self.layers[key].getGcodeText())
 
         for x in self.endGcodeCommands:
-            if isinstance(x, GcodeCommand):
-                output.write('%s\n' % x.str(self.verbose))
-            else:
-                output.write('%s\n' % x)
+            output.write(printCommand(x, self.verbose))
                         
         return output.getvalue()
+
+class Layer:
+    def __init__(self, z, gcode):
+        self.z = z
+        self.gcode = weakref.proxy(gcode)
+        self.bridgeRotation = None
+        self.nestedRings = []
+        
+        
+    def __str__(self):
+        '''Get the string representation.'''
+        output = StringIO.StringIO()
+        
+        
+        
+        output.write('\n\tlayer %s' % self.z)
+        if self.bridgeRotation != None:
+            output.write('bridgeRotation %s, ' % self.bridgeRotation)
+            
+        output.write('\n\t\tnestedRings:\n')
+        for x in self.nestedRings:
+            output.write('%s\n' % x)
+            
+        return output.getvalue()
+    
+    def getGcodeText(self):
+        '''Final Gcode representation.'''
+        output = StringIO.StringIO()
+        for x in self.nestedRings:
+            output.write(x.getGcodeText())
+        return output.getvalue()
+    
+    def addNestedRing(self, nestedRing):
+        self.nestedRings.append(nestedRing)
+   
+
+class NestedRing:
+    def __init__(self, layer):
+        self.layer = weakref.proxy(layer)
+        self.decimalPlaces = self.layer.gcode.runtimeParameters.decimalPlaces
+        self.z = self.layer.z
+        self.verbose = layer.gcode.verbose
+        self.boundaryPerimeters = []
+        self.innerNestedRings = []
+        self.extraLoops = []
+        self.penultimateFillLoops = []
+        self.lastFillLoops = None
+        self.infillPaths = []
+        self.infillGcodeCommands = []
+        
+    def __str__(self):
+        output = StringIO.StringIO()
+        
+        output.write('\n\t\t\tboundaryPerimeters:\n')
+        for x in self.boundaryPerimeters:
+            output.write('%s\n' % x)
+                    
+        output.write('\n\t\t\tinnerNestedRings:\n')
+        for x in self.innerNestedRings:
+            output.write('\t\t\t\t%s\n' % x)
+            
+        output.write('\n\t\t\textraLoops:\n')
+        for x in self.extraLoops:
+            output.write('\t\t\t\t%s\n' % x)
+            
+        output.write('\n\t\t\tpenultimateFillLoops:\n')
+        for x in self.penultimateFillLoops:
+            output.write('\t\t\t\t%s\n' % x)
+        
+        output.write('\n\t\t\tlastFillLoops:\n')
+        if self.lastFillLoops != None:
+            for x in self.lastFillLoops:
+                output.write('\t\t\t\t%s\n' % x)
+            
+        output.write('\n\t\t\tinfillPaths:\n')
+        for x in self.infillPaths:
+            output.write('\t\t\t\t%s\n' % x)
+        
+        output.write('\t\t\t\tinfillGcodeCommands:\n')
+        for x in self.infillGcodeCommands:
+            output.write(printCommand(x, self.verbose))
+            
+        return output.getvalue()
+    
+    def getGcodeText(self):
+        '''Final Gcode representation.'''
+        output = StringIO.StringIO()
+        
+        for x in self.boundaryPerimeters:
+            output.write(x.getGcodeText())
+        
+        for x in self.infillGcodeCommands:
+            output.write(printCommand(x, self.verbose))
+        return output.getvalue()
+ 
+    def addBoundaryPerimeter(self, boundaryPointsLoop, perimeterLoop = None):
+        boundaryPerimeter = BoundaryPerimeter(self)
+        
+        for point in boundaryPointsLoop:
+            boundaryPerimeter.boundaryPoints.append(Vector3(point.real, point.imag, self.z))
+            
+        if len(boundaryPointsLoop) < 2:
+            return
+        
+        if perimeterLoop == None:
+            perimeterLoop = boundaryPointsLoop
+            
+        if euclidean2.isWiddershins(perimeterLoop):
+            boundaryPerimeter.perimeterType = 'outer'
+        else:
+            boundaryPerimeter.perimeterType = 'inner'
+        thread = perimeterLoop + [perimeterLoop[0]]
+        self.addPerimeterGcodeFromThread(thread, boundaryPerimeter)
+                
+    def addPerimeterGcodeFromThread(self, thread, boundaryPerimeter=None):
+        'Add a thread to the output.'
+        if boundaryPerimeter == None:
+            boundaryPerimeter = BoundaryPerimeter(self)
+        decimalPlaces = self.decimalPlaces
+        if len(thread) > 0:
+            point = thread[0]
+            boundaryPerimeter.perimeterGcodeCommands.append(
+                GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT,
+                            [('X', round(point.real, decimalPlaces)),
+                            ('Y', round(point.imag, decimalPlaces)),
+                            ('Z', round(self.layer.z, decimalPlaces))]))
+        else:
+            logger.warning('Zero length vertex positions array which was skipped over, this should never happen.')
+        if len(thread) < 2:
+            logger.warning('Thread of only one point: %s, this should never happen.', thread)
+            return
+        boundaryPerimeter.perimeterGcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_ON))
+        for point in thread[1 :]:
+            boundaryPerimeter.perimeterGcodeCommands.append(
+                GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT,
+                            [('X', round(point.real, decimalPlaces)),
+                            ('Y', round(point.imag, decimalPlaces)),
+                            ('Z', round(self.layer.z, decimalPlaces))]))
+        boundaryPerimeter.perimeterGcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_OFF))    
+        self.boundaryPerimeters.append(boundaryPerimeter)
+        
+    def addInfillGcodeFromThread(self, thread):
+        'Add a thread to the output.'
+        decimalPlaces = self.decimalPlaces
+        if len(thread) > 0:
+            point = thread[0]
+            self.infillGcodeCommands.append(
+                GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT,
+                            [('X', round(point.real, decimalPlaces)),
+                            ('Y', round(point.imag, decimalPlaces)),
+                            ('Z', round(self.layer.z, decimalPlaces))]))
+        else:
+            logger.warning('Zero length vertex positions array which was skipped over, this should never happen.')
+        if len(thread) < 2:
+            logger.warning('Thread of only one point: %s, this should never happen.', thread)
+            return
+        self.infillGcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_ON))
+        for point in thread[1 :]:
+            self.infillGcodeCommands.append(
+                GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT,
+                            [('X', round(point.real, decimalPlaces)),
+                            ('Y', round(point.imag, decimalPlaces)),
+                            ('Z', round(self.layer.z, decimalPlaces))]))
+        self.infillGcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_OFF))    
+
+    def getLoopsToBeFilled(self):
+        'Get last fill loops from the outside loop and the loops inside the inside loops.'
+        if self.lastFillLoops == None:
+            return self.getSurroundingBoundaries()
+        return self.lastFillLoops
+    
+    def getXYBoundaries(self):
+        '''Converts XYZ boundary points to XY'''
+        xyBoundaries = []
+        for boundaryPerimeter in self.boundaryPerimeters:
+            xy_boundary = []
+            for boundaryPoint in boundaryPerimeter.boundaryPoints:
+                xy_boundary.append(boundaryPoint.dropAxis())
+            xyBoundaries.extend(xy_boundary)
+        return xyBoundaries
+            
+    def getSurroundingBoundaries(self):
+        'Get the boundary of the surronding loop plus any boundaries of the innerNestedRings.'
+        surroundingBoundaries = [self.getXYBoundaries()]
+        
+        for nestedRing in self.innerNestedRings:
+            surroundingBoundaries.append(nestedRing.getXYBoundaries())
+        
+        return surroundingBoundaries
+    
+    def getFillLoops(self, penultimateFillLoops):
+        'Get last fill loops from the outside loop and the loops inside the inside loops.'
+        fillLoops = self.getLoopsToBeFilled()[:]
+        surroundingBoundaries = self.getSurroundingBoundaries()
+        withinLoops = []
+        if penultimateFillLoops == None:
+            penultimateFillLoops = self.penultimateFillLoops
+        
+        if penultimateFillLoops != None:
+            for penultimateFillLoop in penultimateFillLoops:
+                if len(penultimateFillLoop) > 2:
+                    if euclidean2.getIsInFilledRegion(surroundingBoundaries, penultimateFillLoop[0]):
+                        withinLoops.append(penultimateFillLoop)
+                        
+        if not euclidean2.getIsInFilledRegionByPaths(self.penultimateFillLoops, fillLoops):
+            fillLoops += self.penultimateFillLoops
+            
+        for nestedRing in self.innerNestedRings:
+            fillLoops += euclidean2.getFillOfSurroundings(nestedRing.innerNestedRings, penultimateFillLoops)
+        return fillLoops
+    
+    def transferPaths(self, paths):
+        'Transfer paths.'
+        for nestedRing in self.innerNestedRings:
+            euclidean2.transferPathsToSurroundingLoops(nestedRing.innerNestedRings, paths)
+        self.infillPaths = euclidean2.getTransferredPaths(paths, self.getXYBoundaries())
+        
+    def addToThreads(self, extrusionHalfWidth, oldOrderedLocation,  threadSequence):
+        'Add to paths from the last location. perimeter>inner >fill>paths or fill> perimeter>inner >paths'
+        # not necessary as already there??????????????
+        #addSurroundingLoopBeginning(skein.gcodeCodec, self.boundary, self.z)
+        
+        # Necessary? already there? needed for ordering?
+        #threadFunctionDictionary = {
+        #    'infill' : self.transferInfillPaths, 'loops' : self.transferClosestFillLoops, 'perimeter' : self.addPerimeterInner}
+        #for threadType in threadSequence:
+        #    threadFunctionDictionary[threadType](extrusionHalfWidth, oldOrderedLocation, threadSequence)
+        
+        self.addPerimeterInner(extrusionHalfWidth, oldOrderedLocation, threadSequence)
+        self.transferInfillPaths(extrusionHalfWidth, oldOrderedLocation, threadSequence)
+        
+    def transferClosestFillLoops(self, extrusionHalfWidth, oldOrderedLocation, threadSequence):
+        'Transfer closest fill loops.'
+        if len( self.extraLoops ) < 1:
+            return
+        remainingFillLoops = self.extraLoops[:]
+        while len( remainingFillLoops ) > 0:
+            euclidean2.transferClosestFillLoop(extrusionHalfWidth, oldOrderedLocation, remainingFillLoops, self)
+
+    def transferInfillPaths(self, extrusionHalfWidth, oldOrderedLocation, threadSequence):
+        'Transfer the infill paths.'
+        euclidean2.transferClosestPaths(oldOrderedLocation, self.infillPaths[:], self)
+    
+    def addPerimeterInner(self, extrusionHalfWidth, oldOrderedLocation, threadSequence):
+        'Add to the perimeter and the inner island.'
+        #if self.loop == None:
+        #    euclidean2.transferClosestPaths(oldOrderedLocation, self.perimeterPaths[:], self)
+        #else:
+        #    euclidean2.addToThreadsFromLoop(extrusionHalfWidth, 'perimeter', self.loop[:], oldOrderedLocation, self)
+        
+        
+        ##!!!!!!!!!!!!!!!!!!!
+        for loop in self.extraLoops:
+           # print "loop",loop
+           # print "loop + [loop[0]]",loop + [loop[0]]
+           #loop + [loop[0]] means go back to start, i.e. form complete loop
+           self.addPerimeterGcodeFromThread(loop + [loop[0]], None)
+        
+        
+        #self.addToThreads(extrusionHalfWidth, self.innerNestedRings[:], oldOrderedLocation, skein, threadSequence)
+        for innerNestedRing in self.innerNestedRings:
+            innerNestedRing.addToThreads(extrusionHalfWidth, oldOrderedLocation, threadSequence)
+        
+        
+class BoundaryPerimeter:
+    def __init__(self, nestedRing):
+        self.nestedRing = weakref.proxy(nestedRing)
+        self.verbose = nestedRing.layer.gcode.verbose
+        self.boundaryPoints = [] 
+        self.perimeterType = None
+        self.perimeterGcodeCommands = []
+
+    def __str__(self):
+        '''Get the string representation.'''
+        output = StringIO.StringIO()
+        output.write('\tboundaryPoints: %s\n' % self.boundaryPoints)
+        output.write('\tperimeterType: %s\n' % self.perimeterType)
+        output.write('\tperimeterGcodeCommands:\n')
+        for x in self.perimeterGcodeCommands:
+            output.write(printCommand(x))
+        return output.getvalue()
+    
+    def getGcodeText(self):
+        '''Final Gcode representation.'''
+        output = StringIO.StringIO()
+        
+        for x in self.perimeterGcodeCommands:
+            output.write(printCommand(x, self.verbose))
+        
+        return output.getvalue()
+
 
 class RuntimeParameters:
     def __init__(self):
@@ -92,6 +377,15 @@ class RuntimeParameters:
         self.profileName = None
         self.bridgeWidthMultiplier = None
         self.nozzleDiameter = None
+        self.threadSequence = None
+        self.infillWidth = None
+        self.operatingFeedRatePerSecond = None
+        self.perimeterFeedRatePerSecond = None
+        self.operatingFlowRate = None
+        self.perimeterFlowRate = None
+        self.orbitalFeedRatePerSecond = None
+        self.travelFeedRate = None
+        
 
 class GcodeCommand:
     def __init__(self, commandLetter, parameters=None):
@@ -112,103 +406,3 @@ class GcodeCommand:
         for name, value in self.parameters.items():
             output.write('%s%s ' % (name, value))
         return output.getvalue().strip()
-
-class Layer:
-    def __init__(self, z, gcode):
-        self.z = z
-        self.gcode = weakref.proxy(gcode)
-        self.bridgeRotation = None
-        self.boundaryPerimeters = []
-        self.loops = []
-        self.gcodeCommands = []
-        
-    def __str__(self):
-        '''Get the string representation.'''
-        output = StringIO.StringIO()
-        
-        output.write('\nlayer %s' % self.z)
-        if self.bridgeRotation != None:
-            output.write('bridgeRotation %s, ' % self.bridgeRotation)
-            
-        output.write('\nboundaryPerimeters:\n')
-        for x in self.boundaryPerimeters:
-            output.write('%s\n' % x)
-            
-        output.write('loops: %s\n, ' % self.loops)
-        output.write('gcodeCommands: %s' % self.gcodeCommands)
-        return output.getvalue()
-    
-    def getGcodeText(self):
-        '''Final Gcode representation.'''
-        output = StringIO.StringIO()
-        for x in self.boundaryPerimeters:
-            output.write('%s' % x.getGcodeText())
-        return output.getvalue()
-    
-    def addBoundaryPerimeter(self, loop):
-        boundaryPerimeter = BoundaryPerimeter()
-        for point in loop:
-            boundaryPerimeter.boundaryPoints.append(Vector3(point.real, point.imag, self.z))
-        if len(loop) < 2:
-            return
-        
-        if euclidean.isWiddershins(loop):
-            boundaryPerimeter.perimeterType = 'outer'
-        else:
-            boundaryPerimeter.perimeterType = 'inner'
-        thread = loop + [loop[0]]
-        self.addGcodeFromThread(thread, boundaryPerimeter)
-                
-    def addGcodeFromThread(self, thread, boundaryPerimeter=None):
-        'Add a thread to the output.'
-        if boundaryPerimeter == None:
-            boundaryPerimeter = BoundaryPerimeter()
-        decimalPlaces = self.gcode.runtimeParameters.decimalPlaces
-        if len(thread) > 0:
-            point = thread[0]
-            boundaryPerimeter.perimeterGcodeCommands.append(
-                GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT,
-                            [('X', round(point.real, decimalPlaces)),
-                            ('Y', round(point.imag, decimalPlaces)),
-                            ('Z', round(self.z, decimalPlaces))]))
-        else:
-            logger.warning('Zero length vertex positions array which was skipped over, this should never happen.')
-        if len(thread) < 2:
-            logger.warning('Thread of only one point: %s, this should never happen.', thread)
-            return
-        for point in thread[1 :]:
-            boundaryPerimeter.perimeterGcodeCommands.append(
-                GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT,
-                            [('X', round(point.real, decimalPlaces)),
-                            ('Y', round(point.imag, decimalPlaces)),
-                            ('Z', round(self.z, decimalPlaces))]))
-            
-        self.boundaryPerimeters.append(boundaryPerimeter)
-
-class BoundaryPerimeter:
-    def __init__(self):
-        self.boundaryPoints = [] 
-        self.perimeterType = None
-        self.perimeterGcodeCommands = []
-
-    def __str__(self):
-        '''Get the string representation.'''
-        output = StringIO.StringIO()
-        output.write('\tboundaryPoints: %s\n' % self.boundaryPoints)
-        output.write('\tperimeterType: %s\n' % self.perimeterType)
-        output.write('\tperimeterGcodeCommands:\n')
-        for x in self.perimeterGcodeCommands:
-            output.write('\t\t%s\n' % x.str())
-        return output.getvalue()
-    
-    def getGcodeText(self):
-        '''Final Gcode representation.'''
-        output = StringIO.StringIO()
-        
-        for x in self.perimeterGcodeCommands:
-            if isinstance(x, GcodeCommand):
-                output.write('%s\n' % x.str())
-            else:
-                output.write('%s\n' % x)
-        
-        return output.getvalue()

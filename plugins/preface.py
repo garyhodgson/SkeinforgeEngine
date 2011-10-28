@@ -7,7 +7,7 @@ from decimal import *
 from fabmetheus_utilities import archive, euclidean, gcodec
 from fabmetheus_utilities.svg_reader import SVGReader
 from fabmetheus_utilities.vector3 import Vector3
-from gcode import GcodeCommand, Layer, BoundaryPerimeter
+from gcode import GcodeCommand, Layer, BoundaryPerimeter, NestedRing
 from time import strftime
 import gcodes
 import logging
@@ -103,14 +103,17 @@ class PrefaceSkein:
 	def addPrefaceToGcode(self, rotatedLoopLayer):
 		z = rotatedLoopLayer.z
 		layer = Layer(z, self.gcode)
+		
 		decimalPlaces = self.gcode.runtimeParameters.decimalPlaces
-		getcontext().prec = decimalPlaces
-		if rotatedLoopLayer.rotation != None:
-			layer.bridgeRotation = str(rotatedLoopLayer.rotation)
-			
-		for loop in rotatedLoopLayer.loops:			
-			layer.addBoundaryPerimeter(loop)
 
+		if rotatedLoopLayer.rotation != None:
+			layer.bridgeRotation = complex(rotatedLoopLayer.rotation)
+			
+		for loop in rotatedLoopLayer.loops:
+			nestedRing = NestedRing(layer)
+			nestedRing.addBoundaryPerimeter(loop)
+			layer.addNestedRing(nestedRing)
+		
 		self.gcode.layers[z] = layer
 
 	def addShutdownToOutput(self):

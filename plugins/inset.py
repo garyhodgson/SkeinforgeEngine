@@ -10,6 +10,7 @@ import math
 import os
 import sys
 import logging
+from gcode import GcodeCommand, Layer, BoundaryPerimeter, NestedRing
 
 logger = logging.getLogger(__name__)
 name = __name__
@@ -224,6 +225,7 @@ class InsetSkein:
 	def addGcodeFromRemainingLoop(self, loop, loopLists, radius, rotatedLoopLayer):
 		"Add the remainder of the loop which does not overlap the alreadyFilledArounds loops."
 		centerOutset = intercircle.getLargestCenterOutsetLoopFromLoopRegardless(loop, radius)
+		#print "centerOutset old inset:",centerOutset
 		euclidean.addSurroundingLoopBeginning(self.gcodeCodec, centerOutset.outset, rotatedLoopLayer.z)
 		self.addGcodePerimeterBlockFromRemainingLoop(centerOutset.center, loopLists, radius, rotatedLoopLayer)
 		self.gcodeCodec.addLine('(</boundaryPerimeter>)')
@@ -264,31 +266,26 @@ class InsetSkein:
 		triangle_mesh.sortLoopsInOrderOfArea(not self.loopOrderAscendingArea, extrudateLoops)
 		z = rotatedLoopLayer.z
 		layer = self.gcode.layers[z]
-		layer.boundaryPerimeters = []
-		#print "z",z
+		layer.nestedRings = []
+		
 		for loop in extrudateLoops:
-			#self.addGcodeFromRemainingLoop(extrudateLoop, alreadyFilledArounds, halfWidth, rotatedLoopLayer)
-			#"Add the remainder of the loop which does not overlap the alreadyFilledArounds loops."
+			nestedRing = NestedRing(layer)
 			centerOutset = intercircle.getLargestCenterOutsetLoopFromLoopRegardless(loop, halfWidth)
 			
-			#euclidean.addSurroundingLoopBeginning(self.gcodeCodec, centerOutset.outset, rotatedLoopLayer.z)
-				#distanceFeedRate.addLine(distanceFeedRate.getBoundaryLine(pointVector3))
-			#self.addGcodePerimeterBlockFromRemainingLoop(centerOutset.center, alreadyFilledArounds, halfWidth, rotatedLoopLayer)
-			#def addGcodePerimeterBlockFromRemainingLoop(self, loop, loopLists, radius, rotatedLoopLayer):
+			#print "centerOutset new inset:",centerOutset	
 			"Add the perimeter block remainder of the loop which does not overlap the alreadyFilledArounds loops."
 			if self.overlapRemovalWidthOverPerimeterWidth < 0.1:
-				#self.gcodeCodec.addPerimeterBlock(centerOutset.center, rotatedLoopLayer.z)
-				layer.addBoundaryPerimeter(centerOutset.center)
+				nestedRing.addBoundaryPerimeter(centerOutset.outset, centerOutset.center)
 				break
 			isIntersectingSelf = isIntersectingItself(centerOutset.center, self.overlapRemovalWidth)
 			if isIntersectingWithinLists(centerOutset.center, alreadyFilledArounds) or isIntersectingSelf:
-				#print "isIntersectingWithinLists"
-				self.addGcodeFromPerimeterPathsToGcode(layer, isIntersectingSelf, centerOutset.center, alreadyFilledArounds, halfWidth, rotatedLoopLayer)
+				self.addGcodeFromPerimeterPathsToGcode(nestedRing, isIntersectingSelf, centerOutset.center, alreadyFilledArounds, halfWidth, rotatedLoopLayer)
 			else:
-				layer.addBoundaryPerimeter(centerOutset.center)
+				nestedRing.addBoundaryPerimeter(centerOutset.outset, centerOutset.center)
 			addAlreadyFilledArounds(alreadyFilledArounds, centerOutset.center, self.overlapRemovalWidth)
+			layer.addNestedRing(nestedRing)
 			
-	def addGcodeFromPerimeterPathsToGcode(self, layer, isIntersectingSelf, loop, loopLists, radius, rotatedLoopLayer):
+	def addGcodeFromPerimeterPathsToGcode(self, nestedRing, isIntersectingSelf, loop, loopLists, radius, rotatedLoopLayer):
 		"Add the perimeter paths to the output."
 		segments = []
 		outlines = []
@@ -327,7 +324,7 @@ class InsetSkein:
 		muchGreaterThanRadius = 6.0 * radius
 		for perimeterPath in perimeterPaths:
 			if euclidean.getPathLength(perimeterPath) > muchGreaterThanRadius:
-				layer.addGcodeFromThread(perimeterPath)
+				nestedRing.addGcodeFromThread(perimeterPath)
 			
 	def getCraftedGcode(self, gcodeText):
 		"Parse gcodeCodec text and store the bevel gcodeCodec."

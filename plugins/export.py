@@ -28,7 +28,7 @@ def writeOutput(fileName, gcodeText, gcode):
 	exportFileName += '.' + config.get(name, 'file.extension')
 	
 	if config.getboolean(name, 'gcode.penultimate.save'):
-		fileNamePenultimate = fileName[: fileName.rfind('.')] + '_penultimate.gcode'
+		fileNamePenultimate = fileName[: fileName.rfind('.')] + '.penultimate.gcode'
 		archive.writeFileText(fileNamePenultimate, gcodeText)
 		logger.info('The penultimate file is saved as %s', fileNamePenultimate)
 		
@@ -42,7 +42,8 @@ def writeOutput(fileName, gcodeText, gcode):
 	
 	if config.getboolean('export', 'debug'):
 		archive.writeFileText(fileName[: fileName.rfind('.')] + '.new.penultimate.gcode', str(gcode))
-		archive.writeFileText(fileName[: fileName.rfind('.')] + '.new.gcode', gcode.getGcodeText())
+		replaceableExportGcode = getReplaceableExportGcode(config.get(name, 'replace.filename'), gcode.getGcodeText())
+		archive.writeFileText(fileName[: fileName.rfind('.')] + '.new.gcode', replaceableExportGcode)
 		
 	logger.info('The exported file is saved as %s', archive.getSummarizedFileName(exportFileName))
 

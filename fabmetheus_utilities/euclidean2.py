@@ -63,14 +63,13 @@ def addElementToListDictionaryIfNotThere(element, key, listDictionary):
 	else:
 		listDictionary[key] = [element]
 
-def addElementToPixelList( element, pixelDictionary, x, y ):
+def addElementToPixelList(element, pixelDictionary, x, y):
 	'Add an element to the pixel list.'
-	stepKey = (x, y)
-	addElementToListDictionary( element, stepKey, pixelDictionary )
+	addElementToListDictionary( element, (x, y), pixelDictionary )
 
-def addElementToPixelListFromPoint( element, pixelDictionary, point ):
+def addElementToPixelListFromPoint(element, pixelDictionary, point):
 	'Add an element to the pixel list.'
-	addElementToPixelList( element, pixelDictionary, int( round( point.real ) ), int( round( point.imag ) ) )
+	addElementToPixelList(element, pixelDictionary, int(round(point.real)), int(round(point.imag)))
 
 def addHorizontallyBoundedPoint(begin, center, end, horizontalBegin, horizontalEnd, path):
 	'Add point if it is within the horizontal bounds.'
@@ -89,42 +88,38 @@ def addHorizontallyBoundedPoint(begin, center, end, horizontalBegin, horizontalE
 			along = (center.real - horizontalEnd) / centerMinusBegin.real
 			path.append(center - along * centerMinusBegin)
 
-def addListToListTable( elementList, key, listDictionary ):
+def addListToListTable(elementList, key, listDictionary):
 	'Add a list to the list table.'
 	if key in listDictionary:
 		listDictionary[key] += elementList
 	else:
 		listDictionary[key] = elementList
 
-def addLoopToPixelTable( loop, pixelDictionary, width ):
+def addLoopToPixelTable(loop, pixelDictionary, width):
 	'Add loop to the pixel table.'
 	for pointIndex in xrange(len(loop)):
 		pointBegin = loop[pointIndex]
 		pointEnd = loop[(pointIndex + 1) % len(loop)]
-		addValueSegmentToPixelTable( pointBegin, pointEnd, pixelDictionary, None, width )
+		addValueSegmentToPixelTable(pointBegin, pointEnd, pixelDictionary, None, width)
 
-def addPathToPixelTable( path, pixelDictionary, value, width ):
+def addPathToPixelTable(path, pixelDictionary, value, width):
 	'Add path to the pixel table.'
-	for pointIndex in xrange( len(path) - 1 ):
+	for pointIndex in xrange(len(path) - 1):
 		pointBegin = path[pointIndex]
 		pointEnd = path[pointIndex + 1]
-		addValueSegmentToPixelTable( pointBegin, pointEnd, pixelDictionary, value, width )
+		addValueSegmentToPixelTable(pointBegin, pointEnd, pixelDictionary, value, width)
 
-def addPixelTableToPixelTable( fromPixelTable, intoPixelTable ):
+def addPixelTableToPixelTable(fromPixelTable, intoPixelTable):
 	'Add from pixel table to the into pixel table.'
 	for fromPixelTableKey in fromPixelTable.keys():
 		intoPixelTable[ fromPixelTableKey ] = fromPixelTable[ fromPixelTableKey ]
 
-def addPixelToPixelTable( pixelDictionary, value, x, y ):
-	'Add pixel to the pixel table.'
-	pixelDictionary[(x, y)] = value
-
 def addPixelToPixelTableWithSteepness( isSteep, pixelDictionary, value, x, y ):
 	'Add pixels to the pixel table with steepness.'
 	if isSteep:
-		addPixelToPixelTable( pixelDictionary, value, y, x )
+		pixelDictionary[(y, x)] = value
 	else:
-		addPixelToPixelTable( pixelDictionary, value, x, y )
+		pixelDictionary[(x, y)] = value
 
 def addPointToPath( path, pixelDictionary, point, value, width ):
 	'Add a point to a path and the pixel table.'
@@ -132,32 +127,32 @@ def addPointToPath( path, pixelDictionary, point, value, width ):
 	if len(path) < 2:
 		return
 	begin = path[-2]
-	addValueSegmentToPixelTable( begin, point, pixelDictionary, value, width )
+	addValueSegmentToPixelTable(begin, point, pixelDictionary, value, width)
 
-def addSegmentToPixelTable( beginComplex, endComplex, pixelDictionary, shortenDistanceBegin, shortenDistanceEnd, width ):
+def addSegmentToPixelTable(beginComplex, endComplex, pixelDictionary, shortenDistanceBegin, shortenDistanceEnd, width):
 	'Add line segment to the pixel table.'
-	if abs( beginComplex - endComplex ) <= 0.0:
+	if abs(beginComplex - endComplex) <= 0.0:
 		return
 	beginComplex /= width
 	endComplex /= width
 	if shortenDistanceBegin > 0.0:
 		endMinusBeginComplex = endComplex - beginComplex
-		endMinusBeginComplexLength = abs( endMinusBeginComplex )
+		endMinusBeginComplexLength = abs(endMinusBeginComplex)
 		if endMinusBeginComplexLength < shortenDistanceBegin:
 			return
 		beginComplex = beginComplex + endMinusBeginComplex * shortenDistanceBegin / endMinusBeginComplexLength
 	if shortenDistanceEnd > 0.0:
 		beginMinusEndComplex = beginComplex - endComplex
-		beginMinusEndComplexLength = abs( beginMinusEndComplex )
+		beginMinusEndComplexLength = abs(beginMinusEndComplex)
 		if beginMinusEndComplexLength < 0.0:
 			return
 		endComplex = endComplex + beginMinusEndComplex * shortenDistanceEnd / beginMinusEndComplexLength
 	deltaX = endComplex.real - beginComplex.real
 	deltaY = endComplex.imag - beginComplex.imag
-	isSteep = abs( deltaY ) > abs( deltaX )
+	isSteep = abs(deltaY) > abs(deltaX)
 	if isSteep:
-		beginComplex = complex( beginComplex.imag, beginComplex.real )
-		endComplex = complex( endComplex.imag, endComplex.real )
+		beginComplex = complex(beginComplex.imag, beginComplex.real)
+		endComplex = complex(endComplex.imag, endComplex.real)
 	if beginComplex.real > endComplex.real:
 		endComplex, beginComplex = beginComplex, endComplex
 	deltaX = endComplex.real - beginComplex.real
@@ -167,20 +162,28 @@ def addSegmentToPixelTable( beginComplex, endComplex, pixelDictionary, shortenDi
 	else:
 		gradient = 0.0
 		print('This should never happen, deltaX in addSegmentToPixelTable in euclidean is 0.')
-		print( beginComplex )
-		print( endComplex )
-		print( shortenDistanceBegin )
-		print( shortenDistanceEnd )
-		print( width )
+		print(beginComplex)
+		print(endComplex)
+		print(shortenDistanceBegin)
+		print(shortenDistanceEnd)
+		print(width)
 	xBegin = int(round(beginComplex.real))
 	xEnd = int(round(endComplex.real))
 	yIntersection = beginComplex.imag - beginComplex.real * gradient
-	addPixelToPixelTableWithSteepness( isSteep, pixelDictionary, None, xBegin, int( round( beginComplex.imag ) ) )
-	addPixelToPixelTableWithSteepness( isSteep, pixelDictionary, None, xEnd, int( round( endComplex.imag ) ) )
-	for x in xrange( xBegin + 1, xEnd ):
-		y = int( math.floor( yIntersection + x * gradient ) )
-		addPixelToPixelTableWithSteepness( isSteep, pixelDictionary, None, x, y )
-		addPixelToPixelTableWithSteepness( isSteep, pixelDictionary, None, x, y + 1 )
+	if isSteep:
+		pixelDictionary[( int( round( beginComplex.imag ) ), xBegin)] = None
+		pixelDictionary[( int( round( endComplex.imag ) ), xEnd )] = None
+		for x in xrange( xBegin + 1, xEnd ):
+			y = int( math.floor( yIntersection + x * gradient ) )
+			pixelDictionary[(y, x)] = None
+			pixelDictionary[(y + 1, x)] = None
+	else:
+		pixelDictionary[(xBegin, int( round( beginComplex.imag ) ) )] = None
+		pixelDictionary[(xEnd, int( round( endComplex.imag ) ) )] = None
+		for x in xrange( xBegin + 1, xEnd ):
+			y = int( math.floor( yIntersection + x * gradient ) )
+			pixelDictionary[(x, y)] = None
+			pixelDictionary[(x, y + 1)] = None
 
 def addSquareTwoToPixelDictionary(pixelDictionary, point, value, width):
 	'Add square with two pixels around the center to pixel dictionary.'
@@ -191,17 +194,15 @@ def addSquareTwoToPixelDictionary(pixelDictionary, point, value, width):
 		for yStep in xrange(y - 2, y + 3):
 			pixelDictionary[(xStep, yStep)] = value
 
-def addSurroundingLoopBeginning( distanceFeedRate, loop, z ):
+def addSurroundingLoopBeginning(distanceFeedRate, loop, z):
 	'Add surrounding loop beginning to gcode output.'
-	#print "addSurroundingLoopBeginning loop",loop
 	distanceFeedRate.addLine('(<nestedRing>)')
 	distanceFeedRate.addLine('(<boundaryPerimeter>)')
 	for point in loop:
-		#print "addSurroundingLoopBeginning point",point
 		pointVector3 = Vector3(point.real, point.imag, z)
-		distanceFeedRate.addLine( distanceFeedRate.getBoundaryLine( pointVector3 ) )
+		distanceFeedRate.addLine(distanceFeedRate.getBoundaryLine(pointVector3))
 
-def addToThreadsFromLoop(extrusionHalfWidth, gcodeType, loop, oldOrderedLocation, skein):
+def addToThreadsFromLoop(extrusionHalfWidth, gcodeType, loop, oldOrderedLocation, nestedRing):
 	'Add to threads from the last location from loop.'
 	loop = getLoopStartingNearest(extrusionHalfWidth, oldOrderedLocation.dropAxis(), loop)
 	oldOrderedLocation.x = loop[0].real
@@ -211,26 +212,28 @@ def addToThreadsFromLoop(extrusionHalfWidth, gcodeType, loop, oldOrderedLocation
 		skein.gcodeCodec.addLine('(<%s> outer )' % gcodeType)
 	else:
 		skein.gcodeCodec.addLine('(<%s> inner )' % gcodeType)
-	skein.addGcodeFromThreadZ(loop + [loop[0]], oldOrderedLocation.z)
+	nestedRing.addGcodeFromThread(loop + [loop[0]])
 	skein.gcodeCodec.addLine('(</%s>)' % gcodeType)
 
-def addToThreadsRemove(extrusionHalfWidth, nestedRings, oldOrderedLocation, skein, threadSequence):
+def addToThreadsRemove(extrusionHalfWidth, nestedRings, oldOrderedLocation, threadSequence):
 	'Add to threads from the last location from surrounding loops.'
-	while len(nestedRings) > 0:
-		getTransferClosestSurroundingLoop(extrusionHalfWidth, nestedRings, oldOrderedLocation, skein, threadSequence)
+	#while len(nestedRings) > 0:
+	#	getTransferClosestSurroundingLoop(extrusionHalfWidth, nestedRings, oldOrderedLocation, threadSequence)
+	for nestedRing in nestedRings:
+		nestedRing.addToThreads(extrusionHalfWidth, oldOrderedLocation, threadSequence)
 
-def addValueSegmentToPixelTable( beginComplex, endComplex, pixelDictionary, value, width ):
+def addValueSegmentToPixelTable(beginComplex, endComplex, pixelDictionary, value, width):
 	'Add line segment to the pixel table.'
-	if abs( beginComplex - endComplex ) <= 0.0:
+	if abs(beginComplex - endComplex) <= 0.0:
 		return
 	beginComplex /= width
 	endComplex /= width
 	deltaX = endComplex.real - beginComplex.real
 	deltaY = endComplex.imag - beginComplex.imag
-	isSteep = abs( deltaY ) > abs( deltaX )
+	isSteep = abs(deltaY) > abs(deltaX)
 	if isSteep:
-		beginComplex = complex( beginComplex.imag, beginComplex.real )
-		endComplex = complex( endComplex.imag, endComplex.real )
+		beginComplex = complex(beginComplex.imag, beginComplex.real)
+		endComplex = complex(endComplex.imag, endComplex.real)
 	if beginComplex.real > endComplex.real:
 		endComplex, beginComplex = beginComplex, endComplex
 	deltaX = endComplex.real - beginComplex.real
@@ -240,19 +243,27 @@ def addValueSegmentToPixelTable( beginComplex, endComplex, pixelDictionary, valu
 	else:
 		gradient = 0.0
 		print('This should never happen, deltaX in addValueSegmentToPixelTable in euclidean is 0.')
-		print( beginComplex )
+		print(beginComplex)
 		print(value)
-		print( endComplex )
-		print( width )
+		print(endComplex)
+		print(width)
 	xBegin = int(round(beginComplex.real))
 	xEnd = int(round(endComplex.real))
 	yIntersection = beginComplex.imag - beginComplex.real * gradient
-	addPixelToPixelTableWithSteepness( isSteep, pixelDictionary, value, xBegin, int( round( beginComplex.imag ) ) )
-	addPixelToPixelTableWithSteepness( isSteep, pixelDictionary, value, xEnd, int( round( endComplex.imag ) ) )
-	for x in xrange( xBegin + 1, xEnd ):
-		y = int( math.floor( yIntersection + x * gradient ) )
-		addPixelToPixelTableWithSteepness( isSteep, pixelDictionary, value, x, y )
-		addPixelToPixelTableWithSteepness( isSteep, pixelDictionary, value, x, y + 1 )
+	if isSteep:
+		pixelDictionary[(int( round( beginComplex.imag ) ), xBegin)] = value
+		pixelDictionary[(int( round( endComplex.imag ) ), xEnd)] = value
+		for x in xrange( xBegin + 1, xEnd ):
+			y = int( math.floor( yIntersection + x * gradient ) )
+			pixelDictionary[(y, x)] = value
+			pixelDictionary[(y + 1, x)] = value
+	else:
+		pixelDictionary[(xBegin, int( round( beginComplex.imag ) ))] = value
+		pixelDictionary[(xEnd, int( round( endComplex.imag ) ))] = value
+		for x in xrange( xBegin + 1, xEnd ):
+			y = int( math.floor( yIntersection + x * gradient ) )
+			pixelDictionary[(x, y)] = value
+			pixelDictionary[(x, y + 1)] = value
 
 def addValueToOutput(depth, keyInput, output, value):
 	'Add value to the output.'
@@ -272,7 +283,7 @@ def addValueToOutput(depth, keyInput, output, value):
 		return
 	output.write(' %s\n' % value)
 
-def addXIntersectionIndexesFromLoop( frontOverWidth, loop, solidIndex, xIntersectionIndexLists, width, yList ):
+def addXIntersectionIndexesFromLoop(frontOverWidth, loop, solidIndex, xIntersectionIndexLists, width, yList):
 	'Add the x intersection indexes for a loop.'
 	for pointIndex in xrange(len(loop)):
 		pointBegin = loop[pointIndex]
@@ -281,69 +292,69 @@ def addXIntersectionIndexesFromLoop( frontOverWidth, loop, solidIndex, xIntersec
 			pointOriginal = pointBegin
 			pointBegin = pointEnd
 			pointEnd = pointOriginal
-		fillBegin = int( math.ceil( pointBegin.imag / width - frontOverWidth ) )
-		fillBegin = max( 0, fillBegin )
-		fillEnd = int( math.ceil( pointEnd.imag / width - frontOverWidth ) )
-		fillEnd = min( len( xIntersectionIndexLists ), fillEnd )
+		fillBegin = int(math.ceil(pointBegin.imag / width - frontOverWidth))
+		fillBegin = max(0, fillBegin)
+		fillEnd = int(math.ceil(pointEnd.imag / width - frontOverWidth))
+		fillEnd = min(len(xIntersectionIndexLists), fillEnd)
 		if fillEnd > fillBegin:
 			secondMinusFirstComplex = pointEnd - pointBegin
 			secondMinusFirstImaginaryOverReal = secondMinusFirstComplex.real / secondMinusFirstComplex.imag
 			beginRealMinusImaginary = pointBegin.real - pointBegin.imag * secondMinusFirstImaginaryOverReal
-			for fillLine in xrange( fillBegin, fillEnd ):
+			for fillLine in xrange(fillBegin, fillEnd):
 				xIntersection = yList[fillLine] * secondMinusFirstImaginaryOverReal + beginRealMinusImaginary
 				xIntersectionIndexList = xIntersectionIndexLists[fillLine]
-				xIntersectionIndexList.append( XIntersectionIndex( solidIndex, xIntersection ) )
+				xIntersectionIndexList.append(XIntersectionIndex(solidIndex, xIntersection))
 
-def addXIntersectionIndexesFromLoops( frontOverWidth, loops, solidIndex, xIntersectionIndexLists, width, yList ):
+def addXIntersectionIndexesFromLoops(frontOverWidth, loops, solidIndex, xIntersectionIndexLists, width, yList):
 	'Add the x intersection indexes for a loop.'
 	for loop in loops:
-		addXIntersectionIndexesFromLoop( frontOverWidth, loop, solidIndex, xIntersectionIndexLists, width, yList )
+		addXIntersectionIndexesFromLoop(frontOverWidth, loop, solidIndex, xIntersectionIndexLists, width, yList)
 
-def addXIntersectionIndexesFromLoopY( loop, solidIndex, xIntersectionIndexList, y ):
+
+def addXIntersectionIndexesFromLoopListsY(loopLists, xIntersectionIndexList, y):
+	'Add the x intersection indexes for the loop lists.'
+	for loopListIndex in xrange(len(loopLists)):
+		loopList = loopLists[ loopListIndex ]
+		addXIntersectionIndexesFromLoopsY(loopList, loopListIndex, xIntersectionIndexList, y)
+
+def addXIntersectionIndexesFromLoopsY(loops, solidIndex, xIntersectionIndexList, y):
+	'Add the x intersection indexes for the loops.'
+	for loop in loops:
+		addXIntersectionIndexesFromLoopY(loop, solidIndex, xIntersectionIndexList, y)
+def addXIntersectionIndexesFromLoopY(loop, solidIndex, xIntersectionIndexList, y):
 	'Add the x intersection indexes for a loop.'
 	for pointIndex in xrange(len(loop)):
 		pointFirst = loop[pointIndex]
 		pointSecond = loop[(pointIndex + 1) % len(loop)]
-		xIntersection = getXIntersectionIfExists( pointFirst, pointSecond, y )
+		xIntersection = getXIntersectionIfExists(pointFirst, pointSecond, y)
 		if xIntersection != None:
-			xIntersectionIndexList.append( XIntersectionIndex( solidIndex, xIntersection ) )
+			xIntersectionIndexList.append(XIntersectionIndex(solidIndex, xIntersection))
 
-def addXIntersectionIndexesFromLoopListsY( loopLists, xIntersectionIndexList, y ):
-	'Add the x intersection indexes for the loop lists.'
-	for loopListIndex in xrange( len(loopLists) ):
-		loopList = loopLists[ loopListIndex ]
-		addXIntersectionIndexesFromLoopsY( loopList, loopListIndex, xIntersectionIndexList, y )
-
-def addXIntersectionIndexesFromLoopsY( loops, solidIndex, xIntersectionIndexList, y ):
-	'Add the x intersection indexes for the loops.'
-	for loop in loops:
-		addXIntersectionIndexesFromLoopY( loop, solidIndex, xIntersectionIndexList, y )
-
-def addXIntersectionIndexesFromSegment( index, segment, xIntersectionIndexList ):
+def addXIntersectionIndexesFromSegment(index, segment, xIntersectionIndexList):
 	'Add the x intersection indexes from the segment.'
 	for endpoint in segment:
-		xIntersectionIndexList.append( XIntersectionIndex( index, endpoint.point.real ) )
+		xIntersectionIndexList.append(XIntersectionIndex(index, endpoint.point.real))
 
-def addXIntersectionIndexesFromSegments( index, segments, xIntersectionIndexList ):
+def addXIntersectionIndexesFromSegments(index, segments, xIntersectionIndexList):
 	'Add the x intersection indexes from the segments.'
 	for segment in segments:
-		addXIntersectionIndexesFromSegment( index, segment, xIntersectionIndexList )
+		addXIntersectionIndexesFromSegment(index, segment, xIntersectionIndexList)
 
-def addXIntersectionIndexesFromXIntersections( index, xIntersectionIndexList, xIntersections ):
+def addXIntersectionIndexesFromXIntersections(index, xIntersectionIndexList, xIntersections):
 	'Add the x intersection indexes from the XIntersections.'
 	for xIntersection in xIntersections:
-		xIntersectionIndexList.append( XIntersectionIndex( index, xIntersection ) )
+		xIntersectionIndexList.append(XIntersectionIndex(index, xIntersection))
 
-def addXIntersections( loop, xIntersections, y ):
+def addXIntersections(loop, xIntersections, y):
 	'Add the x intersections for a loop.'
 	for pointIndex in xrange(len(loop)):
 		pointFirst = loop[pointIndex]
 		pointSecond = loop[(pointIndex + 1) % len(loop)]
-		xIntersection = getXIntersectionIfExists( pointFirst, pointSecond, y )
+		xIntersection = getXIntersectionIfExists(pointFirst, pointSecond, y)
 		if xIntersection != None:
-			xIntersections.append( xIntersection )
+			xIntersections.append(xIntersection)
 
-def addXIntersectionsFromLoopForTable( loop, xIntersectionsTable, width ):
+def addXIntersectionsFromLoopForTable(loop, xIntersectionsTable, width):
 	'Add the x intersections for a loop into a table.'
 	for pointIndex in xrange(len(loop)):
 		pointBegin = loop[pointIndex]
@@ -352,88 +363,88 @@ def addXIntersectionsFromLoopForTable( loop, xIntersectionsTable, width ):
 			pointOriginal = pointBegin
 			pointBegin = pointEnd
 			pointEnd = pointOriginal
-		fillBegin = int( math.ceil( pointBegin.imag / width ) )
-		fillEnd = int( math.ceil( pointEnd.imag / width ) )
+		fillBegin = int(math.ceil(pointBegin.imag / width))
+		fillEnd = int(math.ceil(pointEnd.imag / width))
 		if fillEnd > fillBegin:
 			secondMinusFirstComplex = pointEnd - pointBegin
 			secondMinusFirstImaginaryOverReal = secondMinusFirstComplex.real / secondMinusFirstComplex.imag
 			beginRealMinusImaginary = pointBegin.real - pointBegin.imag * secondMinusFirstImaginaryOverReal
-			for fillLine in xrange( fillBegin, fillEnd ):
+			for fillLine in xrange(fillBegin, fillEnd):
 				y = fillLine * width
 				xIntersection = y * secondMinusFirstImaginaryOverReal + beginRealMinusImaginary
-				addElementToListDictionary( xIntersection, fillLine, xIntersectionsTable )
+				addElementToListDictionary(xIntersection, fillLine, xIntersectionsTable)
 
-def addXIntersectionsFromLoops( loops, xIntersections, y ):
+def addXIntersectionsFromLoops(loops, xIntersections, y):
 	'Add the x intersections for the loops.'
 	for loop in loops:
-		addXIntersections( loop, xIntersections, y )
+		addXIntersections(loop, xIntersections, y)
 
-def addXIntersectionsFromLoopsForTable( loops, xIntersectionsTable, width ):
+def addXIntersectionsFromLoopsForTable(loops, xIntersectionsTable, width):
 	'Add the x intersections for a loop into a table.'
 	for loop in loops:
-		addXIntersectionsFromLoopForTable( loop, xIntersectionsTable, width )
+		addXIntersectionsFromLoopForTable(loop, xIntersectionsTable, width)
 
-def compareSegmentLength( endpoint, otherEndpoint ):
+def compareSegmentLength(endpoint, otherEndpoint):
 	'Get comparison in order to sort endpoints in ascending order of segment length.'
 	if endpoint.segmentLength > otherEndpoint.segmentLength:
 		return 1
 	if endpoint.segmentLength < otherEndpoint.segmentLength:
-		return - 1
+		return -1
 	return 0
 
-def concatenateRemovePath( connectedPaths, pathIndex, paths, pixelDictionary, segments, width ):
+def concatenateRemovePath(connectedPaths, pathIndex, paths, pixelDictionary, segments, width):
 	'Get connected paths from paths.'
 	bottomSegment = segments[ pathIndex ]
 	path = paths[ pathIndex ]
 	if bottomSegment == None:
 		connectedPaths.append(path)
 		return
-	endpoints = getEndpointsFromSegments( segments[ pathIndex + 1 : ] )
+	endpoints = getEndpointsFromSegments(segments[ pathIndex + 1 : ])
 	bottomSegmentEndpoint = bottomSegment[0]
-	nextEndpoint = bottomSegmentEndpoint.getNearestMissCheckEndpointPath( endpoints, bottomSegmentEndpoint.path, pixelDictionary, width )
+	nextEndpoint = bottomSegmentEndpoint.getNearestMissCheckEndpointPath(endpoints, bottomSegmentEndpoint.path, pixelDictionary, width)
 	if nextEndpoint == None:
 		bottomSegmentEndpoint = bottomSegment[1]
-		nextEndpoint = bottomSegmentEndpoint.getNearestMissCheckEndpointPath( endpoints, bottomSegmentEndpoint.path, pixelDictionary, width )
+		nextEndpoint = bottomSegmentEndpoint.getNearestMissCheckEndpointPath(endpoints, bottomSegmentEndpoint.path, pixelDictionary, width)
 	if nextEndpoint == None:
 		connectedPaths.append(path)
 		return
-	if len( bottomSegmentEndpoint.path ) > 0 and len( nextEndpoint.path ) > 0:
+	if len(bottomSegmentEndpoint.path) > 0 and len(nextEndpoint.path) > 0:
 		bottomEnd = bottomSegmentEndpoint.path[-1]
 		nextBegin = nextEndpoint.path[-1]
-		nextMinusBottomNormalized = getNormalized( nextBegin - bottomEnd )
-		if len( bottomSegmentEndpoint.path ) > 1:
+		nextMinusBottomNormalized = getNormalized(nextBegin - bottomEnd)
+		if len(bottomSegmentEndpoint.path) > 1:
 			bottomPenultimate = bottomSegmentEndpoint.path[-2]
-			if getDotProduct( getNormalized( bottomPenultimate - bottomEnd ), nextMinusBottomNormalized ) > 0.9:
+			if getDotProduct(getNormalized(bottomPenultimate - bottomEnd), nextMinusBottomNormalized) > 0.9:
 				connectedPaths.append(path)
 				return
-		if len( nextEndpoint.path ) > 1:
+		if len(nextEndpoint.path) > 1:
 			nextPenultimate = nextEndpoint.path[-2]
-			if getDotProduct( getNormalized( nextPenultimate - nextBegin ), - nextMinusBottomNormalized ) > 0.9:
+			if getDotProduct(getNormalized(nextPenultimate - nextBegin), -nextMinusBottomNormalized) > 0.9:
 				connectedPaths.append(path)
 				return
 	nextEndpoint.path.reverse()
 	concatenatedPath = bottomSegmentEndpoint.path + nextEndpoint.path
 	paths[ nextEndpoint.pathIndex ] = concatenatedPath
-	segments[ nextEndpoint.pathIndex ] = getSegmentFromPath( concatenatedPath, nextEndpoint.pathIndex )
-	addValueSegmentToPixelTable( bottomSegmentEndpoint.point, nextEndpoint.point, pixelDictionary, None, width )
+	segments[ nextEndpoint.pathIndex ] = getSegmentFromPath(concatenatedPath, nextEndpoint.pathIndex)
+	addValueSegmentToPixelTable(bottomSegmentEndpoint.point, nextEndpoint.point, pixelDictionary, None, width)
 
-def getAngleAroundZAxisDifference( subtractFromVec3, subtractVec3 ):
+def getAngleAroundZAxisDifference(subtractFromVec3, subtractVec3):
 	'Get the angle around the Z axis difference between a pair of Vector3s.'
-	subtractVectorMirror = complex( subtractVec3.x , - subtractVec3.y )
-	differenceVector = getRoundZAxisByPlaneAngle( subtractVectorMirror, subtractFromVec3 )
-	return math.atan2( differenceVector.y, differenceVector.x )
+	subtractVectorMirror = complex(subtractVec3.x , -subtractVec3.y)
+	differenceVector = getRoundZAxisByPlaneAngle(subtractVectorMirror, subtractFromVec3)
+	return math.atan2(differenceVector.y, differenceVector.x)
 
-def getAngleDifferenceByComplex( subtractFromComplex, subtractComplex ):
+def getAngleDifferenceByComplex(subtractFromComplex, subtractComplex):
 	'Get the angle between a pair of normalized complexes.'
-	subtractComplexMirror = complex( subtractComplex.real , - subtractComplex.imag )
+	subtractComplexMirror = complex(subtractComplex.real , -subtractComplex.imag)
 	differenceComplex = subtractComplexMirror * subtractFromComplex
-	return math.atan2( differenceComplex.imag, differenceComplex.real )
+	return math.atan2(differenceComplex.imag, differenceComplex.real)
 
 def getAreaLoop(loop):
 	'Get the area of a complex polygon.'
 	areaLoopDouble = 0.0
 	for pointIndex, point in enumerate(loop):
-		pointEnd  = loop[(pointIndex + 1) % len(loop)]
+		pointEnd = loop[(pointIndex + 1) % len(loop)]
 		areaLoopDouble += point.real * pointEnd.imag - pointEnd.real * point.imag
 	return 0.5 * areaLoopDouble
 
@@ -465,28 +476,38 @@ def getAroundLoop(begin, end, loop):
 		aroundLoop.append(loop[pointIndex % len(loop)])
 	return aroundLoop
 
+def getAwayPath(path, radius):
+	'Get a path with only the points that are far enough away from each other, except for the last point.'
+	if len(path) < 2:
+		return path
+	lastPoint = path[-1]
+	awayPath = getAwayPoints(path, radius)
+	if len(awayPath) == 0:
+		return [lastPoint]
+	if abs(lastPoint - awayPath[-1]) > 0.001 * radius:
+		awayPath.append(lastPoint)
+	return awayPath
+
 def getAwayPoints(points, radius):
 	'Get a path with only the points that are far enough away from each other.'
-	away = []
+	awayPoints = []
 	oneOverOverlapDistance = 1000.0 / radius
 	pixelDictionary = {}
 	for point in points:
-		#print "point",point,isinstance(point, Vector3)
 		x = int(point.real * oneOverOverlapDistance)
 		y = int(point.imag * oneOverOverlapDistance)
 		if not getSquareIsOccupied(pixelDictionary, x, y):
-			away.append(point)
-			stepKey = (x, y)
-			pixelDictionary[stepKey] = None
-	return away
+			awayPoints.append(point)
+			pixelDictionary[(x, y)] = None
+	return awayPoints
 
 def getBackOfLoops(loops):
 	'Get the back of the loops.'
-	negativeFloat = - 987654321.75342341
+	negativeFloat = -987654321.75342341
 	back = negativeFloat
 	for loop in loops:
 		for point in loop:
-			back = max( back, point.imag )
+			back = max(back, point.imag)
 	if back == negativeFloat:
 		print('This should never happen, there are no loops for getBackOfLoops in euclidean')
 	return back
@@ -517,19 +538,19 @@ def getBottomByPaths(paths):
 			bottom = min(bottom, point.z)
 	return bottom
 
-def getClippedAtEndLoopPath( clip, loopPath ):
+def getClippedAtEndLoopPath(clip, loopPath):
 	'Get a clipped loop path.'
 	if clip <= 0.0:
 		return loopPath
 	loopPathLength = getPathLength(loopPath)
-	clip = min( clip, 0.3 * loopPathLength )
+	clip = min(clip, 0.3 * loopPathLength)
 	lastLength = 0.0
 	pointIndex = 0
 	totalLength = 0.0
 	clippedLength = loopPathLength - clip
 	while totalLength < clippedLength and pointIndex < len(loopPath) - 1:
 		firstPoint = loopPath[pointIndex]
-		secondPoint  = loopPath[pointIndex + 1]
+		secondPoint = loopPath[pointIndex + 1]
 		pointIndex += 1
 		lastLength = totalLength
 		totalLength += abs(firstPoint - secondPoint)
@@ -555,7 +576,7 @@ def getClippedLoopPath(clip, loopPath):
 	totalLength = 0.0
 	while totalLength < clip and pointIndex < len(loopPath) - 1:
 		firstPoint = loopPath[pointIndex]
-		secondPoint  = loopPath[pointIndex + 1]
+		secondPoint = loopPath[pointIndex + 1]
 		pointIndex += 1
 		lastLength = totalLength
 		totalLength += abs(firstPoint - secondPoint)
@@ -575,25 +596,25 @@ def getClippedSimplifiedLoopPath(clip, loopPath, radius):
 	'Get a clipped and simplified loop path.'
 	return getSimplifiedPath(getClippedLoopPath(clip, loopPath), radius)
 
-def getComplexByCommaString( valueCommaString ):
+def getComplexByCommaString(valueCommaString):
 	'Get the commaString as a complex.'
 	try:
 		splitLine = valueCommaString.replace(',', ' ').split()
-		return complex( float( splitLine[0] ), float(splitLine[1]) )
+		return complex(float(splitLine[0]), float(splitLine[1]))
 	except:
 		pass
 	return None
 
-def getComplexDefaultByDictionary( defaultComplex, dictionary, key ):
+def getComplexDefaultByDictionary(defaultComplex, dictionary, key):
 	'Get the value as a complex.'
 	if key in dictionary:
-		return complex( dictionary[key].strip().replace('(', '').replace(')', '') )
+		return complex(dictionary[key].strip().replace('(', '').replace(')', ''))
 	return defaultComplex
 
-def getComplexDefaultByDictionaryKeys( defaultComplex, dictionary, keyX, keyY ):
+def getComplexDefaultByDictionaryKeys(defaultComplex, dictionary, keyX, keyY):
 	'Get the value as a complex.'
-	x = getFloatDefaultByDictionary( defaultComplex.real, dictionary, keyX )
-	y = getFloatDefaultByDictionary( defaultComplex.real, dictionary, keyY )
+	x = getFloatDefaultByDictionary(defaultComplex.real, dictionary, keyX)
+	y = getFloatDefaultByDictionary(defaultComplex.real, dictionary, keyY)
 	return complex(x, y)
 
 def getComplexByWords(words, wordIndex=0):
@@ -665,18 +686,18 @@ def getConcatenatedList(originalLists):
 		concatenatedList += originalList
 	return concatenatedList
 
-def getConnectedPaths( paths, pixelDictionary, width ):
+def getConnectedPaths(paths, pixelDictionary, width):
 	'Get connected paths from paths.'
 	if len(paths) < 2:
 		return paths
 	connectedPaths = []
 	segments = []
-	for pathIndex in xrange( len(paths) ):
+	for pathIndex in xrange(len(paths)):
 		path = paths[ pathIndex ]
-		segments.append( getSegmentFromPath( path, pathIndex ) )
-	for pathIndex in xrange( 0, len(paths) - 1 ):
-		concatenateRemovePath( connectedPaths, pathIndex, paths, pixelDictionary, segments, width )
-	connectedPaths.append( paths[-1] )
+		segments.append(getSegmentFromPath(path, pathIndex))
+	for pathIndex in xrange(0, len(paths) - 1):
+		concatenateRemovePath(connectedPaths, pathIndex, paths, pixelDictionary, segments, width)
+	connectedPaths.append(paths[-1])
 	return connectedPaths
 
 def getCrossProduct(firstComplex, secondComplex):
@@ -691,14 +712,14 @@ def getDiagonalFlippedLoop(loop):
 	'Get loop flipped over the dialogonal, in other words with the x and y swapped.'
 	diagonalFlippedLoop = []
 	for point in loop:
-		diagonalFlippedLoop.append( complex( point.imag, point.real ) )
+		diagonalFlippedLoop.append(complex(point.imag, point.real))
 	return diagonalFlippedLoop
 
 def getDiagonalFlippedLoops(loops):
 	'Get loops flipped over the dialogonal, in other words with the x and y swapped.'
 	diagonalFlippedLoops = []
 	for loop in loops:
-		diagonalFlippedLoops.append( getDiagonalFlippedLoop(loop) )
+		diagonalFlippedLoops.append(getDiagonalFlippedLoop(loop))
 	return diagonalFlippedLoops
 
 def getDictionaryString(dictionary):
@@ -732,59 +753,59 @@ def getDistanceToLineByPaths(begin, end, paths):
 		distanceToLine = max(getDistanceToLineByPath(begin, end, path), distanceToLine)
 	return distanceToLine
 
-def getDistanceToPlaneSegment( segmentBegin, segmentEnd, point ):
+def getDistanceToPlaneSegment(segmentBegin, segmentEnd, point):
 	'Get the distance squared from a point to the x & y components of a segment.'
 	segmentDifference = segmentEnd - segmentBegin
 	pointMinusSegmentBegin = point - segmentBegin
-	beginPlaneDot = getDotProduct( pointMinusSegmentBegin, segmentDifference )
+	beginPlaneDot = getDotProduct(pointMinusSegmentBegin, segmentDifference)
 	if beginPlaneDot <= 0.0:
-		return abs( point - segmentBegin ) * abs( point - segmentBegin )
-	differencePlaneDot = getDotProduct( segmentDifference, segmentDifference )
+		return abs(point - segmentBegin) * abs(point - segmentBegin)
+	differencePlaneDot = getDotProduct(segmentDifference, segmentDifference)
 	if differencePlaneDot <= beginPlaneDot:
-		return abs( point - segmentEnd ) * abs( point - segmentEnd )
+		return abs(point - segmentEnd) * abs(point - segmentEnd)
 	intercept = beginPlaneDot / differencePlaneDot
 	interceptPerpendicular = segmentBegin + segmentDifference * intercept
-	return abs( point - interceptPerpendicular ) * abs( point - interceptPerpendicular )
+	return abs(point - interceptPerpendicular) * abs(point - interceptPerpendicular)
 
-def getDotProduct( firstComplex, secondComplex ):
+def getDotProduct(firstComplex, secondComplex):
 	'Get the dot product of a pair of complexes.'
 	return firstComplex.real * secondComplex.real + firstComplex.imag * secondComplex.imag
 
-def getDotProductPlusOne( firstComplex, secondComplex ):
+def getDotProductPlusOne(firstComplex, secondComplex):
 	'Get the dot product plus one of the x and y components of a pair of Vector3s.'
-	return 1.0 + getDotProduct( firstComplex, secondComplex )
+	return 1.0 + getDotProduct(firstComplex, secondComplex)
 
-def getDurationString( seconds ):
+def getDurationString(seconds):
 	'Get the duration string.'
-	secondsRounded = int( round( seconds ) )
-	durationString = getPluralString( secondsRounded % 60, 'second')
+	secondsRounded = int(round(seconds))
+	durationString = getPluralString(secondsRounded % 60, 'second')
 	if seconds < 60:
 		return durationString
-	durationString =  '%s %s' % ( getPluralString( ( secondsRounded / 60 ) % 60, 'minute'), durationString )
+	durationString = '%s %s' % (getPluralString((secondsRounded / 60) % 60, 'minute'), durationString)
 	if seconds < 3600:
 		return durationString
-	return  '%s %s' % ( getPluralString( secondsRounded / 3600, 'hour'), durationString )
+	return  '%s %s' % (getPluralString(secondsRounded / 3600, 'hour'), durationString)
 
-def getEndpointFromPath( path, pathIndex ):
+def getEndpointFromPath(path, pathIndex):
 	'Get endpoint segment from a path.'
 	begin = path[-1]
 	end = path[-2]
 	endpointBegin = Endpoint()
-	endpointEnd = Endpoint().getFromOtherPoint( endpointBegin, end )
-	endpointBegin.getFromOtherPoint( endpointEnd, begin )
+	endpointEnd = Endpoint().getFromOtherPoint(endpointBegin, end)
+	endpointBegin.getFromOtherPoint(endpointEnd, begin)
 	endpointBegin.path = path
 	endpointBegin.pathIndex = pathIndex
 	return endpointBegin
 
-def getEndpointsFromSegments( segments ):
+def getEndpointsFromSegments(segments):
 	'Get endpoints from segments.'
 	endpoints = []
 	for segment in segments:
 		for endpoint in segment:
-			endpoints.append( endpoint )
+			endpoints.append(endpoint)
 	return endpoints
 
-def getEndpointsFromSegmentTable( segmentTable ):
+def getEndpointsFromSegmentTable(segmentTable):
 	'Get the endpoints from the segment table.'
 	endpoints = []
 	segmentTableKeys = segmentTable.keys()
@@ -792,7 +813,7 @@ def getEndpointsFromSegmentTable( segmentTable ):
 	for segmentTableKey in segmentTableKeys:
 		for segment in segmentTable[ segmentTableKey ]:
 			for endpoint in segment:
-				endpoints.append( endpoint )
+				endpoints.append(endpoint)
 	return endpoints
 
 def getEnumeratorKeys(enumerator, keys):
@@ -834,13 +855,13 @@ def getEnumeratorKeysExceptForOneArgument(enumerator, keys):
 	return range(beginIndex, endIndex, step)
 
 def getFillOfSurroundings(nestedRings, penultimateFillLoops):
-	'Get extra fill loops of surrounding loops.'
+	'Get extra fill loops of nested rings.'
 	fillOfSurroundings = []
 	for nestedRing in nestedRings:
 		fillOfSurroundings += nestedRing.getFillLoops(penultimateFillLoops)
 	return fillOfSurroundings
 
-def getFloatDefaultByDictionary( defaultFloat, dictionary, key ):
+def getFloatDefaultByDictionary(defaultFloat, dictionary, key):
 	'Get the value as a float.'
 	evaluatedFloat = None
 	if key in dictionary:
@@ -863,10 +884,10 @@ def getFourSignificantFigures(number):
 		return None
 	absoluteNumber = abs(number)
 	if absoluteNumber >= 100.0:
-		return getRoundedToPlacesString( 2, number )
+		return getRoundedToPlacesString(2, number)
 	if absoluteNumber < 0.000000001:
-		return getRoundedToPlacesString( 13, number )
-	return getRoundedToPlacesString( 3 - math.floor( math.log10( absoluteNumber ) ), number )
+		return getRoundedToPlacesString(13, number)
+	return getRoundedToPlacesString(3 - math.floor(math.log10(absoluteNumber)), number)
 
 def getFrontOfLoops(loops):
 	'Get the front of the loops.'
@@ -874,28 +895,28 @@ def getFrontOfLoops(loops):
 	front = bigFloat
 	for loop in loops:
 		for point in loop:
-			front = min( front, point.imag )
+			front = min(front, point.imag)
 	if front == bigFloat:
 		print('This should never happen, there are no loops for getFrontOfLoops in euclidean')
 	return front
 
-def getFrontOverWidthAddXListYList( front, loopLists, numberOfLines, xIntersectionIndexLists, width, yList ):
+def getFrontOverWidthAddXListYList(front, loopLists, numberOfLines, xIntersectionIndexLists, width, yList):
 	'Get the front over width and add the x intersection index lists and ylist.'
-	frontOverWidth = getFrontOverWidthAddYList( front, numberOfLines, xIntersectionIndexLists, width, yList )
-	for loopListIndex in xrange( len(loopLists) ):
+	frontOverWidth = getFrontOverWidthAddYList(front, numberOfLines, xIntersectionIndexLists, width, yList)
+	for loopListIndex in xrange(len(loopLists)):
 		loopList = loopLists[ loopListIndex ]
-		addXIntersectionIndexesFromLoops( frontOverWidth, loopList, loopListIndex, xIntersectionIndexLists, width, yList )
+		addXIntersectionIndexesFromLoops(frontOverWidth, loopList, loopListIndex, xIntersectionIndexLists, width, yList)
 	return frontOverWidth
 
-def getFrontOverWidthAddYList( front, numberOfLines, xIntersectionIndexLists, width, yList ):
+def getFrontOverWidthAddYList(front, numberOfLines, xIntersectionIndexLists, width, yList):
 	'Get the front over width and add the x intersection index lists and ylist.'
 	frontOverWidth = front / width
-	for fillLine in xrange( numberOfLines ):
-		yList.append( front + float( fillLine ) * width )
+	for fillLine in xrange(numberOfLines):
+		yList.append(front + float(fillLine) * width)
 		xIntersectionIndexLists.append([])
 	return frontOverWidth
 
-def getHalfSimplifiedLoop( loop, radius, remainder ):
+def getHalfSimplifiedLoop(loop, radius, remainder):
 	'Get the loop with half of the points inside the channel removed.'
 	if len(loop) < 2:
 		return loop
@@ -908,7 +929,7 @@ def getHalfSimplifiedLoop( loop, radius, remainder ):
 		point = loop[pointIndex]
 		if pointIndex % 2 == remainder or pointIndex == addIndex:
 			simplified.append(point)
-		elif not isWithinChannel( channelRadius, pointIndex, loop ):
+		elif not isWithinChannel(channelRadius, pointIndex, loop):
 			simplified.append(point)
 	return simplified
 
@@ -942,43 +963,43 @@ def getHorizontallyBoundedPath(horizontalBegin, horizontalEnd, path):
 		addHorizontallyBoundedPoint(begin, point, end, horizontalBegin, horizontalEnd, horizontallyBoundedPath)
 	return horizontallyBoundedPath
 
-def getHorizontalSegmentListsFromLoopLists( alreadyFilledArounds, front, numberOfLines, rotatedFillLoops, width ):
+def getHorizontalSegmentListsFromLoopLists(alreadyFilledArounds, front, numberOfLines, rotatedFillLoops, width):
 	'Get horizontal segment lists inside loops.'
 	xIntersectionIndexLists = []
 	yList = []
-	frontOverWidth = getFrontOverWidthAddXListYList( front, alreadyFilledArounds, numberOfLines, xIntersectionIndexLists, width, yList )
-	addXIntersectionIndexesFromLoops( frontOverWidth, rotatedFillLoops, - 1, xIntersectionIndexLists, width, yList )
+	frontOverWidth = getFrontOverWidthAddXListYList(front, alreadyFilledArounds, numberOfLines, xIntersectionIndexLists, width, yList)
+	addXIntersectionIndexesFromLoops(frontOverWidth, rotatedFillLoops, -1, xIntersectionIndexLists, width, yList)
 	horizontalSegmentLists = []
-	for xIntersectionIndexListIndex in xrange( len( xIntersectionIndexLists ) ):
+	for xIntersectionIndexListIndex in xrange(len(xIntersectionIndexLists)):
 		xIntersectionIndexList = xIntersectionIndexLists[ xIntersectionIndexListIndex ]
-		lineSegments = getSegmentsFromXIntersectionIndexes( xIntersectionIndexList, yList[ xIntersectionIndexListIndex ] )
-		horizontalSegmentLists.append( lineSegments )
+		lineSegments = getSegmentsFromXIntersectionIndexes(xIntersectionIndexList, yList[ xIntersectionIndexListIndex ])
+		horizontalSegmentLists.append(lineSegments)
 	return horizontalSegmentLists
 
-def getIncrementFromRank( rank ):
+def getIncrementFromRank(rank):
 	'Get the increment from the rank which is 0 at 1 and increases by three every power of ten.'
-	rankZone = int( math.floor( rank / 3 ) )
+	rankZone = int(math.floor(rank / 3))
 	rankModulo = rank % 3
-	powerOfTen = pow( 10, rankZone )
-	moduloMultipliers = ( 1, 2, 5 )
-	return float( powerOfTen * moduloMultipliers[ rankModulo ] )
+	powerOfTen = pow(10, rankZone)
+	moduloMultipliers = (1, 2, 5)
+	return float(powerOfTen * moduloMultipliers[ rankModulo ])
 
-def getInsidesAddToOutsides( loops, outsides ):
+def getInsidesAddToOutsides(loops, outsides):
 	'Add loops to either the insides or outsides.'
 	insides = []
-	for loopIndex in xrange( len(loops) ):
+	for loopIndex in xrange(len(loops)):
 		loop = loops[loopIndex]
-		if isInsideOtherLoops( loopIndex, loops ):
+		if isInsideOtherLoops(loopIndex, loops):
 			insides.append(loop)
 		else:
 			outsides.append(loop)
 	return insides
 
-def getIntermediateLocation( alongWay, begin, end ):
+def getIntermediateLocation(alongWay, begin, end):
 	'Get the intermediate location between begin and end.'
-	return begin * ( 1.0 - alongWay ) + end * alongWay
+	return begin * (1.0 - alongWay) + end * alongWay
 
-def getIntersectionOfXIntersectionIndexes( totalSolidSurfaceThickness, xIntersectionIndexList ):
+def getIntersectionOfXIntersectionIndexes(totalSolidSurfaceThickness, xIntersectionIndexList):
 	'Get x intersections from surrounding layers.'
 	xIntersectionList = []
 	solidTable = {}
@@ -992,18 +1013,21 @@ def getIntersectionOfXIntersectionIndexes( totalSolidSurfaceThickness, xIntersec
 			xIntersectionList.append(xIntersectionIndex.x)
 	return xIntersectionList
 
-def getIntersectionOfXIntersectionsTables( xIntersectionsTables ):
-	'Get the intersection of both XIntersections tables.'
+def getIntersectionOfXIntersectionsTables(xIntersectionsTables):
+	'Get the intersection of the XIntersections tables.'
+	if len(xIntersectionsTables) == 0:
+		return {}
 	intersectionOfXIntersectionsTables = {}
 	firstIntersectionTable = xIntersectionsTables[0]
 	for firstIntersectionTableKey in firstIntersectionTable.keys():
 		xIntersectionIndexList = []
-		for xIntersectionsTableIndex in xrange( len( xIntersectionsTables ) ):
-			xIntersectionsTable = xIntersectionsTables[ xIntersectionsTableIndex ]
-			addXIntersectionIndexesFromXIntersections( xIntersectionsTableIndex, xIntersectionIndexList, xIntersectionsTable[ firstIntersectionTableKey ] )
-		xIntersections = getIntersectionOfXIntersectionIndexes( len( xIntersectionsTables ), xIntersectionIndexList )
-		if len( xIntersections ) > 0:
-			intersectionOfXIntersectionsTables[ firstIntersectionTableKey ] = xIntersections
+		for xIntersectionsTableIndex in xrange(len(xIntersectionsTables)):
+			xIntersectionsTable = xIntersectionsTables[xIntersectionsTableIndex]
+			if firstIntersectionTableKey in xIntersectionsTable:
+				addXIntersectionIndexesFromXIntersections(xIntersectionsTableIndex, xIntersectionIndexList, xIntersectionsTable[firstIntersectionTableKey])
+		xIntersections = getIntersectionOfXIntersectionIndexes(len(xIntersectionsTables), xIntersectionIndexList)
+		if len(xIntersections) > 0:
+			intersectionOfXIntersectionsTables[firstIntersectionTableKey] = xIntersections
 	return intersectionOfXIntersectionsTables
 
 def getIntFromValue(value):
@@ -1028,13 +1052,13 @@ def getIsInFilledRegionByPaths(loops, paths):
 
 def getIsRadianClose(firstRadian, secondRadian):
 	'Determine if the firstRadian is close to the secondRadian.'
-	return abs(math.pi - abs(math.pi - ((firstRadian - secondRadian) % (math.pi + math.pi) ))) < 0.000001
+	return abs(math.pi - abs(math.pi - ((firstRadian - secondRadian) % (math.pi + math.pi)))) < 0.000001
 
-def getIsWiddershinsByVector3( polygon ):
+def getIsWiddershinsByVector3(polygon):
 	'Determine if the polygon goes round in the widdershins direction.'
-	return isWiddershins( getComplexPath( polygon ) )
+	return isWiddershins(getComplexPath(polygon))
 
-def getJoinOfXIntersectionIndexes( xIntersectionIndexList ):
+def getJoinOfXIntersectionIndexes(xIntersectionIndexList):
 	'Get joined x intersections from surrounding layers.'
 	xIntersections = []
 	solidTable = {}
@@ -1052,10 +1076,10 @@ def getLargestLoop(loops):
 	'Get largest loop from loops.'
 	if len(loops) == 1:
 		return loops[0]
-	largestArea = - 987654321.0
+	largestArea = -987654321.0
 	largestLoop = []
 	for loop in loops:
-		loopArea = abs( getAreaLoop(loop) )
+		loopArea = abs(getAreaLoop(loop))
 		if loopArea > largestArea:
 			largestArea = loopArea
 			largestLoop = loop
@@ -1076,12 +1100,12 @@ def getLeftPointIndex(points):
 	if len(points) < 1:
 		return None
 	leftPointIndex = 0
-	for pointIndex in xrange( len(points) ):
+	for pointIndex in xrange(len(points)):
 		if points[pointIndex].real < points[ leftPointIndex ].real:
 			leftPointIndex = pointIndex
 	return leftPointIndex
 
-def getListTableElements( listDictionary ):
+def getListTableElements(listDictionary):
 	'Get all the element in a list table.'
 	listDictionaryElements = []
 	for listDictionaryValue in listDictionary.values():
@@ -1092,11 +1116,11 @@ def getLoopCentroid(polygonComplex):
 	'Get the area of a complex polygon using http://en.wikipedia.org/wiki/Centroid.'
 	polygonDoubleArea = 0.0
 	polygonTorque = 0.0
-	for pointIndex in xrange( len(polygonComplex) ):
+	for pointIndex in xrange(len(polygonComplex)):
 		pointBegin = polygonComplex[pointIndex]
-		pointEnd  = polygonComplex[ (pointIndex + 1) % len(polygonComplex) ]
+		pointEnd = polygonComplex[ (pointIndex + 1) % len(polygonComplex) ]
 		doubleArea = pointBegin.real * pointEnd.imag - pointEnd.real * pointBegin.imag
-		doubleCenter = complex( pointBegin.real + pointEnd.real, pointBegin.imag + pointEnd.imag )
+		doubleCenter = complex(pointBegin.real + pointEnd.real, pointBegin.imag + pointEnd.imag)
 		polygonDoubleArea += doubleArea
 		polygonTorque += doubleArea * doubleCenter
 	torqueMultiplier = 0.333333333333333333333333 / polygonDoubleArea
@@ -1129,7 +1153,7 @@ def getLoopConvex(points):
 			nextSegment = getNormalized(point - lastPoint)
 			if abs(nextSegment) > 0.0:
 				dotProduct = getDotProduct(nextSegment, lastSegment)
-				if dotProduct >= greatestDotProduct:
+				if dotProduct > greatestDotProduct:
 					greatestDotProduct = dotProduct
 					greatestPoint = point
 					greatestSegment = nextSegment
@@ -1143,23 +1167,23 @@ def getLoopConvex(points):
 
 def getLoopConvexCentroid(polygonComplex):
 	'Get centroid of the convex hull of a complex polygon.'
-	return getLoopCentroid( getLoopConvex(polygonComplex) )
+	return getLoopCentroid(getLoopConvex(polygonComplex))
 
-def getLoopInsideContainingLoop( containingLoop, loops ):
+def getLoopInsideContainingLoop(containingLoop, loops):
 	'Get a loop that is inside the containing loop.'
 	for loop in loops:
 		if loop != containingLoop:
-			if isPathInsideLoop( containingLoop, loop ):
+			if isPathInsideLoop(containingLoop, loop):
 				return loop
 	return None
 
-def getLoopLength( polygon ):
+def getLoopLength(polygon):
 	'Get the length of a polygon perimeter.'
 	polygonLength = 0.0
-	for pointIndex in xrange( len( polygon ) ):
+	for pointIndex in xrange(len(polygon)):
 		point = polygon[pointIndex]
-		secondPoint  = polygon[ (pointIndex + 1) % len( polygon ) ]
-		polygonLength += abs( point - secondPoint )
+		secondPoint = polygon[ (pointIndex + 1) % len(polygon) ]
+		polygonLength += abs(point - secondPoint)
 	return polygonLength
 
 def getLoopStartingNearest(extrusionHalfWidth, location, loop):
@@ -1179,7 +1203,7 @@ def getLoopWithoutCloseEnds(close, loop):
 		return loop
 	if abs(loop[0] - loop[-1]) > close:
 		return loop
-	return loop[: -1]
+	return loop[:-1]
 
 def getLoopWithoutCloseSequentialPoints(close, loop):
 	'Get loop without close sequential points.'
@@ -1276,20 +1300,20 @@ def getMirrorPath(path):
 			path.append(flipPoint)
 	return path
 
-def getNearestDistanceIndex( point, loop ):
+def getNearestDistanceIndex(point, loop):
 	'Get the distance squared to the nearest segment of the loop and index of that segment.'
 	smallestDistance = 987654321987654321.0
 	nearestDistanceIndex = None
 	for pointIndex in xrange(len(loop)):
 		segmentBegin = loop[pointIndex]
 		segmentEnd = loop[(pointIndex + 1) % len(loop)]
-		distance = getDistanceToPlaneSegment( segmentBegin, segmentEnd, point )
+		distance = getDistanceToPlaneSegment(segmentBegin, segmentEnd, point)
 		if distance < smallestDistance:
 			smallestDistance = distance
-			nearestDistanceIndex = DistanceIndex( distance, pointIndex )
+			nearestDistanceIndex = DistanceIndex(distance, pointIndex)
 	return nearestDistanceIndex
 
-def getNearestPointOnSegment( segmentBegin, segmentEnd, point ):
+def getNearestPointOnSegment(segmentBegin, segmentEnd, point):
 	'Get the nearest point on the segment.'
 	segmentDifference = segmentEnd - segmentBegin
 	if abs(segmentDifference) <= 0.0:
@@ -1317,9 +1341,9 @@ def getNormalByPath(path):
 		totalNormal += getNormalWeighted(point, center, end)
 	return totalNormal.getNormalized()
 
-def getNormalized( complexNumber ):
+def getNormalized(complexNumber):
 	'Get the normalized complex.'
-	complexNumberLength = abs( complexNumber )
+	complexNumberLength = abs(complexNumber)
 	if complexNumberLength > 0.0:
 		return complexNumber / complexNumberLength
 	return complexNumber
@@ -1331,6 +1355,7 @@ def getNormalWeighted(begin, center, end):
 def getNumberOfIntersectionsToLeft(loop, point):
 	'Get the number of intersections through the loop for the line going left.'
 	numberOfIntersectionsToLeft = 0
+	#print "loop", loop
 	for pointIndex in xrange(len(loop)):
 		firstPointComplex = loop[pointIndex]
 		secondPointComplex = loop[(pointIndex + 1) % len(loop)]
@@ -1376,16 +1401,16 @@ def getPathCopy(path):
 def getPathLength(path):
 	'Get the length of a path ( an open polyline ).'
 	pathLength = 0.0
-	for pointIndex in xrange( len(path) - 1 ):
+	for pointIndex in xrange(len(path) - 1):
 		firstPoint = path[pointIndex]
-		secondPoint  = path[pointIndex + 1]
+		secondPoint = path[pointIndex + 1]
 		pathLength += abs(firstPoint - secondPoint)
 	return pathLength
 
 def getPathsFromEndpoints(endpoints, maximumConnectionLength, pixelDictionary, width):
 	'Get paths from endpoints.'
 	if len(endpoints) < 2:
-		return [[]]
+		return []
 	endpoints = endpoints[:] # so that the first two endpoints aren't removed when used again
 	for beginningEndpoint in endpoints[: : 2]:
 		beginningPoint = beginningEndpoint.point
@@ -1412,7 +1437,7 @@ def getPathsFromEndpoints(endpoints, maximumConnectionLength, pixelDictionary, w
 	while len(endpointTable) > 0:
 		if len(endpointTable) == 1:
 			if len(endpointTable.values()[0]) < 2:
-				return
+				return []
 		endpoints = getSquareValuesFromPoint(endpointTable, otherEndpoint.point * oneOverEndpointWidth)
 		nextEndpoint = otherEndpoint.getNearestMiss(endpoints, path, pixelDictionary, width)
 		if nextEndpoint == None:
@@ -1437,16 +1462,19 @@ def getPathsFromEndpoints(endpoints, maximumConnectionLength, pixelDictionary, w
 		removeElementFromPixelListFromPoint(otherEndpoint, endpointTable, otherEndpoint.point * oneOverEndpointWidth)
 	return paths
 
-def getPlaneDot( vec3First, vec3Second ):
+def getPlaneDot(vec3First, vec3Second):
 	'Get the dot product of the x and y components of a pair of Vector3s.'
 	return vec3First.x * vec3Second.x + vec3First.y * vec3Second.y
 
-def getPluralString( number, suffix ):
+def getPluralString(number, suffix):
 	'Get the plural string.'
 	if number == 1:
 		return '1 %s' % suffix
-	return '%s %ss' % ( number, suffix )
+	return '%s %ss' % (number, suffix)
 
+def getPointPlusSegmentWithLength( length, point, segment ):
+	'Get point plus a segment scaled to a given length.'
+	return segment * length / abs(segment) + point
 def getPointsByHorizontalDictionary(width, xIntersectionsDictionary):
 	'Get points from the horizontalXIntersectionsDictionary.'
 	points = []
@@ -1467,14 +1495,18 @@ def getPointsByVerticalDictionary(width, xIntersectionsDictionary):
 			points.append(complex(xIntersectionsDictionaryKey * width, xIntersection))
 	return points
 
-def getPointsRoundZAxis( planeAngle, points ):
+def getRadiusArealizedMultiplier(sides):
+	'Get the radius multiplier for a polygon of equal area.'
+	return math.sqrt(globalTau / sides / math.sin(globalTau / sides))
+
+def getPointsRoundZAxis(planeAngle, points):
 	'Get points rotated by the plane angle'
 	planeArray = []
 	for point in points:
-		planeArray.append( planeAngle * point )
+		planeArray.append(planeAngle * point)
 	return planeArray
 
-def getPointPlusSegmentWithLength( length, point, segment ):
+def getPointPlusSegmentWithLength(length, point, segment):
 	'Get point plus a segment scaled to a given length.'
 	return segment * length / abs(segment) + point
 
@@ -1486,6 +1518,19 @@ def getRandomComplex(begin, end):
 def getRank(width):
 	'Get the rank which is 0 at 1 and increases by three every power of ten.'
 	return int(math.floor(3.0 * math.log10(width)))
+def getRotatedComplexes(planeAngle, points):
+	'Get points rotated by the plane angle'
+	rotatedComplexes = []
+	for point in points:
+		rotatedComplexes.append(planeAngle * point)
+	return rotatedComplexes
+
+def getRotatedComplexLists(planeAngle, pointLists):
+	'Get point lists rotated by the plane angle'
+	rotatedComplexLists = []
+	for pointList in pointLists:
+		rotatedComplexLists.append(getRotatedComplexes(planeAngle, pointList))
+	return rotatedComplexLists
 
 def getRotatedWiddershinsQuarterAroundZAxis(vector3):
 	'Get Vector3 rotated a quarter widdershins turn around Z axis.'
@@ -1493,12 +1538,12 @@ def getRotatedWiddershinsQuarterAroundZAxis(vector3):
 
 def getRoundedPoint(point):
 	'Get point with each component rounded.'
-	return Vector3(round(point.x), round( point.y ), round(point.z))
+	return Vector3(round(point.x), round(point.y), round(point.z))
 
 def getRoundedToPlaces(decimalPlaces, number):
 	'Get number rounded to a number of decimal places.'
 	decimalPlacesRounded = max(1, int(round(decimalPlaces)))
-	return round(number, decimalPlacesRounded )
+	return round(number, decimalPlacesRounded)
 
 def getRoundedToPlacesString(decimalPlaces, number):
 	'Get number rounded to a number of decimal places as a string.'
@@ -1508,74 +1553,74 @@ def getRoundedToThreePlaces(number):
 	'Get number rounded to three places as a string.'
 	return str(round(number, 3))
 
-def getRoundZAxisByPlaneAngle( planeAngle, vector3 ):
+def getRoundZAxisByPlaneAngle(planeAngle, vector3):
 	'Get Vector3 rotated by a plane angle.'
-	return Vector3( vector3.x * planeAngle.real - vector3.y * planeAngle.imag, vector3.x * planeAngle.imag + vector3.y * planeAngle.real, vector3.z )
+	return Vector3(vector3.x * planeAngle.real - vector3.y * planeAngle.imag, vector3.x * planeAngle.imag + vector3.y * planeAngle.real, vector3.z)
 
-def getSegmentFromPath( path, pathIndex ):
+def getSegmentFromPath(path, pathIndex):
 	'Get endpoint segment from a path.'
 	if len(path) < 2:
 		return None
 	begin = path[-1]
 	end = path[-2]
-	forwardEndpoint = getEndpointFromPath( path, pathIndex )
+	forwardEndpoint = getEndpointFromPath(path, pathIndex)
 	reversePath = path[:]
 	reversePath.reverse()
-	reverseEndpoint = getEndpointFromPath( reversePath, pathIndex )
-	return ( forwardEndpoint, reverseEndpoint )
+	reverseEndpoint = getEndpointFromPath(reversePath, pathIndex)
+	return (forwardEndpoint, reverseEndpoint)
 
-def getSegmentFromPoints( begin, end ):
+def getSegmentFromPoints(begin, end):
 	'Get endpoint segment from a pair of points.'
 	endpointFirst = Endpoint()
-	endpointSecond = Endpoint().getFromOtherPoint( endpointFirst, end )
-	endpointFirst.getFromOtherPoint( endpointSecond, begin )
-	return ( endpointFirst, endpointSecond )
-
-def getSegmentsFromXIntersections( xIntersections, y ):
-	'Get endpoint segments from the x intersections.'
-	segments = []
-	end = len( xIntersections )
-	if len( xIntersections ) % 2 == 1:
-		end -= 1
-	for xIntersectionIndex in xrange( 0, end, 2 ):
-		firstX = xIntersections[ xIntersectionIndex ]
-		secondX = xIntersections[ xIntersectionIndex + 1 ]
-		if firstX != secondX:
-			segments.append( getSegmentFromPoints( complex( firstX, y ), complex( secondX, y ) ) )
-	return segments
+	endpointSecond = Endpoint().getFromOtherPoint(endpointFirst, end)
+	endpointFirst.getFromOtherPoint(endpointSecond, begin)
+	return (endpointFirst, endpointSecond)
 
 def getSegmentsFromXIntersectionIndexes( xIntersectionIndexList, y ):
 	'Get endpoint segments from the x intersection indexes.'
 	xIntersections = getXIntersectionsFromIntersections( xIntersectionIndexList )
 	return getSegmentsFromXIntersections( xIntersections, y )
+def getSegmentsFromXIntersections(xIntersections, y):
+	'Get endpoint segments from the x intersections.'
+	segments = []
+	end = len(xIntersections)
+	if len(xIntersections) % 2 == 1:
+		end -= 1
+	for xIntersectionIndex in xrange(0, end, 2):
+		firstX = xIntersections[ xIntersectionIndex ]
+		secondX = xIntersections[ xIntersectionIndex + 1 ]
+		if firstX != secondX:
+			segments.append(getSegmentFromPoints(complex(firstX, y), complex(secondX, y)))
+	return segments
 
-def getSimplifiedLoop( loop, radius ):
+
+def getSimplifiedLoop(loop, radius):
 	'Get loop with points inside the channel removed.'
 	if len(loop) < 2:
 		return loop
 	simplificationMultiplication = 256
-	simplificationRadius = radius / float( simplificationMultiplication )
+	simplificationRadius = radius / float(simplificationMultiplication)
 	maximumIndex = len(loop) * simplificationMultiplication
 	pointIndex = 1
 	while pointIndex < maximumIndex:
 		oldLoopLength = len(loop)
-		loop = getHalfSimplifiedLoop( loop, simplificationRadius, 0 )
-		loop = getHalfSimplifiedLoop( loop, simplificationRadius, 1 )
+		loop = getHalfSimplifiedLoop(loop, simplificationRadius, 0)
+		loop = getHalfSimplifiedLoop(loop, simplificationRadius, 1)
 		simplificationRadius += simplificationRadius
 		if oldLoopLength == len(loop):
 			if simplificationRadius > radius:
-				return getAwayPoints( loop, radius )
+				return getAwayPoints(loop, radius)
 			else:
 				simplificationRadius *= 1.5
-		simplificationRadius = min( simplificationRadius, radius )
+		simplificationRadius = min(simplificationRadius, radius)
 		pointIndex += pointIndex
-	return getAwayPoints( loop, radius )
+	return getAwayPoints(loop, radius)
 
-def getSimplifiedLoops( loops, radius ):
+def getSimplifiedLoops(loops, radius):
 	'Get the simplified loops.'
 	simplifiedLoops = []
 	for loop in loops:
-		simplifiedLoops.append( getSimplifiedLoop( loop, radius ) )
+		simplifiedLoops.append(getSimplifiedLoop(loop, radius))
 	return simplifiedLoops
 
 def getSimplifiedPath(path, radius):
@@ -1593,20 +1638,19 @@ def getSimplifiedPath(path, radius):
 		simplificationRadius += simplificationRadius
 		if oldPathLength == len(path):
 			if simplificationRadius > radius:
-				return getAwayPoints(path, radius)
+				return getAwayPath(path, radius)
 			else:
 				simplificationRadius *= 1.5
 		simplificationRadius = min(simplificationRadius, radius)
 		pointIndex += pointIndex
-	return getAwayPoints(path, radius)
+	return getAwayPath(path, radius)
 
-def getSquareIsOccupied( pixelDictionary, x, y ):
+def getSquareIsOccupied(pixelDictionary, x, y):
 	'Determine if a square around the x and y pixel coordinates is occupied.'
 	squareValues = []
 	for xStep in xrange(x - 1, x + 2):
 		for yStep in xrange(y - 1, y + 2):
-			stepKey = (xStep, yStep)
-			if stepKey in pixelDictionary:
+			if (xStep, yStep) in pixelDictionary:
 				return True
 	return False
 
@@ -1616,7 +1660,7 @@ def getSquareLoopWiddershins(beginComplex, endComplex):
 	loop.append(complex(beginComplex.real, endComplex.imag))
 	return loop
 
-def getSquareValues( pixelDictionary, x, y ):
+def getSquareValues(pixelDictionary, x, y):
 	'Get a list of the values in a square around the x and y pixel coordinates.'
 	squareValues = []
 	for xStep in xrange(x - 1, x + 2):
@@ -1626,7 +1670,7 @@ def getSquareValues( pixelDictionary, x, y ):
 				squareValues += pixelDictionary[ stepKey ]
 	return squareValues
 
-def getSquareValuesFromPoint( pixelDictionary, point ):
+def getSquareValuesFromPoint(pixelDictionary, point):
 	'Get a list of the values in a square around the point.'
 	return getSquareValues(pixelDictionary, int(round(point.real)), int(round(point.imag)))
 
@@ -1638,10 +1682,10 @@ def getThreeSignificantFigures(number):
 	'Get number rounded to three significant figures as a string.'
 	absoluteNumber = abs(number)
 	if absoluteNumber >= 10.0:
-		return getRoundedToPlacesString( 1, number )
+		return getRoundedToPlacesString(1, number)
 	if absoluteNumber < 0.000000001:
-		return getRoundedToPlacesString( 12, number )
-	return getRoundedToPlacesString( 1 - math.floor( math.log10( absoluteNumber ) ), number )
+		return getRoundedToPlacesString(12, number)
+	return getRoundedToPlacesString(1 - math.floor(math.log10(absoluteNumber)), number)
 
 def getTopPath(path):
 	'Get the top of the path.'
@@ -1658,38 +1702,40 @@ def getTopPaths(paths):
 			top = max(top, point.z)
 	return top
 
-def getTransferClosestSurroundingLoop(extrusionHalfWidth, nestedRings, oldOrderedLocation, skein, threadSequence):
+def getTransferClosestSurroundingLoop(extrusionHalfWidth, nestedRings, oldOrderedLocation, threadSequence):
 	'Get and transfer the closest remaining surrounding loop.'
 	if len(nestedRings) > 0:
 		oldOrderedLocation.z = nestedRings[0].z
 	closestDistance = 987654321987654321.0
-	closestSurroundingLoop = None
-	for remainingSurroundingLoop in nestedRings:
-		distance = getNearestDistanceIndex(oldOrderedLocation.dropAxis(), remainingSurroundingLoop.boundary).distance
+	closestNestedRing = None
+	for nestedRing in nestedRings:
+		distance = getNearestDistanceIndex(oldOrderedLocation.dropAxis(), nestedRing.getXYBoundaries()).distance
 		if distance < closestDistance:
 			closestDistance = distance
-			closestSurroundingLoop = remainingSurroundingLoop
-	nestedRings.remove(closestSurroundingLoop)
-	closestSurroundingLoop.addToThreads(extrusionHalfWidth, oldOrderedLocation, skein, threadSequence)
-	return closestSurroundingLoop
+			closestNestedRing = nestedRing
+	print "closestNestedRing",closestNestedRing
+	#Needed???
+	#nestedRings.remove(closestNestedRing)
+	closestNestedRing.addToThreads(extrusionHalfWidth, oldOrderedLocation, threadSequence)
+	return closestNestedRing
 
-def getTransferredPaths( insides, loop ):
+def getTransferredPaths(insides, loop):
 	'Get transferred paths from inside paths.'
 	transferredPaths = []
-	for insideIndex in xrange( len( insides ) - 1, - 1, - 1 ):
+	for insideIndex in xrange(len(insides) - 1, -1, -1):
 		inside = insides[ insideIndex ]
-		if isPathInsideLoop( loop, inside ):
-			transferredPaths.append( inside )
+		if isPathInsideLoop(loop, inside):
+			transferredPaths.append(inside)
 			del insides[ insideIndex ]
 	return transferredPaths
 
-def getTransferredSurroundingLoops( insides, loop ):
+def getTransferredSurroundingLoops(insides, loop):
 	'Get transferred paths from inside surrounding loops.'
 	transferredSurroundings = []
-	for insideIndex in xrange( len( insides ) - 1, - 1, - 1 ):
+	for insideIndex in xrange(len(insides) - 1, -1, -1):
 		insideSurrounding = insides[ insideIndex ]
-		if isPathInsideLoop( loop, insideSurrounding.boundary ):
-			transferredSurroundings.append( insideSurrounding )
+		if isPathInsideLoop(loop, insideSurrounding.boundary):
+			transferredSurroundings.append(insideSurrounding)
 			del insides[ insideIndex ]
 	return transferredSurroundings
 
@@ -1718,14 +1764,14 @@ def getWiddershinsUnitPolar(angle):
 	'Get polar complex from counterclockwise angle from 1, 0.'
 	return complex(math.cos(angle), math.sin(angle))
 
-def getXIntersectionIfExists( beginComplex, endComplex, y ):
+def getXIntersectionIfExists(beginComplex, endComplex, y):
 	'Get the x intersection if it exists.'
-	if ( y > beginComplex.imag ) == ( y > endComplex.imag ):
+	if (y > beginComplex.imag) == (y > endComplex.imag):
 		return None
 	endMinusBeginComplex = endComplex - beginComplex
-	return ( y - beginComplex.imag ) / endMinusBeginComplex.imag * endMinusBeginComplex.real + beginComplex.real
+	return (y - beginComplex.imag) / endMinusBeginComplex.imag * endMinusBeginComplex.real + beginComplex.real
 
-def getXIntersectionsFromIntersections( xIntersectionIndexList ):
+def getXIntersectionsFromIntersections(xIntersectionIndexList):
 	'Get x intersections from the x intersection index list, in other words subtract non negative intersections from negatives.'
 	xIntersections = []
 	fill = False
@@ -1734,13 +1780,13 @@ def getXIntersectionsFromIntersections( xIntersectionIndexList ):
 	xIntersectionIndexList.sort()
 	for solidX in xIntersectionIndexList:
 		if solidX.index >= 0:
-			toggleHashtable( solidTable, solidX.index, '' )
+			toggleHashtable(solidTable, solidX.index, '')
 		else:
 			fill = not fill
 		oldSolid = solid
-		solid = ( len( solidTable ) == 0 and fill )
+		solid = (len(solidTable) == 0 and fill)
 		if oldSolid != solid:
-			xIntersections.append( solidX.x )
+			xIntersections.append(solidX.x)
 	return xIntersections
 
 def getXYComplexFromVector3(vector3):
@@ -1749,88 +1795,89 @@ def getXYComplexFromVector3(vector3):
 		return None
 	return vector3.dropAxis()
 
-def getYIntersectionIfExists( beginComplex, endComplex, x ):
+def getYIntersectionIfExists(beginComplex, endComplex, x):
 	'Get the y intersection if it exists.'
-	if ( x > beginComplex.real ) == ( x > endComplex.real ):
+	if (x > beginComplex.real) == (x > endComplex.real):
 		return None
 	endMinusBeginComplex = endComplex - beginComplex
-	return ( x - beginComplex.real ) / endMinusBeginComplex.real * endMinusBeginComplex.imag + beginComplex.imag
+	return (x - beginComplex.real) / endMinusBeginComplex.real * endMinusBeginComplex.imag + beginComplex.imag
 
-def getZComponentCrossProduct( vec3First, vec3Second ):
+def getZComponentCrossProduct(vec3First, vec3Second):
 	'Get z component cross product of a pair of Vector3s.'
 	return vec3First.x * vec3Second.y - vec3First.y * vec3Second.x
 
-def isInsideOtherLoops( loopIndex, loops ):
+def isInsideOtherLoops(loopIndex, loops):
 	'Determine if a loop in a list is inside another loop in that list.'
-	return isPathInsideLoops( loops[ : loopIndex ] + loops[loopIndex + 1 :], loops[loopIndex] )
+	return isPathInsideLoops(loops[ : loopIndex ] + loops[loopIndex + 1 :], loops[loopIndex])
 
-def isLineIntersectingInsideXSegment( beginComplex, endComplex, segmentFirstX, segmentSecondX, y ):
+def isLineIntersectingInsideXSegment(beginComplex, endComplex, segmentFirstX, segmentSecondX, y):
 	'Determine if the line is crossing inside the x segment.'
-	xIntersection = getXIntersectionIfExists( beginComplex, endComplex, y )
+	xIntersection = getXIntersectionIfExists(beginComplex, endComplex, y)
 	if xIntersection == None:
 		return False
-	if xIntersection < min( segmentFirstX, segmentSecondX ):
+	if xIntersection < min(segmentFirstX, segmentSecondX):
 		return False
-	return xIntersection <= max( segmentFirstX, segmentSecondX )
+	return xIntersection <= max(segmentFirstX, segmentSecondX)
 
-def isLineIntersectingLoop( loop, pointBegin, pointEnd ):
+def isLineIntersectingLoop(loop, pointBegin, pointEnd):
 	'Determine if the line is intersecting loops.'
 	normalizedSegment = pointEnd - pointBegin
-	normalizedSegmentLength = abs( normalizedSegment )
+	normalizedSegmentLength = abs(normalizedSegment)
 	if normalizedSegmentLength > 0.0:
 		normalizedSegment /= normalizedSegmentLength
 		segmentYMirror = complex(normalizedSegment.real, -normalizedSegment.imag)
 		pointBeginRotated = segmentYMirror * pointBegin
 		pointEndRotated = segmentYMirror * pointEnd
-		if isLoopIntersectingInsideXSegment( loop, pointBeginRotated.real, pointEndRotated.real, segmentYMirror, pointBeginRotated.imag ):
+		if isLoopIntersectingInsideXSegment(loop, pointBeginRotated.real, pointEndRotated.real, segmentYMirror, pointBeginRotated.imag):
 			return True
 	return False
 
-def isLineIntersectingLoops( loops, pointBegin, pointEnd ):
+def isLineIntersectingLoops(loops, pointBegin, pointEnd):
 	'Determine if the line is intersecting loops.'
 	normalizedSegment = pointEnd - pointBegin
-	normalizedSegmentLength = abs( normalizedSegment )
+	normalizedSegmentLength = abs(normalizedSegment)
 	if normalizedSegmentLength > 0.0:
 		normalizedSegment /= normalizedSegmentLength
 		segmentYMirror = complex(normalizedSegment.real, -normalizedSegment.imag)
 		pointBeginRotated = segmentYMirror * pointBegin
 		pointEndRotated = segmentYMirror * pointEnd
-		if isLoopListIntersectingInsideXSegment( loops, pointBeginRotated.real, pointEndRotated.real, segmentYMirror, pointBeginRotated.imag ):
+		if isLoopListIntersectingInsideXSegment(loops, pointBeginRotated.real, pointEndRotated.real, segmentYMirror, pointBeginRotated.imag):
 			return True
 	return False
 
-def isLoopIntersectingInsideXSegment( loop, segmentFirstX, segmentSecondX, segmentYMirror, y ):
+def isLoopIntersectingInsideXSegment(loop, segmentFirstX, segmentSecondX, segmentYMirror, y):
 	'Determine if the loop is intersecting inside the x segment.'
-	rotatedLoop = getPointsRoundZAxis( segmentYMirror, loop )
-	for pointIndex in xrange( len( rotatedLoop ) ):
+	rotatedLoop = getRotatedComplexes( segmentYMirror, loop )
+	
+	for pointIndex in xrange(len(rotatedLoop)):
 		pointFirst = rotatedLoop[pointIndex]
-		pointSecond = rotatedLoop[ (pointIndex + 1) % len( rotatedLoop ) ]
-		if isLineIntersectingInsideXSegment( pointFirst, pointSecond, segmentFirstX, segmentSecondX, y ):
+		pointSecond = rotatedLoop[ (pointIndex + 1) % len(rotatedLoop) ]
+		if isLineIntersectingInsideXSegment(pointFirst, pointSecond, segmentFirstX, segmentSecondX, y):
 			return True
 	return False
 
-def isLoopIntersectingLoop( loop, otherLoop ):
+def isLoopIntersectingLoop(loop, otherLoop):
 	'Determine if the loop is intersecting the other loop.'
 	for pointIndex in xrange(len(loop)):
 		pointBegin = loop[pointIndex]
 		pointEnd = loop[(pointIndex + 1) % len(loop)]
-		if isLineIntersectingLoop( otherLoop, pointBegin, pointEnd ):
+		if isLineIntersectingLoop(otherLoop, pointBegin, pointEnd):
 			return True
 	return False
 
-def isLoopIntersectingLoops( loop, otherLoops ):
+def isLoopIntersectingLoops(loop, otherLoops):
 	'Determine if the loop is intersecting other loops.'
 	for pointIndex in xrange(len(loop)):
 		pointBegin = loop[pointIndex]
 		pointEnd = loop[(pointIndex + 1) % len(loop)]
-		if isLineIntersectingLoops( otherLoops, pointBegin, pointEnd ):
+		if isLineIntersectingLoops(otherLoops, pointBegin, pointEnd):
 			return True
 	return False
 
-def isLoopListIntersectingInsideXSegment( loopList, segmentFirstX, segmentSecondX, segmentYMirror, y ):
+def isLoopListIntersectingInsideXSegment(loopList, segmentFirstX, segmentSecondX, segmentYMirror, y):
 	'Determine if the loop list is crossing inside the x segment.'
 	for alreadyFilledLoop in loopList:
-		if isLoopIntersectingInsideXSegment( alreadyFilledLoop, segmentFirstX, segmentSecondX, segmentYMirror, y ):
+		if isLoopIntersectingInsideXSegment(alreadyFilledLoop, segmentFirstX, segmentSecondX, segmentYMirror, y):
 			return True
 	return False
 
@@ -1867,7 +1914,7 @@ def isPathInsideLoops(loops, path):
 			return True
 	return False
 
-def isPixelTableIntersecting( bigTable, littleTable, maskTable = {} ):
+def isPixelTableIntersecting(bigTable, littleTable, maskTable={}):
 	'Add path to the pixel table.'
 	littleTableKeys = littleTable.keys()
 	for littleTableKey in littleTableKeys:
@@ -1880,54 +1927,54 @@ def isPointInsideLoop(loop, point):
 	'Determine if a point is inside another loop.'
 	return getNumberOfIntersectionsToLeft(loop, point) % 2 == 1
 
-def isSegmentCompletelyInX( segment, xFirst, xSecond ):
+def isSegmentCompletelyInX(segment, xFirst, xSecond):
 	'Determine if the segment overlaps within x.'
 	segmentFirstX = segment[0].point.real
 	segmentSecondX = segment[1].point.real
-	if max( segmentFirstX, segmentSecondX ) > max( xFirst, xSecond ):
+	if max(segmentFirstX, segmentSecondX) > max(xFirst, xSecond):
 		return False
-	return min( segmentFirstX, segmentSecondX ) >= min( xFirst, xSecond )
+	return min(segmentFirstX, segmentSecondX) >= min(xFirst, xSecond)
 
 def isWiddershins(polygonComplex):
 	'Determine if the complex polygon goes round in the widdershins direction.'
 	return getAreaLoop(polygonComplex) > 0.0
 
-def isWithinChannel( channelRadius, pointIndex, loop ):
+def isWithinChannel(channelRadius, pointIndex, loop):
 	'Determine if the the point is within the channel between two adjacent points.'
 	point = loop[pointIndex]
 	behindSegmentComplex = loop[(pointIndex + len(loop) - 1) % len(loop)] - point
-	behindSegmentComplexLength = abs( behindSegmentComplex )
+	behindSegmentComplexLength = abs(behindSegmentComplex)
 	if behindSegmentComplexLength < channelRadius:
 		return True
 	aheadSegmentComplex = loop[(pointIndex + 1) % len(loop)] - point
-	aheadSegmentComplexLength = abs( aheadSegmentComplex )
+	aheadSegmentComplexLength = abs(aheadSegmentComplex)
 	if aheadSegmentComplexLength < channelRadius:
 		return True
 	behindSegmentComplex /= behindSegmentComplexLength
 	aheadSegmentComplex /= aheadSegmentComplexLength
-	absoluteZ = getDotProductPlusOne( aheadSegmentComplex, behindSegmentComplex )
+	absoluteZ = getDotProductPlusOne(aheadSegmentComplex, behindSegmentComplex)
 	if behindSegmentComplexLength * absoluteZ < channelRadius:
 		return True
 	return aheadSegmentComplexLength * absoluteZ < channelRadius
 
-def isXSegmentIntersectingPath( path, segmentFirstX, segmentSecondX, segmentYMirror, y ):
+def isXSegmentIntersectingPath(path, segmentFirstX, segmentSecondX, segmentYMirror, y):
 	'Determine if a path is crossing inside the x segment.'
-	rotatedPath = getPointsRoundZAxis( segmentYMirror, path )
-	for pointIndex in xrange( len( rotatedPath ) - 1 ):
+	rotatedPath = getRotatedComplexes( segmentYMirror, path )
+	for pointIndex in xrange(len(rotatedPath) - 1):
 		pointFirst = rotatedPath[pointIndex]
 		pointSecond = rotatedPath[pointIndex + 1]
-		if isLineIntersectingInsideXSegment( pointFirst, pointSecond, segmentFirstX, segmentSecondX, y ):
+		if isLineIntersectingInsideXSegment(pointFirst, pointSecond, segmentFirstX, segmentSecondX, y):
 			return True
 	return False
 
-def isXSegmentIntersectingPaths( paths, segmentFirstX, segmentSecondX, segmentYMirror, y ):
+def isXSegmentIntersectingPaths(paths, segmentFirstX, segmentSecondX, segmentYMirror, y):
 	'Determine if a path list is crossing inside the x segment.'
 	for path in paths:
-		if isXSegmentIntersectingPath( path, segmentFirstX, segmentSecondX, segmentYMirror, y ):
+		if isXSegmentIntersectingPath(path, segmentFirstX, segmentSecondX, segmentYMirror, y):
 			return True
 	return False
 
-def joinSegmentTables( fromTable, intoTable ):
+def joinSegmentTables(fromTable, intoTable):
 	'Join both segment tables and put the join into the intoTable.'
 	intoTableKeys = intoTable.keys()
 	fromTableKeys = fromTable.keys()
@@ -1940,17 +1987,17 @@ def joinSegmentTables( fromTable, intoTable ):
 	for joinedKey in joinedKeys:
 		xIntersectionIndexList = []
 		if joinedKey in intoTable:
-			addXIntersectionIndexesFromSegments( 0, intoTable[ joinedKey ], xIntersectionIndexList )
+			addXIntersectionIndexesFromSegments(0, intoTable[ joinedKey ], xIntersectionIndexList)
 		if joinedKey in fromTable:
-			addXIntersectionIndexesFromSegments( 1, fromTable[ joinedKey ], xIntersectionIndexList )
-		xIntersections = getJoinOfXIntersectionIndexes( xIntersectionIndexList )
-		lineSegments = getSegmentsFromXIntersections( xIntersections, joinedKey )
-		if len( lineSegments ) > 0:
+			addXIntersectionIndexesFromSegments(1, fromTable[ joinedKey ], xIntersectionIndexList)
+		xIntersections = getJoinOfXIntersectionIndexes(xIntersectionIndexList)
+		lineSegments = getSegmentsFromXIntersections(xIntersections, joinedKey)
+		if len(lineSegments) > 0:
 			intoTable[ joinedKey ] = lineSegments
 		else:
 			print('This should never happen, there are no line segments in joinSegments in euclidean')
 
-def joinXIntersectionsTables( fromTable, intoTable ):
+def joinXIntersectionsTables(fromTable, intoTable):
 	'Join both XIntersections tables and put the join into the intoTable.'
 	joinedKeyTable = {}
 	concatenatedTableKeys = fromTable.keys() + intoTable.keys()
@@ -1959,11 +2006,11 @@ def joinXIntersectionsTables( fromTable, intoTable ):
 	for joinedKey in joinedKeyTable.keys():
 		xIntersectionIndexList = []
 		if joinedKey in intoTable:
-			addXIntersectionIndexesFromXIntersections( 0, xIntersectionIndexList, intoTable[ joinedKey ] )
+			addXIntersectionIndexesFromXIntersections(0, xIntersectionIndexList, intoTable[ joinedKey ])
 		if joinedKey in fromTable:
-			addXIntersectionIndexesFromXIntersections( 1, xIntersectionIndexList, fromTable[ joinedKey ] )
-		xIntersections = getJoinOfXIntersectionIndexes( xIntersectionIndexList )
-		if len( xIntersections ) > 0:
+			addXIntersectionIndexesFromXIntersections(1, xIntersectionIndexList, fromTable[ joinedKey ])
+		xIntersections = getJoinOfXIntersectionIndexes(xIntersectionIndexList)
+		if len(xIntersections) > 0:
 			intoTable[ joinedKey ] = xIntersections
 		else:
 			print('This should never happen, there are no line segments in joinSegments in euclidean')
@@ -1984,31 +2031,31 @@ def removeElementFromListTable(element, key, listDictionary):
 	if key not in listDictionary:
 		return
 	elementList = listDictionary[key]
-	if len( elementList ) < 2:
+	if len(elementList) < 2:
 		del listDictionary[key]
 		return
 	if element in elementList:
 		elementList.remove(element)
 
-def removeElementFromPixelListFromPoint( element, pixelDictionary, point ):
+def removeElementFromPixelListFromPoint(element, pixelDictionary, point):
 	'Remove an element from the pixel list.'
 	stepKey = getStepKeyFromPoint(point)
-	removeElementFromListTable( element, stepKey, pixelDictionary )
+	removeElementFromListTable(element, stepKey, pixelDictionary)
 
 def removeElementsFromDictionary(dictionary, keys):
 	'Remove list from the dictionary.'
 	for key in keys:
 		removeElementFromDictionary(dictionary, key)
 
-def removePrefixFromDictionary( dictionary, prefix ):
+def removePrefixFromDictionary(dictionary, prefix):
 	'Remove the attributes starting with the prefix from the dictionary.'
 	for key in dictionary.keys():
-		if key.startswith( prefix ):
+		if key.startswith(prefix):
 			del dictionary[key]
 
-def removePixelTableFromPixelTable( pixelDictionaryToBeRemoved, pixelDictionaryToBeRemovedFrom ):
+def removePixelTableFromPixelTable(pixelDictionaryToBeRemoved, pixelDictionaryToBeRemovedFrom):
 	'Remove pixel from the pixel table.'
-	removeElementsFromDictionary( pixelDictionaryToBeRemovedFrom, pixelDictionaryToBeRemoved.keys() )
+	removeElementsFromDictionary(pixelDictionaryToBeRemovedFrom, pixelDictionaryToBeRemoved.keys())
 
 def removeTrueFromDictionary(dictionary, key):
 	'Remove key from the dictionary in the value is true.'
@@ -2016,38 +2063,38 @@ def removeTrueFromDictionary(dictionary, key):
 		if getBooleanFromValue(dictionary[key]):
 			del dictionary[key]
 
-def removeTrueListFromDictionary( dictionary, keys ):
+def removeTrueListFromDictionary(dictionary, keys):
 	'Remove list from the dictionary in the value is true.'
 	for key in keys:
-		removeTrueFromDictionary( dictionary, key )
+		removeTrueFromDictionary(dictionary, key)
 
-def subtractXIntersectionsTable( subtractFromTable, subtractTable ):
+def subtractXIntersectionsTable(subtractFromTable, subtractTable):
 	'Subtract the subtractTable from the subtractFromTable.'
 	subtractFromTableKeys = subtractFromTable.keys()
 	subtractFromTableKeys.sort()
 	for subtractFromTableKey in subtractFromTableKeys:
 		xIntersectionIndexList = []
-		addXIntersectionIndexesFromXIntersections( - 1, xIntersectionIndexList, subtractFromTable[ subtractFromTableKey ] )
+		addXIntersectionIndexesFromXIntersections(-1, xIntersectionIndexList, subtractFromTable[ subtractFromTableKey ])
 		if subtractFromTableKey in subtractTable:
-			addXIntersectionIndexesFromXIntersections( 0, xIntersectionIndexList, subtractTable[ subtractFromTableKey ] )
-		xIntersections = getXIntersectionsFromIntersections( xIntersectionIndexList )
-		if len( xIntersections ) > 0:
+			addXIntersectionIndexesFromXIntersections(0, xIntersectionIndexList, subtractTable[ subtractFromTableKey ])
+		xIntersections = getXIntersectionsFromIntersections(xIntersectionIndexList)
+		if len(xIntersections) > 0:
 			subtractFromTable[ subtractFromTableKey ] = xIntersections
 		else:
 			del subtractFromTable[ subtractFromTableKey ]
 
-def swapList( elements, indexBegin, indexEnd ):
+def swapList(elements, indexBegin, indexEnd):
 	'Swap the list elements.'
 	elements[ indexBegin ], elements[ indexEnd ] = elements[ indexEnd ], elements[ indexBegin ]
 
-def toggleHashtable( hashtable, key, value ):
+def toggleHashtable(hashtable, key, value):
 	'Toggle a hashtable between having and not having a key.'
 	if key in hashtable:
 		del hashtable[key]
 	else:
 		hashtable[key] = value
 
-def transferClosestFillLoop(extrusionHalfWidth, oldOrderedLocation, remainingFillLoops, skein):
+def transferClosestFillLoop(extrusionHalfWidth, oldOrderedLocation, remainingFillLoops, nestedRing):
 	'Transfer the closest remaining fill loop.'
 	closestDistance = 987654321987654321.0
 	closestFillLoop = None
@@ -2061,27 +2108,27 @@ def transferClosestFillLoop(extrusionHalfWidth, oldOrderedLocation, remainingFil
 		closestFillLoop = newClosestFillLoop
 		newClosestFillLoop = getLoopInsideContainingLoop(closestFillLoop, remainingFillLoops)
 	remainingFillLoops.remove(closestFillLoop)
-	addToThreadsFromLoop(extrusionHalfWidth, 'loop', closestFillLoop[:], oldOrderedLocation, skein)
+	addToThreadsFromLoop(extrusionHalfWidth, 'loop', closestFillLoop[:], oldOrderedLocation, nestedRing)
 
-def transferClosestPath( oldOrderedLocation, remainingPaths, skein ):
+def transferClosestPath(oldOrderedLocation, remainingPaths, nestedRing):
 	'Transfer the closest remaining path.'
 	closestDistance = 987654321987654321.0
 	closestPath = None
 	oldOrderedLocationComplex = oldOrderedLocation.dropAxis()
 	for remainingPath in remainingPaths:
-		distance = min( abs( oldOrderedLocationComplex - remainingPath[0] ), abs( oldOrderedLocationComplex - remainingPath[-1] ) )
+		distance = min(abs(oldOrderedLocationComplex - remainingPath[0]), abs(oldOrderedLocationComplex - remainingPath[-1]))
 		if distance < closestDistance:
 			closestDistance = distance
 			closestPath = remainingPath
-	remainingPaths.remove( closestPath )
-	skein.addGcodeFromThreadZ( closestPath, oldOrderedLocation.z )
+	remainingPaths.remove(closestPath)
+	nestedRing.addInfillGcodeFromThread(closestPath)
 	oldOrderedLocation.x = closestPath[-1].real
 	oldOrderedLocation.y = closestPath[-1].imag
 
-def transferClosestPaths(oldOrderedLocation, remainingPaths, skein):
+def transferClosestPaths(oldOrderedLocation, remainingPaths, nestedRing):
 	'Transfer the closest remaining paths.'
 	while len(remainingPaths) > 0:
-		transferClosestPath(oldOrderedLocation, remainingPaths, skein)
+		transferClosestPath(oldOrderedLocation, remainingPaths, nestedRing)
 
 def transferPathsToSurroundingLoops(nestedRings, paths):
 	'Transfer paths to surrounding loops.'
@@ -2098,45 +2145,45 @@ def translateVector3Paths(paths, translateVector3):
 	for path in paths:
 		translateVector3Path(path, translateVector3)
 
-def unbuckleBasis( basis, maximumUnbuckling, normal ):
+def unbuckleBasis(basis, maximumUnbuckling, normal):
 	'Unbuckle space.'
-	normalDot = basis.dot( normal )
-	dotComplement = math.sqrt( 1.0 - normalDot * normalDot )
+	normalDot = basis.dot(normal)
+	dotComplement = math.sqrt(1.0 - normalDot * normalDot)
 	unbuckling = maximumUnbuckling
 	if dotComplement > 0.0:
-		unbuckling = min( 1.0 / dotComplement, maximumUnbuckling )
-	basis.setToVector3( basis * unbuckling )
+		unbuckling = min(1.0 / dotComplement, maximumUnbuckling)
+	basis.setToVector3(basis * unbuckling)
 
 
 class DistanceIndex:
 	'A class to hold the distance and the index of the loop.'
-	def __init__( self, distance, index ):
+	def __init__(self, distance, index):
 		self.distance = distance
 		self.index = index
 
 	def __repr__(self):
 		'Get the string representation of this distance index.'
-		return '%s, %s' % ( self.distance, self.index )
+		return '%s, %s' % (self.distance, self.index)
 
 
 class Endpoint:
 	'The endpoint of a segment.'
 	def __repr__(self):
 		'Get the string representation of this Endpoint.'
-		return 'Endpoint %s, %s' % ( self.point, self.otherEndpoint.point )
+		return 'Endpoint %s, %s' % (self.point, self.otherEndpoint.point)
 
-	def getFromOtherPoint( self, otherEndpoint, point ):
+	def getFromOtherPoint(self, otherEndpoint, point):
 		'Initialize from other endpoint.'
 		self.otherEndpoint = otherEndpoint
 		self.point = point
 		return self
 
-	def getNearestEndpoint( self, endpoints ):
+	def getNearestEndpoint(self, endpoints):
 		'Get nearest endpoint.'
 		smallestDistance = 987654321987654321.0
 		nearestEndpoint = None
 		for endpoint in endpoints:
-			distance = abs( self.point - endpoint.point )
+			distance = abs(self.point - endpoint.point)
 			if distance < smallestDistance:
 				smallestDistance = distance
 				nearestEndpoint = endpoint
@@ -2170,7 +2217,7 @@ class Endpoint:
 					segmentYMirror = complex(normalizedSegment.real, -normalizedSegment.imag)
 					pointRotated = segmentYMirror * self.point
 					endpointPointRotated = segmentYMirror * endpoint.point
-					if isXSegmentIntersectingPath(path[max(0, len(path) - 21) : -1], pointRotated.real, endpointPointRotated.real, segmentYMirror, pointRotated.imag):
+					if isXSegmentIntersectingPath(path[max(0, len(path) - 21) :-1], pointRotated.real, endpointPointRotated.real, segmentYMirror, pointRotated.imag):
 						isOverlappingSelf = True
 			if not isOverlappingSelf:
 				totalMaskTable = pathMaskTable.copy()
@@ -2181,14 +2228,14 @@ class Endpoint:
 					return endpoint
 		return None
 
-	def getNearestMissCheckEndpointPath( self, endpoints, path, pixelDictionary, width ):
+	def getNearestMissCheckEndpointPath(self, endpoints, path, pixelDictionary, width):
 		'Get the nearest endpoint which the segment to that endpoint misses the other extrusions, also checking the path of the endpoint.'
 		pathMaskTable = {}
 		smallestDistance = 987654321.0
 		penultimateMinusPoint = complex(0.0, 0.0)
 		if len(path) > 1:
 			penultimatePoint = path[-2]
-			addSegmentToPixelTable( penultimatePoint, self.point, pathMaskTable, 0, 0, width )
+			addSegmentToPixelTable(penultimatePoint, self.point, pathMaskTable, 0, 0, width)
 			penultimateMinusPoint = penultimatePoint - self.point
 			if abs(penultimateMinusPoint) > 0.0:
 				penultimateMinusPoint /= abs(penultimateMinusPoint)
@@ -2200,30 +2247,30 @@ class Endpoint:
 #				print( endpoint )
 #				print(path)
 				return endpoint
-		endpoints.sort( compareSegmentLength )
+		endpoints.sort(compareSegmentLength)
 		for endpoint in endpoints[ : 15 ]: # increasing the number of searched endpoints increases the search time, with 20 fill took 600 seconds for cilinder.gts, with 10 fill took 533 seconds
 			normalizedSegment = endpoint.segment / endpoint.segmentLength
-			isOverlappingSelf = getDotProduct( penultimateMinusPoint, normalizedSegment ) > 0.9
+			isOverlappingSelf = getDotProduct(penultimateMinusPoint, normalizedSegment) > 0.9
 			if not isOverlappingSelf:
 				if len(path) > 2:
 					segmentYMirror = complex(normalizedSegment.real, -normalizedSegment.imag)
 					pointRotated = segmentYMirror * self.point
 					endpointPointRotated = segmentYMirror * endpoint.point
-					if isXSegmentIntersectingPath( path[ max( 0, len(path) - 21 ) : - 1 ], pointRotated.real, endpointPointRotated.real, segmentYMirror, pointRotated.imag ):
+					if isXSegmentIntersectingPath(path[ max(0, len(path) - 21) :-1 ], pointRotated.real, endpointPointRotated.real, segmentYMirror, pointRotated.imag):
 						isOverlappingSelf = True
 				endpointPath = endpoint.path
-				if len( endpointPath ) > 2:
+				if len(endpointPath) > 2:
 					segmentYMirror = complex(normalizedSegment.real, -normalizedSegment.imag)
 					pointRotated = segmentYMirror * self.point
 					endpointPointRotated = segmentYMirror * endpoint.point
-					if isXSegmentIntersectingPath( endpointPath, pointRotated.real, endpointPointRotated.real, segmentYMirror, pointRotated.imag ):
+					if isXSegmentIntersectingPath(endpointPath, pointRotated.real, endpointPointRotated.real, segmentYMirror, pointRotated.imag):
 						isOverlappingSelf = True
 			if not isOverlappingSelf:
 				totalMaskTable = pathMaskTable.copy()
-				addSegmentToPixelTable( endpoint.point, endpoint.otherEndpoint.point, totalMaskTable, 0, 0, width )
+				addSegmentToPixelTable(endpoint.point, endpoint.otherEndpoint.point, totalMaskTable, 0, 0, width)
 				segmentTable = {}
-				addSegmentToPixelTable( self.point, endpoint.point, segmentTable, 0, 0, width )
-				if not isPixelTableIntersecting( pixelDictionary, segmentTable, totalMaskTable ):
+				addSegmentToPixelTable(self.point, endpoint.point, segmentTable, 0, 0, width)
+				if not isPixelTableIntersecting(pixelDictionary, segmentTable, totalMaskTable):
 					return endpoint
 		return None
 
@@ -2236,7 +2283,7 @@ class LoopLayer:
 
 	def __repr__(self):
 		'Get the string representation of this loop layer.'
-		return '%s, %s' % ( self.z, self.loops )
+		return '%s, %s' % (self.z, self.loops)
 
 
 class NestedRing:
@@ -2247,7 +2294,7 @@ class NestedRing:
 		self.innerNestedRings = None
 
 	def __repr__(self):
-		'Get the string representation of this surrounding loop.'
+		'Get the string representation of this nested ring.'
 		return str(self.__dict__)
 
 	def addFlattenedNestedRings(self, flattenedNestedRings):
@@ -2257,7 +2304,7 @@ class NestedRing:
 			flattenedNestedRings += getFlattenedNestedRings(innerNestedRing.innerNestedRings)
 
 	def getFromInsideSurroundings(self, inputSurroundingInsides):
-		'Initialize from inside surrounding loops.'
+		'Initialize from inside nested rings.'
 		transferredSurroundings = getTransferredSurroundingLoops(inputSurroundingInsides, self.boundary)
 		self.innerNestedRings = getOrderedNestedRings(transferredSurroundings)
 		return self
@@ -2357,15 +2404,15 @@ class NestedBand(NestedRing):
 		surroundingBoundaries = [self.boundary]
 		for nestedRing in self.innerNestedRings:
 			surroundingBoundaries.append(nestedRing.boundary)
-		#print "surroundingBoundaries",surroundingBoundaries
+		
 		return surroundingBoundaries
 
 	def transferClosestFillLoops(self, extrusionHalfWidth, oldOrderedLocation, skein, threadSequence):
 		'Transfer closest fill loops.'
-		if len( self.extraLoops ) < 1:
+		if len(self.extraLoops) < 1:
 			return
 		remainingFillLoops = self.extraLoops[:]
-		while len( remainingFillLoops ) > 0:
+		while len(remainingFillLoops) > 0:
 			transferClosestFillLoop(extrusionHalfWidth, oldOrderedLocation, remainingFillLoops, skein)
 
 	def transferInfillPaths(self, extrusionHalfWidth, oldOrderedLocation, skein, threadSequence):
@@ -2376,24 +2423,24 @@ class NestedBand(NestedRing):
 		'Transfer paths.'
 		for nestedRing in self.innerNestedRings:
 			transferPathsToSurroundingLoops(nestedRing.innerNestedRings, paths)
-		#print "transferPaths self.boundary",self.boundary
+		
 		self.infillPaths = getTransferredPaths(paths, self.boundary)
 
 
 class PathZ:
 	'Complex path with a z.'
-	def __init__( self, z ):
+	def __init__(self, z):
 		self.path = []
 		self.z = z
 
 	def __repr__(self):
 		'Get the string representation of this path z.'
-		return '%s, %s' % ( self.z, self.path )
+		return '%s, %s' % (self.z, self.path)
 
 
 class ProjectiveSpace:
 	'Class to define a projective space.'
-	def __init__( self, basisX = Vector3(1.0, 0.0, 0.0), basisY = Vector3( 0.0, 1.0, 0.0 ), basisZ = Vector3(0.0, 0.0, 1.0) ):
+	def __init__(self, basisX=Vector3(1.0, 0.0, 0.0), basisY=Vector3(0.0, 1.0, 0.0), basisZ=Vector3(0.0, 0.0, 1.0)):
 		'Initialize the basis vectors.'
 		self.basisX = basisX
 		self.basisY = basisY
@@ -2401,9 +2448,9 @@ class ProjectiveSpace:
 
 	def __repr__(self):
 		'Get the string representation of this ProjectivePlane.'
-		return '%s, %s, %s' % ( self.basisX, self.basisY, self.basisZ )
+		return '%s, %s, %s' % (self.basisX, self.basisY, self.basisZ)
 
-	def getByBasisXZ( self, basisX, basisZ ):
+	def getByBasisXZ(self, basisX, basisZ):
 		'Get by x basis x and y basis.'
 		self.basisX = basisX
 		self.basisZ = basisZ
@@ -2425,63 +2472,63 @@ class ProjectiveSpace:
 		'Get by basisZ and top.'
 		return self.getByBasisXZ(top.cross(basisZ), basisZ)
 
-	def getByLatitudeLongitude( self, viewpointLatitude, viewpointLongitude ):
+	def getByLatitudeLongitude(self, viewpointLatitude, viewpointLongitude):
 		'Get by latitude and longitude.'
-		longitudeComplex = getWiddershinsUnitPolar( math.radians( 90.0 - viewpointLongitude ) )
-		viewpointLatitudeRatio = getWiddershinsUnitPolar( math.radians( viewpointLatitude ) )
-		basisZ = Vector3( viewpointLatitudeRatio.imag * longitudeComplex.real, viewpointLatitudeRatio.imag * longitudeComplex.imag, viewpointLatitudeRatio.real )
-		return self.getByBasisXZ( Vector3( - longitudeComplex.imag, longitudeComplex.real, 0.0 ), basisZ )
+		longitudeComplex = getWiddershinsUnitPolar(math.radians(90.0 - viewpointLongitude))
+		viewpointLatitudeRatio = getWiddershinsUnitPolar(math.radians(viewpointLatitude))
+		basisZ = Vector3(viewpointLatitudeRatio.imag * longitudeComplex.real, viewpointLatitudeRatio.imag * longitudeComplex.imag, viewpointLatitudeRatio.real)
+		return self.getByBasisXZ(Vector3(-longitudeComplex.imag, longitudeComplex.real, 0.0), basisZ)
 
-	def getByTilt( self, tilt ):
+	def getByTilt(self, tilt):
 		'Get by latitude and longitude.'
-		xPlaneAngle = getWiddershinsUnitPolar( tilt.real )
-		self.basisX = Vector3( xPlaneAngle.real, 0.0,  xPlaneAngle.imag )
-		yPlaneAngle = getWiddershinsUnitPolar( tilt.imag )
-		self.basisY = Vector3( 0.0,  yPlaneAngle.real, yPlaneAngle.imag )
+		xPlaneAngle = getWiddershinsUnitPolar(tilt.real)
+		self.basisX = Vector3(xPlaneAngle.real, 0.0, xPlaneAngle.imag)
+		yPlaneAngle = getWiddershinsUnitPolar(tilt.imag)
+		self.basisY = Vector3(0.0, yPlaneAngle.real, yPlaneAngle.imag)
 		self.basisZ = self.basisX.cross(self.basisY)
 		return self
 
-	def getComplexByComplex( self, pointComplex ):
+	def getComplexByComplex(self, pointComplex):
 		'Get complex by complex point.'
 		return self.basisX.dropAxis() * pointComplex.real + self.basisY.dropAxis() * pointComplex.imag
 
 	def getCopy(self):
 		'Get copy.'
-		return ProjectiveSpace( self.basisX, self.basisY, self.basisZ )
+		return ProjectiveSpace(self.basisX, self.basisY, self.basisZ)
 
 	def getDotComplex(self, point):
 		'Get the dot complex.'
-		return complex( point.dot(self.basisX), point.dot(self.basisY) )
+		return complex(point.dot(self.basisX), point.dot(self.basisY))
 
 	def getDotVector3(self, point):
 		'Get the dot vector3.'
 		return Vector3(point.dot(self.basisX), point.dot(self.basisY), point.dot(self.basisZ))
 
-	def getNextSpace( self, nextNormal ):
+	def getNextSpace(self, nextNormal):
 		'Get next space by next normal.'
 		nextSpace = self.getCopy()
 		nextSpace.normalize()
-		dotNext = nextSpace.basisZ.dot( nextNormal )
+		dotNext = nextSpace.basisZ.dot(nextNormal)
 		if dotNext > 0.999999:
 			return nextSpace
-		if dotNext < - 0.999999:
-			nextSpace.basisX = - nextSpace.basisX
+		if dotNext < -0.999999:
+			nextSpace.basisX = -nextSpace.basisX
 			return nextSpace
-		crossNext = nextSpace.basisZ.cross( nextNormal )
-		oldBasis = ProjectiveSpace().getByBasisZTop( nextSpace.basisZ, crossNext )
-		newBasis = ProjectiveSpace().getByBasisZTop( nextNormal, crossNext )
-		nextSpace.basisX = newBasis.getVector3ByPoint( oldBasis.getDotVector3( nextSpace.basisX ) )
-		nextSpace.basisY = newBasis.getVector3ByPoint( oldBasis.getDotVector3( nextSpace.basisY ) )
-		nextSpace.basisZ = newBasis.getVector3ByPoint( oldBasis.getDotVector3( nextSpace.basisZ ) )
+		crossNext = nextSpace.basisZ.cross(nextNormal)
+		oldBasis = ProjectiveSpace().getByBasisZTop(nextSpace.basisZ, crossNext)
+		newBasis = ProjectiveSpace().getByBasisZTop(nextNormal, crossNext)
+		nextSpace.basisX = newBasis.getVector3ByPoint(oldBasis.getDotVector3(nextSpace.basisX))
+		nextSpace.basisY = newBasis.getVector3ByPoint(oldBasis.getDotVector3(nextSpace.basisY))
+		nextSpace.basisZ = newBasis.getVector3ByPoint(oldBasis.getDotVector3(nextSpace.basisZ))
 		nextSpace.normalize()
 		return nextSpace
 
-	def getSpaceByXYScaleAngle( self, angle, scale ):
+	def getSpaceByXYScaleAngle(self, angle, scale):
 		'Get space by angle and scale.'
 		spaceByXYScaleRotation = ProjectiveSpace()
 		planeAngle = getWiddershinsUnitPolar(angle)
 		spaceByXYScaleRotation.basisX = self.basisX * scale.real * planeAngle.real + self.basisY * scale.imag * planeAngle.imag
-		spaceByXYScaleRotation.basisY = - self.basisX * scale.real * planeAngle.imag + self.basisY * scale.imag * planeAngle.real
+		spaceByXYScaleRotation.basisY = -self.basisX * scale.real * planeAngle.imag + self.basisY * scale.imag * planeAngle.real
 		spaceByXYScaleRotation.basisZ = self.basisZ
 		return spaceByXYScaleRotation
 
@@ -2495,40 +2542,40 @@ class ProjectiveSpace:
 		self.basisY.normalize()
 		self.basisZ.normalize()
 
-	def unbuckle( self, maximumUnbuckling, normal ):
+	def unbuckle(self, maximumUnbuckling, normal):
 		'Unbuckle space.'
-		unbuckleBasis( self.basisX, maximumUnbuckling, normal )
-		unbuckleBasis( self.basisY, maximumUnbuckling, normal )
+		unbuckleBasis(self.basisX, maximumUnbuckling, normal)
+		unbuckleBasis(self.basisY, maximumUnbuckling, normal)
 
 
 class RotatedLoopLayer:
 	'A rotated layer.'
-	def __init__( self, z ):
+	def __init__(self, z):
 		self.loops = []
 		self.rotation = None
 		self.z = z
 
 	def __repr__(self):
 		'Get the string representation of this rotated loop layer.'
-		return '%s, %s, %s' % ( self.z, self.rotation, self.loops )
+		return '%s, %s, %s' % (self.z, self.rotation, self.loops)
 
 	def addXML(self, depth, output):
 		'Add the xml for this object.'
-		if len( self.loops ) < 1:
+		if len(self.loops) < 1:
 			return
-		if len( self.loops ) == 1:
-			xml_simple_writer.addXMLFromLoopComplexZ( {}, depth, self.loops[0], output, self.z )
+		if len(self.loops) == 1:
+			xml_simple_writer.addXMLFromLoopComplexZ({}, depth, self.loops[0], output, self.z)
 			return
-		xml_simple_writer.addBeginXMLTag( {}, depth, 'group', output )
+		xml_simple_writer.addBeginXMLTag({}, depth, 'group', output)
 		for loop in self.loops:
-			xml_simple_writer.addXMLFromLoopComplexZ( {}, depth + 1, loop, output, self.z )
-		xml_simple_writer.addEndXMLTag(depth, 'group', output )
+			xml_simple_writer.addXMLFromLoopComplexZ({}, depth + 1, loop, output, self.z)
+		xml_simple_writer.addEndXMLTag(depth, 'group', output)
 
-	def getCopyAtZ( self, z ):
+	def getCopyAtZ(self, z):
 		'Get a raised copy.'
 		raisedRotatedLoopLayer = RotatedLoopLayer(z)
 		for loop in self.loops:
-			raisedRotatedLoopLayer.loops.append( loop[:] )
+			raisedRotatedLoopLayer.loops.append(loop[:])
 		raisedRotatedLoopLayer.rotation = self.rotation
 		return raisedRotatedLoopLayer
 
@@ -2542,7 +2589,7 @@ def getFlattenedNestedRings(nestedRings):
 
 class XIntersectionIndex:
 	'A class to hold the x intersection position and the index of the loop which intersected.'
-	def __init__( self, index, x ):
+	def __init__(self, index, x):
 		'Initialize.'
 		self.index = index
 		self.x = x
@@ -2550,8 +2597,8 @@ class XIntersectionIndex:
 	def __cmp__(self, other):
 		'Get comparison in order to sort x intersections in ascending order of x.'
 		if self.x < other.x:
-			return - 1
-		return int( self.x > other.x )
+			return -1
+		return int(self.x > other.x)
 
 	def __eq__(self, other):
 		'Determine whether this XIntersectionIndex is identical to other one.'
@@ -2567,4 +2614,4 @@ class XIntersectionIndex:
 
 	def __repr__(self):
 		'Get the string representation of this x intersection.'
-		return 'XIntersectionIndex index %s; x %s ' % ( self.index, self.x )
+		return 'XIntersectionIndex index %s; x %s ' % (self.index, self.x)

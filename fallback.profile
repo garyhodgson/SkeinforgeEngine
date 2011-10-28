@@ -44,10 +44,33 @@ altitude=0.0
 
 [fill]
 active=true
+debug=true
 infill.solidity.ratio=0.35
 extrusion.lines.extra.spacer.scaler=1.0
 infill.overlap.over.perimeter.scaler=1.0
-shells.alternating.solid=3
+shells.alternating.solid=2
+shells.base=2
+shells.sparse=2
+fully.filled.layers=2
+;LowerLeft | Nearest
+extrusion.sequence.start.layer=LowerLeft
+extrusion.sequence.print.order=perimeter,loops,infill
+; Only line is currently supported
+infill.pattern=Line
+grid.extra.overlap=0.1
+diaphragm.every.n.layers=100
+diaphragm.thickness=0
+infill.rotation.begin=45.0
+infill.rotation.repeat=1
+infill.rotation.odd.layer=90.0
+
+[fill2]
+active=true
+debug=true
+infill.solidity.ratio=0.35
+extrusion.lines.extra.spacer.scaler=1.0
+infill.overlap.over.perimeter.scaler=1.0
+shells.alternating.solid=2
 shells.base=2
 shells.sparse=2
 fully.filled.layers=2

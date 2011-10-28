@@ -15,17 +15,18 @@ __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agp
 logger = logging.getLogger(__name__)
 name = __name__
 
-def getCraftedText(fileName, text):
+def getCraftedText(fileName, text, gcode):
 	"Speed the file or text."
 	if not config.getboolean(name, 'active'):
 		logger.info("%s plugin is not active", name.capitalize())
 		return text
-	return SpeedSkein().getCraftedGcode(text)
+	return SpeedSkein(gcode).getCraftedGcode(text)
 
 class SpeedSkein:
 	"A class to speed a skein of extrusions."
-	def __init__(self):
-		self.gcode = gcodec.Gcode()
+	def __init__(self, gcode):
+		self.gcodeCodec = gcodec.Gcode()
+		self.gcode = gcode
 		self.isBridgeLayer = False
 		self.isExtruderActive = False
 		self.isPerimeterPath = False
@@ -55,32 +56,41 @@ class SpeedSkein:
 		"Add flow rate line."
 		flowRateString = self.getFlowRateString()
 		if flowRateString != self.oldFlowRateString:
-			self.gcode.addLine('M108 S' + flowRateString)
+			self.gcodeCodec.addLine('M108 S' + flowRateString)
 		self.oldFlowRateString = flowRateString
 
 	def addAccelerationRateLineIfNecessary(self): #todo delete if not working
 		"Add Acceleration rate line."
 		AccelerationRateString = self.getAccelerationRateString()
 		if AccelerationRateString != self.oldAccelerationRateString:
-			self.gcode.addLine('M201 E' + AccelerationRateString)
+			self.gcodeCodec.addLine('M201 E' + AccelerationRateString)
 		self.oldAccelerationRateString = AccelerationRateString
 
 	def addParameterString(self, firstWord, parameterWord):
 		"Add parameter string."
 		if parameterWord == '':
-			self.gcode.addLine(firstWord)
+			self.gcodeCodec.addLine(firstWord)
 			return
-		self.gcode.addParameter(firstWord, parameterWord)
+		self.gcodeCodec.addParameter(firstWord, parameterWord)
 
 	def getCraftedGcode(self, gcodeText):
-		"Parse gcode text and store the speed gcode."
+		"Parse gcodeCodec text and store the speed gcodeCodec."
 		self.travelFeedRateMinute = 60.0 * self.travelFeedRate
 		self.lines = archive.getTextLines(gcodeText)
 		self.parseInitialization()
+		
+		self.gcode.runtimeParameters.operatingFeedRatePerSecond = self.feedRate
+		self.gcode.runtimeParameters.perimeterFeedRatePerSecond = self.perimeterFeedRate
+		
+		self.gcode.runtimeParameters.operatingFlowRate = self.flowRate * self.feedRate
+		self.gcode.runtimeParameters.perimeterFlowRate = self.perimeterFlowRate * self.perimeterFeedRate
+		self.gcode.runtimeParameters.orbitalFeedRatePerSecond = self.feedRate * self.orbitalFeedRateRatio
+		self.gcode.runtimeParameters.travelFeedRate = self.travelFeedRate
+				
 		for line in self.lines[self.lineIndex :]:
 			self.parseLine(line)
 		self.addParameterString('M113', self.dutyCycleAtEnding) # Set duty cycle .
-		return self.gcode.output.getvalue()
+		return self.gcodeCodec.output.getvalue()
 
 	def getFlowRateString(self):
 		"Get the flow rate string."
@@ -109,7 +119,7 @@ class SpeedSkein:
 		return euclidean.getFourSignificantFigures(accelerationRate)
 
 	def getSpeededLine(self, line, splitLine):
-		'Get gcode line with feed rate.'
+		'Get gcodeCodec line with feed rate.'
 		if gcodec.getIndexOfStartingWithSecond('F', splitLine) > 0:
 			return line
 		feedRateMinute = 60.0 * self.feedRate
@@ -121,42 +131,44 @@ class SpeedSkein:
 			feedRateMinute = self.travelFeedRate * 60
 		self.addFlowRateLineIfNecessary()
 		self.addAccelerationRateLineIfNecessary()
-		return self.gcode.getLineWithFeedRate(feedRateMinute, line, splitLine)
+		return self.gcodeCodec.getLineWithFeedRate(feedRateMinute, line, splitLine)
 
 	def parseInitialization(self):
-		'Parse gcode initialization and store the parameters.'
+		'Parse gcodeCodec initialization and store the parameters.'
 		for self.lineIndex in xrange(len(self.lines)):
 			line = self.lines[self.lineIndex]
 			splitLine = gcodec.getSplitLineBeforeBracketSemicolon(line)
 			firstWord = gcodec.getFirstWord(splitLine)
-			self.gcode.parseSplitLine(firstWord, splitLine)
+			self.gcodeCodec.parseSplitLine(firstWord, splitLine)
 			if firstWord == '(<layerThickness>':
 				self.layerThickness = float(splitLine[1])
 			elif firstWord == '(</extruderInitialization>)':
-				self.gcode.addLine('(<procedureName> speed </procedureName>)')
+				self.gcodeCodec.addLine('(<procedureName> speed </procedureName>)')
 				return
 			elif firstWord == '(<perimeterWidth>':
 				self.absolutePerimeterWidth = abs(float(splitLine[1]))
-				self.gcode.addTagBracketedLine('operatingFeedRatePerSecond', self.feedRate)
-				self.gcode.addTagBracketedLine('PerimeterFeedRatePerSecond', self.perimeterFeedRate)
+				self.gcodeCodec.addTagBracketedLine('operatingFeedRatePerSecond', self.feedRate)
+								
+				self.gcodeCodec.addTagBracketedLine('PerimeterFeedRatePerSecond', self.perimeterFeedRate)
+				
 				if self.addFlowRate:
-					self.gcode.addTagBracketedLine('operatingFlowRate', self.flowRate * self.feedRate)
-					self.gcode.addTagBracketedLine('PerimeterFlowRate', self.perimeterFlowRate * self.perimeterFeedRate)
+					self.gcodeCodec.addTagBracketedLine('operatingFlowRate', self.flowRate * self.feedRate)
+					self.gcodeCodec.addTagBracketedLine('PerimeterFlowRate', self.perimeterFlowRate * self.perimeterFeedRate)
 				orbitalFeedRatePerSecond = self.feedRate * self.orbitalFeedRateRatio
-				self.gcode.addTagBracketedLine('orbitalFeedRatePerSecond', orbitalFeedRatePerSecond)
-				self.gcode.addTagBracketedLine('travelFeedRate', self.travelFeedRate)
+				self.gcodeCodec.addTagBracketedLine('orbitalFeedRatePerSecond', orbitalFeedRatePerSecond)
+				self.gcodeCodec.addTagBracketedLine('travelFeedRate', self.travelFeedRate)
 			elif firstWord == '(<nozzleDiameter>':
 				self.nozzleDiameter = abs(float(splitLine[1]))
-			self.gcode.addLine(line)
+			self.gcodeCodec.addLine(line)
 
 	def parseLine(self, line):
-		"Parse a gcode line and add it to the speed skein."
+		"Parse a gcodeCodec line and add it to the speed skein."
 		splitLine = gcodec.getSplitLineBeforeBracketSemicolon(line)
 		if len(splitLine) < 1:
 			return
 		firstWord = splitLine[0]
 		if firstWord == '(<crafting>)':
-			self.gcode.addLine(line)
+			self.gcodeCodec.addLine(line)
 			self.addParameterString('M113', self.dutyCycleAtBeginning)
 			return
 		elif firstWord == 'G1':
@@ -175,4 +187,4 @@ class SpeedSkein:
 			self.isPerimeterPath = True
 		elif firstWord == '(</perimeter>)' or firstWord == '(</perimeterPath>)':
 			self.isPerimeterPath = False
-		self.gcode.addLine(line)
+		self.gcodeCodec.addLine(line)

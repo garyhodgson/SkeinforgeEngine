@@ -50,6 +50,9 @@ def main():
 		return
 	config.read(args.c)
 	
+	logLevel = config.get('general', 'log.level')
+	logging.basicConfig(level=logLevel, format='%(asctime)s %(levelname)s (%(name)s) %(message)s')
+	
 	defaultProfile = config.get('general', 'default.profile')
 	if defaultProfile != None:
 		config.read(defaultProfile)
@@ -58,9 +61,10 @@ def main():
 		config.read(args.p)
 
 	inputFilename = args.file
-	logLevel = config.get('general', 'log.level')
-	logging.basicConfig(level=logLevel, format='%(asctime)s %(levelname)s (%(name)s) %(message)s')
-	logging.Handler.handleError = handleError
+	
+	if not os.path.isfile(inputFilename):
+		logger.error('File not found: %s', inputFilename)
+		return
 	
 	startTime = time.time()
 	gcodeText = ''
@@ -88,4 +92,5 @@ def handleError(self, record):
 	traceback.print_stack()
 
 if __name__ == "__main__":
+	logging.Handler.handleError = handleError
 	main()
