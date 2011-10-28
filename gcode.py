@@ -1,7 +1,7 @@
 from collections import OrderedDict
 from config import config
 from decimal import Decimal, ROUND_HALF_UP
-from fabmetheus_utilities import euclidean2
+from fabmetheus_utilities import euclidean
 from fabmetheus_utilities.vector3 import Vector3
 from math import log10, floor
 import StringIO
@@ -188,7 +188,7 @@ class NestedRing:
         if perimeterLoop == None:
             perimeterLoop = boundaryPointsLoop
             
-        if euclidean2.isWiddershins(perimeterLoop):
+        if euclidean.isWiddershins(perimeterLoop):
             boundaryPerimeter.perimeterType = 'outer'
         else:
             boundaryPerimeter.perimeterType = 'inner'
@@ -297,21 +297,21 @@ class NestedRing:
         if penultimateFillLoops != None:
             for penultimateFillLoop in penultimateFillLoops:
                 if len(penultimateFillLoop) > 2:
-                    if euclidean2.getIsInFilledRegion(surroundingBoundaries, penultimateFillLoop[0]):
+                    if euclidean.getIsInFilledRegion(surroundingBoundaries, penultimateFillLoop[0]):
                         withinLoops.append(penultimateFillLoop)
                         
-        if not euclidean2.getIsInFilledRegionByPaths(self.penultimateFillLoops, fillLoops):
+        if not euclidean.getIsInFilledRegionByPaths(self.penultimateFillLoops, fillLoops):
             fillLoops += self.penultimateFillLoops
             
         for nestedRing in self.innerNestedRings:
-            fillLoops += euclidean2.getFillOfSurroundings(nestedRing.innerNestedRings, penultimateFillLoops)
+            fillLoops += euclidean.getFillOfSurroundings(nestedRing.innerNestedRings, penultimateFillLoops)
         return fillLoops
     
     def transferPaths(self, paths):
         'Transfer paths.'
         for nestedRing in self.innerNestedRings:
-            euclidean2.transferPathsToSurroundingLoops(nestedRing.innerNestedRings, paths)
-        self.infillPaths = euclidean2.getTransferredPaths(paths, self.getXYBoundaries())
+            euclidean.transferPathsToSurroundingLoops(nestedRing.innerNestedRings, paths)
+        self.infillPaths = euclidean.getTransferredPaths(paths, self.getXYBoundaries())
         
     def addToThreads(self, extrusionHalfWidth, oldOrderedLocation, threadSequence):
         'Add to paths from the last location. perimeter>inner >fill>paths or fill> perimeter>inner >paths'
@@ -333,18 +333,18 @@ class NestedRing:
             return
         remainingFillLoops = self.extraLoops[:]
         while len(remainingFillLoops) > 0:
-            euclidean2.transferClosestFillLoop(extrusionHalfWidth, oldOrderedLocation, remainingFillLoops, self)
+            euclidean.transferClosestFillLoop(extrusionHalfWidth, oldOrderedLocation, remainingFillLoops, self)
 
     def transferInfillPaths(self, extrusionHalfWidth, oldOrderedLocation, threadSequence):
         'Transfer the infill paths.'
-        euclidean2.transferClosestPaths(oldOrderedLocation, self.infillPaths[:], self)
+        euclidean.transferClosestPaths(oldOrderedLocation, self.infillPaths[:], self)
     
     def addPerimeterInner(self, extrusionHalfWidth, oldOrderedLocation, threadSequence):
         'Add to the perimeter and the inner island.'
         #if self.loop == None:
-        #    euclidean2.transferClosestPaths(oldOrderedLocation, self.perimeterPaths[:], self)
+        #    euclidean.transferClosestPaths(oldOrderedLocation, self.perimeterPaths[:], self)
         #else:
-        #    euclidean2.addToThreadsFromLoop(extrusionHalfWidth, 'perimeter', self.loop[:], oldOrderedLocation, self)
+        #    euclidean.addToThreadsFromLoop(extrusionHalfWidth, 'perimeter', self.loop[:], oldOrderedLocation, self)
         
         
         ##!!!!!!!!!!!!!!!!!!!
