@@ -1,5 +1,13 @@
 """
 Raft is a script to create a raft, elevate the nozzle and set the temperature.
+
+Original author 
+	'Enrique Perez (perez_enrique@yahoo.com) 
+	modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
+	
+license 
+	'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
+
 """
 
 from fabmetheus_utilities.geometry.solids import triangle_mesh

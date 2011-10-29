@@ -1,6 +1,13 @@
 """
-Carve is a script to carve a shape into svg slice layers.
-It creates the perimeter contours
+Carve is a script to carve a shape into svg slice layers. It creates the perimeter contours
+
+Original author 
+	'Enrique Perez (perez_enrique@yahoo.com) 
+	modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
+	
+license 
+	'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
+
 """
 
 from config import config

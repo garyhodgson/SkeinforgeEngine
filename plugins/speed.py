@@ -44,14 +44,14 @@ class SpeedSkein:
 		self.addFlowRate = config.getboolean(name, 'add.flow.rate')
 		self.addAccelerationRate = config.getboolean(name, 'add.acceleration.rate')
 		self.feedRate = config.getfloat(name, 'feed.rate')
-		self.flowRate = config.getfloat(name, 'flow.rate')
+		self.flowRateRatio = config.getfloat(name, 'flow.rate.ratio')
 		self.accelerationRate = config.getfloat(name, 'acceleration.rate')
 		self.orbitalFeedRateRatio = config.getfloat(name, 'feed.rate.orbiting.ratio')
 		self.perimeterFeedRate = config.getfloat(name, 'feed.rate.perimeter')
-		self.perimeterFlowRate = config.getfloat(name, 'flow.rate.perimeter')
+		self.perimeterFlowRateRatio = config.getfloat(name, 'flow.rate.perimeter.ratio')
 		self.perimeterAccelerationRate = config.getfloat(name, 'acceleration.rate.perimeter')
 		self.bridgeFeedRateRatio = config.getfloat(name, 'feed.rate.bridge.ratio')
-		self.bridgeFlowRateRatio = config.getfloat(name, 'flow.rate.bridge')
+		self.bridgeFlowRateRatio = config.getfloat(name, 'flow.rate.bridge.ratio')
 		self.bridgeAccelerationRate = config.getfloat(name, 'acceleration.rate.bridge')
 		self.travelFeedRate = config.getfloat(name, 'feed.rate.travel')
 		self.dutyCycleAtBeginning = config.getfloat(name, 'dc.duty.cycle.beginning')
@@ -62,8 +62,8 @@ class SpeedSkein:
 		runtimeParameters.perimeterFeedRatePerSecond = self.perimeterFeedRate
 		
 		if self.addFlowRate:
-			runtimeParameters.operatingFlowRate = self.flowRate * self.feedRate
-			runtimeParameters.perimeterFlowRate = self.perimeterFlowRate * self.perimeterFeedRate
+			runtimeParameters.operatingFlowRate = self.flowRateRatio * self.feedRate
+			runtimeParameters.perimeterFlowRateRatio = self.perimeterFlowRateRatio * self.perimeterFeedRate
 		runtimeParameters.orbitalFeedRatePerSecond = self.feedRate * self.orbitalFeedRateRatio
 		runtimeParameters.travelFeedRate = self.travelFeedRate
 		
@@ -110,11 +110,11 @@ class SpeedSkein:
 		
 		if not self.addFlowRate:
 			return None
-		flowRate = self.flowRate * self.feedRate
+		flowRate = self.flowRateRatio * self.feedRate
 		if self.isBridgeLayer:
-			flowRate = (self.bridgeFlowRateRatio * self.bridgeFeedRateRatio) * (self.perimeterFlowRate * self.perimeterFeedRate) * (nozzleXsection / extrusionXsection)
+			flowRate = (self.bridgeFlowRateRatio * self.bridgeFeedRateRatio) * (self.perimeterFlowRateRatio * self.perimeterFeedRate) * (nozzleXsection / extrusionXsection)
 		if self.isPerimeterPath:
-			flowRate = self.perimeterFlowRate * self.perimeterFeedRate
+			flowRate = self.perimeterFlowRateRatio * self.perimeterFeedRate
 		return euclidean.getFourSignificantFigures(flowRate)
 
 	def getAccelerationRateString(self):

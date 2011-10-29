@@ -1,5 +1,13 @@
 """
 Preface converts the svg slices into gcodecGcode extrusion layers, optionally prefaced with some gcodecGcode commands.
+
+Original author 
+	'Enrique Perez (perez_enrique@yahoo.com) 
+	modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
+	
+license 
+	'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
+
 """
 
 from config import config
@@ -35,11 +43,10 @@ class PrefaceSkein:
 		self.lineIndex = 0
 		self.oldLocation = None
 		self.svgReader = SVGReader()
-		self.setPositioningToAbsolute = config.getboolean('preface', 'positioning.absolute')
-		self.setUnitsToMillimeters = config.getboolean('preface', 'units.millimeters')
-		self.startAtHome = config.getboolean('preface', 'startup.at.home')
-		self.resetExtruder = config.getboolean('preface', 'startup.extruder.reset')
-		self.setPositioningToAbsolute = config.getboolean('preface', 'positioning.absolute')
+		self.setPositioningToAbsolute = config.getboolean(name, 'positioning.absolute')
+		self.setUnitsToMillimeters = config.getboolean(name, 'units.millimeters')
+		self.startAtHome = config.getboolean(name, 'startup.at.home')
+		self.resetExtruder = config.getboolean(name, 'startup.extruder.reset')
 
 	def addFromUpperLowerFile(self, fileName):
 		"Add lines of text from the fileName or the lowercase fileName, if there is no file by the original fileName in the directory."

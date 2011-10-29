@@ -1,5 +1,13 @@
 """
 Inset will inset the outside outlines by half the perimeter width, and outset the inside outlines by the same amount.
+
+Original author 
+	'Enrique Perez (perez_enrique@yahoo.com) 
+	modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
+	
+license 
+	'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
+
 """
 
 from config import config
@@ -324,7 +332,7 @@ class InsetSkein:
 		muchGreaterThanRadius = 6.0 * radius
 		for perimeterPath in perimeterPaths:
 			if euclidean.getPathLength(perimeterPath) > muchGreaterThanRadius:
-				nestedRing.addGcodeFromThread(perimeterPath)
+				nestedRing.addPerimeterGcodeFromThread(perimeterPath)
 			
 	def getCraftedGcode(self, gcodeText):
 		"Parse gcodeCodec text and store the bevel gcodeCodec."

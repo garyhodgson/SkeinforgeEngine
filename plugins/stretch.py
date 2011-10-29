@@ -1,5 +1,13 @@
 """
 Stretch is a script to stretch the threads to partially compensate for filament shrinkage when extruded.
+
+Original author 
+	'Enrique Perez (perez_enrique@yahoo.com) 
+	modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
+	
+license 
+	'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
+
 """
 
 from fabmetheus_utilities import archive
@@ -7,9 +15,6 @@ from fabmetheus_utilities import euclidean
 from fabmetheus_utilities import gcodec
 from config import config
 import logging
-
-__originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
-__license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
 
 logger = logging.getLogger(__name__)
 name = __name__

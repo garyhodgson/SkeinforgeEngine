@@ -1,6 +1,13 @@
 """
-Bottom sets the bottom of the carving to the defined altitude.
-Adjusts the Z heights of each layer.
+Bottom sets the bottom of the carving to the defined altitude. Adjusts the Z heights of each layer.
+
+Original author 
+	'Enrique Perez (perez_enrique@yahoo.com) 
+	modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
+	
+license 
+	'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
+
 """
 
 from fabmetheus_utilities.svg_reader import SVGReader

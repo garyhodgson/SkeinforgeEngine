@@ -78,14 +78,14 @@ active=true
 add.flow.rate=true
 add.acceleration.rate=false
 feed.rate=60.0
-flow.rate=1.0
+flow.rate.ratio=1.0
 acceleration.rate=1300.0
 feed.rate.orbiting.ratio=0.5
 feed.rate.perimeter=30.0
-flow.rate.perimeter=1.0
+flow.rate.perimeter.ratio=1.0
 acceleration.rate.perimeter=50.0
 feed.rate.bridge.ratio=1.0
-flow.rate.bridge=1.0
+flow.rate.bridge.ratio=1.0
 acceleration.rate.bridge=1000.0
 feed.rate.travel=130.0
 dc.duty.cycle.beginning=1.0
@@ -134,8 +134,7 @@ calibrating.active=false
 calibrating.x.section=0.5
 oozerate=75.0
 extruder.retraction.speed=15.0
-; relative | absolute
-extrusion.units=absolute
+extrusion.units.relative=false
 
 [comb]
 active=true

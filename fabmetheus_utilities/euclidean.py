@@ -46,7 +46,12 @@ globalGoldenAngle = 3.8832220774509332 # (math.sqrt(5.0) - 1.0) * math.pi
 globalGoldenRatio = 1.6180339887498948482045868 # math.sqrt(1.25) - .5
 globalTau = math.pi + math.pi # http://tauday.com/
 
-
+def calculateAutoRetractDistance(targetPoint, oozeRate, feedRateMinute, zDistanceRatio):
+		xyTravel = abs(targetPoint.dropAxis())
+		zTravelMultiplied = targetPoint.z * zDistanceRatio
+		timeToNextThread = math.sqrt(xyTravel * xyTravel + zTravelMultiplied * zTravelMultiplied) / feedRateMinute * 60
+		return timeToNextThread * abs(oozeRate) / 60
+	
 def addElementToListDictionary(element, key, listDictionary):
 	'Add an element to the list table.'
 	if key in listDictionary:

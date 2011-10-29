@@ -1,5 +1,13 @@
 """
 Multiply is a script to multiply the shape into an array of copies arranged in a table.
+
+Original author 
+	'Enrique Perez (perez_enrique@yahoo.com) 
+	modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
+	
+license 
+	'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
+
 """
 
 from fabmetheus_utilities.vector3 import Vector3
