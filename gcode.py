@@ -236,11 +236,7 @@ class NestedRing:
             logger.warning('Thread of only one point: %s, this should never happen.', thread)
             return
 
-#############################################################################################
         if self.activateDimension:
-            # Retraction - reverse
-            
-            
             # note hardcoded because of retraction calculation
             if self.previousPoint == None:
                 extrusionDistance = 0.0
@@ -248,26 +244,8 @@ class NestedRing:
                 extrusionDistance = 0.7
                 
             self.previousPoint = point
+            boundaryPerimeter.perimeterGcodeCommands.extend(self.getRetractReverseCommands(extrusionDistance))
             
-            if self.extrusionUnitsRelative:
-                retractDistance = round(extrusionDistance, self.decimalPlaces)
-            else:
-                self.totalExtrusionDistance += extrusionDistance
-                retractDistance = round(self.totalExtrusionDistance, self.decimalPlaces)
-        
-            boundaryPerimeter.perimeterGcodeCommands.append(GcodeCommand(
-                            gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.extruderRetractionSpeedMinute)]))
-            boundaryPerimeter.perimeterGcodeCommands.append(GcodeCommand(
-                            gcodes.LINEAR_GCODE_MOVEMENT, [('E', '%s' % retractDistance)]))
-            boundaryPerimeter.perimeterGcodeCommands.append(GcodeCommand(
-                            gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.travelFeedRateMinute)]))
-                            
-            if not self.extrusionUnitsRelative:
-                boundaryPerimeter.perimeterGcodeCommands.append(self.getResetExtruderDistance())
-#############################################################################################
-
-
-        
         boundaryPerimeter.perimeterGcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_ON))        
         
         for point in thread[1 :]:
@@ -278,69 +256,20 @@ class NestedRing:
             if self.activateSpeed:
                 gcodeArgs.append(('F', self.perimeterFeedRateMinute))
                 
-            ### dimension on perimeter
             if self.activateDimension:
-                distance = 0.0
-                if self.absolutePositioning:
-                    #location = gcodec.getLocationFromSplitLine(self.oldLocation, splitLine)
-                    if self.previousPoint != None:
-                        distance = abs(point - self.previousPoint)
-                    self.previousPoint = point
-                else:
-                    if self.previousPoint == None:
-                        logger.warning('There was no absolute location when the G91 command was parsed, so the absolute location will be set to the origin.')
-                        self.previousPoint = Vector3()
-                    distance = abs(point)
-                    self.previousPoint += point
-                    
-                filamentRadius = 0.5 * self.filamentDiameter
-                filamentPackingArea = pi * filamentRadius * filamentRadius * self.filamentPackingDensity
-                flowScaleSixty = 60.0 * ((((self.layerThickness + self.perimeterWidth) / 4) ** 2 * pi) / filamentPackingArea)
-                scaledFlowRate = self.flowRate * flowScaleSixty
-                extrusionDistance = scaledFlowRate / self.extrusionFeedRateMinute * distance
-                
-                if self.extrusionUnitsRelative:
-                    extrusionDistance = round(extrusionDistance, self.decimalPlaces)
-                else:
-                    self.totalExtrusionDistance += extrusionDistance
-                    extrusionDistance = round(self.totalExtrusionDistance, self.decimalPlaces)
-            
+                extrusionDistance = self.getExtrusionDistance(self.previousPoint, point)
                 gcodeArgs.append(('E', '%s' % extrusionDistance))
-                
-            ###
                 
             boundaryPerimeter.perimeterGcodeCommands.append(
                 GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
             
-
-
-            
-#############################################################################################        
         if self.activateDimension:
-            # Retraction - retract
-            
             # IMPORTANT - TODO - calcuating the distance between the end of the perimeter 
             # and the next starting point (either next layer perimeter or infill) is quite 
             # tricky unless the gcode is generated after all plugins are finished.
             # for the time being i'm hardcoding the retraction to 0.7mm
-             
             extrusionDistance = -0.7
-            
-            if self.extrusionUnitsRelative:
-                retractDistance = round(extrusionDistance, self.decimalPlaces)
-            else:
-                self.totalExtrusionDistance += extrusionDistance
-                retractDistance = round(self.totalExtrusionDistance, self.decimalPlaces)
-        
-            boundaryPerimeter.perimeterGcodeCommands.append(GcodeCommand(
-                            gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.extruderRetractionSpeedMinute)]))
-            boundaryPerimeter.perimeterGcodeCommands.append(GcodeCommand(
-                            gcodes.LINEAR_GCODE_MOVEMENT, [('E', '%s' % retractDistance)]))
-            boundaryPerimeter.perimeterGcodeCommands.append(GcodeCommand(
-                            gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.perimeterFeedRateMinute)]))
-#############################################################################################            
-            
-            
+            boundaryPerimeter.perimeterGcodeCommands.extend(self.getRetractCommands(extrusionDistance))
             
         boundaryPerimeter.perimeterGcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_OFF))    
         self.boundaryPerimeters.append(boundaryPerimeter)
@@ -349,6 +278,60 @@ class NestedRing:
         self.totalExtrusionDistance = 0.0
         return GcodeCommand(gcodes.RESET_EXTRUDER_DISTANCE, [('E', '0')])
         
+
+    def getExtrusionDistance(self, previousPoint, point):
+        distance = 0.0
+        if self.absolutePositioning:
+            if previousPoint != None:
+                distance = abs(point - previousPoint)
+            previousPoint = point
+        else:
+            if previousPoint == None:
+                logger.warning('There was no absolute location when the G91 command was parsed, so the absolute location will be set to the origin.')
+                previousPoint = Vector3()
+            distance = abs(point)
+            previousPoint += point
+        filamentRadius = 0.5 * self.filamentDiameter
+        filamentPackingArea = pi * filamentRadius * filamentRadius * self.filamentPackingDensity
+        flowScaleSixty = 60.0 * ((((self.layerThickness + self.perimeterWidth) / 4) ** 2 * pi) / filamentPackingArea)
+        scaledFlowRate = self.flowRate * flowScaleSixty
+        extrusionDistance = scaledFlowRate / self.extrusionFeedRateMinute * distance
+        if self.extrusionUnitsRelative:
+            extrusionDistance = round(extrusionDistance, self.decimalPlaces)
+        else:
+            self.totalExtrusionDistance += extrusionDistance
+            extrusionDistance = round(self.totalExtrusionDistance, self.decimalPlaces)
+        return extrusionDistance
+
+    def getRetractCommands(self, extrusionDistance):
+        commands = []
+        if self.extrusionUnitsRelative:
+            retractDistance = round(extrusionDistance, self.decimalPlaces)
+        else:
+            self.totalExtrusionDistance += extrusionDistance
+            retractDistance = round(self.totalExtrusionDistance, self.decimalPlaces)
+    
+        commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.extruderRetractionSpeedMinute)]))
+        commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('E', '%s' % retractDistance)]))
+        commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.perimeterFeedRateMinute)]))
+        return commands
+    
+    def getRetractReverseCommands(self, extrusionDistance):
+        commands = []
+        if self.extrusionUnitsRelative:
+            retractDistance = round(extrusionDistance, self.decimalPlaces)
+        else:
+            self.totalExtrusionDistance += extrusionDistance
+            retractDistance = round(self.totalExtrusionDistance, self.decimalPlaces)
+    
+        commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.extruderRetractionSpeedMinute)]))
+        commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('E', '%s' % retractDistance)]))
+        commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.travelFeedRateMinute)]))
+                        
+        if not self.extrusionUnitsRelative:
+            commands.append(self.getResetExtruderDistance())
+        return commands
+
     def addInfillGcodeFromThread(self, thread):
         'Add a thread to the output.'
         decimalPlaces = self.decimalPlaces
@@ -366,19 +349,40 @@ class NestedRing:
         if len(thread) < 2:
             logger.warning('Thread of only one point: %s, this should never happen.', thread)
             return
+        
+        if self.activateDimension:
+            # note hardcoded because of retraction calculation
+            if self.previousPoint == None:
+                extrusionDistance = 0.0
+            else:
+                extrusionDistance = 0.7
+                
+            self.previousPoint = point
+            self.infillGcodeCommands.extend(self.getRetractReverseCommands(extrusionDistance))
+            
         self.infillGcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_ON))
         for point in thread[1 :]:
-            gcodeArgs = [('X', round(point.real, decimalPlaces)),
-                            ('Y', round(point.imag, decimalPlaces)),
-                            ('Z', round(self.layer.z, decimalPlaces))]
+            gcodeArgs = [('X', round(point.real, decimalPlaces)),('Y', round(point.imag, decimalPlaces)),('Z', round(self.layer.z, decimalPlaces))]
             if self.activateSpeed:
-                if self.layer.bridgeRotation == None:
-                    feedRate = self.extrusionFeedRateMinute
-                else:
-                    feedRate = self.bridgeFeedRateMinute
+                feedRate = self.extrusionFeedRateMinute if self.layer.bridgeRotation == None else self.bridgeFeedRateMinute
                 gcodeArgs.append(('F', feedRate))
+            
+            if self.activateDimension:
+                extrusionDistance = self.getExtrusionDistance(self.previousPoint, point)
+                gcodeArgs.append(('E', '%s' % extrusionDistance))
+                
             self.infillGcodeCommands.append(
                 GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
+            
+        if self.activateDimension:
+            
+            # IMPORTANT - TODO - calcuating the distance between the end of the perimeter 
+            # and the next starting point (either next layer perimeter or infill) is quite 
+            # tricky unless the gcode is generated after all plugins are finished.
+            # for the time being i'm hardcoding the retraction to 0.7mm
+            extrusionDistance = -0.7
+            self.infillGcodeCommands.extend(self.getRetractCommands(extrusionDistance))
+            
         self.infillGcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_OFF))    
 
     def getLoopsToBeFilled(self):
