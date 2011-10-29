@@ -146,7 +146,12 @@ class NestedRing:
         self.filamentPackingDensity = self.runtimeParameters.filamentPackingDensity
         self.absolutePositioning = config.getboolean('preface', 'positioning.absolute')
         self.flowRate = self.runtimeParameters.flowRate
+        self.perimeterFlowRate = self.runtimeParameters.perimeterFlowRate
+        self.bridgeFlowRate = self.runtimeParameters.bridgeFlowRate
         self.previousPoint = None
+        filamentRadius = 0.5 * self.filamentDiameter
+        filamentPackingArea = pi * filamentRadius * filamentRadius * self.filamentPackingDensity
+        self.flowScaleSixty = 60.0 * ((((self.layerThickness + self.perimeterWidth) / 4) ** 2 * pi) / filamentPackingArea)
         
     def __str__(self):
         output = StringIO.StringIO()
@@ -257,7 +262,7 @@ class NestedRing:
                 gcodeArgs.append(('F', self.perimeterFeedRateMinute))
                 
             if self.activateDimension:
-                extrusionDistance = self.getExtrusionDistance(self.previousPoint, point)
+                extrusionDistance = self.getExtrusionDistance(point, self.flowRate, self.extrusionFeedRateMinute)
                 gcodeArgs.append(('E', '%s' % extrusionDistance))
                 
             boundaryPerimeter.perimeterGcodeCommands.append(
@@ -279,28 +284,35 @@ class NestedRing:
         return GcodeCommand(gcodes.RESET_EXTRUDER_DISTANCE, [('E', '0')])
         
 
-    def getExtrusionDistance(self, previousPoint, point):
+    def getExtrusionDistance(self, point, flowRate, feedRateMinute):
         distance = 0.0
+        
+        #print "previousPoint",previousPoint,"point",point
+        
         if self.absolutePositioning:
-            if previousPoint != None:
-                distance = abs(point - previousPoint)
-            previousPoint = point
+            if self.previousPoint != None:
+                distance = abs(point - self.previousPoint)
+            self.previousPoint = point
         else:
             if previousPoint == None:
                 logger.warning('There was no absolute location when the G91 command was parsed, so the absolute location will be set to the origin.')
-                previousPoint = Vector3()
+                self.previousPoint = Vector3()
             distance = abs(point)
-            previousPoint += point
-        filamentRadius = 0.5 * self.filamentDiameter
-        filamentPackingArea = pi * filamentRadius * filamentRadius * self.filamentPackingDensity
-        flowScaleSixty = 60.0 * ((((self.layerThickness + self.perimeterWidth) / 4) ** 2 * pi) / filamentPackingArea)
-        scaledFlowRate = self.flowRate * flowScaleSixty
-        extrusionDistance = scaledFlowRate / self.extrusionFeedRateMinute * distance
+            self.previousPoint += point
+            
+        
+        scaledFlowRate = flowRate * self.flowScaleSixty
+        extrusionDistance = scaledFlowRate / feedRateMinute * distance
+        #print "self.flowRate ",flowRate, "scaledFlowRate",scaledFlowRate,"extrusionDistance",extrusionDistance, "distance",distance
+        
         if self.extrusionUnitsRelative:
             extrusionDistance = round(extrusionDistance, self.decimalPlaces)
         else:
             self.totalExtrusionDistance += extrusionDistance
             extrusionDistance = round(self.totalExtrusionDistance, self.decimalPlaces)
+            
+        
+        
         return extrusionDistance
 
     def getRetractCommands(self, extrusionDistance):
@@ -368,7 +380,10 @@ class NestedRing:
                 gcodeArgs.append(('F', feedRate))
             
             if self.activateDimension:
-                extrusionDistance = self.getExtrusionDistance(self.previousPoint, point)
+                if self.layer.bridgeRotation == None:
+                    extrusionDistance = self.getExtrusionDistance(point, self.bridgeFlowRate, self.bridgeFeedRateMinute)
+                else:
+                    extrusionDistance = self.getExtrusionDistance(point, self.flowRate, self.extrusionFeedRateMinute)
                 gcodeArgs.append(('E', '%s' % extrusionDistance))
                 
             self.infillGcodeCommands.append(

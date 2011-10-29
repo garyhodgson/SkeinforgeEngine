@@ -118,6 +118,7 @@ class DimensionSkein:
 			location = gcodec.getLocationFromSplitLine(self.oldLocation, splitLine)
 			if self.oldLocation != None:
 				distance = abs(location - self.oldLocation)
+			#print "location",location,"self.oldLocation",self.oldLocation, "distance",distance
 			self.oldLocation = location
 		else:
 			if self.oldLocation == None:
@@ -126,6 +127,7 @@ class DimensionSkein:
 			location = gcodec.getLocationFromSplitLine(None, splitLine)
 			distance = abs(location)
 			self.oldLocation += location
+			
 		return line + self.getExtrusionDistanceString(distance, splitLine)
 
 	def getDistanceToNextThread(self, lineIndex):
@@ -167,8 +169,9 @@ class DimensionSkein:
 		if distance <= 0.0:
 			return ''
 		scaledFlowRate = self.flowRate * self.flowScaleSixty
-		#print "self.flowRate orig",self.flowRate
+		
 		extrusionDistance = scaledFlowRate / self.feedRateMinute * distance
+		#print "orig flowRate",self.flowRate, "scaledFlowRate",scaledFlowRate,"extrusionDistance",extrusionDistance, "distance",distance
 		return self.getExtrusionDistanceStringFromExtrusionDistance(extrusionDistance)
 
 	def getExtrusionDistanceStringFromExtrusionDistance(self, extrusionDistance):
