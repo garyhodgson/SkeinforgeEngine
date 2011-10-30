@@ -1,18 +1,17 @@
 """
-Fill is a script to fill the perimeters of a gcode file.
+Fills the perimeters.
 
-Original author 
-	'Enrique Perez (perez_enrique@yahoo.com) 
-	modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
-	
-license 
-	'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
+Credits:
+	Original Author: Enrique Perez (http://skeinforge.com)
+	Contributors: Please see the documentation in Skeinforge 
+	Modifed as SFACT: Ahmet Cem Turan (github.com/ahmetcemturan/SFACT)	
 
+License: 
+	GNU Affero General Public License http://www.gnu.org/licenses/agpl.html
 """
 
 from config import config
 from fabmetheus_utilities import archive, euclidean, gcodec, intercircle
-from fabmetheus_utilities.geometry.solids import triangle_mesh
 from fabmetheus_utilities.vector3 import Vector3
 import logging
 import math
@@ -21,11 +20,207 @@ import sys
 logger = logging.getLogger(__name__)
 name = __name__
 
-def getCraftedText(fileName, text, gcode):
-	'Fill the inset file or gcodeCodec text.'
-	FillSkein(gcode).getCraftedGcode()
-	return text 
+def performAction(gcode):
+	'Fills the perimeters.'
+	FillSkein(gcode).fill()
 	
+class FillSkein:
+	'A class to fill a skein of extrusions.'
+	def __init__(self, gcode):
+		self.gcode = gcode
+		self.extruderActive = False
+		self.previousExtraShells = -1
+		self.oldOrderedLocation = None
+		
+		self.activateFill = config.getboolean(name, 'active')
+		self.infillSolidity = config.getfloat(name, 'infill.solidity.ratio')
+		self.infillWidthOverThickness = config.getfloat(name, 'extrusion.lines.extra.spacer.scaler')
+		self.infillPerimeterOverlap = config.getfloat(name, 'infill.overlap.over.perimeter.scaler')
+		self.extraShellsAlternatingSolidLayer = config.getint(name, 'shells.alternating.solid')
+		self.extraShellsBase = config.getint(name, 'shells.base')
+		self.extraShellsSparseLayer = config.getint(name, 'shells.sparse')
+		self.solidSurfaceThickness = config.getint(name, 'fully.filled.layers')
+		self.doubleSolidSurfaceThickness = self.solidSurfaceThickness + self.solidSurfaceThickness
+		self.startFromChoice = config.get(name, 'extrusion.sequence.start.layer')
+		self.threadSequenceChoice = config.get(name, 'extrusion.sequence.print.order')
+		self.threadSequence = self.threadSequenceChoice.split(",")
+		self.infillPattern = config.get(name, 'infill.pattern')
+		self.gridExtraOverlap = config.getfloat(name, 'grid.extra.overlap')
+		self.diaphragmPeriod = config.getint(name, 'diaphragm.every.n.layers')
+		self.diaphragmThickness = config.getint(name, 'diaphragm.thickness')
+		self.infillBeginRotation = math.radians(config.getfloat(name, 'infill.rotation.begin'))
+		self.infillBeginRotationRepeat = config.getint(name, 'infill.rotation.repeat')
+		self.infillOddLayerExtraRotation = math.radians(config.getfloat(name, 'infill.rotation.odd.layer'))
+		self.bridgeWidthMultiplier = config.getfloat('inset', 'bridge.width.multiplier.ratio')
+		self.extrusionWidth = config.getfloat('carve', 'extrusion.width')
+		self.infillWidth = self.extrusionWidth * self.infillWidthOverThickness * (0.7853)
+		self.betweenWidth = self.extrusionWidth * self.infillWidthOverThickness * (0.7853)
+
+	def fill(self):
+		'Fills the layers.'
+		if self.extrusionWidth == None:
+			logger.warning('Nothing will be done because extrusion width FillSkein is None.')
+			return
+
+		for layerIndex in xrange(len(self.gcode.layers)):
+			layer = self.gcode.layers.values()[layerIndex]
+			self.addFill(layerIndex, layer)		
+		
+	def addFill(self, layerIndex, rotatedLayer):
+		'Add fill to the carve layer.'
+		alreadyFilledArounds = []
+		pixelTable = {}
+		arounds = []
+		betweenWidth = self.extrusionWidth / 1.7594801994   # this really sucks I cant find hwe#(self.repository.infillWidthOverThickness.value * self.extrusionWidth *(0.7853))/1.5 #- 0.0866#todo todo TODO *0.5 is the distance between the outer loops..
+		self.layerExtrusionWidth = self.infillWidth # spacing between fill lines
+		layerFillInset = self.infillWidth  # the distance between perimeter incl loops and the fill pattern
+		
+		layerRotation = self.getLayerRotation(layerIndex, rotatedLayer)
+		reverseRotation = complex(layerRotation.real, -layerRotation.imag)
+		surroundingCarves = []
+		layerRemainder = layerIndex % self.diaphragmPeriod
+		extraShells = self.extraShellsSparseLayer
+		
+		if layerRemainder >= self.diaphragmThickness and rotatedLayer.bridgeRotation == None:
+			for surroundingIndex in xrange(1, self.solidSurfaceThickness + 1):
+				self.addRotatedCarve(layerIndex, -surroundingIndex, reverseRotation, surroundingCarves)
+				self.addRotatedCarve(layerIndex, surroundingIndex, reverseRotation, surroundingCarves)
+
+		if len(surroundingCarves) < self.doubleSolidSurfaceThickness:
+			extraShells = self.extraShellsAlternatingSolidLayer
+			if self.previousExtraShells != self.extraShellsBase:
+				extraShells = self.extraShellsBase
+		 
+		if rotatedLayer.bridgeRotation != None:
+			extraShells = 0
+			betweenWidth *= self.bridgeWidthMultiplier#/0.7853  #todo check what is better with or without the normalizer
+			self.layerExtrusionWidth *= self.bridgeWidthMultiplier
+			layerFillInset *= self.bridgeWidthMultiplier
+		 
+		aroundInset = 0.25 * self.layerExtrusionWidth
+		aroundWidth = 0.25 * self.layerExtrusionWidth
+		self.previousExtraShells = extraShells
+		gridPointInsetX = 0.5 * layerFillInset
+		doubleExtrusionWidth = 2.0 * self.layerExtrusionWidth
+		endpoints = []
+		infillPaths = []
+		layerInfillSolidity = self.infillSolidity
+		
+		self.isDoubleJunction = True
+		self.isJunctionWide = True
+		rotatedLoops = []
+
+		nestedRings = rotatedLayer.nestedRings
+				 
+		createFillForSurroundings(nestedRings, betweenWidth, False)
+		 
+		for extraShellIndex in xrange(extraShells):
+			createFillForSurroundings(nestedRings, self.layerExtrusionWidth, True)
+
+		fillLoops = euclidean.getFillOfSurroundings(nestedRings, None)
+		
+		slightlyGreaterThanFill = 1.001 * layerFillInset #todo was 1.01 ACT 0.95  How much the parallel fill is filled
+		 
+		for loop in fillLoops:
+			alreadyFilledLoop = []
+			alreadyFilledArounds.append(alreadyFilledLoop)
+			planeRotatedPerimeter = euclidean.getPointsRoundZAxis(reverseRotation, loop)
+			rotatedLoops.append(planeRotatedPerimeter)
+			centers = intercircle.getCentersFromLoop(planeRotatedPerimeter, slightlyGreaterThanFill)
+			euclidean.addLoopToPixelTable(planeRotatedPerimeter, pixelTable, aroundWidth)
+			for center in centers:
+				alreadyFilledInset = intercircle.getSimplifiedInsetFromClockwiseLoop(center, layerFillInset)
+				if intercircle.isLargeSameDirection(alreadyFilledInset, center, layerFillInset):
+					alreadyFilledLoop.append(alreadyFilledInset)
+					around = intercircle.getSimplifiedInsetFromClockwiseLoop(center, aroundInset)
+					if euclidean.isPathInsideLoop(planeRotatedPerimeter, around) == euclidean.isWiddershins(planeRotatedPerimeter):
+						around.reverse()
+						arounds.append(around)
+						euclidean.addLoopToPixelTable(around, pixelTable, aroundWidth)
+		 
+		if len(arounds) < 1:
+			self.addThreadsBridgeLayer(layerIndex, nestedRings, rotatedLayer)
+			return
+		 
+		back = euclidean.getBackOfLoops(arounds)
+		front = euclidean.getFrontOfLoops(arounds)
+		front = math.ceil(front / self.layerExtrusionWidth) * self.layerExtrusionWidth
+		fillWidth = back - front
+		numberOfLines = int(math.ceil(fillWidth / self.layerExtrusionWidth))
+		self.frontOverWidth = 0.0
+		self.horizontalSegmentLists = euclidean.getHorizontalSegmentListsFromLoopLists(alreadyFilledArounds, front, numberOfLines, rotatedLoops, self.layerExtrusionWidth)
+		self.surroundingXIntersectionLists = []
+		self.yList = []
+		removedEndpoints = []
+		 
+		if len(surroundingCarves) >= self.doubleSolidSurfaceThickness:
+			xIntersectionIndexLists = []
+			self.frontOverWidth = euclidean.getFrontOverWidthAddXListYList(front, surroundingCarves, numberOfLines, xIntersectionIndexLists, self.layerExtrusionWidth, self.yList)
+			for fillLine in xrange(len(self.horizontalSegmentLists)):
+				xIntersectionIndexList = xIntersectionIndexLists[fillLine]
+				surroundingXIntersections = euclidean.getIntersectionOfXIntersectionIndexes(self.doubleSolidSurfaceThickness, xIntersectionIndexList)
+				self.surroundingXIntersectionLists.append(surroundingXIntersections)
+				addSparseEndpoints(doubleExtrusionWidth, endpoints, fillLine, self.horizontalSegmentLists, layerInfillSolidity, removedEndpoints, self.solidSurfaceThickness, surroundingXIntersections)
+		else:
+			for fillLine in xrange(len(self.horizontalSegmentLists)):
+				addSparseEndpoints(doubleExtrusionWidth, endpoints, fillLine, self.horizontalSegmentLists, layerInfillSolidity, removedEndpoints, self.solidSurfaceThickness, None)
+		 
+		paths = euclidean.getPathsFromEndpoints(endpoints, 5.0 * self.layerExtrusionWidth, pixelTable, aroundWidth)
+		 
+		oldRemovedEndpointLength = len(removedEndpoints) + 1
+		 
+		while oldRemovedEndpointLength - len(removedEndpoints) > 0:
+			oldRemovedEndpointLength = len(removedEndpoints)
+			removeEndpoints(pixelTable, self.layerExtrusionWidth, paths, removedEndpoints, aroundWidth)
+		
+		paths = euclidean.getConnectedPaths(paths, pixelTable, aroundWidth)
+		 
+		for path in paths:
+			addPath(self.layerExtrusionWidth, infillPaths, path, layerRotation)
+
+		for nestedRing in nestedRings:
+			nestedRing.transferPaths(infillPaths)
+		 
+		self.addThreadsBridgeLayer(layerIndex, nestedRings, rotatedLayer)
+
+	def addRotatedCarve(self, currentLayer, layerDelta, reverseRotation, surroundingCarves):
+		'Add a rotated carve to the surrounding carves.'
+		layerIndex = currentLayer + layerDelta
+		if layerIndex < 0 or layerIndex >= len(self.gcode.layers):
+			return
+		
+		layer = self.gcode.layers.values()[layerIndex]
+		
+		nestedRings = layer.nestedRings
+		rotatedCarve = []
+		for nestedRing in nestedRings:
+			planeRotatedLoop = euclidean.getPointsRoundZAxis(reverseRotation, nestedRing.getXYBoundaries())
+			rotatedCarve.append(planeRotatedLoop)
+		outsetRadius = float(abs(layerDelta)) * self.extrusionWidth #todo investigate was   float(abs(layerDelta)) * self.layerThickness
+		rotatedCarve = intercircle.getInsetSeparateLoopsFromLoops(-outsetRadius, rotatedCarve)
+		surroundingCarves.append(rotatedCarve)
+
+	def addThreadsBridgeLayer(self, layerIndex, nestedRings, rotatedLayer):
+		'Add the threads, add the bridge end & the layer end tag.'
+		if self.oldOrderedLocation == None or self.startFromChoice == "LowerLeft":
+			self.oldOrderedLocation = getLowerLeftCorner(nestedRings)
+		extrusionHalfWidth = 0.5 * self.layerExtrusionWidth
+		threadSequence = self.threadSequence
+		if layerIndex < 1:
+			threadSequence = ['perimeter', 'loops', 'infill']
+		#euclidean.addToThreadsRemove(extrusionHalfWidth, nestedRings, self.oldOrderedLocation, threadSequence)
+		for nestedRing in nestedRings:
+			nestedRing.addToThreads(extrusionHalfWidth, self.oldOrderedLocation, threadSequence)
+
+	def getLayerRotation(self, layerIndex, rotatedLayer):
+		'Get the layer rotation.'
+		rotation = rotatedLayer.bridgeRotation
+		if rotation != None:
+			return rotation
+		infillOddLayerRotationMultiplier = float(layerIndex % (self.infillBeginRotationRepeat + 1) == self.infillBeginRotationRepeat)
+		layerAngle = self.infillBeginRotation + infillOddLayerRotationMultiplier * self.infillOddLayerExtraRotation
+		return euclidean.getWiddershinsUnitPolar(layerAngle)
+
 def addPath(infillWidth, infillPaths, path, rotationPlaneAngle):
 	'Add simplified path to fill.'
 	simplifiedPath = euclidean.getSimplifiedPath(path, infillWidth)
@@ -326,228 +521,3 @@ def removeEndpoints(pixelTable, layerExtrusionWidth, paths, removedEndpoints, ar
 		removedEndpointPoint = removedEndpoint.point
 		if isPointAddedAroundClosest(pixelTable, layerExtrusionWidth, paths, removedEndpointPoint, aroundWidth):
 			removedEndpoints.remove(removedEndpoint)
-
-class FillSkein:
-	'A class to fill a skein of extrusions.'
-	def __init__(self, gcode):
-		self.bridgeWidthMultiplier = 1.0
-		self.gcode = gcode
-		self.extruderActive = False
-		self.fillInset = 0.18
-		self.isPerimeter = False
-		self.previousExtraShells = -1
-		self.lineIndex = 0
-		self.oldLocation = None
-		self.oldOrderedLocation = None
-		self.perimeterWidth = None
-		self.rotatedLayer = None
-		self.rotatedLayers = []
-		self.shutdownLineIndex = sys.maxint
-		self.nestedRing = None
-		self.thread = None
-		
-		self.activateFill = config.getboolean(name, 'active')
-		self.infillSolidity = config.getfloat(name, 'infill.solidity.ratio')
-		self.infillWidthOverThickness = config.getfloat(name, 'extrusion.lines.extra.spacer.scaler')
-		self.infillPerimeterOverlap = config.getfloat(name, 'infill.overlap.over.perimeter.scaler')
-		self.extraShellsAlternatingSolidLayer = config.getint(name, 'shells.alternating.solid')
-		self.extraShellsBase = config.getint(name, 'shells.base')
-		self.extraShellsSparseLayer = config.getint(name, 'shells.sparse')
-		self.solidSurfaceThickness = config.getint(name, 'fully.filled.layers')
-		self.startFromChoice = config.get(name, 'extrusion.sequence.start.layer')
-		self.threadSequenceChoice = config.get(name, 'extrusion.sequence.print.order')
-		self.infillPattern = config.get(name, 'infill.pattern')
-		self.gridExtraOverlap = config.getfloat(name, 'grid.extra.overlap')
-		self.diaphragmPeriod = config.getint(name, 'diaphragm.every.n.layers')
-		self.diaphragmThickness = config.getint(name, 'diaphragm.thickness')
-		self.infillBeginRotation = math.radians(config.getfloat(name, 'infill.rotation.begin'))
-		self.infillBeginRotationRepeat = config.getint(name, 'infill.rotation.repeat')
-		self.infillOddLayerExtraRotation = math.radians(config.getfloat(name, 'infill.rotation.odd.layer'))
-
-	def getCraftedGcode(self):
-	
-		self.threadSequence = self.threadSequenceChoice.split(",")
-		
-		self.perimeterWidth = self.gcode.runtimeParameters.perimeterWidth
-		self.gcode.runtimeParameters.threadSequence = self.threadSequenceChoice
-		
-		self.infillWidth = self.perimeterWidth * self.infillWidthOverThickness * (0.7853)
-		self.gcode.runtimeParameters.infillWidth = self.infillWidth
-		self.bridgeWidthMultiplier = self.gcode.runtimeParameters.bridgeWidthMultiplier
-		self.layerThickness = self.gcode.runtimeParameters.layerThickness
-		
-		if self.perimeterWidth == None:
-			logger.warning('Nothing will be done because self.perimeterWidth in getCraftedGcode in FillSkein was None.')
-			return ''
-
-		self.betweenWidth = self.perimeterWidth * self.infillWidthOverThickness * (0.7853)
-		self.fillInset = self.infillWidth # * self.repository.infillPerimeterOverlap.value #self.infillWidth / self.repository.infillPerimeterOverlap.value #todo was :self.infillWidth - self.infillWidth * self.repository.infillPerimeterOverlap.value
-		
-		self.doubleSolidSurfaceThickness = self.solidSurfaceThickness + self.solidSurfaceThickness
-
-		#for lineIndex in xrange(self.lineIndex, len(self.lines)):
-		#	self.parseLine(lineIndex)
-			
-		for layerIndex in xrange(len(self.gcode.layers)):
-			layer = self.gcode.layers.values()[layerIndex]
-			self.addFill(layerIndex, layer)
-		
-		
-	def addFill(self, layerIndex, rotatedLayer):
-		'Add fill to the carve layer.'
-		alreadyFilledArounds = []
-		pixelTable = {}
-		arounds = []
-		betweenWidth = self.perimeterWidth / 1.7594801994   # this really sucks I cant find hwe#(self.repository.infillWidthOverThickness.value * self.perimeterWidth *(0.7853))/1.5 #- 0.0866#todo todo TODO *0.5 is the distance between the outer loops..
-		self.layerExtrusionWidth = self.infillWidth # spacing between fill lines
-		layerFillInset = self.fillInset  # the distance between perimeter incl loops and the fill pattern
-		self.bridgeWidthMultiplier = config.getfloat('inset', 'bridge.width.multiplier.ratio')
-		
-		layerRotation = self.getLayerRotation(layerIndex, rotatedLayer)
-		reverseRotation = complex(layerRotation.real, -layerRotation.imag)
-		surroundingCarves = []
-		layerRemainder = layerIndex % self.diaphragmPeriod
-		extraShells = self.extraShellsSparseLayer
-		
-		if layerRemainder >= self.diaphragmThickness and rotatedLayer.bridgeRotation == None:
-			for surroundingIndex in xrange(1, self.solidSurfaceThickness + 1):
-				self.addRotatedCarve(layerIndex, -surroundingIndex, reverseRotation, surroundingCarves)
-				self.addRotatedCarve(layerIndex, surroundingIndex, reverseRotation, surroundingCarves)
-
-		if len(surroundingCarves) < self.doubleSolidSurfaceThickness:
-			extraShells = self.extraShellsAlternatingSolidLayer
-			if self.previousExtraShells != self.extraShellsBase:
-				extraShells = self.extraShellsBase
-		 
-		if rotatedLayer.bridgeRotation != None:
-			extraShells = 0
-			betweenWidth *= self.bridgeWidthMultiplier#/0.7853  #todo check what is better with or without the normalizer
-			self.layerExtrusionWidth *= self.bridgeWidthMultiplier
-			layerFillInset *= self.bridgeWidthMultiplier
-		 
-		aroundInset = 0.25 * self.layerExtrusionWidth
-		aroundWidth = 0.25 * self.layerExtrusionWidth
-		self.previousExtraShells = extraShells
-		gridPointInsetX = 0.5 * layerFillInset
-		doubleExtrusionWidth = 2.0 * self.layerExtrusionWidth
-		endpoints = []
-		infillPaths = []
-		layerInfillSolidity = self.infillSolidity
-		
-		self.isDoubleJunction = True
-		self.isJunctionWide = True
-		rotatedLoops = []
-
-		nestedRings = rotatedLayer.nestedRings
-				 
-		createFillForSurroundings(nestedRings, betweenWidth, False)
-		 
-		for extraShellIndex in xrange(extraShells):
-			createFillForSurroundings(nestedRings, self.layerExtrusionWidth, True)
-
-		fillLoops = euclidean.getFillOfSurroundings(nestedRings, None)
-		
-		slightlyGreaterThanFill = 1.001 * layerFillInset #todo was 1.01 ACT 0.95  How much the parallel fill is filled
-		 
-		for loop in fillLoops:
-			alreadyFilledLoop = []
-			alreadyFilledArounds.append(alreadyFilledLoop)
-			planeRotatedPerimeter = euclidean.getPointsRoundZAxis(reverseRotation, loop)
-			rotatedLoops.append(planeRotatedPerimeter)
-			centers = intercircle.getCentersFromLoop(planeRotatedPerimeter, slightlyGreaterThanFill)
-			euclidean.addLoopToPixelTable(planeRotatedPerimeter, pixelTable, aroundWidth)
-			for center in centers:
-				alreadyFilledInset = intercircle.getSimplifiedInsetFromClockwiseLoop(center, layerFillInset)
-				if intercircle.isLargeSameDirection(alreadyFilledInset, center, layerFillInset):
-					alreadyFilledLoop.append(alreadyFilledInset)
-					around = intercircle.getSimplifiedInsetFromClockwiseLoop(center, aroundInset)
-					if euclidean.isPathInsideLoop(planeRotatedPerimeter, around) == euclidean.isWiddershins(planeRotatedPerimeter):
-						around.reverse()
-						arounds.append(around)
-						euclidean.addLoopToPixelTable(around, pixelTable, aroundWidth)
-		 
-		if len(arounds) < 1:
-			self.addThreadsBridgeLayer(layerIndex, nestedRings, rotatedLayer)
-			return
-		 
-		back = euclidean.getBackOfLoops(arounds)
-		front = euclidean.getFrontOfLoops(arounds)
-		front = math.ceil(front / self.layerExtrusionWidth) * self.layerExtrusionWidth
-		fillWidth = back - front
-		numberOfLines = int(math.ceil(fillWidth / self.layerExtrusionWidth))
-		self.frontOverWidth = 0.0
-		self.horizontalSegmentLists = euclidean.getHorizontalSegmentListsFromLoopLists(alreadyFilledArounds, front, numberOfLines, rotatedLoops, self.layerExtrusionWidth)
-		self.surroundingXIntersectionLists = []
-		self.yList = []
-		removedEndpoints = []
-		 
-		if len(surroundingCarves) >= self.doubleSolidSurfaceThickness:
-			xIntersectionIndexLists = []
-			self.frontOverWidth = euclidean.getFrontOverWidthAddXListYList(front, surroundingCarves, numberOfLines, xIntersectionIndexLists, self.layerExtrusionWidth, self.yList)
-			for fillLine in xrange(len(self.horizontalSegmentLists)):
-				xIntersectionIndexList = xIntersectionIndexLists[fillLine]
-				surroundingXIntersections = euclidean.getIntersectionOfXIntersectionIndexes(self.doubleSolidSurfaceThickness, xIntersectionIndexList)
-				self.surroundingXIntersectionLists.append(surroundingXIntersections)
-				addSparseEndpoints(doubleExtrusionWidth, endpoints, fillLine, self.horizontalSegmentLists, layerInfillSolidity, removedEndpoints, self.solidSurfaceThickness, surroundingXIntersections)
-		else:
-			for fillLine in xrange(len(self.horizontalSegmentLists)):
-				addSparseEndpoints(doubleExtrusionWidth, endpoints, fillLine, self.horizontalSegmentLists, layerInfillSolidity, removedEndpoints, self.solidSurfaceThickness, None)
-		 
-		paths = euclidean.getPathsFromEndpoints(endpoints, 5.0 * self.layerExtrusionWidth, pixelTable, aroundWidth)
-		#print "paths",paths
-		 
-		oldRemovedEndpointLength = len(removedEndpoints) + 1
-		 
-		while oldRemovedEndpointLength - len(removedEndpoints) > 0:
-			oldRemovedEndpointLength = len(removedEndpoints)
-			removeEndpoints(pixelTable, self.layerExtrusionWidth, paths, removedEndpoints, aroundWidth)
-		
-		paths = euclidean.getConnectedPaths(paths, pixelTable, aroundWidth)
-		 
-		for path in paths:
-			addPath(self.layerExtrusionWidth, infillPaths, path, layerRotation)
-
-		#print "infillPaths",infillPaths
-
-		for nestedRing in nestedRings:
-			nestedRing.transferPaths(infillPaths)
-		 
-		self.addThreadsBridgeLayer(layerIndex, nestedRings, rotatedLayer)
-
-	def addRotatedCarve(self, currentLayer, layerDelta, reverseRotation, surroundingCarves):
-		'Add a rotated carve to the surrounding carves.'
-		layerIndex = currentLayer + layerDelta
-		if layerIndex < 0 or layerIndex >= len(self.gcode.layers):
-			return
-		
-		layer = self.gcode.layers.values()[layerIndex]
-		
-		nestedRings = layer.nestedRings
-		rotatedCarve = []
-		for nestedRing in nestedRings:
-			planeRotatedLoop = euclidean.getPointsRoundZAxis(reverseRotation, nestedRing.getXYBoundaries())
-			rotatedCarve.append(planeRotatedLoop)
-		outsetRadius = float(abs(layerDelta)) * self.perimeterWidth #todo investigate was   float(abs(layerDelta)) * self.layerThickness
-		rotatedCarve = intercircle.getInsetSeparateLoopsFromLoops(-outsetRadius, rotatedCarve)
-		surroundingCarves.append(rotatedCarve)
-
-	def addThreadsBridgeLayer(self, layerIndex, nestedRings, rotatedLayer):
-		'Add the threads, add the bridge end & the layer end tag.'
-		if self.oldOrderedLocation == None or self.startFromChoice == "LowerLeft":
-			self.oldOrderedLocation = getLowerLeftCorner(nestedRings)
-		extrusionHalfWidth = 0.5 * self.layerExtrusionWidth
-		threadSequence = self.threadSequence
-		if layerIndex < 1:
-			threadSequence = ['perimeter', 'loops', 'infill']
-		#euclidean.addToThreadsRemove(extrusionHalfWidth, nestedRings, self.oldOrderedLocation, threadSequence)
-		for nestedRing in nestedRings:
-			nestedRing.addToThreads(extrusionHalfWidth, self.oldOrderedLocation, threadSequence)
-
-	def getLayerRotation(self, layerIndex, rotatedLayer):
-		'Get the layer rotation.'
-		rotation = rotatedLayer.bridgeRotation
-		if rotation != None:
-			return rotation
-		infillOddLayerRotationMultiplier = float(layerIndex % (self.infillBeginRotationRepeat + 1) == self.infillBeginRotationRepeat)
-		layerAngle = self.infillBeginRotation + infillOddLayerRotationMultiplier * self.infillOddLayerExtraRotation
-		return euclidean.getWiddershinsUnitPolar(layerAngle)

@@ -1,8 +1,8 @@
 from collections import OrderedDict
 from config import config
 from decimal import Decimal, ROUND_HALF_UP
-from fabmetheus_utilities import euclidean
 from fabmetheus_utilities.vector3 import Vector3
+from fabmetheus_utilities import archive, svg_writer, euclidean
 from math import log10, floor, pi
 from plugins.speed import SpeedSkein
 import StringIO
@@ -10,29 +10,17 @@ import decimal
 import gcodes
 import time
 import weakref
-
-def sa_round(f, digits=0):
-    """
-    Symmetric Arithmetic Rounding for decimal numbers
-    f       - float to round
-    digits  - number of digits after the point to leave
-    """
-    decimal.getcontext().prec = 12
-    return str(Decimal(str(f)).quantize(Decimal("1") / (Decimal('10') ** digits), ROUND_HALF_UP))
-
-def printCommand(x, verbose=False):
-    if isinstance(x, GcodeCommand):
-        return'%s\n' % x.str(verbose)
-    else:
-        return '%s\n' % x
             
 class Gcode:
     '''Runtime data for conversion of 3D model to gcode.'''
     
     def __init__(self, verbose=False):
         self.verbose = verbose
+        self.svgText = None
         self.runtimeParameters = RuntimeParameters()
         self.rotatedLoopLayers = []
+        self.carvingCornerMaximum = None
+        self.carvingCornerMinimum = None
         self.layers = OrderedDict()
         
         self.startGcodeCommands = []
@@ -62,6 +50,16 @@ class Gcode:
              
         return output.getvalue()
     
+    def getSVGText(self):
+        svgWriter = svg_writer.SVGWriter(
+                                True,
+                                self.carvingCornerMaximum,
+                                self.carvingCornerMinimum,
+                                self.runtimeParameters.decimalPlaces,
+                                self.runtimeParameters.layerHeight,
+                                self.runtimeParameters.layerThickness)
+        return svgWriter.getReplacedSVGTemplate(self.runtimeParameters.inputFilename, '', self.rotatedLoopLayers)
+        
     def getGcodeText(self):
         '''Final Gcode representation.'''
         output = StringIO.StringIO()
@@ -374,7 +372,7 @@ class NestedRing:
             
         self.infillGcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_ON))
         for point in thread[1 :]:
-            gcodeArgs = [('X', round(point.real, decimalPlaces)),('Y', round(point.imag, decimalPlaces)),('Z', round(self.layer.z, decimalPlaces))]
+            gcodeArgs = [('X', round(point.real, decimalPlaces)), ('Y', round(point.imag, decimalPlaces)), ('Z', round(self.layer.z, decimalPlaces))]
             if self.activateSpeed:
                 feedRate = self.extrusionFeedRateMinute if self.layer.bridgeRotation == None else self.bridgeFeedRateMinute
                 gcodeArgs.append(('F', feedRate))
@@ -607,3 +605,10 @@ class GcodeCommand:
         for name, value in self.parameters.items():
             output.write('%s%s ' % (name, value))
         return output.getvalue().strip()
+
+
+def printCommand(x, verbose=False):
+    if isinstance(x, GcodeCommand):
+        return'%s\n' % x.str(verbose)
+    else:
+        return '%s\n' % x

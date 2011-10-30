@@ -1,13 +1,13 @@
 """
 Carve is a script to carve a shape into svg slice layers. It creates the perimeter contours
 
-Original author 
-	'Enrique Perez (perez_enrique@yahoo.com) 
-	modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
-	
-license 
-	'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
+Credits:
+	Original Author: Enrique Perez (http://skeinforge.com)
+	Contributors: Please see the documentation in Skeinforge 
+	Modifed as SFACT: Ahmet Cem Turan (github.com/ahmetcemturan/SFACT)	
 
+License: 
+	GNU Affero General Public License http://www.gnu.org/licenses/agpl.html
 """
 
 from config import config
@@ -18,19 +18,20 @@ import math
 logger = logging.getLogger(__name__)
 name = __name__
 
-def getCraftedText(fileName, gcodeText, gcode):
+def performAction(gcode):
 	"Get carved text."
-	carving = svg_writer.getCarving(fileName)
+	filename = gcode.runtimeParameters.inputFilename
+	carving = svg_writer.getCarving(filename)
 	if carving == None:
-		return ''
+		return
 	if config.getboolean(name, 'debug'):
-		carvingFilename = fileName[: fileName.rfind('.')]+'.carving.xml'
-		archive.writeFileText( carvingFilename , str(carving) )
+		carvingFilename = filename[: filename.rfind('.')] + '.carving.xml'
+		archive.writeFileText(carvingFilename , str(carving))
 		logger.info("Carving XML written to %s", carvingFilename)
-	return CarveSkein(gcode).getCarvedSVG(carving, fileName)
+	CarveSkein(gcode).carve(carving)
 
 class CarveSkein:
-	"A class to carve a carving."
+	"A class to carve a 3D model."
 	
 	def __init__(self, gcode):
 		'Initialize'
@@ -44,8 +45,8 @@ class CarveSkein:
 		self.layerPrintFrom = config.getint(name, 'layer.print.from')
 		self.layerPrintTo = config.getint(name, 'layer.print.to')
 				
-	def getCarvedSVG(self, carving, fileName):
-		"Parse gnu triangulated surface text and store the carved gcode."
+	def carve(self, carving):
+		"Parse 3D model file and store the carved gcode."
 		
 		carving.setCarveInfillInDirectionOfBridge(self.infillBridgeDirection)
 		carving.setCarveLayerThickness(self.layerHeight)
@@ -57,29 +58,15 @@ class CarveSkein:
 		
 		if len(rotatedLoopLayers) < 1:
 			logger.warning('There are no slices for the model, this could be because the model is too small for the Layer Thickness.')
-			return ''
+			return
 		
-		self.gcode.runtimeParameters.decimalPlaces = self.decimalPlaces
-		self.gcode.runtimeParameters.layerThickness = self.layerHeight
-		self.gcode.runtimeParameters.perimeterWidth = self.extrusionWidth
-	
-		svgWriter = svg_writer.SVGWriter(
-			True,
-			carving.getCarveCornerMaximum(),
-			carving.getCarveCornerMinimum(),
-			self.decimalPlaces,
-			carving.getCarveLayerThickness(),
-			self.extrusionWidth)
-		
-		truncatedLayers = rotatedLoopLayers[self.layerPrintFrom : self.layerPrintTo]
-		
+		truncatedLayers = rotatedLoopLayers[self.layerPrintFrom : self.layerPrintTo]		
 		self.gcode.rotatedLoopLayers = truncatedLayers
-		
-		svgText = svgWriter.getReplacedSVGTemplate(fileName, name, truncatedLayers, carving.getFabmetheusXML())
+		self.gcode.carvingCornerMaximum = carving.getCarveCornerMaximum()
+		self.gcode.carvingCornerMinimum = carving.getCarveCornerMinimum()
 		
 		if config.getboolean(name, 'debug'):
-			svgFilename = fileName[: fileName.rfind('.')]+'.svg'
-			archive.writeFileText( svgFilename , svgText )
+			filename = self.gcode.runtimeParameters.inputFilename
+			svgFilename = filename[: filename.rfind('.')] + '.carving.svg'
+			archive.writeFileText(svgFilename , self.gcode.getSVGText())
 			logger.info("Carving SVG written to %s", svgFilename)
-		
-		return svgText

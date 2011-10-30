@@ -21,7 +21,7 @@ import argparse
 __plugins_path__ = 'plugins'
 logger = logging.getLogger('engine')
 
-def getCraftedTextFromPlugins(fileName, pluginSequence, text, gcode):
+def getCraftedTextFromPlugins(pluginSequence, gcode):
 	'Get a crafted shape file from a list of pluginSequence.'
 	lastProcedureTime = time.time()
 	sys.path.insert(0, __plugins_path__)
@@ -29,13 +29,9 @@ def getCraftedTextFromPlugins(fileName, pluginSequence, text, gcode):
 	for plugin in pluginSequence:
 		pluginModule = import_module(plugin)
 		if pluginModule != None:
-			text = pluginModule.getCraftedText(fileName, text, gcode)
-			if text == '':
-				logger.warning('Procedure %s returned no text', plugin)
-				return ''
+			pluginModule.performAction(gcode)
 			logger.info('%s plugin took %s seconds.', plugin.capitalize(), timedelta(seconds=time.time() - lastProcedureTime).total_seconds())
 			lastProcedureTime = time.time()
-	return text
 
 def main():
 	"Starting point for skeinforge engine."
@@ -66,8 +62,6 @@ def main():
 		logger.error('File not found: %s', inputFilename)
 		return
 	
-	startTime = time.time()
-	gcodeText = ''
 	pluginSequence = config.get('general', 'plugin.sequence').split(',')
 	profileName = config.get('profile', 'name')
 	logger.info("Profile: %s", profileName)
@@ -76,17 +70,12 @@ def main():
 	verbose = config.getboolean('general', 'verbose.gcode')
 	gcode = Gcode(verbose)
 	gcode.runtimeParameters.profileName = profileName
-	
-	gcodeText = getCraftedTextFromPlugins(inputFilename, pluginSequence[:-1], gcodeText, gcode)
+	gcode.runtimeParameters.inputFilename = inputFilename
+	getCraftedTextFromPlugins(pluginSequence[:], gcode)
 	
 	gcode.runtimeParameters.endTime = time.time()
-
-	if gcodeText == '':
-		logger.warning('No Gcode given to write out in export module.')
-		return
 	
-	export.writeOutput(inputFilename, gcodeText, gcode)
-	logger.info('It took %s seconds to export the file.', timedelta(seconds=gcode.runtimeParameters.endTime - gcode.runtimeParameters.startTime).total_seconds())
+	logger.info('It took %s seconds to complete.', timedelta(seconds=gcode.runtimeParameters.endTime - gcode.runtimeParameters.startTime).total_seconds())
 
 def handleError(self, record):
 	traceback.print_stack()
