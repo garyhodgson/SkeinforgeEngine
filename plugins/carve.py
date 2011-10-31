@@ -11,7 +11,8 @@ License:
 """
 
 from config import config
-from fabmetheus_utilities import archive, svg_writer
+from fabmetheus_utilities import archive, svg_writer, vector3
+from plugins.multiply import MultiplySkein
 import logging
 import math
 
@@ -55,15 +56,16 @@ class CarveSkein:
 		carving.setCarveIsCorrectMesh(self.correctMesh)
 		
 		rotatedLoopLayers = carving.getCarveRotatedBoundaryLayers()
-		
+
 		if len(rotatedLoopLayers) < 1:
 			logger.warning('There are no slices for the model, this could be because the model is too small for the Layer Thickness.')
 			return
 		
-		truncatedLayers = rotatedLoopLayers[self.layerPrintFrom : self.layerPrintTo]		
-		self.gcode.rotatedLoopLayers = truncatedLayers
 		self.gcode.carvingCornerMaximum = carving.getCarveCornerMaximum()
 		self.gcode.carvingCornerMinimum = carving.getCarveCornerMinimum()
+		
+		self.gcode.rotatedLoopLayers = rotatedLoopLayers[self.layerPrintFrom : self.layerPrintTo]
+		
 		
 		if config.getboolean(name, 'debug'):
 			filename = self.gcode.runtimeParameters.inputFilename

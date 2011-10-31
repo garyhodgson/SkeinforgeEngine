@@ -22,6 +22,9 @@ name = __name__
 
 def performAction(gcode):
 	'Fills the perimeters.'
+	if not config.getboolean(name, 'active'):
+		logger.info("%s plugin is inactive", name.capitalize())
+		return
 	FillSkein(gcode).fill()
 	
 class FillSkein:
@@ -111,7 +114,7 @@ class FillSkein:
 		rotatedLoops = []
 
 		nestedRings = rotatedLayer.nestedRings
-				 
+		
 		createFillForSurroundings(nestedRings, betweenWidth, False)
 		 
 		for extraShellIndex in xrange(extraShells):
@@ -208,7 +211,7 @@ class FillSkein:
 		threadSequence = self.threadSequence
 		if layerIndex < 1:
 			threadSequence = ['perimeter', 'loops', 'infill']
-		#euclidean.addToThreadsRemove(extrusionHalfWidth, nestedRings, self.oldOrderedLocation, threadSequence)
+
 		for nestedRing in nestedRings:
 			nestedRing.addToThreads(extrusionHalfWidth, self.oldOrderedLocation, threadSequence)
 

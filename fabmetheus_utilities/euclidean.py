@@ -1908,6 +1908,29 @@ def isPathEntirelyInsideLoops(loops, path):
 			return True
 	return False
 
+
+def getEnclosingLoops(loops, path):
+	'Returns loops within which the path is entirely contained.'
+	enclosingLoops = []
+	for loop in loops:
+		if isPathEntirelyInsideLoop(loop, path):
+			enclosingLoops.append(loop)
+	return enclosingLoops
+
+def getClosestEnclosingLoop(loops, path):
+	'Returns closest loop within which the path is entirely contained.'
+	enclosingLoop = (None,None)#absArea, loop
+	for loop in loops:
+		if isPathEntirelyInsideLoop(loop, path):
+			absArea = abs(getAreaLoop(loop))
+			if enclosingLoop == (None,None):
+				enclosingLoop = (absArea, loop)
+			else:
+				if absArea < enclosingLoop[0]:
+					 enclosingLoop = (absArea, loop)
+				
+	return enclosingLoop[1]
+
 def isPathInsideLoop(loop, path):
 	'Determine if a path is inside another loop.'
 	return isPointInsideLoop(loop, getLeftPoint(path))

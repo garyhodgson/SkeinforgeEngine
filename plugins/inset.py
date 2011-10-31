@@ -41,45 +41,52 @@ class InsetSkein:
 	
 	def inset(self):
 		"Inset the layers"
-		for rotatedLoopLayer in self.gcode.rotatedLoopLayers:
-			self.addInset(rotatedLoopLayer)
-
-	def addInset(self, rotatedLoopLayer):
-		"Add inset to the layer."
-		alreadyFilledArounds = []
-		halfWidth = self.halfPerimeterWidth * 0.7853
-		if rotatedLoopLayer.rotation != None:
-			halfWidth = self.bridgeWidthMultiplier * ((2 * self.nozzleDiameter - self.layerThickness) / 2) * 0.7853
-		extrudateLoops = intercircle.getInsetLoopsFromLoops(halfWidth, rotatedLoopLayer.loops)
-		triangle_mesh.sortLoopsInOrderOfArea(not self.loopOrderAscendingArea, extrudateLoops)
-		z = rotatedLoopLayer.z
-		layer = self.gcode.layers[z]
-		layer.nestedRings = []
 		
-		for loop in extrudateLoops:
-			nestedRing = NestedRing(layer)
+		for (z, layer) in self.gcode.layers.items():
+			halfWidth = self.halfPerimeterWidth * 0.7853
+			if layer.bridgeRotation != None:
+				halfWidth = self.bridgeWidthMultiplier * ((2 * self.nozzleDiameter - self.layerThickness) / 2) * 0.7853
+			
+			alreadyFilledArounds = []
+			
+			for nestedRing in layer.nestedRings:
+				self.addInset(nestedRing, halfWidth, alreadyFilledArounds)
+
+	def addInset(self, nestedRing, halfWidth, alreadyFilledArounds):
+		"Add inset to the layer."
+
+		# Note: inner nested rings have to come first so the intersecting check below does not give a false positive
+		for innerNestedRing in nestedRing.innerNestedRings:
+			self.addInset(innerNestedRing, halfWidth, alreadyFilledArounds)
+					
+		boundary = [nestedRing.getXYBoundaries()]
+		insetBoundaryPerimeter = intercircle.getInsetLoopsFromLoops(halfWidth, boundary)
+		
+		triangle_mesh.sortLoopsInOrderOfArea(not self.loopOrderAscendingArea, insetBoundaryPerimeter)
+		
+		for loop in insetBoundaryPerimeter:
 			centerOutset = intercircle.getLargestCenterOutsetLoopFromLoopRegardless(loop, halfWidth)
 			
-			#print "centerOutset new inset:",centerOutset	
 			"Add the perimeter block remainder of the loop which does not overlap the alreadyFilledArounds loops."
 			if self.overlapRemovalWidthOverPerimeterWidth < 0.1:
-				nestedRing.addBoundaryPerimeter(centerOutset.outset, centerOutset.center)
+				nestedRing.boundaryPerimeter.addPathFromThread(centerOutset.center + [centerOutset.center[0]])
 				break
 			isIntersectingSelf = isIntersectingItself(centerOutset.center, self.overlapRemovalWidth)
-			if isIntersectingWithinLists(centerOutset.center, alreadyFilledArounds) or isIntersectingSelf:
-				self.addGcodeFromPerimeterPaths(nestedRing, isIntersectingSelf, centerOutset.center, alreadyFilledArounds, halfWidth, rotatedLoopLayer)
-			else:
-				nestedRing.addBoundaryPerimeter(centerOutset.outset, centerOutset.center)
-			addAlreadyFilledArounds(alreadyFilledArounds, centerOutset.center, self.overlapRemovalWidth)
-			layer.addNestedRing(nestedRing)
 			
-	def addGcodeFromPerimeterPaths(self, nestedRing, isIntersectingSelf, loop, loopLists, radius, rotatedLoopLayer):
+			if isIntersectingWithinLists(centerOutset.center, alreadyFilledArounds) or isIntersectingSelf:
+				self.addGcodeFromPerimeterPaths(nestedRing, isIntersectingSelf, centerOutset.center, alreadyFilledArounds, halfWidth, boundary)
+			else:
+				nestedRing.boundaryPerimeter.addPathFromThread(centerOutset.center + [centerOutset.center[0]])
+			addAlreadyFilledArounds(alreadyFilledArounds, centerOutset.center, self.overlapRemovalWidth)
+
+				
+	def addGcodeFromPerimeterPaths(self, nestedRing, isIntersectingSelf, loop, alreadyFilledArounds, halfWidth, boundary):
 		"Add the perimeter paths to the output."
 		segments = []
 		outlines = []
 		thickOutlines = []
-		allLoopLists = loopLists[:] + [thickOutlines]
-		aroundLists = loopLists
+		allLoopLists = alreadyFilledArounds[:] + [thickOutlines]
+		aroundLists = alreadyFilledArounds
 		for pointIndex in xrange(len(loop)):
 			pointBegin = loop[pointIndex]
 			pointEnd = loop[(pointIndex + 1) % len(loop)]
@@ -87,15 +94,15 @@ class InsetSkein:
 				if euclidean.isLineIntersectingLoops(outlines, pointBegin, pointEnd):
 					segments += getSegmentsFromLoopListsPoints(allLoopLists, pointBegin, pointEnd)
 				else:
-					segments += getSegmentsFromLoopListsPoints(loopLists, pointBegin, pointEnd)
+					segments += getSegmentsFromLoopListsPoints(alreadyFilledArounds, pointBegin, pointEnd)
 				addSegmentOutline(False, outlines, pointBegin, pointEnd, self.overlapRemovalWidth)
 				addSegmentOutline(True, thickOutlines, pointBegin, pointEnd, self.overlapRemovalWidth)
 			else:
-				segments += getSegmentsFromLoopListsPoints(loopLists, pointBegin, pointEnd)
+				segments += getSegmentsFromLoopListsPoints(alreadyFilledArounds, pointBegin, pointEnd)
 		perimeterPaths = []
 		path = []
-		muchSmallerThanRadius = 0.1 * radius
-		segments = getInteriorSegments(rotatedLoopLayer.loops, segments)
+		muchSmallerThanRadius = 0.1 * halfWidth
+		segments = getInteriorSegments(boundary, segments)
 		for segment in segments:
 			pointBegin = segment[0].point
 			if not isCloseToLast(perimeterPaths, pointBegin, muchSmallerThanRadius):
@@ -109,10 +116,10 @@ class InsetSkein:
 				connectedBeginning = lastPath[:-1] + firstPath
 				perimeterPaths[0] = connectedBeginning
 				perimeterPaths.remove(lastPath)
-		muchGreaterThanRadius = 6.0 * radius
+		muchGreaterThanRadius = 6.0 * halfWidth
 		for perimeterPath in perimeterPaths:
 			if euclidean.getPathLength(perimeterPath) > muchGreaterThanRadius:
-				nestedRing.addPerimeterGcodeFromThread(perimeterPath)
+				nestedRing.boundaryPerimeter.addPathFromThread(perimeterPath)
 
 def addAlreadyFilledArounds(alreadyFilledArounds, loop, radius):
 	"Add already filled loops around loop to alreadyFilledArounds."

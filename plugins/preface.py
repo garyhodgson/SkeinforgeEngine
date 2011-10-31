@@ -13,6 +13,7 @@ License:
 from config import config
 from gcode import GcodeCommand, Layer, BoundaryPerimeter, NestedRing
 from time import strftime
+from fabmetheus_utilities import euclidean
 import gcodes
 import logging
 import os
@@ -45,35 +46,52 @@ class PrefaceSkein:
 		for rotatedLoopLayer in self.gcode.rotatedLoopLayers:
 			self.addPrefaceToGcode(rotatedLoopLayer)
 		
-		self.addEndCommandsToGcode()
-		
-	def getLinesFromFile(self, fileName):
-		lines = []
-		absPath = os.path.join('alterations', fileName)
-		try:			
-			f = open(absPath, 'r')
-			lines = f.read().replace('\r', '\n').replace('\n\n', '\n').split('\n')
-			f.close()
-		except IOError as e:
-			logger.warning("Unable to open file: %s", absPath)
-		return lines
+		self.addEndCommandsToGcode()		
+	
 	
 	def addPrefaceToGcode(self, rotatedLoopLayer):
 		z = rotatedLoopLayer.z
-		layer = Layer(z, self.gcode)
-		
+		layer = Layer(z, self.gcode)		
 		decimalPlaces = self.gcode.runtimeParameters.decimalPlaces
 
 		if rotatedLoopLayer.rotation != None:
 			layer.bridgeRotation = complex(rotatedLoopLayer.rotation)
-			
-		for loop in rotatedLoopLayer.loops:
-			nestedRing = NestedRing(layer)
-			nestedRing.addBoundaryPerimeter(loop)
-			layer.addNestedRing(nestedRing)
 		
+		loops = rotatedLoopLayer.loops
+		internalLoops = self.createLoopHierarchy(loops)
+		
+		nestRingPlaceholder = {}
+		for loop in loops:
+			nestedRing = NestedRing(z, self.gcode.runtimeParameters)
+			nestedRing.setBoundaryPerimeter(loop)
+			nestRingPlaceholder[str(loop)] = nestedRing 
+		
+		for internalLoop in internalLoops:
+			parent = internalLoops[internalLoop]
+			child = loops[internalLoop]
+			childNestedRing = nestRingPlaceholder[str(loops[internalLoop])]
+			
+			if parent == None:
+				layer.addNestedRing(childNestedRing)
+			else:
+				parentNestedRing = nestRingPlaceholder[str(internalLoops[internalLoop])]
+				parentNestedRing.innerNestedRings.append(childNestedRing)
+				 
 		self.gcode.layers[z] = layer
 
+	def createLoopHierarchy(self, loops):
+		internalLoops = {}
+		
+		for (loopIndex, loop) in enumerate(loops):
+			internalLoops[loopIndex] = []
+			otherLoops = []
+			for beforeIndex in xrange(loopIndex):
+				otherLoops.append(loops[beforeIndex])
+			for afterIndex in xrange(loopIndex + 1, len(loops)):
+				otherLoops.append(loops[afterIndex])
+			internalLoops[loopIndex] = euclidean.getClosestEnclosingLoop(otherLoops, loop)
+		return internalLoops
+	
 	def addStartCommandsToGcode(self):		
 		if config.get(name, 'start.file') != None:
 			for line in self.getLinesFromFile(self.startFile):
@@ -93,3 +111,13 @@ class PrefaceSkein:
 			for line in self.getLinesFromFile(self.endFile):
 				self.gcode.endGcodeCommands.append(line)
 
+	def getLinesFromFile(self, fileName):
+		lines = []
+		absPath = os.path.join('alterations', fileName)
+		try:			
+			f = open(absPath, 'r')
+			lines = f.read().replace('\r', '\n').replace('\n\n', '\n').split('\n')
+			f.close()
+		except IOError as e:
+			logger.warning("Unable to open file: %s", absPath)
+		return lines

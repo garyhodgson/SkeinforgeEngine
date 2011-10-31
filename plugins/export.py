@@ -38,7 +38,12 @@ class ExportSkein:
 		
 	def getReplaceableExportGcode(self, nameOfReplaceFile, replaceableExportGcode):
 		'Get text with strings replaced according to replace.csv file.'
+		
 		fullReplaceFilePath = os.path.join('alterations', nameOfReplaceFile)
+		
+		if self.nameOfReplaceFile == '' or not os.path.exists(fullReplaceFilePath):
+			return replaceableExportGcode
+					
 		fullReplaceText = archive.getFileText(fullReplaceFilePath)
 		replaceLines = archive.getTextLines(fullReplaceText)
 		if len(replaceLines) < 1:
@@ -66,12 +71,12 @@ class ExportSkein:
 				exportFileName += '.' + string.replace(profileName, ' ', '_')
 		exportFileName += '.' + config.get(name, 'file.extension')
 		
+		replaceableExportGcode = self.getReplaceableExportGcode(self.nameOfReplaceFile, self.gcode.getGcodeText())
+		archive.writeFileText(exportFileName, replaceableExportGcode)
+		
 		if self.savePenultimateGcode:
 			fileNamePenultimate = filename[: filename.rfind('.')] + '.penultimate.gcode'
 			archive.writeFileText(fileNamePenultimate, str(self.gcode))
 			logger.info('Penultimate gcode exported to: %s', fileNamePenultimate)
-
-		replaceableExportGcode = self.getReplaceableExportGcode(self.nameOfReplaceFile, self.gcode.getGcodeText())
-		archive.writeFileText(exportFileName, replaceableExportGcode)
-			
+	
 		logger.info('Gcode exported to: %s', archive.getSummarizedFileName(exportFileName))

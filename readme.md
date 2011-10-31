@@ -16,6 +16,8 @@ A fork of Enrique's [Skeinforge](http://skeinforge.com), taken from ahmetcemtura
   * Only python 2.7 is supported.
   * No GUI.
   * Supports only stepper extruders and volumetric extrusion.
+  * Currently the retraction is hardcoded to 0.7mm until I work out how to get the next coordinate from the dat structure
+  * Fill option extrusion.sequence.print.order are currently inactive
 
 ## Running
   * python ./skeinforge_engine.py [-h] [-c config] [-p profile] file

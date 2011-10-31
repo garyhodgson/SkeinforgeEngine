@@ -66,9 +66,8 @@ def main():
 	profileName = config.get('profile', 'name')
 	logger.info("Profile: %s", profileName)
 	logger.debug("Plugin Sequence: %s", pluginSequence)
-	
-	verbose = config.getboolean('general', 'verbose.gcode')
-	gcode = Gcode(verbose)
+
+	gcode = Gcode()
 	gcode.runtimeParameters.profileName = profileName
 	gcode.runtimeParameters.inputFilename = inputFilename
 	getCraftedTextFromPlugins(pluginSequence[:], gcode)
