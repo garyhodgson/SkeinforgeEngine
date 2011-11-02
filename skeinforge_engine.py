@@ -29,7 +29,8 @@ def getCraftedTextFromPlugins(pluginSequence, gcode):
 	for plugin in pluginSequence:
 		pluginModule = import_module(plugin)
 		if pluginModule != None:
-			memory_tracker.tracker.create_snapshot('Before %s action' % plugin)
+			if gcode.runtimeParameters.profileMemory:
+				memory_tracker.create_snapshot('Before %s action' % plugin)
 			pluginModule.performAction(gcode)
 			logger.info('%s plugin took %s seconds.', plugin.capitalize(), timedelta(seconds=time.time() - lastProcedureTime).total_seconds())
 			lastProcedureTime = time.time()
@@ -69,19 +70,28 @@ def main():
 	logger.debug("Plugin Sequence: %s", pluginSequence)
 
 	gcode = Gcode()
-	memory_tracker.tracker.track_object(gcode)
-	memory_tracker.tracker.create_snapshot('Start')
+	
+	if gcode.runtimeParameters.profileMemory:
+		memory_tracker.track_object(gcode)
+		memory_tracker.create_snapshot('Start')
 	
 	gcode.runtimeParameters.profileName = profileName
 	gcode.runtimeParameters.inputFilename = inputFilename
 	getCraftedTextFromPlugins(pluginSequence[:], gcode)
 	
-	memory_tracker.tracker.create_snapshot('End')
+	
 	gcode.runtimeParameters.endTime = time.time()
 	
 	logger.info('It took %s seconds to complete.', timedelta(seconds=gcode.runtimeParameters.endTime - gcode.runtimeParameters.startTime).total_seconds())
-	
-	memory_tracker.tracker.stats.print_summary()
+
+	if gcode.runtimeParameters.profileMemory:
+		memory_tracker.create_snapshot('End')
+		memory_tracker.tracker.stats.print_summary()
+		if config.getboolean('general', 'profile.memory.export.data'):
+			memory_tracker.tracker.stats.dump_stats('%s.memory_tracker.dat'%inputFilename)
+		if config.getboolean('general', 'profile.memory.export.html'):
+			from pympler.classtracker_stats import HtmlStats
+			HtmlStats(tracker=memory_tracker.tracker).create_html('%s.memory_tracker.html'%inputFilename)
 	
 def handleError(self, record):
 	traceback.print_stack()

@@ -23,13 +23,21 @@ import multiprocessing
 import os
 import sys
 import types
+from utilities import memory_tracker
 
 logger = logging.getLogger(__name__)
 name = __name__
 
 def performAction(gcode):
 	"Inset the gcode."
-	InsetSkein(gcode).inset()
+	
+	i = InsetSkein(gcode)
+	if gcode.runtimeParameters.profileMemory:
+            memory_tracker.track_object(i)
+	i.inset()
+	
+	if gcode.runtimeParameters.profileMemory:
+		memory_tracker.create_snapshot("After inset")
 
 class InsetSkein:
 	

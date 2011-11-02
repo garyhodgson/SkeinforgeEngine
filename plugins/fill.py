@@ -16,6 +16,7 @@ from fabmetheus_utilities.vector3 import Vector3
 import logging
 import math
 import sys
+from utilities import memory_tracker
 
 logger = logging.getLogger(__name__)
 name = __name__
@@ -25,7 +26,13 @@ def performAction(gcode):
 	if not config.getboolean(name, 'active'):
 		logger.info("%s plugin is inactive", name.capitalize())
 		return
-	FillSkein(gcode).fill()
+	
+	f = FillSkein(gcode)
+	if gcode.runtimeParameters.profileMemory:
+            memory_tracker.track_object(f)
+	f.fill()
+	if gcode.runtimeParameters.profileMemory:
+		memory_tracker.create_snapshot("After fill")
 	
 class FillSkein:
 	'A class to fill a skein of extrusions.'

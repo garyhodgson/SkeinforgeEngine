@@ -18,13 +18,19 @@ import logging
 import os
 import string
 import time
+from utilities import memory_tracker
 
 logger = logging.getLogger('export')
 name = 'export'
 
 def performAction(gcode):
 	'Export a gcode linear move text.'
-	ExportSkein(gcode).export()
+	e = ExportSkein(gcode)
+	if gcode.runtimeParameters.profileMemory:
+            memory_tracker.track_object(e)
+	e.export()
+	if gcode.runtimeParameters.profileMemory:
+		memory_tracker.create_snapshot("After export")
 
 class ExportSkein:
 	'A class to export a skein of extrusions.'

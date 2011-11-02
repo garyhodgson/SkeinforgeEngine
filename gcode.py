@@ -91,6 +91,8 @@ class Layer:
         self.runtimeParameters = runtimeParameters
         self.bridgeRotation = None
         self.nestedRings = []
+        if runtimeParameters.profileMemory:
+            memory_tracker.track_object(self)
         
     def __str__(self):
         '''Get the string representation.'''
@@ -117,6 +119,10 @@ class Layer:
 
 class NestedRing:
     def __init__(self, z, runtimeParameters):
+       
+        if runtimeParameters.profileMemory:
+            memory_tracker.track_object(self)
+        
         self.runtimeParameters = runtimeParameters
         self.decimalPlaces = self.runtimeParameters.decimalPlaces
         self.z = z
@@ -570,6 +576,8 @@ class RuntimeParameters:
     def __init__(self):
         self.startTime = time.time()
         self.endTime = None
+        
+        self.profileMemory = config.getboolean('general', 'profile.memory')
         
         self.decimalPlaces = config.getfloat('general', 'decimal.places')
         self.layerThickness = config.getfloat('carve', 'layer.height')
