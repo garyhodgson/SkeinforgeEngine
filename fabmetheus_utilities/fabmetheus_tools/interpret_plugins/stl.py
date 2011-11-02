@@ -55,7 +55,18 @@ def addFacesGivenText( stlText, triangleMesh, vertexIndexTable ):
 def addFacesGivenVertexes( triangleMesh, vertexIndexTable, vertexes ):
 	"Add faces given stl text."
 	for vertexIndex in xrange( 0, len(vertexes), 3 ):
-		triangleMesh.faces.append( getFaceGivenLines( triangleMesh, vertexIndex, vertexIndexTable, vertexes ) )
+		faceGivenLines = face.Face()
+		faceGivenLines.index = len( triangleMesh.faces )
+		for i in xrange( vertexIndex, vertexIndex + 3 ):
+			vertex = vertexes[i]
+			vertexUniqueIndex = len( vertexIndexTable )
+			if str(vertex) in vertexIndexTable:
+				vertexUniqueIndex = vertexIndexTable[ str(vertex) ]
+			else:
+				vertexIndexTable[ str(vertex) ] = vertexUniqueIndex
+				triangleMesh.vertexes.append(vertex)
+			faceGivenLines.vertexIndexes.append( vertexUniqueIndex )
+		triangleMesh.faces.append( faceGivenLines )
 
 def getCarving(fileName=''):
 	"Get the triangle mesh for the stl file."
@@ -75,21 +86,6 @@ def getCarving(fileName=''):
 		addFacesGivenBinary( stlData, triangleMesh, vertexIndexTable )
 	return triangleMesh
 
-def getFaceGivenLines( triangleMesh, vertexStartIndex, vertexIndexTable, vertexes ):
-	"Add face given line index and lines."
-	faceGivenLines = face.Face()
-	faceGivenLines.index = len( triangleMesh.faces )
-	for vertexIndex in xrange( vertexStartIndex, vertexStartIndex + 3 ):
-		vertex = vertexes[vertexIndex]
-		vertexUniqueIndex = len( vertexIndexTable )
-		if str(vertex) in vertexIndexTable:
-			vertexUniqueIndex = vertexIndexTable[ str(vertex) ]
-		else:
-			vertexIndexTable[ str(vertex) ] = vertexUniqueIndex
-			triangleMesh.vertexes.append(vertex)
-		faceGivenLines.vertexIndexes.append( vertexUniqueIndex )
-	return faceGivenLines
-
 def getFloat(floatString):
 	"Get the float, replacing commas if necessary because an inferior program is using a comma instead of a point for the decimal point."
 	try:
@@ -103,7 +99,10 @@ def getFloatGivenBinary( byteIndex, stlData ):
 
 def getVertexGivenBinary( byteIndex, stlData ):
 	"Get vertex given stl vertex line."
-	return Vector3( getFloatGivenBinary( byteIndex, stlData ), getFloatGivenBinary( byteIndex + 4, stlData ), getFloatGivenBinary( byteIndex + 8, stlData ) )
+	x = unpack('f', stlData[ byteIndex : byteIndex + 4 ] )[0]
+	y = unpack('f', stlData[ byteIndex + 4 : byteIndex + 8 ] )[0]
+	z = unpack('f', stlData[ byteIndex + 8 : byteIndex + 12 ] )[0]
+	return Vector3( x,y,z )
 
 def getVertexGivenLine(line):
 	"Get vertex given stl vertex line."

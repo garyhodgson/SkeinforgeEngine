@@ -8,7 +8,6 @@ from datetime import timedelta
 from fabmetheus_utilities import archive
 from gcode import Gcode
 from importlib import import_module
-from plugins import *
 import os
 import sys
 import time
@@ -16,6 +15,7 @@ import re
 import logging
 import traceback
 import argparse
+from utilities import memory_tracker
 
 
 __plugins_path__ = 'plugins'
@@ -29,6 +29,7 @@ def getCraftedTextFromPlugins(pluginSequence, gcode):
 	for plugin in pluginSequence:
 		pluginModule = import_module(plugin)
 		if pluginModule != None:
+			memory_tracker.tracker.create_snapshot('Before %s action' % plugin)
 			pluginModule.performAction(gcode)
 			logger.info('%s plugin took %s seconds.', plugin.capitalize(), timedelta(seconds=time.time() - lastProcedureTime).total_seconds())
 			lastProcedureTime = time.time()
@@ -68,17 +69,25 @@ def main():
 	logger.debug("Plugin Sequence: %s", pluginSequence)
 
 	gcode = Gcode()
+	memory_tracker.tracker.track_object(gcode)
+	memory_tracker.tracker.create_snapshot('Start')
+	
 	gcode.runtimeParameters.profileName = profileName
 	gcode.runtimeParameters.inputFilename = inputFilename
 	getCraftedTextFromPlugins(pluginSequence[:], gcode)
 	
+	memory_tracker.tracker.create_snapshot('End')
 	gcode.runtimeParameters.endTime = time.time()
 	
 	logger.info('It took %s seconds to complete.', timedelta(seconds=gcode.runtimeParameters.endTime - gcode.runtimeParameters.startTime).total_seconds())
-
+	
+	memory_tracker.tracker.stats.print_summary()
+	
 def handleError(self, record):
 	traceback.print_stack()
 
 if __name__ == "__main__":
 	logging.Handler.handleError = handleError
+	
+	
 	main()

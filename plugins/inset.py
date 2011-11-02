@@ -10,14 +10,19 @@ License:
 	GNU Affero General Public License http://www.gnu.org/licenses/agpl.html
 """
 
-from config import config
+from config import config, config
 from fabmetheus_utilities import archive, euclidean, intercircle
 from fabmetheus_utilities.geometry.solids import triangle_mesh
+from gcode import GcodeCommand, Layer, BoundaryPerimeter, NestedRing
+from multiprocessing import Pool, Manager, Process
+from utilities import class_pickler
+import copy_reg
+import logging
 import math
+import multiprocessing
 import os
 import sys
-import logging
-from gcode import GcodeCommand, Layer, BoundaryPerimeter, NestedRing
+import types
 
 logger = logging.getLogger(__name__)
 name = __name__
@@ -27,6 +32,7 @@ def performAction(gcode):
 	InsetSkein(gcode).inset()
 
 class InsetSkein:
+	
 	"A class to inset a skein of extrusions."
 	def __init__(self, gcode):
 		self.gcode = gcode
@@ -38,19 +44,38 @@ class InsetSkein:
 		self.perimeterWidth = self.gcode.runtimeParameters.perimeterWidth
 		self.halfPerimeterWidth = 0.5 * self.perimeterWidth
 		self.overlapRemovalWidth = self.perimeterWidth * (0.7853) * self.overlapRemovalWidthOverPerimeterWidth
-	
+		self.multiprocess = config.getboolean(name, 'multiprocess')
+		
 	def inset(self):
 		"Inset the layers"
 		
-		for (z, layer) in self.gcode.layers.items():
-			halfWidth = self.halfPerimeterWidth * 0.7853
-			if layer.bridgeRotation != None:
-				halfWidth = self.bridgeWidthMultiplier * ((2 * self.nozzleDiameter - self.layerThickness) / 2) * 0.7853
+		if self.multiprocess:
+			manager = Manager()
+			sharedLayers = manager.list(self.gcode.layers.values())
 			
-			alreadyFilledArounds = []
+			p = Pool()
+			resultLayers = p.map(self.addInsetForLayer, sharedLayers)
+			p.close()
+			p.join()
 			
-			for nestedRing in layer.nestedRings:
-				self.addInset(nestedRing, halfWidth, alreadyFilledArounds)
+			for resultLayer in resultLayers:
+				self.gcode.layers[resultLayer.z] = resultLayer
+			
+		else:
+			
+			for x in self.gcode.layers.values():
+				self.addInsetForLayer(x)
+			
+	def addInsetForLayer(self, layer):
+		halfWidth = self.halfPerimeterWidth * 0.7853
+		if layer.bridgeRotation != None:
+			halfWidth = self.bridgeWidthMultiplier * ((2 * self.nozzleDiameter - self.layerThickness) / 2) * 0.7853
+		
+		alreadyFilledArounds = []
+		
+		for nestedRing in layer.nestedRings:
+			self.addInset(nestedRing, halfWidth, alreadyFilledArounds)
+		return layer
 
 	def addInset(self, nestedRing, halfWidth, alreadyFilledArounds):
 		"Add inset to the layer."
@@ -256,3 +281,5 @@ def isIntersectingWithinLists(loop, loopLists):
 		if getIsIntersectingWithinList(loop, loopList):
 			return True
 	return False
+
+copy_reg.pickle(types.MethodType, class_pickler._pickle_method, class_pickler._unpickle_method)

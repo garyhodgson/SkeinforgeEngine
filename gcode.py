@@ -11,7 +11,8 @@ import gcodes
 import time
 import weakref
 import sys
-            
+from utilities import memory_tracker
+
 class Gcode:
     '''Runtime data for conversion of 3D model to gcode.'''
     
@@ -84,8 +85,9 @@ class Gcode:
         return output.getvalue()
 
 class Layer:
-    def __init__(self, z, runtimeParameters):
+    def __init__(self, z, index, runtimeParameters):
         self.z = z
+        self.index = index
         self.runtimeParameters = runtimeParameters
         self.bridgeRotation = None
         self.nestedRings = []
@@ -94,7 +96,7 @@ class Layer:
         '''Get the string representation.'''
         output = StringIO.StringIO()
         
-        output.write('%2slayer: %s\n' % ('', self.z))
+        output.write('%2slayer (%s) z:%s\n' % ('', self.index,self.z))
         if self.bridgeRotation != None:
             output.write('bridgeRotation %s, ' % self.bridgeRotation)
             

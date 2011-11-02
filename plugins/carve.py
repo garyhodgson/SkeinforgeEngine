@@ -65,8 +65,7 @@ class CarveSkein:
 		self.gcode.carvingCornerMinimum = carving.getCarveCornerMinimum()
 		
 		self.gcode.rotatedLoopLayers = rotatedLoopLayers[self.layerPrintFrom : self.layerPrintTo]
-		
-		
+				
 		if config.getboolean(name, 'debug'):
 			filename = self.gcode.runtimeParameters.inputFilename
 			svgFilename = filename[: filename.rfind('.')] + '.carving.svg'

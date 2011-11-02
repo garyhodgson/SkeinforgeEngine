@@ -43,16 +43,17 @@ class PrefaceSkein:
 		
 		self.addStartCommandsToGcode()
 		
-		for rotatedLoopLayer in self.gcode.rotatedLoopLayers:
-			self.addPrefaceToGcode(rotatedLoopLayer)
+		for (index, rotatedLoopLayer) in enumerate(self.gcode.rotatedLoopLayers):
+			self.addPrefaceToGcode(index, rotatedLoopLayer)
 		
 		self.addEndCommandsToGcode()		
 	
 	
-	def addPrefaceToGcode(self, rotatedLoopLayer):
-		z = rotatedLoopLayer.z
-		layer = Layer(z, self.gcode)		
+	def addPrefaceToGcode(self, index, rotatedLoopLayer):
 		decimalPlaces = self.gcode.runtimeParameters.decimalPlaces
+		z = round(rotatedLoopLayer.z, 3)
+		layer = Layer(z, index, self.gcode.runtimeParameters)		
+		
 
 		if rotatedLoopLayer.rotation != None:
 			layer.bridgeRotation = complex(rotatedLoopLayer.rotation)
