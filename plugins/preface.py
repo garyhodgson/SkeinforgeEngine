@@ -106,7 +106,7 @@ class PrefaceSkein:
 			self.gcode.startGcodeCommands.append(GcodeCommand(gcodes.START_AT_HOME))
 		if self.resetExtruder:
 			self.gcode.startGcodeCommands.append(GcodeCommand(gcodes.RESET_EXTRUDER_DISTANCE, [('E', '0')]))
-
+		
 	def addEndCommandsToGcode(self):
 		if config.get(name, 'end.file') != None:
 			for line in self.getLinesFromFile(self.endFile):

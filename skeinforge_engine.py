@@ -86,7 +86,8 @@ def main():
 
 	if gcode.runtimeParameters.profileMemory:
 		memory_tracker.create_snapshot('End')
-		memory_tracker.tracker.stats.print_summary()
+		if config.getboolean('general', 'profile.memory.print.summary'):
+			memory_tracker.tracker.stats.print_summary()
 		if config.getboolean('general', 'profile.memory.export.data'):
 			memory_tracker.tracker.stats.dump_stats('%s.memory_tracker.dat'%inputFilename)
 		if config.getboolean('general', 'profile.memory.export.html'):

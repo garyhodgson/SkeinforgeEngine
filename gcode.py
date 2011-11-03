@@ -1,17 +1,17 @@
 from collections import OrderedDict
 from config import config
 from decimal import Decimal, ROUND_HALF_UP
-from fabmetheus_utilities.vector3 import Vector3
 from fabmetheus_utilities import archive, svg_writer, euclidean
+from fabmetheus_utilities.vector3 import Vector3
 from math import log10, floor, pi
 from plugins.speed import SpeedSkein
+from utilities import memory_tracker
 import StringIO
 import decimal
 import gcodes
-import time
-import weakref
+import math
 import sys
-from utilities import memory_tracker
+import time
 
 class Gcode:
     '''Runtime data for conversion of 3D model to gcode.'''
@@ -75,9 +75,21 @@ class Gcode:
         
         for startCommand in self.startGcodeCommands:
             output.write(printCommand(startCommand, self.verbose))
-
+        
+        lookaheadStartVector = None
+        lookaheadKeyIndex = 0
+        layerCount = len(self.layers)
         for key in sorted(self.layers.iterkeys()):
-            output.write(self.layers[key].getGcodeText(output))
+            lookaheadStartPoint = None
+            lookaheadKeyIndex = lookaheadKeyIndex + 1
+            if lookaheadKeyIndex < layerCount:
+                lookaheadKey = self.layers.keys()[lookaheadKeyIndex]
+                lookaheadLayer = self.layers[lookaheadKey]
+                lookaheadStartPoint = lookaheadLayer.getStartPoint()
+                lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, lookaheadLayer.z)
+                #print "Layer lookaheadStartVector", lookaheadStartVector
+
+            output.write(self.layers[key].getGcodeText(output, lookaheadStartVector))
 
         for endCommand in self.endGcodeCommands:
             output.write(printCommand(endCommand, self.verbose))
@@ -98,7 +110,7 @@ class Layer:
         '''Get the string representation.'''
         output = StringIO.StringIO()
         
-        output.write('%2slayer (%s) z:%s\n' % ('', self.index,self.z))
+        output.write('%2slayer (%s) z:%s\n' % ('', self.index, self.z))
         if self.bridgeRotation != None:
             output.write('bridgeRotation %s, ' % self.bridgeRotation)
             
@@ -108,11 +120,31 @@ class Layer:
            
         return output.getvalue()
     
-    def getGcodeText(self, output):
+    def getGcodeText(self, output, parentLookaheadStartVector=None):
         '''Final Gcode representation.'''
-        for nestedRing in self.nestedRings:
-            output.write(nestedRing.getGcodeText(output))
+        
+        if self.runtimeParameters.activateDimension:
+            if self.runtimeParameters.extrusionUnitsRelative:
+                output.write('%s\n' % GcodeCommand(gcodes.RELATIVE_EXTRUSION_DISTANCE))
+            else:
+                output.write('%s\n' % GcodeCommand(gcodes.ABSOLUTE_EXTRUSION_DISTANCE))
+                
+        nestedRingCount = len(self.nestedRings)
+        for (index, nestedRing) in enumerate(self.nestedRings):
+            lookaheadStartPoint = None
+            if index + 1 < nestedRingCount:
+                lookaheadStartPoint = self.nestedRings[index + 1].boundaryPerimeter.startPoint
+                lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
+                #print "NestedRing lookaheadStartVector", lookaheadStartVector
+            else:
+                lookaheadStartVector = parentLookaheadStartVector
+            
+            output.write(nestedRing.getGcodeText(output, lookaheadStartVector))
     
+    def getStartPoint(self):
+        if len(self.nestedRings) > 0:
+            return self.nestedRings[0].getStartPoint()
+        
     def addNestedRing(self, nestedRing):
         self.nestedRings.append(nestedRing)
    
@@ -127,7 +159,7 @@ class NestedRing:
         self.decimalPlaces = self.runtimeParameters.decimalPlaces
         self.z = z
         
-        self.boundaryPerimeters = None
+        self.boundaryPerimeter = None
         
         self.loops = []
         
@@ -169,7 +201,7 @@ class NestedRing:
         
     def __str__(self):
         output = StringIO.StringIO()
-        output.write('\n%4s#########################################'%'')
+        output.write('\n%4s#########################################' % '')
         output.write('\n%8snestedRing:' % '')
         
         output.write('\n%10sboundaryPerimeter:\n' % '')
@@ -200,24 +232,72 @@ class NestedRing:
         for infillPath in self.infillPaths:
             output.write(infillPath)
             
-        output.write('\n%4s###### end nestedRing ########################'%'')
+        output.write('\n%4s###### end nestedRing ########################' % '')
                     
         return output.getvalue()
     
-    def getGcodeText(self, output):
+    def getGcodeText(self, output, parentLookaheadStartVector=None):
         '''Final Gcode representation.'''        
         
-        output.write(self.boundaryPerimeter.getGcodeText(output))
+        loopsCount = len(self.loops)
+        infillPathsCount = len(self.infillPaths)
         
-        for loop in self.loops:
-            output.write(loop.getGcodeText(output))
+        if loopsCount > 0:
+            lookaheadStartPoint = self.loops[0].startPoint
+            lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
+        elif infillPathsCount > 0:
+            lookaheadStartPoint = self.infillPaths[0].startPoint
+            lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
+        else :
+            lookaheadStartVector = parentLookaheadStartVector
+            
+        output.write(self.boundaryPerimeter.getGcodeText(output, lookaheadStartVector))
+        
+        
+        for (index, loop) in enumerate(self.loops):
+            if index + 1 < loopsCount:
+                lookaheadStartPoint = self.loops[index + 1].startPoint
+                lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
+                #print "Next Loop lookaheadStartVector", lookaheadStartVector
+            else:
+                if infillPathsCount > 0:
+                    lookaheadStartPoint = self.infillPaths[0].startPoint
+                    lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
+                    #print "Next Infill lookaheadStartVector", lookaheadStartVector
+                else:
+                    lookaheadStartVector = parentLookaheadStartVector
+                    #print "Next NestedRing or Layer  lookaheadStartVector", lookaheadStartVector
+                    
+            output.write(loop.getGcodeText(output, lookaheadStartVector))
+            
+            
             
         for infillPath in self.infillPaths:
-            output.write(infillPath.getGcodeText(output))
+            if index + 1 < infillPathsCount:
+                lookaheadStartPoint = self.infillPaths[index + 1].startPoint
+                lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
+                #print "Next InfillPath lookaheadStartVector", lookaheadStartVector
+            else:
+                if infillPathsCount > 0:
+                    lookaheadStartPoint = self.infillPaths[0].startPoint
+                    lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
+                    #print "Next Infill lookaheadStartVector", lookaheadStartVector
+                else:
+                    lookaheadStartVector = parentLookaheadStartVector
+                    #print "Next NestedRing or Layer lookaheadStartVector", lookaheadStartVector
+                    
+            output.write(infillPath.getGcodeText(output, lookaheadStartVector))
+            
+            
+        # TODO!!!!!!!!!! 
             
         for innerNestedRing in self.innerNestedRings:
-            output.write(innerNestedRing.getGcodeText(output))
-    
+            output.write(innerNestedRing.getGcodeText(output, None))
+            
+    def getStartPoint(self):
+        if self.boundaryPerimeter != None:
+            return self.boundaryPerimeter.startPoint
+
     def offset(self, offset):
         'Moves the nested ring by the offset amount'
         for innerNestedRing in self.innerNestedRings:
@@ -245,7 +325,7 @@ class NestedRing:
             perimeterLoop = boundaryPointsLoop
             
         if euclidean.isWiddershins(perimeterLoop):
-            self.boundaryPerimeter.type  = 'outer'
+            self.boundaryPerimeter.type = 'outer'
         else:
             self.boundaryPerimeter.type = 'inner'
         thread = perimeterLoop + [perimeterLoop[0]]
@@ -318,25 +398,9 @@ class NestedRing:
         
     def addToThreads(self, extrusionHalfWidth, oldOrderedLocation, threadSequence):
         'Add to paths from the last location. perimeter>inner >fill>paths or fill> perimeter>inner >paths'
-        
-        # Necessary? already there? needed for ordering?
-        #threadFunctionDictionary = {
-        #    'infill' : self.transferInfillPaths, 'loops' : self.transferClosestFillLoops, 'perimeter' : self.addPerimeterInner}
-        #for threadType in threadSequence:
-        #    threadFunctionDictionary[threadType](extrusionHalfWidth, oldOrderedLocation, threadSequence)
-        
-        #self.transferClosestFillLoops(extrusionHalfWidth, oldOrderedLocation, threadSequence)
         self.addPerimeterInner(extrusionHalfWidth, oldOrderedLocation, threadSequence)
         self.transferInfillPaths(extrusionHalfWidth, oldOrderedLocation, threadSequence)
         
-    def transferClosestFillLoops(self, extrusionHalfWidth, oldOrderedLocation, threadSequence):
-        'Transfer closest fill loops.'
-        if len(self.extraLoops) < 1:
-            return
-        remainingFillLoops = self.extraLoops[:]
-        while len(remainingFillLoops) > 0:
-            euclidean.transferClosestFillLoop(extrusionHalfWidth, oldOrderedLocation, remainingFillLoops, self)
-
     def transferInfillPaths(self, extrusionHalfWidth, oldOrderedLocation, threadSequence):
         'Transfer the infill paths.'
         euclidean.transferClosestPaths(oldOrderedLocation, self.infillPathsHolder[:], self)
@@ -346,7 +410,7 @@ class NestedRing:
         for loop in self.extraLoops:
             innerPerimeterLoop = Loop(self.z, self.runtimeParameters)
             if euclidean.isWiddershins(loop + [loop[0]]):
-                innerPerimeterLoop.type  = 'outer'
+                innerPerimeterLoop.type = 'outer'
             else:
                 innerPerimeterLoop.type = 'inner'
             innerPerimeterLoop.addPathFromThread(loop + [loop[0]])
@@ -359,8 +423,6 @@ class Path:
     ''' A Path the tool will follow within a nested ring.'''
     def __init__(self, z, runtimeParameters):
         
-        #self.nestedRing = weakref.proxy(nestedRing)
-        #self.nestedRing = nestedRing
         self.z = z
         self.runtimeParameters = runtimeParameters
         self.verbose = self.runtimeParameters.verboseGcode
@@ -409,16 +471,16 @@ class Path:
             output.write('%16s%s' % ('', printCommand(x)))
         return output.getvalue()    
         
-    def getGcodeText(self, output, returnCached=False):
+    def getGcodeText(self, output, lookaheadStartVector=None):
         '''Final Gcode representation.'''
-        if not returnCached:
-            self.generateGcode()
+        self.generateGcode(lookaheadStartVector)
             
         for command in self.gcodeCommands:
             output.write('%s' % printCommand(command, self.verbose))
 
-    def generateGcode(self):
+    def generateGcode(self, lookaheadStartVector=None):
         'Transforms paths and points to gcode'
+        
         gcodeArgs = [('X', round(self.startPoint.real, self.decimalPlaces)),
                      ('Y', round(self.startPoint.imag, self.decimalPlaces)),
                      ('Z', round(self.z, self.decimalPlaces))]
@@ -432,12 +494,12 @@ class Path:
         if self.activateDimension:
             # note hardcoded because of retraction calculation
             if self.previousPoint == None:
-                extrusionDistance = 0.0
+                retractionExtrusionDistance = 0.0
             else:
-                extrusionDistance = 0.7
+                retractionExtrusionDistance = 0.7
                 
             self.previousPoint = self.startPoint
-            self.gcodeCommands.extend(self.getRetractReverseCommands(extrusionDistance))
+            self.gcodeCommands.extend(self.getRetractReverseCommands(retractionExtrusionDistance))
             
         self.gcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_ON))        
         
@@ -447,26 +509,57 @@ class Path:
                          ('Z', round(self.z, self.decimalPlaces))]
             
             if self.activateSpeed:
-                gcodeArgs.append(('F', self.perimeterFeedRateMinute))
+                if isinstance(self, BoundaryPerimeter):
+                    preExtrusionFeedRateMinute = self.perimeterFeedRateMinute
+                else:
+                    preExtrusionFeedRateMinute = self.extrusionFeedRateMinute
+                gcodeArgs.append(('F', preExtrusionFeedRateMinute))
+                
                 
             if self.activateDimension:
-                extrusionDistance = self.getExtrusionDistance(point, self.flowRate, self.extrusionFeedRateMinute)
-                gcodeArgs.append(('E', '%s' % extrusionDistance))
+                retractionExtrusionDistance = self.getExtrusionDistance(point, self.flowRate, self.extrusionFeedRateMinute)
+                gcodeArgs.append(('E', '%s' % retractionExtrusionDistance))
                 
             self.gcodeCommands.append(
                 GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
             
         if self.activateDimension:
-            # IMPORTANT - TODO - calcuating the distance between the end of the perimeter 
-            # and the next starting point (either next layer perimeter or infill) is quite 
-            # tricky unless the gcode is generated after all plugins are finished.
-            # for the time being i'm hardcoding the retraction to 0.7mm
-            extrusionDistance = -0.7
-            self.gcodeCommands.extend(self.getRetractCommands(extrusionDistance))
+            
+            if lookaheadStartVector != None:
+                #print "retractionExtrusionDistance calc..."
+                
+                fromLocation = Vector3(point.real, point.imag, self.z)
+                toLocation = lookaheadStartVector
+                #print "fromLocation", fromLocation 
+                #print "toLocation", toLocation 
+                
+                locationMinusOld = toLocation - fromLocation
+                xyTravel = abs(locationMinusOld.dropAxis())
+                #print "xyTravel", xyTravel 
+                zTravelMultiplied = locationMinusOld.z * self.zDistanceRatio
+                #print "zTravelMultiplied", zTravelMultiplied
+                timeToNextThread = math.sqrt(xyTravel * xyTravel + zTravelMultiplied * zTravelMultiplied) / self.extrusionFeedRateMinute * 60
+                retractionExtrusionDistance = timeToNextThread * abs(self.oozeRate) / 60
+                distancetonextthread = math.sqrt(xyTravel * xyTravel + zTravelMultiplied * zTravelMultiplied)
+                
+                retractionExtrusionDistance = -retractionExtrusionDistance
+                #print "timeToNextThread", timeToNextThread 
+                #print "retractionExtrusionDistance", retractionExtrusionDistance
+                #print "distancetonextthread", distancetonextthread
+                
+            else:
+                retractionExtrusionDistance = 0.0
+
+            
+            if isinstance(self, BoundaryPerimeter):
+                postRetractFeedRateMinute = self.perimeterFeedRateMinute
+            else:
+                postRetractFeedRateMinute = self.extrusionFeedRateMinute
+            self.gcodeCommands.extend(self.getRetractCommands(retractionExtrusionDistance, postRetractFeedRateMinute))
             
         self.gcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_OFF))
-      
-    def getRetractCommands(self, extrusionDistance):
+        
+    def getRetractCommands(self, extrusionDistance, resumingSpeed):
         commands = []
         if self.extrusionUnitsRelative:
             retractDistance = round(extrusionDistance, self.decimalPlaces)
@@ -476,7 +569,7 @@ class Path:
     
         commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.extruderRetractionSpeedMinute)]))
         commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('E', '%s' % retractDistance)]))
-        commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.perimeterFeedRateMinute)]))
+        commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % resumingSpeed)]))
         return commands
     
     def getRetractReverseCommands(self, extrusionDistance):
@@ -492,10 +585,10 @@ class Path:
         commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.travelFeedRateMinute)]))
                         
         if not self.extrusionUnitsRelative:
-            commands.append(self.getResetExtruderDistance())
+            commands.append(self.getResetExtruderDistanceCommand())
         return commands
     
-    def getResetExtruderDistance(self):
+    def getResetExtruderDistanceCommand(self):
         self.totalExtrusionDistance = 0.0
         return GcodeCommand(gcodes.RESET_EXTRUDER_DISTANCE, [('E', '0')])
         
@@ -529,15 +622,14 @@ class Path:
     def offset(self, offset):
         if self.startPoint != None:
             self.startPoint = complex(self.startPoint.real + offset.real, self.startPoint.imag + offset.imag)
-
-        for (index,point) in enumerate(self.extrusionThread):
+        for (index, point) in enumerate(self.extrusionThread):
             self.extrusionThread[index] = complex(point.real + offset.real, point.imag + offset.imag)
             
 class InfillPath(Path):
     
     def __init__(self, z, runtimeParameters):        
         Path.__init__(self, z, runtimeParameters)
-        
+            
 class Loop(Path):
     
     def __init__(self, z, runtimeParameters):
@@ -570,8 +662,8 @@ class BoundaryPerimeter(Loop):
         for boundaryPoint in self.boundaryPoints:
             boundaryPoint.x += offset.real
             boundaryPoint.y += offset.imag            
-        Loop.offset(self, offset)
-
+        Loop.offset(self, offset)    
+        
 class RuntimeParameters:
     def __init__(self):
         self.startTime = time.time()
@@ -644,7 +736,7 @@ class GcodeCommand:
         self.parameters = OrderedDict(parameters)
     
     def __str__(self):
-        return str(False) 
+        return self.str(False) 
     
     def str(self, verbose=False):
         '''Get the string representation.'''
