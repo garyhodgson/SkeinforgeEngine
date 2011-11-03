@@ -13,6 +13,10 @@ import math
 import sys
 import time
 
+# globals used as an easy way to maintain state between layer changes
+_lastRetractionExtrusionDistance = 0.0
+_totalExtrusionDistance = 0.0
+
 class Gcode:
     '''Runtime data for conversion of 3D model to gcode.'''
     
@@ -75,7 +79,7 @@ class Gcode:
         
         for startCommand in self.startGcodeCommands:
             output.write(printCommand(startCommand, self.verbose))
-        
+            
         lookaheadStartVector = None
         lookaheadKeyIndex = 0
         layerCount = len(self.layers)
@@ -87,7 +91,6 @@ class Gcode:
                 lookaheadLayer = self.layers[lookaheadKey]
                 lookaheadStartPoint = lookaheadLayer.getStartPoint()
                 lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, lookaheadLayer.z)
-                #print "Layer lookaheadStartVector", lookaheadStartVector
 
             output.write(self.layers[key].getGcodeText(output, lookaheadStartVector))
 
@@ -95,7 +98,7 @@ class Gcode:
             output.write(printCommand(endCommand, self.verbose))
                         
         return output.getvalue()
-
+    
 class Layer:
     def __init__(self, z, index, runtimeParameters):
         self.z = z
@@ -128,18 +131,38 @@ class Layer:
                 output.write('%s\n' % GcodeCommand(gcodes.RELATIVE_EXTRUSION_DISTANCE))
             else:
                 output.write('%s\n' % GcodeCommand(gcodes.ABSOLUTE_EXTRUSION_DISTANCE))
-                
-        nestedRingCount = len(self.nestedRings)
-        for (index, nestedRing) in enumerate(self.nestedRings):
-            lookaheadStartPoint = None
-            if index + 1 < nestedRingCount:
-                lookaheadStartPoint = self.nestedRings[index + 1].boundaryPerimeter.startPoint
+
+        pathList = []
+        threadFunctionDictionary = {
+            'infill' : self.getInfillPaths, 'loops' : self.getLoopPaths, 'perimeter' : self.getPerimeterPaths}
+        
+        for threadType in self.runtimeParameters.extrusionPrintOrder:
+            threadFunctionDictionary[threadType](pathList)
+
+        pathListCount = len(pathList)
+        for (index, path) in enumerate(pathList):
+            if index + 1 < pathListCount:
+                lookaheadStartPoint = pathList[index + 1].getStartPoint()
                 lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
-                #print "NestedRing lookaheadStartVector", lookaheadStartVector
             else:
                 lookaheadStartVector = parentLookaheadStartVector
-            
-            output.write(nestedRing.getGcodeText(output, lookaheadStartVector))
+            path.getGcodeText(output, lookaheadStartVector)
+    
+    
+    def getPerimeterPaths(self, pathList):
+
+        for nestedRing in self.nestedRings:
+            nestedRing.getPerimeterPaths(pathList)
+    
+    def getLoopPaths(self, pathList):
+
+        for nestedRing in self.nestedRings:
+            nestedRing.getLoopPaths(pathList)
+    
+    def getInfillPaths(self, pathList):
+
+        for nestedRing in self.nestedRings:
+            nestedRing.getInfillPaths(pathList)
     
     def getStartPoint(self):
         if len(self.nestedRings) > 0:
@@ -159,19 +182,18 @@ class NestedRing:
         self.decimalPlaces = self.runtimeParameters.decimalPlaces
         self.z = z
         
-        self.boundaryPerimeter = None
-        
+        self.perimeter = None
         self.loops = []
-        
         self.infillPaths = []
-        self.infillPathsHolder = []
-        
+
         self.innerNestedRings = []
         
         # can the following be removed? only used whilst generating the infill?
+        self.infillPathsHolder = []
         self.extraLoops = []
         self.penultimateFillLoops = []
         self.lastFillLoops = None        
+        ###
                 
         self.activateSpeed = self.runtimeParameters.activateSpeed
         self.bridgeFeedRateMinute = self.runtimeParameters.bridgeFeedRateRatio * self.runtimeParameters.perimeterFeedRate * 60 # todo former reference to main feed now perimeter feed
@@ -179,7 +201,6 @@ class NestedRing:
         self.extrusionFeedRateMinute = 60.0 * self.runtimeParameters.feedRate
         self.travelFeedRateMinute = self.runtimeParameters.travelFeedRate * 60
         self.extrusionUnitsRelative = self.runtimeParameters.extrusionUnitsRelative
-        self.totalExtrusionDistance = 0.0
         
         self.activateDimension = self.runtimeParameters.activateDimension
         self.oozeRate = self.runtimeParameters.oozeRate
@@ -205,7 +226,7 @@ class NestedRing:
         output.write('\n%8snestedRing:' % '')
         
         output.write('\n%10sboundaryPerimeter:\n' % '')
-        output.write(self.boundaryPerimeter)
+        output.write(self.perimeter)
 
         output.write('\n%10sinnerNestedRings:\n' % '')
         for innerNestedRing in self.innerNestedRings:
@@ -236,74 +257,39 @@ class NestedRing:
                     
         return output.getvalue()
     
-    def getGcodeText(self, output, parentLookaheadStartVector=None):
-        '''Final Gcode representation.'''        
+    def getPerimeterPaths(self, pathList):
         
-        loopsCount = len(self.loops)
-        infillPathsCount = len(self.infillPaths)
+        pathList.append(self.perimeter)
         
-        if loopsCount > 0:
-            lookaheadStartPoint = self.loops[0].startPoint
-            lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
-        elif infillPathsCount > 0:
-            lookaheadStartPoint = self.infillPaths[0].startPoint
-            lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
-        else :
-            lookaheadStartVector = parentLookaheadStartVector
-            
-        output.write(self.boundaryPerimeter.getGcodeText(output, lookaheadStartVector))
-        
-        
-        for (index, loop) in enumerate(self.loops):
-            if index + 1 < loopsCount:
-                lookaheadStartPoint = self.loops[index + 1].startPoint
-                lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
-                #print "Next Loop lookaheadStartVector", lookaheadStartVector
-            else:
-                if infillPathsCount > 0:
-                    lookaheadStartPoint = self.infillPaths[0].startPoint
-                    lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
-                    #print "Next Infill lookaheadStartVector", lookaheadStartVector
-                else:
-                    lookaheadStartVector = parentLookaheadStartVector
-                    #print "Next NestedRing or Layer  lookaheadStartVector", lookaheadStartVector
-                    
-            output.write(loop.getGcodeText(output, lookaheadStartVector))
-            
-            
-            
-        for infillPath in self.infillPaths:
-            if index + 1 < infillPathsCount:
-                lookaheadStartPoint = self.infillPaths[index + 1].startPoint
-                lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
-                #print "Next InfillPath lookaheadStartVector", lookaheadStartVector
-            else:
-                if infillPathsCount > 0:
-                    lookaheadStartPoint = self.infillPaths[0].startPoint
-                    lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
-                    #print "Next Infill lookaheadStartVector", lookaheadStartVector
-                else:
-                    lookaheadStartVector = parentLookaheadStartVector
-                    #print "Next NestedRing or Layer lookaheadStartVector", lookaheadStartVector
-                    
-            output.write(infillPath.getGcodeText(output, lookaheadStartVector))
-            
-            
-        # TODO!!!!!!!!!! 
-            
         for innerNestedRing in self.innerNestedRings:
-            output.write(innerNestedRing.getGcodeText(output, None))
+            innerNestedRing.getPerimeterPaths(pathList)
+        
+    def getLoopPaths(self, pathList):
+        
+        for loop in self.loops:
+            pathList.append(loop)
+        
+        for innerNestedRing in self.innerNestedRings:
+            innerNestedRing.getLoopPaths(pathList)
+        
+    def getInfillPaths(self, pathList):
+        
+        for infillPath in self.infillPaths:
+            pathList.append(infillPath)
+        
+        for innerNestedRing in self.innerNestedRings:
+            innerNestedRing.getInfillPaths(pathList)
             
     def getStartPoint(self):
-        if self.boundaryPerimeter != None:
-            return self.boundaryPerimeter.startPoint
+        if self.perimeter != None:
+            return self.perimeter.getStartPoint()
 
     def offset(self, offset):
         'Moves the nested ring by the offset amount'
         for innerNestedRing in self.innerNestedRings:
             innerNestedRing.offset(offset)
             
-        self.boundaryPerimeter.offset(offset)
+        self.perimeter.offset(offset)
                         
         for loop in self.loops:
             loop.offset(offset)
@@ -313,10 +299,10 @@ class NestedRing:
                         
     def setBoundaryPerimeter(self, boundaryPointsLoop, perimeterLoop=None):
         
-        self.boundaryPerimeter = BoundaryPerimeter(self.z, self.runtimeParameters)
+        self.perimeter = BoundaryPerimeter(self.z, self.runtimeParameters)
         
         for point in boundaryPointsLoop:
-            self.boundaryPerimeter.boundaryPoints.append(Vector3(point.real, point.imag, self.z))
+            self.perimeter.boundaryPoints.append(Vector3(point.real, point.imag, self.z))
             
         if len(boundaryPointsLoop) < 2:
             return
@@ -325,11 +311,11 @@ class NestedRing:
             perimeterLoop = boundaryPointsLoop
             
         if euclidean.isWiddershins(perimeterLoop):
-            self.boundaryPerimeter.type = 'outer'
+            self.perimeter.type = 'outer'
         else:
-            self.boundaryPerimeter.type = 'inner'
+            self.perimeter.type = 'inner'
         thread = perimeterLoop + [perimeterLoop[0]]
-        self.boundaryPerimeter.addPathFromThread(thread)
+        self.perimeter.addPathFromThread(thread)
     
     def addInfillGcodeFromThread(self, thread):
         'Add a thread to the output.'
@@ -356,7 +342,7 @@ class NestedRing:
     def getXYBoundaries(self):
         '''Converts XYZ boundary points to XY'''
         xyBoundaries = []
-        for boundaryPoint in self.boundaryPerimeter.boundaryPoints:
+        for boundaryPoint in self.perimeter.boundaryPoints:
             xyBoundaries.append(boundaryPoint.dropAxis())
         return xyBoundaries
             
@@ -439,7 +425,6 @@ class Path:
         self.extrusionFeedRateMinute = 60.0 * self.runtimeParameters.feedRate
         self.travelFeedRateMinute = self.runtimeParameters.travelFeedRate * 60
         self.extrusionUnitsRelative = self.runtimeParameters.extrusionUnitsRelative
-        self.totalExtrusionDistance = 0.0
         
         self.activateDimension = self.runtimeParameters.activateDimension
         
@@ -467,9 +452,19 @@ class Path:
         output.write('%14sstartPoint: %s\n' % ('', self.startPoint))
         output.write('%14sextrusionThread: %s\n' % ('', self.extrusionThread))
         output.write('%14sgcodeCommands:\n' % '')
-        for x in self.gcodeCommands:
-            output.write('%16s%s' % ('', printCommand(x)))
+        for command in self.gcodeCommands:
+            output.write('%16s%s' % ('', printCommand(command)))
         return output.getvalue()    
+    
+    def getStartPoint(self):
+        
+        return self.startPoint
+# Note - I think the above is the real startpoint, but SFACT/Skeinforge seem to use the first extruded location as below.        
+#        if len(self.extrusionThread) > 0:
+#            print "returning",self.extrusionThread[0]
+#            return self.extrusionThread[0]
+#        else:
+#            return None
         
     def getGcodeText(self, output, lookaheadStartVector=None):
         '''Final Gcode representation.'''
@@ -480,6 +475,7 @@ class Path:
 
     def generateGcode(self, lookaheadStartVector=None):
         'Transforms paths and points to gcode'
+        global _lastRetractionExtrusionDistance
         
         gcodeArgs = [('X', round(self.startPoint.real, self.decimalPlaces)),
                      ('Y', round(self.startPoint.imag, self.decimalPlaces)),
@@ -492,14 +488,8 @@ class Path:
             GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
     
         if self.activateDimension:
-            # note hardcoded because of retraction calculation
-            if self.previousPoint == None:
-                retractionExtrusionDistance = 0.0
-            else:
-                retractionExtrusionDistance = 0.7
-                
             self.previousPoint = self.startPoint
-            self.gcodeCommands.extend(self.getRetractReverseCommands(retractionExtrusionDistance))
+            self.gcodeCommands.extend(self.getRetractReverseCommands(_lastRetractionExtrusionDistance))
             
         self.gcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_ON))        
         
@@ -526,27 +516,17 @@ class Path:
         if self.activateDimension:
             
             if lookaheadStartVector != None:
-                #print "retractionExtrusionDistance calc..."
                 
                 fromLocation = Vector3(point.real, point.imag, self.z)
                 toLocation = lookaheadStartVector
-                #print "fromLocation", fromLocation 
-                #print "toLocation", toLocation 
                 
                 locationMinusOld = toLocation - fromLocation
                 xyTravel = abs(locationMinusOld.dropAxis())
-                #print "xyTravel", xyTravel 
                 zTravelMultiplied = locationMinusOld.z * self.zDistanceRatio
-                #print "zTravelMultiplied", zTravelMultiplied
                 timeToNextThread = math.sqrt(xyTravel * xyTravel + zTravelMultiplied * zTravelMultiplied) / self.extrusionFeedRateMinute * 60
                 retractionExtrusionDistance = timeToNextThread * abs(self.oozeRate) / 60
-                distancetonextthread = math.sqrt(xyTravel * xyTravel + zTravelMultiplied * zTravelMultiplied)
-                
-                retractionExtrusionDistance = -retractionExtrusionDistance
-                #print "timeToNextThread", timeToNextThread 
-                #print "retractionExtrusionDistance", retractionExtrusionDistance
-                #print "distancetonextthread", distancetonextthread
-                
+                #following is not used
+                #distancetonextthread = math.sqrt(xyTravel * xyTravel + zTravelMultiplied * zTravelMultiplied)
             else:
                 retractionExtrusionDistance = 0.0
 
@@ -557,15 +537,19 @@ class Path:
                 postRetractFeedRateMinute = self.extrusionFeedRateMinute
             self.gcodeCommands.extend(self.getRetractCommands(retractionExtrusionDistance, postRetractFeedRateMinute))
             
+            #Store for reverse retraction
+            _lastRetractionExtrusionDistance = retractionExtrusionDistance
+            
         self.gcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_OFF))
         
     def getRetractCommands(self, extrusionDistance, resumingSpeed):
+        global _totalExtrusionDistance
         commands = []
         if self.extrusionUnitsRelative:
             retractDistance = round(extrusionDistance, self.decimalPlaces)
         else:
-            self.totalExtrusionDistance += extrusionDistance
-            retractDistance = round(self.totalExtrusionDistance, self.decimalPlaces)
+            _totalExtrusionDistance -= extrusionDistance
+            retractDistance = round(_totalExtrusionDistance, self.decimalPlaces)
     
         commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.extruderRetractionSpeedMinute)]))
         commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('E', '%s' % retractDistance)]))
@@ -573,12 +557,13 @@ class Path:
         return commands
     
     def getRetractReverseCommands(self, extrusionDistance):
+        global _totalExtrusionDistance
         commands = []
         if self.extrusionUnitsRelative:
             retractDistance = round(extrusionDistance, self.decimalPlaces)
         else:
-            self.totalExtrusionDistance += extrusionDistance
-            retractDistance = round(self.totalExtrusionDistance, self.decimalPlaces)
+            _totalExtrusionDistance += extrusionDistance
+            retractDistance = round(_totalExtrusionDistance, self.decimalPlaces)
     
         commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.extruderRetractionSpeedMinute)]))
         commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('E', '%s' % retractDistance)]))
@@ -589,11 +574,13 @@ class Path:
         return commands
     
     def getResetExtruderDistanceCommand(self):
-        self.totalExtrusionDistance = 0.0
+        global _totalExtrusionDistance
+        _totalExtrusionDistance = 0.0
         return GcodeCommand(gcodes.RESET_EXTRUDER_DISTANCE, [('E', '0')])
         
 
     def getExtrusionDistance(self, point, flowRate, feedRateMinute):
+        global _totalExtrusionDistance
         distance = 0.0
         
         if self.absolutePositioning:
@@ -614,8 +601,8 @@ class Path:
         if self.extrusionUnitsRelative:
             extrusionDistance = round(extrusionDistance, self.decimalPlaces)
         else:
-            self.totalExtrusionDistance += extrusionDistance
-            extrusionDistance = round(self.totalExtrusionDistance, self.decimalPlaces)
+            _totalExtrusionDistance += extrusionDistance
+            extrusionDistance = round(_totalExtrusionDistance, self.decimalPlaces)
             
         return extrusionDistance
 
@@ -719,6 +706,8 @@ class RuntimeParameters:
         self.extruderRetractionSpeed = config.getfloat('dimension', 'extruder.retraction.speed')
         self.extrusionUnitsRelative = config.getboolean('dimension', 'extrusion.units.relative')
         
+        self.extrusionPrintOrder = config.get('fill', 'extrusion.sequence.print.order').split(',')
+        
         
         nozzleXsection = (self.nozzleDiameter / 2) ** 2 * pi
         extrusionXsection = ((abs(self.perimeterWidth) + self.layerThickness) / 4) ** 2 * pi
@@ -742,10 +731,10 @@ class GcodeCommand:
         '''Get the string representation.'''
         output = StringIO.StringIO()
         output.write('%s ' % (self.commandLetter[0]))
-        if (verbose):
-            output.write('\t\t\t; %s ' % (self.commandLetter[1]))
         for name, value in self.parameters.items():
             output.write('%s%s ' % (name, value))
+        if (verbose):
+            output.write('%20s ' % (self.commandLetter[1]))
         return output.getvalue().strip()
 
 

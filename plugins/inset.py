@@ -102,14 +102,14 @@ class InsetSkein:
 			
 			"Add the perimeter block remainder of the loop which does not overlap the alreadyFilledArounds loops."
 			if self.overlapRemovalWidthOverPerimeterWidth < 0.1:
-				nestedRing.boundaryPerimeter.addPathFromThread(centerOutset.center + [centerOutset.center[0]])
+				nestedRing.perimeter.addPathFromThread(centerOutset.center + [centerOutset.center[0]])
 				break
 			isIntersectingSelf = isIntersectingItself(centerOutset.center, self.overlapRemovalWidth)
 			
 			if isIntersectingWithinLists(centerOutset.center, alreadyFilledArounds) or isIntersectingSelf:
 				self.addGcodeFromPerimeterPaths(nestedRing, isIntersectingSelf, centerOutset.center, alreadyFilledArounds, halfWidth, boundary)
 			else:
-				nestedRing.boundaryPerimeter.addPathFromThread(centerOutset.center + [centerOutset.center[0]])
+				nestedRing.perimeter.addPathFromThread(centerOutset.center + [centerOutset.center[0]])
 			addAlreadyFilledArounds(alreadyFilledArounds, centerOutset.center, self.overlapRemovalWidth)
 
 				
@@ -152,7 +152,7 @@ class InsetSkein:
 		muchGreaterThanRadius = 6.0 * halfWidth
 		for perimeterPath in perimeterPaths:
 			if euclidean.getPathLength(perimeterPath) > muchGreaterThanRadius:
-				nestedRing.boundaryPerimeter.addPathFromThread(perimeterPath)
+				nestedRing.perimeter.addPathFromThread(perimeterPath)
 
 def addAlreadyFilledArounds(alreadyFilledArounds, loop, radius):
 	"Add already filled loops around loop to alreadyFilledArounds."

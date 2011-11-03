@@ -56,6 +56,7 @@ fully.filled.layers=2
 ;LowerLeft | Nearest
 extrusion.sequence.start.layer=LowerLeft
 extrusion.sequence.print.order=perimeter,loops,infill
+;extrusion.sequence.print.order=infill,loops,perimeter
 ; Only line is currently supported
 infill.pattern=Line
 grid.extra.overlap=0.1
