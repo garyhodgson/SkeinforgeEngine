@@ -3,12 +3,7 @@ Triangle Mesh holds the faces and edges of a triangular mesh.
 
 """
 
-from __future__ import absolute_import
-#Init has to be imported first because it has code to workaround the python bug where relative imports don't work if the module is imported as a main module.
-import __init__
-
 from fabmetheus_utilities.geometry.geometry_tools import face
-from fabmetheus_utilities.geometry.geometry_tools import dictionary
 from fabmetheus_utilities.geometry.geometry_tools import vertex
 from fabmetheus_utilities.geometry.geometry_utilities import evaluate
 from fabmetheus_utilities.geometry.geometry_utilities import matrix

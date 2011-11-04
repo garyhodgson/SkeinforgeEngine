@@ -49,10 +49,3 @@ class BottomSkein:
 		
 		for rotatedLoopLayer in rotatedLoopLayers:
 			rotatedLoopLayer.z += deltaZ
-		
-		if config.getboolean(name, 'debug'):
-			filename = self.gcode.runtimeParameters.inputFilename
-			svgFilename = filename[: filename.rfind('.')] + '.bottom.svg'
-			archive.writeFileText(svgFilename , self.gcode.getSVGText())
-			logger.info("Bottom SVG written to %s", svgFilename)
-

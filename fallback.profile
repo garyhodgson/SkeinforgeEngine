@@ -7,8 +7,8 @@ delete.comments=true
 file.extension=gcode
 replace.filename=replace.csv
 gcode.penultimate.save=true
-gcode.pickled.save=true
-gcode.pickled.overwrite=false
+gcode.pickled.save=false
+gcode.pickled.overwrite=true
 file.extension.profile=true
 
 [preface]
@@ -41,7 +41,7 @@ overlap.removal.scaler=1.0
 
 [bottom]
 active=true
-debug=true
+debug=false
 additional.height.ratio=0.5
 altitude=0.0
 

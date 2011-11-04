@@ -4,7 +4,6 @@ from decimal import Decimal, ROUND_HALF_UP
 from fabmetheus_utilities import archive, svg_writer, euclidean
 from fabmetheus_utilities.vector3 import Vector3
 from math import log10, floor, pi
-from plugins.speed import SpeedSkein
 from utilities import memory_tracker
 import StringIO
 import decimal
@@ -729,7 +728,7 @@ class GcodeCommand:
         for name, value in self.parameters.items():
             output.write('%s%s ' % (name, value))
         if (verbose):
-            output.write('%20s ' % (self.commandLetter[1]))
+            output.write(';%20s ' % (self.commandLetter[1]))
         return output.getvalue().strip()
 
 

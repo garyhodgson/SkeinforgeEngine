@@ -12,7 +12,6 @@ License:
 
 from config import config
 from fabmetheus_utilities import archive, svg_writer, vector3
-from plugins.multiply import MultiplySkein
 import logging
 import math
 
@@ -68,6 +67,6 @@ class CarveSkein:
 				
 		if config.getboolean(name, 'debug'):
 			filename = self.gcode.runtimeParameters.inputFilename
-			svgFilename = filename[: filename.rfind('.')] + '.carving.svg'
+			svgFilename = filename[: filename.rfind('.')] + '.svg'
 			archive.writeFileText(svgFilename , self.gcode.getSVGText())
 			logger.info("Carving SVG written to %s", svgFilename)

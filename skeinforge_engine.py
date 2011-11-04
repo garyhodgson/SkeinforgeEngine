@@ -41,11 +41,11 @@ def getCraftedTextFromPlugins(pluginSequence, gcode):
 def main():
 	"Starting point for skeinforge engine."
 	parser = argparse.ArgumentParser(description='Skeins a 3D model into gcode.')
-	parser.add_argument('file', help='the file to skein')
-	parser.add_argument('-c', metavar='config', help='configuration for skeinforge engine.', default='skeinforge_engine.cfg')
-	parser.add_argument('-p', metavar='profile', help='profile for the skeining.')
-	parser.add_argument('-o', metavar='output', help='output filename (including path). Overrides other export filename settings.')
-	parser.add_argument('-r', metavar='reprocess', help='comma seperated list of plugins to reprocess a pickled gcode file. The export plugin is automatically appended.')
+	parser.add_argument('file', help='The file to skein. Files accepted: stl, obj, gts, and svg or pickledgcode files produced by Skeinforge.')
+	parser.add_argument('-c', metavar='config', help='Configuration for skeinforge engine.', default='skeinforge_engine.cfg')
+	parser.add_argument('-p', metavar='profile', help='Profile for the skeining.')
+	parser.add_argument('-o', metavar='output', help='Output filename (including path). Overrides other export filename settings.')
+	parser.add_argument('-r', metavar='reprocess', help='Comma seperated list of plugins to reprocess a pickled gcode file. The export plugin is automatically appended.')
 	
 	args = parser.parse_args()
 	

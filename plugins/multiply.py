@@ -13,7 +13,6 @@ License:
 from fabmetheus_utilities.vector3 import Vector3
 from fabmetheus_utilities import archive
 from fabmetheus_utilities import euclidean
-from fabmetheus_utilities import gcodec
 from config import config
 import logging
 import copy

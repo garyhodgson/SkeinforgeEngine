@@ -11,7 +11,7 @@ License:
 """
 
 from config import config
-from fabmetheus_utilities import archive, euclidean, gcodec, intercircle
+from fabmetheus_utilities import archive, euclidean, intercircle
 from fabmetheus_utilities.vector3 import Vector3
 import logging
 import math
