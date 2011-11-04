@@ -457,15 +457,8 @@ class Path:
         return output.getvalue()    
     
     def getStartPoint(self):
-        
         return self.startPoint
-# Note - I think the above is the real startpoint, but SFACT/Skeinforge seem to use the first extruded location as below.        
-#        if len(self.extrusionThread) > 0:
-#            print "returning",self.extrusionThread[0]
-#            return self.extrusionThread[0]
-#        else:
-#            return None
-        
+    
     def getGcodeText(self, output, lookaheadStartVector=None):
         '''Final Gcode representation.'''
         self.generateGcode(lookaheadStartVector)
@@ -526,7 +519,7 @@ class Path:
                 timeToNextThread = math.sqrt(xyTravel * xyTravel + zTravelMultiplied * zTravelMultiplied) / self.extrusionFeedRateMinute * 60
                 retractionExtrusionDistance = timeToNextThread * abs(self.oozeRate) / 60
                 #following is not used
-                #distancetonextthread = math.sqrt(xyTravel * xyTravel + zTravelMultiplied * zTravelMultiplied)
+                #dist = math.sqrt(xyTravel * xyTravel + zTravelMultiplied * zTravelMultiplied)
             else:
                 retractionExtrusionDistance = 0.0
 
@@ -655,6 +648,8 @@ class RuntimeParameters:
     def __init__(self):
         self.startTime = time.time()
         self.endTime = None
+        self.inputFilename = None
+        self.outputFilename = None
         
         self.profileMemory = config.getboolean('general', 'profile.memory')
         

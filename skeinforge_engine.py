@@ -8,15 +8,18 @@ from datetime import timedelta
 from fabmetheus_utilities import archive
 from gcode import Gcode
 from importlib import import_module
+from utilities import memory_tracker
+import argparse
+import logging
 import os
+import re
 import sys
 import time
-import re
-import logging
 import traceback
-import argparse
-from utilities import memory_tracker
-
+try:
+   import cPickle as pickle
+except:
+   import pickle
 
 __plugins_path__ = 'plugins'
 logger = logging.getLogger('engine')
@@ -39,8 +42,11 @@ def main():
 	"Starting point for skeinforge engine."
 	parser = argparse.ArgumentParser(description='Skeins a 3D model into gcode.')
 	parser.add_argument('file', help='the file to skein')
-	parser.add_argument('-c', metavar='config', help='configuration for skeinforge engine', default='skeinforge_engine.cfg')
-	parser.add_argument('-p', metavar='profile', help='profile for the skeining')
+	parser.add_argument('-c', metavar='config', help='configuration for skeinforge engine.', default='skeinforge_engine.cfg')
+	parser.add_argument('-p', metavar='profile', help='profile for the skeining.')
+	parser.add_argument('-o', metavar='output', help='output filename (including path). Overrides other export filename settings.')
+	parser.add_argument('-r', metavar='reprocess', help='comma seperated list of plugins to reprocess a pickled gcode file. The export plugin is automatically appended.')
+	
 	args = parser.parse_args()
 	
 	if args.c == None:
@@ -50,7 +56,7 @@ def main():
 	
 	logLevel = config.get('general', 'log.level')
 	logging.basicConfig(level=logLevel, format='%(asctime)s %(levelname)s (%(name)s) %(message)s')
-	
+		
 	defaultProfile = config.get('general', 'default.profile')
 	if defaultProfile != None:
 		config.read(defaultProfile)
@@ -64,21 +70,38 @@ def main():
 		logger.error('File not found: %s', inputFilename)
 		return
 	
-	pluginSequence = config.get('general', 'plugin.sequence').split(',')
+	if inputFilename.endswith('.pickledgcode'):
+		pickledGcode = archive.getFileText(inputFilename)
+		gcode = pickle.loads(pickledGcode)
+		gcode.runtimeParameters.startTime = time.time()
+		gcode.runtimeParameters.endTime = None
+	else:
+		gcode = Gcode()
+	
+	if args.o != None:
+		print os.path.isabs(gcode.runtimeParameters.outputFilename)
+
+	if args.r != None:
+		pluginSequence = args.r.split(',')
+		if 'carve' in pluginSequence:
+			logger.error('Reprocessing a pickled gcode file with carve is not possible. Please process the original file instead.')
+			return
+		if 'export' not in pluginSequence:
+			pluginSequence.append('export')
+	else:
+		pluginSequence = config.get('general', 'plugin.sequence').split(',')
+		
 	profileName = config.get('profile', 'name')
 	logger.info("Profile: %s", profileName)
 	logger.debug("Plugin Sequence: %s", pluginSequence)
 
-	gcode = Gcode()
-	
 	if gcode.runtimeParameters.profileMemory:
 		memory_tracker.track_object(gcode)
 		memory_tracker.create_snapshot('Start')
 	
 	gcode.runtimeParameters.profileName = profileName
 	gcode.runtimeParameters.inputFilename = inputFilename
-	getCraftedTextFromPlugins(pluginSequence[:], gcode)
-	
+	getCraftedTextFromPlugins(pluginSequence[:], gcode)	
 	
 	gcode.runtimeParameters.endTime = time.time()
 	
@@ -89,10 +112,10 @@ def main():
 		if config.getboolean('general', 'profile.memory.print.summary'):
 			memory_tracker.tracker.stats.print_summary()
 		if config.getboolean('general', 'profile.memory.export.data'):
-			memory_tracker.tracker.stats.dump_stats('%s.memory_tracker.dat'%inputFilename)
+			memory_tracker.tracker.stats.dump_stats('%s.memory_tracker.dat' % inputFilename)
 		if config.getboolean('general', 'profile.memory.export.html'):
 			from pympler.classtracker_stats import HtmlStats
-			HtmlStats(tracker=memory_tracker.tracker).create_html('%s.memory_tracker.html'%inputFilename)
+			HtmlStats(tracker=memory_tracker.tracker).create_html('%s.memory_tracker.html' % inputFilename)
 	
 def handleError(self, record):
 	traceback.print_stack()

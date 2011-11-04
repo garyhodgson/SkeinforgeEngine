@@ -7,6 +7,8 @@ delete.comments=true
 file.extension=gcode
 replace.filename=replace.csv
 gcode.penultimate.save=true
+gcode.pickled.save=true
+gcode.pickled.overwrite=false
 file.extension.profile=true
 
 [preface]
