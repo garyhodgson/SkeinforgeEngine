@@ -39,8 +39,8 @@ A fork of Enrique's [Skeinforge](http://skeinforge.com), taken from ahmetcemtura
 
 ## Reprocessing
 
-  * Reprocessing allows you to use a pickledgcode file (if this is turned on in the export settings) to reload the underlying data structure and then reapply specific plugins.  For example, the following command would load an existing gcode object and reapply the fill plugin from the specified profile:
-  > skeinforge_engine.py -r fill -p new.profile test.pickledgcode
+  * Reprocessing allows you to use a pickledgcode file (if this is turned on in the export settings) to reload the underlying data structure and then reapply specific plugins.  For example, the following command would load an existing gcode object and reapply the fill plugin from the specified profile: 
+    * skeinforge_engine.py -r fill -p new.profile test.pickledgcode
 
 
 ## Configuration
