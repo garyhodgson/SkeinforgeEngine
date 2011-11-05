@@ -33,7 +33,7 @@ import.coarseness.ratio=1.0
 
 [inset]
 debug=true
-multiprocess=true
+multiprocess=false
 bridge.width.multiplier.ratio=1.0
 nozzle.diameter=0.5
 loop.order.preferloops=true

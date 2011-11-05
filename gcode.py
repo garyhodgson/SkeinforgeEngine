@@ -1,12 +1,10 @@
 from collections import OrderedDict
 from config import config
-from decimal import Decimal, ROUND_HALF_UP
 from fabmetheus_utilities import archive, svg_writer, euclidean
 from fabmetheus_utilities.vector3 import Vector3
 from math import log10, floor, pi
 from utilities import memory_tracker
 import StringIO
-import decimal
 import gcodes
 import math
 import sys
