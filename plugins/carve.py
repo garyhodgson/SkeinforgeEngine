@@ -15,8 +15,9 @@ from fabmetheus_utilities import archive, svg_writer, vector3
 import logging
 import math
 
-logger = logging.getLogger(__name__)
-name = __name__
+name = 'carve'
+logger = logging.getLogger(name)
+
 
 def performAction(gcode):
 	"Get carved text."

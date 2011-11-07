@@ -103,32 +103,61 @@ class Layer:
         self.runtimeParameters = runtimeParameters
         self.bridgeRotation = None
         self.nestedRings = []
+        self.preLayerGcodeCommands = []
+        self.postLayerGcodeCommands = []
+        self.feedAndFlowRateMultiplier = 1.0  
+        
         if runtimeParameters.profileMemory:
             memory_tracker.track_object(self)
+        self.verbose = self.runtimeParameters.verboseGcode
+        
+        if self.runtimeParameters.dimensionActive:
+            if self.runtimeParameters.extrusionUnitsRelative:
+                self.preLayerGcodeCommands.append(GcodeCommand(gcodes.RELATIVE_EXTRUSION_DISTANCE))
+            else:
+                self.preLayerGcodeCommands.append(GcodeCommand(gcodes.ABSOLUTE_EXTRUSION_DISTANCE))
         
     def __str__(self):
         '''Get the string representation.'''
         output = StringIO.StringIO()
         
         output.write('%2slayer (%s) z:%s\n' % ('', self.index, self.z))
+        
+        output.write('%2slayer feedAndFlowRateMultiplier:%s\n' % ('', self.feedAndFlowRateMultiplier))
+        
         if self.bridgeRotation != None:
             output.write('bridgeRotation %s, ' % self.bridgeRotation)
+            
+        output.write('%4spreLayerGcodeCommand:' % (''))
+        for preLayerGcodeCommand in self.preLayerGcodeCommands:
+            output.write(printCommand(preLayerGcodeCommand, self.verbose))
             
         output.write('%4snestedRings:' % (''))
         for nestedRing in self.nestedRings:
             output.write(nestedRing)
+            
+        output.write('%4spostLayerGcodeCommand:' % (''))
+        for postLayerGcodeCommand in self.postLayerGcodeCommands:
+            output.write(printCommand(postLayerGcodeCommand, self.verbose))
            
         return output.getvalue()
+    
+    def getDistanceAndDuration(self):
+        '''Returns the amount of time needed to print the layer, and the distance to travel. Note, this currently ignores commands in the pre and post layer list.'''
+        duration = 0.0
+        distance = 0.0
+        for nestedRing in self.nestedRings:
+            (nestedRingDistance, nestedRingDuration) = nestedRing.getDistanceAndDuration()
+            distance += nestedRingDistance
+            duration += nestedRingDuration
+        return (distance, duration)
     
     def getGcodeText(self, output, parentLookaheadStartVector=None):
         '''Final Gcode representation.'''
         
-        if self.runtimeParameters.activateDimension:
-            if self.runtimeParameters.extrusionUnitsRelative:
-                output.write('%s\n' % GcodeCommand(gcodes.RELATIVE_EXTRUSION_DISTANCE))
-            else:
-                output.write('%s\n' % GcodeCommand(gcodes.ABSOLUTE_EXTRUSION_DISTANCE))
-
+        for preLayerGcodeCommand in self.preLayerGcodeCommands:
+            output.write(printCommand(preLayerGcodeCommand, self.verbose))
+        
         pathList = []
         threadFunctionDictionary = {
             'infill' : self.getInfillPaths, 'loops' : self.getLoopPaths, 'perimeter' : self.getPerimeterPaths}
@@ -143,8 +172,11 @@ class Layer:
                 lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, self.z)
             else:
                 lookaheadStartVector = parentLookaheadStartVector
-            path.getGcodeText(output, lookaheadStartVector)
-    
+                
+            path.getGcodeText(output, lookaheadStartVector, self.feedAndFlowRateMultiplier)
+            
+        for postLayerGcodeCommand in self.postLayerGcodeCommands:
+            output.write(printCommand(postLayerGcodeCommand, self.verbose))
     
     def getPerimeterPaths(self, pathList):
 
@@ -167,6 +199,9 @@ class Layer:
         
     def addNestedRing(self, nestedRing):
         self.nestedRings.append(nestedRing)
+        
+    def isBridgeLayer(self):
+        return self.bridgeRotation != None
    
 
 class NestedRing:
@@ -192,14 +227,12 @@ class NestedRing:
         self.lastFillLoops = None        
         ###
                 
-        self.activateSpeed = self.runtimeParameters.activateSpeed
-        self.bridgeFeedRateMinute = self.runtimeParameters.bridgeFeedRateRatio * self.runtimeParameters.perimeterFeedRate * 60 # todo former reference to main feed now perimeter feed
-        self.perimeterFeedRateMinute = self.runtimeParameters.perimeterFeedRate * 60
-        self.extrusionFeedRateMinute = 60.0 * self.runtimeParameters.feedRate
-        self.travelFeedRateMinute = self.runtimeParameters.travelFeedRate * 60
+        self.bridgeFeedRateMinute = self.runtimeParameters.bridgeFeedRateMinute
+        self.perimeterFeedRateMinute = self.runtimeParameters.perimeterFeedRateMinute
+        self.extrusionFeedRateMinute = self.runtimeParameters.extrusionFeedRateMinute
+        self.travelFeedRateMinute = self.runtimeParameters.travelFeedRateMinute
         self.extrusionUnitsRelative = self.runtimeParameters.extrusionUnitsRelative
         
-        self.activateDimension = self.runtimeParameters.activateDimension
         self.oozeRate = self.runtimeParameters.oozeRate
         self.zDistanceRatio = 5.0
         self.extruderRetractionSpeedMinute = round(60.0 * self.runtimeParameters.extruderRetractionSpeed, self.decimalPlaces)
@@ -253,6 +286,33 @@ class NestedRing:
         output.write('\n%4s###### end nestedRing ########################' % '')
                     
         return output.getvalue()
+    
+    
+    def getDistanceAndDuration(self):
+        '''Returns the amount of time needed to print the ring, and the distance travelled.'''
+        duration = 0.0
+        distance = 0.0
+        
+        (perimeterDistance, perimeterDuration) = self.perimeter.getDistanceAndDuration()
+        duration += perimeterDuration
+        distance += perimeterDistance
+            
+        for loop in self.loops:
+            (loopDistance, loopDuration) = loop.getDistanceAndDuration()
+            duration += loopDuration
+            distance += loopDistance
+            
+        for infillPath in self.infillPaths:
+            (infillPathDistance, infillPathDuration) = infillPath.getDistanceAndDuration()
+            duration += infillPathDuration
+            distance += infillPathDistance
+        
+        for nestedRing in self.innerNestedRings:
+            (nestedRingPathDistance, nestedRingDuration) = nestedRing.getDistanceAndDuration()
+            duration += nestedRingDuration
+            distance += nestedRingDistance
+            
+        return (distance, duration)
     
     def getPerimeterPaths(self, pathList):
         
@@ -416,18 +476,19 @@ class Path:
         self.gcodeCommands = []
         
         self.decimalPlaces = self.runtimeParameters.decimalPlaces
-        self.activateSpeed = self.runtimeParameters.activateSpeed
-        self.bridgeFeedRateMinute = self.runtimeParameters.bridgeFeedRateRatio * self.runtimeParameters.perimeterFeedRate * 60 # todo former reference to main feed now perimeter feed
-        self.perimeterFeedRateMinute = self.runtimeParameters.perimeterFeedRate * 60
-        self.extrusionFeedRateMinute = 60.0 * self.runtimeParameters.feedRate
-        self.travelFeedRateMinute = self.runtimeParameters.travelFeedRate * 60
+        self.dimensionDecimalPlaces = self.runtimeParameters.dimensionDecimalPlaces
+        self.speedActive = self.runtimeParameters.speedActive
+        self.bridgeFeedRateMinute = self.runtimeParameters.bridgeFeedRateMinute
+        self.perimeterFeedRateMinute = self.runtimeParameters.perimeterFeedRateMinute
+        self.extrusionFeedRateMinute = self.runtimeParameters.extrusionFeedRateMinute
+        self.travelFeedRateMinute = self.runtimeParameters.travelFeedRateMinute
         self.extrusionUnitsRelative = self.runtimeParameters.extrusionUnitsRelative
         
-        self.activateDimension = self.runtimeParameters.activateDimension
+        self.dimensionActive = self.runtimeParameters.dimensionActive
         
         self.oozeRate = self.runtimeParameters.oozeRate
         self.zDistanceRatio = 5.0
-        self.extruderRetractionSpeedMinute = round(60.0 * self.runtimeParameters.extruderRetractionSpeed, self.decimalPlaces)
+        self.extruderRetractionSpeedMinute = round(60.0 * self.runtimeParameters.extruderRetractionSpeed, self.dimensionDecimalPlaces)
 
         self.layerThickness = self.runtimeParameters.layerThickness
         self.perimeterWidth = self.runtimeParameters.perimeterWidth
@@ -442,6 +503,12 @@ class Path:
         filamentPackingArea = pi * filamentRadius * filamentRadius * self.filamentPackingDensity
         self.flowScaleSixty = 60.0 * ((((self.layerThickness + self.perimeterWidth) / 4) ** 2 * pi) / filamentPackingArea)
         
+        self.minimumBridgeFeedRateMultiplier = self.runtimeParameters.minimumBridgeFeedRateMultiplier
+        self.minimumPerimeterFeedRateMultiplier = self.runtimeParameters.minimumPerimeterFeedRateMultiplier
+        self.minimumExtrusionFeedRateMultiplier = self.runtimeParameters.minimumExtrusionFeedRateMultiplier
+        self.minimumTravelFeedRateMultiplier = self.runtimeParameters.minimumTravelFeedRateMultiplier
+        self.minimumLayerFeedRateMinute = self.runtimeParameters.minimumLayerFeedRateMinute
+        
     def __str__(self):
         '''Get the string representation.'''
         output = StringIO.StringIO()
@@ -453,73 +520,96 @@ class Path:
             output.write('%16s%s' % ('', printCommand(command)))
         return output.getvalue()    
     
+    def getDistanceAndDuration(self):
+        '''Returns the time taken to follow the path and the distance'''
+        oldLocation = self.startPoint
+        feedRate = self.travelFeedRateMinute
+        duration = 0.0
+        distance = 0.0
+        for location in self.extrusionThread:
+            feedRateSecond = feedRate / 60.0
+            
+            separationX = location.real - oldLocation.real
+            separationY = location.imag - oldLocation.imag
+            segmentDistance = math.sqrt(separationX ** 2 + separationY ** 2)
+            
+            duration += segmentDistance / feedRateSecond
+            distance += segmentDistance
+            oldLocation = location
+            if isinstance(self, BoundaryPerimeter):
+                feedRate = self.perimeterFeedRateMinute
+            else:
+                feedRate = self.extrusionFeedRateMinute
+                
+        return (distance, duration)
+        
     def getStartPoint(self):
         return self.startPoint
     
-    def getGcodeText(self, output, lookaheadStartVector=None):
+    def getGcodeText(self, output, lookaheadStartVector=None, feedAndFlowRateMultiplier=1.0):
         '''Final Gcode representation.'''
-        self.generateGcode(lookaheadStartVector)
+        self.generateGcode(lookaheadStartVector, feedAndFlowRateMultiplier)
             
         for command in self.gcodeCommands:
             output.write('%s' % printCommand(command, self.verbose))
 
-    def generateGcode(self, lookaheadStartVector=None):
+    def generateGcode(self, lookaheadStartVector=None, feedAndFlowRateMultiplier=1.0):
         'Transforms paths and points to gcode'
         global _lastRetractionExtrusionDistance
         
         gcodeArgs = [('X', round(self.startPoint.real, self.decimalPlaces)),
                      ('Y', round(self.startPoint.imag, self.decimalPlaces)),
                      ('Z', round(self.z, self.decimalPlaces))]
-        
-        if self.activateSpeed:
-            gcodeArgs.append(('F', self.travelFeedRateMinute))
+                
+        if self.speedActive:
+            (travelFeedRateMinute, travelFeedRateMultiplier) = self.getFeedRateAndMultiplier(self.travelFeedRateMinute, feedAndFlowRateMultiplier)
+            gcodeArgs.append(('F', self.travelFeedRateMinute * travelFeedRateMultiplier))
         
         self.gcodeCommands.append(
             GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
     
-        if self.activateDimension:
+        if self.dimensionActive:
             self.previousPoint = self.startPoint
             self.gcodeCommands.extend(self.getRetractReverseCommands(_lastRetractionExtrusionDistance))
             
         self.gcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_ON))        
         
         for point in self.extrusionThread:
+            
             gcodeArgs = [('X', round(point.real, self.decimalPlaces)),
                          ('Y', round(point.imag, self.decimalPlaces)),
                          ('Z', round(self.z, self.decimalPlaces))]
             
-            if self.activateSpeed:
-                if isinstance(self, BoundaryPerimeter):
-                    preExtrusionFeedRateMinute = self.perimeterFeedRateMinute
-                else:
-                    preExtrusionFeedRateMinute = self.extrusionFeedRateMinute
-                gcodeArgs.append(('F', preExtrusionFeedRateMinute))
+            if isinstance(self, BoundaryPerimeter):
+                pathFeedRateMinute = self.perimeterFeedRateMinute
+            else:
+                pathFeedRateMinute = self.extrusionFeedRateMinute
+
+            (pathFeedRateMinute, pathFeedRateMultiplier) = self.getFeedRateAndMultiplier(pathFeedRateMinute, feedAndFlowRateMultiplier)
+            
+            if self.speedActive:
+                gcodeArgs.append(('F', pathFeedRateMinute))
                 
-                
-            if self.activateDimension:
-                retractionExtrusionDistance = self.getExtrusionDistance(point, self.flowRate, self.extrusionFeedRateMinute)
+            if self.dimensionActive:
+                retractionExtrusionDistance = self.getExtrusionDistance(point, self.flowRate * pathFeedRateMultiplier, pathFeedRateMinute)
                 gcodeArgs.append(('E', '%s' % retractionExtrusionDistance))
                 
             self.gcodeCommands.append(
                 GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
             
-        if self.activateDimension:
+        if self.dimensionActive:
             
             if lookaheadStartVector != None:
                 
                 fromLocation = Vector3(point.real, point.imag, self.z)
                 toLocation = lookaheadStartVector
-                
                 locationMinusOld = toLocation - fromLocation
                 xyTravel = abs(locationMinusOld.dropAxis())
                 zTravelMultiplied = locationMinusOld.z * self.zDistanceRatio
                 timeToNextThread = math.sqrt(xyTravel * xyTravel + zTravelMultiplied * zTravelMultiplied) / self.extrusionFeedRateMinute * 60
                 retractionExtrusionDistance = timeToNextThread * abs(self.oozeRate) / 60
-                #following is not used
-                #dist = math.sqrt(xyTravel * xyTravel + zTravelMultiplied * zTravelMultiplied)
             else:
                 retractionExtrusionDistance = 0.0
-
             
             if isinstance(self, BoundaryPerimeter):
                 postRetractFeedRateMinute = self.perimeterFeedRateMinute
@@ -532,14 +622,21 @@ class Path:
             
         self.gcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_OFF))
         
+    def getFeedRateAndMultiplier(self, feedRateMinute, feedRateMultiplier):
+        'Returns the multiplier that results in either the minimum feed rate or the slowed down feed rate'
+        if (feedRateMultiplier * feedRateMinute) < self.minimumLayerFeedRateMinute:
+            return (self.minimumLayerFeedRateMinute, self.minimumLayerFeedRateMinute / feedRateMinute)
+        else:
+            return (feedRateMinute, feedRateMultiplier)
+        
     def getRetractCommands(self, extrusionDistance, resumingSpeed):
         global _totalExtrusionDistance
         commands = []
         if self.extrusionUnitsRelative:
-            retractDistance = round(extrusionDistance, self.decimalPlaces)
+            retractDistance = round(extrusionDistance, self.dimensionDecimalPlaces)
         else:
             _totalExtrusionDistance -= extrusionDistance
-            retractDistance = round(_totalExtrusionDistance, self.decimalPlaces)
+            retractDistance = round(_totalExtrusionDistance, self.dimensionDecimalPlaces)
     
         commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.extruderRetractionSpeedMinute)]))
         commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('E', '%s' % retractDistance)]))
@@ -550,10 +647,10 @@ class Path:
         global _totalExtrusionDistance
         commands = []
         if self.extrusionUnitsRelative:
-            retractDistance = round(extrusionDistance, self.decimalPlaces)
+            retractDistance = round(extrusionDistance, self.dimensionDecimalPlaces)
         else:
             _totalExtrusionDistance += extrusionDistance
-            retractDistance = round(_totalExtrusionDistance, self.decimalPlaces)
+            retractDistance = round(_totalExtrusionDistance, self.dimensionDecimalPlaces)
     
         commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('F', '%s' % self.extruderRetractionSpeedMinute)]))
         commands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, [('E', '%s' % retractDistance)]))
@@ -589,10 +686,10 @@ class Path:
         extrusionDistance = scaledFlowRate / feedRateMinute * distance
         
         if self.extrusionUnitsRelative:
-            extrusionDistance = round(extrusionDistance, self.decimalPlaces)
+            extrusionDistance = round(extrusionDistance, self.dimensionDecimalPlaces)
         else:
             _totalExtrusionDistance += extrusionDistance
-            extrusionDistance = round(_totalExtrusionDistance, self.decimalPlaces)
+            extrusionDistance = round(_totalExtrusionDistance, self.dimensionDecimalPlaces)
             
         return extrusionDistance
 
@@ -650,7 +747,7 @@ class RuntimeParameters:
         
         self.profileMemory = config.getboolean('general', 'profile.memory')
         
-        self.decimalPlaces = config.getfloat('general', 'decimal.places')
+        self.decimalPlaces = config.getint('general', 'decimal.places')
         self.layerThickness = config.getfloat('carve', 'layer.height')
         self.perimeterWidth = config.getfloat('carve', 'extrusion.width')
         self.profileName = None
@@ -661,7 +758,6 @@ class RuntimeParameters:
         self.operatingFeedRatePerSecond = None
         self.perimeterFeedRatePerSecond = None
         self.operatingFlowRate = None
-        self.orbitalFeedRatePerSecond = None
         self.verboseGcode = config.getboolean('general', 'verbose.gcode')
         
         self.overlapRemovalWidthOverPerimeterWidth = config.getfloat('inset', 'overlap.removal.scaler')
@@ -678,7 +774,7 @@ class RuntimeParameters:
         self.layerPrintFrom = config.getint('carve', 'layer.print.from')
         self.layerPrintTo = config.getint('carve', 'layer.print.to')
         
-        self.activateSpeed = config.getboolean('speed', 'active')
+        self.speedActive = config.getboolean('speed', 'active')
         self.addFlowRate = config.getboolean('speed', 'add.flow.rate')
         self.addAccelerationRate = config.getboolean('speed', 'add.acceleration.rate')
         self.feedRate = config.getfloat('speed', 'feed.rate')
@@ -691,15 +787,28 @@ class RuntimeParameters:
         self.bridgeFlowRateRatio = config.getfloat('speed', 'flow.rate.bridge.ratio')
         self.travelFeedRate = config.getfloat('speed', 'feed.rate.travel')
         
-        self.activateDimension = config.getboolean('dimension', 'active')
+        self.dimensionActive = config.getboolean('dimension', 'active')
         self.filamentDiameter = config.getfloat('dimension', 'filament.diameter')
         self.filamentPackingDensity = config.getfloat('dimension', 'filament.packing.density')
         self.oozeRate = config.getfloat('dimension', 'oozerate')
         self.extruderRetractionSpeed = config.getfloat('dimension', 'extruder.retraction.speed')
         self.extrusionUnitsRelative = config.getboolean('dimension', 'extrusion.units.relative')
+        self.dimensionDecimalPlaces = config.getint('dimension', 'decimal.places')
         
         self.extrusionPrintOrder = config.get('fill', 'extrusion.sequence.print.order').split(',')
         
+        self.bridgeFeedRateMinute = self.bridgeFeedRateRatio * self.perimeterFeedRate * 60 # todo former reference to main feed now perimeter feed
+        self.perimeterFeedRateMinute = self.perimeterFeedRate * 60
+        self.extrusionFeedRateMinute = self.feedRate * 60.0
+        self.travelFeedRateMinute = self.travelFeedRate * 60
+        
+        self.minimumLayerFeedRate = config.getfloat('cool', 'minimum.layer.feed.rate')
+        self.minimumLayerFeedRateMinute = self.minimumLayerFeedRate * 60
+        
+        self.minimumBridgeFeedRateMultiplier = self.minimumLayerFeedRateMinute / self.bridgeFeedRateMinute
+        self.minimumPerimeterFeedRateMultiplier = self.minimumLayerFeedRateMinute / self.perimeterFeedRateMinute        
+        self.minimumExtrusionFeedRateMultiplier = self.minimumLayerFeedRateMinute / self.extrusionFeedRateMinute
+        self.minimumTravelFeedRateMultiplier = self.minimumLayerFeedRateMinute / self.travelFeedRateMinute
         
         nozzleXsection = (self.nozzleDiameter / 2) ** 2 * pi
         extrusionXsection = ((abs(self.perimeterWidth) + self.layerThickness) / 4) ** 2 * pi
@@ -708,6 +817,8 @@ class RuntimeParameters:
         self.bridgeFlowRate = (self.bridgeFlowRateRatio * self.bridgeFeedRateRatio) * (self.perimeterFlowRateRatio * self.perimeterFeedRate) * (nozzleXsection / extrusionXsection)
         self.perimeterFlowRate = self.perimeterFlowRateRatio * self.perimeterFeedRate
         
+        self.orbitalFeedRatePerSecond = (self.feedRate * self.orbitalFeedRateRatio)
+        self.orbitalFeedRateMinute = self.orbitalFeedRatePerSecond * 60
 
 class GcodeCommand:
     def __init__(self, commandLetter, parameters=None):

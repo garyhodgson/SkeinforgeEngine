@@ -186,7 +186,7 @@ class FillSkein:
 		paths = euclidean.getConnectedPaths(paths, pixelTable, aroundWidth)
 		 
 		for path in paths:
-			addPath(self.layerExtrusionWidth, infillPaths, path, layerRotation)
+			addPathToInfillPaths(self.layerExtrusionWidth, infillPaths, path, layerRotation)
 
 		for nestedRing in nestedRings:
 			nestedRing.transferPaths(infillPaths)
@@ -231,7 +231,7 @@ class FillSkein:
 		layerAngle = self.infillBeginRotation + infillOddLayerRotationMultiplier * self.infillOddLayerExtraRotation
 		return euclidean.getWiddershinsUnitPolar(layerAngle)
 
-def addPath(infillWidth, infillPaths, path, rotationPlaneAngle):
+def addPathToInfillPaths(infillWidth, infillPaths, path, rotationPlaneAngle):
 	'Add simplified path to fill.'
 	simplifiedPath = euclidean.getSimplifiedPath(path, infillWidth)
 	if len(simplifiedPath) < 2:

@@ -11,13 +11,12 @@ License:
 """
 
 from config import config
+from fabmetheus_utilities import euclidean, archive
 from gcode import GcodeCommand, Layer, BoundaryPerimeter, NestedRing
 from time import strftime
-from fabmetheus_utilities import euclidean
 import gcodes
 import logging
 import os
-import sys
 
 
 logger = logging.getLogger(__name__)
@@ -95,7 +94,7 @@ class PrefaceSkein:
 	
 	def addStartCommandsToGcode(self):		
 		if config.get(name, 'start.file') != None:
-			for line in self.getLinesFromFile(self.startFile):
+			for line in archive.getLinesFromAlterationsFile(self.startFile):
 				self.gcode.startGcodeCommands.append(line)
 		
 		if self.setPositioningToAbsolute:
@@ -109,16 +108,6 @@ class PrefaceSkein:
 		
 	def addEndCommandsToGcode(self):
 		if config.get(name, 'end.file') != None:
-			for line in self.getLinesFromFile(self.endFile):
+			for line in archive.getLinesFromAlterationsFile(self.endFile):
 				self.gcode.endGcodeCommands.append(line)
 
-	def getLinesFromFile(self, fileName):
-		lines = []
-		absPath = os.path.join('alterations', fileName)
-		try:			
-			f = open(absPath, 'r')
-			lines = f.read().replace('\r', '\n').replace('\n\n', '\n').split('\n')
-			f.close()
-		except IOError as e:
-			logger.warning("Unable to open file: %s", absPath)
-		return lines

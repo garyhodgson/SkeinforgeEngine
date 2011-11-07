@@ -50,7 +50,7 @@ def main():
 	args = parser.parse_args()
 	
 	if args.c == None:
-		logger.error('Invalid or missing configuration file defined.')
+		logger.error('Invalid or missing configuration file.')
 		return
 	config.read(args.c)
 	

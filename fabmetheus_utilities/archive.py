@@ -13,6 +13,16 @@ __license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agp
 
 globalTemporarySettingsPath = os.path.join(os.getcwd(), 'sfact_profiles')
 
+def getLinesFromAlterationsFile(fileName):
+	lines = []
+	absPath = os.path.join('alterations', fileName)
+	try:			
+		f = open(absPath, 'r')
+		lines = f.read().replace('\r', '\n').replace('\n\n', '\n').split('\n')
+		f.close()
+	except IOError as e:
+		logger.warning("Unable to open file: %s", absPath)
+	return lines
 
 def addToNamePathDictionary(directoryPath, namePathDictionary):
 	'Add to the name path dictionary.'

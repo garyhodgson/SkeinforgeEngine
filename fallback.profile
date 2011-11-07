@@ -58,7 +58,6 @@ fully.filled.layers=2
 ;LowerLeft | Nearest
 extrusion.sequence.start.layer=LowerLeft
 extrusion.sequence.print.order=perimeter,loops,infill
-;extrusion.sequence.print.order=infill,loops,perimeter
 ; Only line is currently supported
 infill.pattern=Line
 grid.extra.overlap=0.1
@@ -72,8 +71,8 @@ infill.rotation.odd.layer=90.0
 active=true
 center.x=100.0
 center.y=100.0
-columns=1
-rows=1
+columns=2
+rows=2
 sequence.reverse.odd.layers=false
 separation.over.perimeter.width=15.0
 
@@ -134,28 +133,26 @@ infill.overhang.ratio=3.0
 active=true
 filament.diameter=2.8
 filament.packing.density=1.0
-calibrating.active=false
-calibrating.x.section=0.5
 oozerate=75.0
 extruder.retraction.speed=15.0
 extrusion.units.relative=false
+decimal.places=6
 
 [comb]
 active=true
 
 [cool]
 active=true
-minimum.layer.time=10.0
+; usually smaller....
+minimum.layer.time=120.0
 minimum.layer.feed.rate=15.0
 turn.on.fan.at.beginning=true
 turn.off.fan.at.end=true
 cool.start.file=cool_start.gmc
 cool.end.file=cool_end.gmc
-; Orbit | SlowDown
-cool.type=SlowDown
-maximum.cool=2.0
-bridge.cool=1.0
-minimum.orbital.radius=10.0
+; OrbitCoolStrategy | SlowDownCoolStrategy
+cool.strategy=OrbitCoolStrategy
+orbital.margin=10.0
 
 [stretch]
 active=true
