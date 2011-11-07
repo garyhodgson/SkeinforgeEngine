@@ -16,7 +16,7 @@ from gcode import GcodeCommand
 import gcodes
 import logging
 from importlib import import_module
-import os
+import os, sys
 
 name = __name__
 logger = logging.getLogger(name)
@@ -38,6 +38,7 @@ class CoolSkein:
 		self.nameOfCoolStartFile = config.get(name, 'cool.start.file')
 		self.nameOfCoolEndFile = config.get(name, 'cool.end.file')
 		self.coolStrategyName = config.get(name, 'cool.strategy')
+		self.coolStrategyPath = config.get(name, 'cool.strategy.path')
 		self.absoluteCoolStartFilePath = os.path.join(archive.getSkeinforgePath('alterations'), self.nameOfCoolStartFile)
 		self.absoluteCoolEndFilePath = os.path.join(archive.getSkeinforgePath('alterations'), self.nameOfCoolEndFile)
 		self.coolStartLines = archive.getFileText(self.absoluteCoolEndFilePath, printWarning=False)
@@ -51,6 +52,7 @@ class CoolSkein:
 		
 		coolStrategy = None
 		try:
+			sys.path.insert(0, self.coolStrategyPath)
 			coolStrategy = import_module(self.coolStrategyName)
 		except:
 			logger.warning("Could not find module for cooling strategy called: %s", self.coolStrategyName)

@@ -151,6 +151,7 @@ turn.off.fan.at.end=true
 cool.start.file=cool_start.gmc
 cool.end.file=cool_end.gmc
 ; OrbitCoolStrategy | SlowDownCoolStrategy
+cool.strategy.path=strategies
 cool.strategy=OrbitCoolStrategy
 orbital.margin=10.0
 
