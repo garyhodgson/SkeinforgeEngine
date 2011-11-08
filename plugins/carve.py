@@ -64,16 +64,16 @@ class CarveSkein:
 		self.gcode.carvingCornerMaximum = carving.getCarveCornerMaximum()
 		self.gcode.carvingCornerMinimum = carving.getCarveCornerMinimum()
 
-		a = rotatedLoopLayers[self.layerPrintFrom : self.layerPrintTo]
-		for x in a:
-			rr = []
-			for y in x.loops:
-				lowerLeftPoint = self.getLowerLeftCorner(y)
-				lowerLeftIndex = y.index(lowerLeftPoint)
-				rr.append(y[lowerLeftIndex:] + y[:lowerLeftIndex])
-			x.loops = rr
+		toBePrintedLayers = rotatedLoopLayers[self.layerPrintFrom : self.layerPrintTo]
+		for toBePrintedLayer in toBePrintedLayers:
+			sortedLoops = []
+			for toBePrintedLayerLoop in toBePrintedLayer.loops:
+				lowerLeftPoint = self.getLowerLeftCorner(toBePrintedLayerLoop)
+				lowerLeftIndex = toBePrintedLayerLoop.index(lowerLeftPoint)
+				sortedLoops.append(toBePrintedLayerLoop[lowerLeftIndex:] + toBePrintedLayerLoop[:lowerLeftIndex])
+			toBePrintedLayer.loops = sortedLoops
 
-		self.gcode.rotatedLoopLayers = a
+		self.gcode.rotatedLoopLayers = toBePrintedLayers
 				
 		if config.getboolean(name, 'debug'):
 			filename = self.gcode.runtimeParameters.inputFilename

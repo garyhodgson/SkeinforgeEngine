@@ -18,141 +18,38 @@ import math
 name = __name__
 logger = logging.getLogger(name)
 
-
-def performAction(gcode):
-	"Modify the travel paths of a skein to remove strings"
-	if not config.getboolean(name, 'active'):
-		logger.info("%s plugin is not active", name.capitalize())
-		return text
-	return CombSkein(gcode.runtimeParameters).comb()
-
 class CombSkein:
 	"A class to comb a skein of extrusions."
-	def __init__(self,runtimeParameters):
+	def __init__(self, layer):
 		'Initialize'
-		self.isAlteration = False
 		self.betweenTable = {}
-		self.boundaryLoop = None
-		#self.gcode = gcode
-		self.runtimeParameters = runtimeParameters
-		self.extruderActive = False
-		self.layer = None
-		self.layerCount = 0
-		self.layerTable = {}
-		self.layerZ = None
-		self.lineIndex = 0
-		self.lines = None
-		self.nextLayerZ = None
-		self.oldLocation = None
-		self.oldZ = None
-		self.operatingFeedRatePerMinute = None
-		self.travelFeedRateMinute = None
+		self.z = layer.z
 		
-		self.perimeterWidth = self.runtimeParameters.perimeterWidth
+		self.perimeterWidth = layer.runtimeParameters.perimeterWidth
 		self.combInset = 0.7 * self.perimeterWidth
 		self.betweenInset = 0.4 * self.perimeterWidth
 		self.uTurnWidth = 0.5 * self.betweenInset
-		self.travelFeedRateMinute = self.runtimeParameters.travelFeedRateMinute
+		self.travelFeedRateMinute = layer.runtimeParameters.travelFeedRateMinute
 		
-
-	def comb(self):
-		"Modify the travel paths of a skein to remove strings"
-		
-		None
-#		for lineIndex in xrange(self.lineIndex, len(self.lines)):
-#			line = self.lines[lineIndex]
-#			self.parseBoundariesLayers(line)
-#		for lineIndex in xrange(self.lineIndex, len(self.lines)):
-#			line = self.lines[lineIndex]
-#			self.parseLine(line)
-	
-	
-	def parseBoundariesLayers(self, line):
-		"Parse a gcode line."
-		splitLine = gcodec.getSplitLineBeforeBracketSemicolon(line)
-		if len(splitLine) < 1:
-			return
-		firstWord = splitLine[0]
-		if firstWord == 'M103':
-			self.boundaryLoop = None
-		elif firstWord == '(<boundaryPoint>':
-			location = gcodec.getLocationFromSplitLine(None, splitLine)
-			self.addToLoop(location)
-		elif firstWord == '(<layer>':
-			self.boundaryLoop = None
-			self.layer = None
-			self.oldZ = float(splitLine[1])
-
-	def parseLine(self, line):
-		"Parse a gcode line and add it to the comb skein."
-		splitLine = gcodec.getSplitLineBeforeBracketSemicolon(line)
-		if len(splitLine) < 1:
-			return
-		firstWord = splitLine[0]
-		if firstWord == 'G1':
-			self.addIfTravel(splitLine)
-			self.layerZ = self.nextLayerZ
-		elif firstWord == 'M101':
-			self.extruderActive = True
-		elif firstWord == 'M103':
-			self.extruderActive = False
-		elif firstWord == '(<alteration>)':
-			self.isAlteration = True
-		elif firstWord == '(</alteration>)':
-			self.isAlteration = False
-		elif firstWord == '(<layer>':
-			self.layerCount = self.layerCount + 1
-			#logger.info('layer: %s', self.layerCount)
-			self.nextLayerZ = float(splitLine[1])
-			if self.layerZ == None:
-				self.layerZ = self.nextLayerZ
-		self.gcode.addLine(line)
-
-
-	def addGcodePathZ(self, feedRateMinute, path, z):
-		"Add a gcode path, without modifying the extruder, to the output."
-		for point in path:
-			self.gcode.addGcodeMovementZWithFeedRate(feedRateMinute, point, z)
-
-	def addIfTravel(self, splitLine):
-		"Add travel move around loops if the extruder is off."
-		location = gcodec.getLocationFromSplitLine(self.oldLocation, splitLine)
-		if not self.isAlteration and not self.extruderActive and self.oldLocation != None:
-			if len(self.getBoundaries()) > 0:
-				highestZ = max(location.z, self.oldLocation.z)
-				self.addGcodePathZ(self.travelFeedRateMinute, self.getPathsBetween(self.oldLocation.dropAxis(), location.dropAxis()), highestZ)
-		self.oldLocation = location
-
-	def addToLoop(self, location):
-		"Add a location to loop."
-		if self.layer == None:
-			if not self.oldZ in self.layerTable:
-				self.layerTable[ self.oldZ ] = []
-			self.layer = self.layerTable[ self.oldZ ]
-		if self.boundaryLoop == None:
-			self.boundaryLoop = [] #starting with an empty array because a closed loop does not have to restate its beginning
-			self.layer.append(self.boundaryLoop)
-		if self.boundaryLoop != None:
-			self.boundaryLoop.append(location.dropAxis())
-
+		self.boundaries = []
+		perimeters = []
+		layer.getPerimeterPaths(perimeters)
+		for perimeter in perimeters:
+			x = []
+			for boundaryPoint in perimeter.boundaryPoints:
+				x.append(boundaryPoint.dropAxis())
+			self.boundaries.append(x)
+				
 	def getBetweens(self):
 		"Set betweens for the layer."
-		if self.layerZ in self.betweenTable:
-			return self.betweenTable[ self.layerZ ]
-		if self.layerZ not in self.layerTable:
+		if self.z in self.betweenTable:
+			return self.betweenTable[ self.z ]
+		if len(self.boundaries) == 0:
 			return []
-		self.betweenTable[ self.layerZ ] = []
-		for boundaryLoop in self.layerTable[ self.layerZ ]:
-			self.betweenTable[ self.layerZ ] += intercircle.getInsetLoopsFromLoop(boundaryLoop, self.betweenInset)
-		return self.betweenTable[ self.layerZ ]
-
-	def getBoundaries(self):
-		"Get boundaries for the layer."
-		if self.layerZ in self.layerTable:
-			return self.layerTable[ self.layerZ ]
-		return []
-
-	
+		self.betweenTable[ self.z ] = []
+		for boundaryLoop in self.boundaries:
+			self.betweenTable[ self.z ] += intercircle.getInsetLoopsFromLoop(boundaryLoop, self.betweenInset)
+		return self.betweenTable[ self.z ]
 
 	def getIsAsFarAndNotIntersecting(self, begin, end):
 		"Determine if the point on the line is at least as far from the loop as the center point."
@@ -229,8 +126,9 @@ class CombSkein:
 			pathBetween.append(between)
 		return pathBetween
 
-	def getPathsBetween(self, begin, end):
+	def getPathsBetween(self, z, begin, end):
 		"Insert paths between the perimeter and the fill."
+		self.z = z
 		aroundBetweenPath = []
 		points = [begin]
 		lineX = []
@@ -240,9 +138,9 @@ class CombSkein:
 		beginRotated = segmentYMirror * begin
 		endRotated = segmentYMirror * end
 		y = beginRotated.imag
-		boundaries = self.getBoundaries()
-		for boundaryIndex in xrange(len(boundaries)):
-			boundary = boundaries[ boundaryIndex ]
+		
+		for boundaryIndex in xrange(len(self.boundaries)):
+			boundary = self.boundaries[ boundaryIndex ]
 			boundaryRotated = euclidean.getPointsRoundZAxis(segmentYMirror, boundary)
 			euclidean.addXIntersectionIndexesFromLoopY(boundaryRotated, boundaryIndex, switchX, y)
 		switchX.sort()
@@ -255,11 +153,10 @@ class CombSkein:
 				lineX.append(xIntersection)
 		points.append(end)
 		lineXIndex = 0
-#		pathBetweenAdded = False
 		while lineXIndex < len(lineX) - 1:
 			lineXFirst = lineX[lineXIndex]
 			lineXSecond = lineX[lineXIndex + 1]
-			loopFirst = boundaries[lineXFirst.index]
+			loopFirst = self.boundaries[lineXFirst.index]
 			if lineXSecond.index == lineXFirst.index:
 				pathBetween = self.getPathBetween(loopFirst, points[lineXIndex : lineXIndex + 4])
 				pathBetween = self.getSimplifiedAroundPath(points[lineXIndex], points[lineXIndex + 3], loopFirst, pathBetween)
