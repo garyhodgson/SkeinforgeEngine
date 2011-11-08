@@ -27,8 +27,8 @@ logger = logging.getLogger('engine')
 def getCraftedTextFromPlugins(pluginSequence, gcode):
 	'Get a crafted shape file from a list of pluginSequence.'
 	lastProcedureTime = time.time()
-	sys.path.insert(0, __plugins_path__)
-	
+	if __plugins_path__ not in sys.path:
+		sys.path.insert(0, __plugins_path__)	
 	for plugin in pluginSequence:
 		pluginModule = import_module(plugin)
 		if pluginModule != None:

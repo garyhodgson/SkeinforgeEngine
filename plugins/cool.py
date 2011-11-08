@@ -22,7 +22,7 @@ name = __name__
 logger = logging.getLogger(name)
 
 def performAction(gcode):
-	'Cool a gcode linear move text.'
+	'Give the extrusion time to cool down.'
 	if not config.getboolean(name, 'active'):
 		logger.info("%s plugin is not active", name.capitalize())
 		return
@@ -45,14 +45,15 @@ class CoolSkein:
 		self.coolEndLines = archive.getFileText(self.absoluteCoolEndFilePath, printWarning=False)
 		
 	def cool(self):
-		'Parse gcode text and store the cool gcode.'
+		'Apply the cool strategy.'
 		
 		if self.turnFanOnAtBeginning:
 			self.gcode.startGcodeCommands.append(GcodeCommand(gcodes.TURN_FAN_ON))
 		
 		coolStrategy = None
 		try:
-			sys.path.insert(0, self.coolStrategyPath)
+			if self.coolStrategyPath not in sys.path:
+				sys.path.insert(0, self.coolStrategyPath)
 			coolStrategy = import_module(self.coolStrategyName)
 		except:
 			logger.warning("Could not find module for cooling strategy called: %s", self.coolStrategyName)

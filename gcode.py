@@ -9,6 +9,7 @@ import gcodes
 import math
 import sys
 import time
+from plugins.comb import CombSkein
 
 # globals used as an easy way to maintain state between layer changes
 _lastRetractionExtrusionDistance = 0.0
@@ -509,6 +510,9 @@ class Path:
         self.minimumTravelFeedRateMultiplier = self.runtimeParameters.minimumTravelFeedRateMultiplier
         self.minimumLayerFeedRateMinute = self.runtimeParameters.minimumLayerFeedRateMinute
         
+        if self.runtimeParameters.combActive: 
+            self.combSkein = CombSkein(self.runtimeParameters)
+        
     def __str__(self):
         '''Get the string representation.'''
         output = StringIO.StringIO()
@@ -553,20 +557,29 @@ class Path:
         for command in self.gcodeCommands:
             output.write('%s' % printCommand(command, self.verbose))
 
+
+    def moveToStartPoint(self, feedAndFlowRateMultiplier):
+        '''Adds gcode to move the nozzle to the startpoint of the path. 
+            If comb is active the path will dodge all open spaces.
+        '''
+        
+        #if self.runtimeParameters.combActive: 
+        #    additionalCommands = self.combSkein.getPathsBetween(self.oldLocation.dropAxis(), location.dropAxis())
+        
+        
+        gcodeArgs = [('X', round(self.startPoint.real, self.decimalPlaces)), 
+            ('Y', round(self.startPoint.imag, self.decimalPlaces)), 
+            ('Z', round(self.z, self.decimalPlaces))]
+        if self.speedActive:
+            travelFeedRateMinute, travelFeedRateMultiplier = self.getFeedRateAndMultiplier(self.travelFeedRateMinute, feedAndFlowRateMultiplier)
+            gcodeArgs.append(('F', self.travelFeedRateMinute * travelFeedRateMultiplier))
+        self.gcodeCommands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
+
     def generateGcode(self, lookaheadStartVector=None, feedAndFlowRateMultiplier=1.0):
         'Transforms paths and points to gcode'
         global _lastRetractionExtrusionDistance
         
-        gcodeArgs = [('X', round(self.startPoint.real, self.decimalPlaces)),
-                     ('Y', round(self.startPoint.imag, self.decimalPlaces)),
-                     ('Z', round(self.z, self.decimalPlaces))]
-                
-        if self.speedActive:
-            (travelFeedRateMinute, travelFeedRateMultiplier) = self.getFeedRateAndMultiplier(self.travelFeedRateMinute, feedAndFlowRateMultiplier)
-            gcodeArgs.append(('F', self.travelFeedRateMinute * travelFeedRateMultiplier))
-        
-        self.gcodeCommands.append(
-            GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
+        self.moveToStartPoint(feedAndFlowRateMultiplier)
     
         if self.dimensionActive:
             self.previousPoint = self.startPoint
@@ -819,6 +832,8 @@ class RuntimeParameters:
         
         self.orbitalFeedRatePerSecond = (self.feedRate * self.orbitalFeedRateRatio)
         self.orbitalFeedRateMinute = self.orbitalFeedRatePerSecond * 60
+        
+        self.combActive = config.getboolean('comb', 'active')
 
 class GcodeCommand:
     def __init__(self, commandLetter, parameters=None):

@@ -1,44 +1,40 @@
 """
-Comb is a script to comb the extrusion hair of a gcode file.
+Comb the extrusion hair of a gcode file.  Modifies the travel paths so the nozzle does not go over empty spaces, thus reducing the strings that may build up.
 
-Original author 
-	'Enrique Perez (perez_enrique@yahoo.com) 
-	modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
-	
-license 
-	'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
+Credits:
+	Original Author: Enrique Perez (http://skeinforge.com)
+	Contributors: Please see the documentation in Skeinforge 
+	Modifed as SFACT: Ahmet Cem Turan (github.com/ahmetcemturan/SFACT)	
 
+License: 
+	GNU Affero General Public License http://www.gnu.org/licenses/agpl.html
 """
 
-from fabmetheus_utilities import archive
-from fabmetheus_utilities import euclidean
-from fabmetheus_utilities import gcodec
-from fabmetheus_utilities import intercircle
-import math
 from config import config
+from fabmetheus_utilities import archive, euclidean, intercircle
 import logging
+import math
 
-__originalauthor__ = 'Enrique Perez (perez_enrique@yahoo.com) modifed as SFACT by Ahmet Cem Turan (ahmetcemturan@gmail.com)'
-__license__ = 'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'
-
-logger = logging.getLogger(__name__)
 name = __name__
+logger = logging.getLogger(name)
 
-def getCraftedText(fileName, text):
-	"Comb a gcode linear move text."
+
+def performAction(gcode):
+	"Modify the travel paths of a skein to remove strings"
 	if not config.getboolean(name, 'active'):
 		logger.info("%s plugin is not active", name.capitalize())
 		return text
-	return CombSkein().getCraftedGcode(text)
+	return CombSkein(gcode.runtimeParameters).comb()
 
 class CombSkein:
 	"A class to comb a skein of extrusions."
-	def __init__(self):
+	def __init__(self,runtimeParameters):
 		'Initialize'
 		self.isAlteration = False
 		self.betweenTable = {}
 		self.boundaryLoop = None
-		self.gcode = gcodec.Gcode()
+		#self.gcode = gcode
+		self.runtimeParameters = runtimeParameters
 		self.extruderActive = False
 		self.layer = None
 		self.layerCount = 0
@@ -51,6 +47,67 @@ class CombSkein:
 		self.oldZ = None
 		self.operatingFeedRatePerMinute = None
 		self.travelFeedRateMinute = None
+		
+		self.perimeterWidth = self.runtimeParameters.perimeterWidth
+		self.combInset = 0.7 * self.perimeterWidth
+		self.betweenInset = 0.4 * self.perimeterWidth
+		self.uTurnWidth = 0.5 * self.betweenInset
+		self.travelFeedRateMinute = self.runtimeParameters.travelFeedRateMinute
+		
+
+	def comb(self):
+		"Modify the travel paths of a skein to remove strings"
+		
+		None
+#		for lineIndex in xrange(self.lineIndex, len(self.lines)):
+#			line = self.lines[lineIndex]
+#			self.parseBoundariesLayers(line)
+#		for lineIndex in xrange(self.lineIndex, len(self.lines)):
+#			line = self.lines[lineIndex]
+#			self.parseLine(line)
+	
+	
+	def parseBoundariesLayers(self, line):
+		"Parse a gcode line."
+		splitLine = gcodec.getSplitLineBeforeBracketSemicolon(line)
+		if len(splitLine) < 1:
+			return
+		firstWord = splitLine[0]
+		if firstWord == 'M103':
+			self.boundaryLoop = None
+		elif firstWord == '(<boundaryPoint>':
+			location = gcodec.getLocationFromSplitLine(None, splitLine)
+			self.addToLoop(location)
+		elif firstWord == '(<layer>':
+			self.boundaryLoop = None
+			self.layer = None
+			self.oldZ = float(splitLine[1])
+
+	def parseLine(self, line):
+		"Parse a gcode line and add it to the comb skein."
+		splitLine = gcodec.getSplitLineBeforeBracketSemicolon(line)
+		if len(splitLine) < 1:
+			return
+		firstWord = splitLine[0]
+		if firstWord == 'G1':
+			self.addIfTravel(splitLine)
+			self.layerZ = self.nextLayerZ
+		elif firstWord == 'M101':
+			self.extruderActive = True
+		elif firstWord == 'M103':
+			self.extruderActive = False
+		elif firstWord == '(<alteration>)':
+			self.isAlteration = True
+		elif firstWord == '(</alteration>)':
+			self.isAlteration = False
+		elif firstWord == '(<layer>':
+			self.layerCount = self.layerCount + 1
+			#logger.info('layer: %s', self.layerCount)
+			self.nextLayerZ = float(splitLine[1])
+			if self.layerZ == None:
+				self.layerZ = self.nextLayerZ
+		self.gcode.addLine(line)
+
 
 	def addGcodePathZ(self, feedRateMinute, path, z):
 		"Add a gcode path, without modifying the extruder, to the output."
@@ -95,17 +152,7 @@ class CombSkein:
 			return self.layerTable[ self.layerZ ]
 		return []
 
-	def getCraftedGcode(self, gcodeText):
-		"Parse gcode text and store the comb gcode."
-		self.lines = archive.getTextLines(gcodeText)
-		self.parseInitialization()
-		for lineIndex in xrange(self.lineIndex, len(self.lines)):
-			line = self.lines[lineIndex]
-			self.parseBoundariesLayers(line)
-		for lineIndex in xrange(self.lineIndex, len(self.lines)):
-			line = self.lines[lineIndex]
-			self.parseLine(line)
-		return self.gcode.output.getvalue()
+	
 
 	def getIsAsFarAndNotIntersecting(self, begin, end):
 		"Determine if the point on the line is at least as far from the loop as the center point."
@@ -248,63 +295,3 @@ class CombSkein:
 				return pathAround[: pathIndex + 1]
 			pathIndex -= 1
 		return pathAround[: 1]
-
-	def parseBoundariesLayers(self, line):
-		"Parse a gcode line."
-		splitLine = gcodec.getSplitLineBeforeBracketSemicolon(line)
-		if len(splitLine) < 1:
-			return
-		firstWord = splitLine[0]
-		if firstWord == 'M103':
-			self.boundaryLoop = None
-		elif firstWord == '(<boundaryPoint>':
-			location = gcodec.getLocationFromSplitLine(None, splitLine)
-			self.addToLoop(location)
-		elif firstWord == '(<layer>':
-			self.boundaryLoop = None
-			self.layer = None
-			self.oldZ = float(splitLine[1])
-
-	def parseInitialization(self):
-		'Parse gcode initialization and store the parameters.'
-		for self.lineIndex in xrange(len(self.lines)):
-			line = self.lines[self.lineIndex]
-			splitLine = gcodec.getSplitLineBeforeBracketSemicolon(line)
-			firstWord = gcodec.getFirstWord(splitLine)
-			self.gcode.parseSplitLine(firstWord, splitLine)
-			if firstWord == '(</extruderInitialization>)':
-				self.gcode.addLine('(<procedureName> comb </procedureName>)')
-				return
-			elif firstWord == '(<perimeterWidth>':
-				perimeterWidth = float(splitLine[1])
-				self.combInset = 0.7 * perimeterWidth
-				self.betweenInset = 0.4 * perimeterWidth
-				self.uTurnWidth = 0.5 * self.betweenInset
-			elif firstWord == '(<travelFeedRate>':
-				self.travelFeedRateMinute = 60.0 * float(splitLine[1])
-			self.gcode.addLine(line)
-
-	def parseLine(self, line):
-		"Parse a gcode line and add it to the comb skein."
-		splitLine = gcodec.getSplitLineBeforeBracketSemicolon(line)
-		if len(splitLine) < 1:
-			return
-		firstWord = splitLine[0]
-		if firstWord == 'G1':
-			self.addIfTravel(splitLine)
-			self.layerZ = self.nextLayerZ
-		elif firstWord == 'M101':
-			self.extruderActive = True
-		elif firstWord == 'M103':
-			self.extruderActive = False
-		elif firstWord == '(<alteration>)':
-			self.isAlteration = True
-		elif firstWord == '(</alteration>)':
-			self.isAlteration = False
-		elif firstWord == '(<layer>':
-			self.layerCount = self.layerCount + 1
-			#logger.info('layer: %s', self.layerCount)
-			self.nextLayerZ = float(splitLine[1])
-			if self.layerZ == None:
-				self.layerZ = self.nextLayerZ
-		self.gcode.addLine(line)

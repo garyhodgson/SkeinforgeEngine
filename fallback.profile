@@ -71,8 +71,8 @@ infill.rotation.odd.layer=90.0
 active=true
 center.x=100.0
 center.y=100.0
-columns=2
-rows=2
+columns=1
+rows=1
 sequence.reverse.odd.layers=false
 separation.over.perimeter.width=15.0
 
@@ -151,8 +151,8 @@ turn.off.fan.at.end=true
 cool.start.file=cool_start.gmc
 cool.end.file=cool_end.gmc
 ; OrbitCoolStrategy | SlowDownCoolStrategy
-cool.strategy.path=strategies
-cool.strategy=OrbitCoolStrategy
+cool.strategy.path=plugins/strategies
+cool.strategy=SlowDownCoolStrategy
 orbital.margin=10.0
 
 [stretch]

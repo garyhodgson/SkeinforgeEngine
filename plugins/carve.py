@@ -63,11 +63,32 @@ class CarveSkein:
 		
 		self.gcode.carvingCornerMaximum = carving.getCarveCornerMaximum()
 		self.gcode.carvingCornerMinimum = carving.getCarveCornerMinimum()
-		
-		self.gcode.rotatedLoopLayers = rotatedLoopLayers[self.layerPrintFrom : self.layerPrintTo]
+
+		a = rotatedLoopLayers[self.layerPrintFrom : self.layerPrintTo]
+		for x in a:
+			rr = []
+			for y in x.loops:
+				lowerLeftPoint = self.getLowerLeftCorner(y)
+				lowerLeftIndex = y.index(lowerLeftPoint)
+				rr.append(y[lowerLeftIndex:] + y[:lowerLeftIndex])
+			x.loops = rr
+
+		self.gcode.rotatedLoopLayers = a
 				
 		if config.getboolean(name, 'debug'):
 			filename = self.gcode.runtimeParameters.inputFilename
 			svgFilename = filename[: filename.rfind('.')] + '.svg'
 			archive.writeFileText(svgFilename , self.gcode.getSVGText())
 			logger.info("Carving SVG written to %s", svgFilename)
+			
+	def getLowerLeftCorner(self, points):
+		'Get the lower left corner point from a set of points.'
+		lowerLeftCorner = None
+		lowestRealPlusImaginary = 987654321.0
+		for point in points:
+			realPlusImaginary = point.real + point.imag
+			if realPlusImaginary < lowestRealPlusImaginary:
+				lowestRealPlusImaginary = realPlusImaginary
+				lowerLeftCorner = point
+		return lowerLeftCorner
+			
