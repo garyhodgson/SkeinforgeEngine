@@ -170,8 +170,6 @@ class Layer:
         
         for preLayerGcodeCommand in self.preLayerGcodeCommands:
             output.write(printCommand(preLayerGcodeCommand, self.verbose))
-        
-        
         if self.runtimeParameters.combActive: 
             self.combSkein = CombSkein(self)
         
@@ -458,10 +456,15 @@ class NestedRing:
     
     def transferPaths(self, paths):
         'Transfer paths.'
-        for nestedRing in self.innerNestedRings:
-            euclidean.transferPathsToSurroundingLoops(nestedRing.innerNestedRings, paths)
-        self.infillPathsHolder = euclidean.getTransferredPaths(paths, self.getXYBoundaries())
-        
+        for innerNestedRing in self.innerNestedRings:
+            innerNestedRing.transferPaths(paths)
+        loop = self.getXYBoundaries()
+        for insideIndex in xrange(len(paths) - 1, -1, -1):
+            inside = paths[ insideIndex ]
+            if euclidean.isPathInsideLoop(loop, inside):
+                self.infillPathsHolder.append(inside)
+                del paths[ insideIndex ]
+
     def addToThreads(self, extrusionHalfWidth, oldOrderedLocation, threadSequence):
         'Add to paths from the last location. perimeter>inner >fill>paths or fill> perimeter>inner >paths'
         self.addPerimeterInner(extrusionHalfWidth, oldOrderedLocation, threadSequence)

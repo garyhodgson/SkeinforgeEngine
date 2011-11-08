@@ -1,6 +1,7 @@
 """
 Comb the extrusion hair of a gcode file.  Modifies the travel paths so the nozzle does not go over empty spaces, thus reducing the strings that may build up.
 
+Note: comb is called during gcode generation, not through the usual plugin channel. This is because the travel calculations are made at the last minute.
 Credits:
 	Original Author: Enrique Perez (http://skeinforge.com)
 	Contributors: Please see the documentation in Skeinforge 
