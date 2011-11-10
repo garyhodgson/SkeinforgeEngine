@@ -81,7 +81,7 @@ class RuntimeParameters:
         self.bridgeFlowRate = (self.bridgeFlowRateRatio * self.bridgeFeedRateRatio) * (self.perimeterFlowRateRatio * self.perimeterFeedRate) * (nozzleXsection / extrusionXsection)
         self.perimeterFlowRate = self.perimeterFlowRateRatio * self.perimeterFeedRate
         
-        self.orbitalFeedRatePerSecond = (self.feedRate * self.orbitalFeedRateRatio)
-        self.orbitalFeedRateMinute = self.orbitalFeedRatePerSecond * 60
+        self.orbitalFeedRateSecond = (self.feedRate * self.orbitalFeedRateRatio)
+        self.orbitalFeedRateMinute = self.orbitalFeedRateSecond * 60
         
         self.combActive = config.getboolean('comb', 'active')

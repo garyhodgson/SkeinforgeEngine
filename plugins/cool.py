@@ -37,8 +37,8 @@ class CoolSkein:
 		self.turnFanOffAtEnding = config.getboolean(name, 'turn.off.fan.at.end')
 		self.nameOfCoolStartFile = config.get(name, 'cool.start.file')
 		self.nameOfCoolEndFile = config.get(name, 'cool.end.file')
-		self.coolStrategyName = config.get(name, 'cool.strategy')
-		self.coolStrategyPath = config.get(name, 'cool.strategy.path')
+		self.coolStrategyName = config.get(name, 'strategy')
+		self.coolStrategyPath = config.get(name, 'strategy.path')
 		self.absoluteCoolStartFilePath = os.path.join(archive.getSkeinforgePath('alterations'), self.nameOfCoolStartFile)
 		self.absoluteCoolEndFilePath = os.path.join(archive.getSkeinforgePath('alterations'), self.nameOfCoolEndFile)
 		self.coolStartLines = archive.getFileText(self.absoluteCoolEndFilePath, printWarning=False)
@@ -54,16 +54,19 @@ class CoolSkein:
 		try:
 			if self.coolStrategyPath not in sys.path:
 				sys.path.insert(0, self.coolStrategyPath)
-			coolStrategy = import_module(self.coolStrategyName)
-		except:
-			logger.warning("Could not find module for cooling strategy called: %s", self.coolStrategyName)
+			coolStrategy = import_module(self.coolStrategyName).getStrategy(self.slicedModel.runtimeParameters)
+			logger.info("Using cool strategy: %s", self.coolStrategyName)
+		except ImportError as inst:
+			logger.warning("Could not find module for cooling strategy called: %s. %s", self.coolStrategyName, inst)	
+		except Exception as inst:
+			logger.warning("Exception reading strategy %s: %s", self.coolStrategyName, inst)
 		
 		for layer in self.slicedModel.layers.values():
 			for line in self.coolStartLines:
 				layer.preLayerGcodeCommands.append(line)
 	            
 			if coolStrategy != None:
-				coolStrategy.cool(layer, self.slicedModel.runtimeParameters, dict(config.items(name)))
+				coolStrategy.cool(layer)
 				
 			for line in self.coolEndLines:
 				layer.postLayerGcodeCommands.append(line)

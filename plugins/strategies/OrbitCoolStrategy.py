@@ -1,42 +1,56 @@
-from fabmetheus_utilities import intercircle, euclidean
+from config import config
 from data_structures import GcodeCommand
-import gcodes, math
+from fabmetheus_utilities import euclidean
+import gcodes
 
-def cool(layer, runtimeParameters, coolOptions=None):
-    '''Apply the cooling by moving the nozzle around the print.'''
-    
-    if layer.index == 0:
-        # We don't have to slow down on the first layer
-        return
-    
-    (layerDistance, layerDuration) = layer.getDistanceAndDuration()
-    minimumLayerTime = float(coolOptions['minimum.layer.time'])
-    remainingOrbitTime = max(minimumLayerTime - layerDuration, 0.0)
-    oribitalMarginDistance = float(coolOptions['orbital.margin'])
-    oribitalMargin = complex(oribitalMarginDistance, oribitalMarginDistance)
+def getStrategy(runtimeParameters):
+    '''Returns an instance of the strategy'''
+    return OrbitCoolStrategy(runtimeParameters)
+
+class OrbitCoolStrategy:
+    '''Allows a layer to cool by orbiting around the model for a set time.'''
+    def __init__(self, runtimeParameters):
         
-    boundaryLayerLoops = []
-    for nestedRing in layer.nestedRings:
-        boundaryLayerLoops.append(nestedRing.getXYBoundaries())
-    
-    if remainingOrbitTime > 0.0 and boundaryLayerLoops != None:          
-        if len(boundaryLayerLoops) < 1:
+        self.minimumLayerTime = config.getfloat('cool','minimum.layer.time')
+        self.orbitalFeedRateSecond = runtimeParameters.orbitalFeedRateSecond
+        self.orbitalFeedRateMinute = runtimeParameters.orbitalFeedRateMinute
+        self.oribitalMarginDistance = config.getfloat('cool','orbital.margin')
+        self.oribitalMargin = complex(self.oribitalMarginDistance, self.oribitalMarginDistance)
+        self.decimalPlaces = runtimeParameters.decimalPlaces
+        
+        
+    def cool(self, layer):
+        '''Apply the cooling by moving the nozzle around the print.'''
+        
+        if layer.index == 0:
+            # We don't have to slow down on the first layer
             return
         
-        largestLoop = euclidean.getLargestLoop(boundaryLayerLoops)
-        cornerMinimum = euclidean.getMinimumByComplexPath(largestLoop) - oribitalMargin
-        cornerMaximum = euclidean.getMaximumByComplexPath(largestLoop) + oribitalMargin
+        (layerDistance, layerDuration) = layer.getDistanceAndDuration()
+        remainingOrbitTime = max(self.minimumLayerTime - layerDuration, 0.0)
 
-        largestLoop = euclidean.getSquareLoopWiddershins(cornerMaximum, cornerMinimum)
+        boundaryLayerLoops = []
+        for nestedRing in layer.nestedRings:
+            boundaryLayerLoops.append(nestedRing.getXYBoundaries())
         
-        if len(largestLoop) > 1 and remainingOrbitTime > 1.5 :
-            timeInOrbit = 0.0
+        if remainingOrbitTime > 0.0 and boundaryLayerLoops != None:          
+            if len(boundaryLayerLoops) < 1:
+                return
             
-            while timeInOrbit < remainingOrbitTime:
-                for point in largestLoop:
-                    gcodeArgs = [('X', round(point.real, runtimeParameters.decimalPlaces)),
-                                 ('Y', round(point.imag, runtimeParameters.decimalPlaces)),
-                                 ('Z', round(layer.z, runtimeParameters.decimalPlaces)),
-                                 ('F', round(runtimeParameters.orbitalFeedRateMinute, runtimeParameters.decimalPlaces))]
-                    layer.preLayerGcodeCommands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
-                timeInOrbit += euclidean.getLoopLength(largestLoop) / runtimeParameters.orbitalFeedRatePerSecond
+            largestLoop = euclidean.getLargestLoop(boundaryLayerLoops)
+            cornerMinimum = euclidean.getMinimumByComplexPath(largestLoop) - self.oribitalMargin
+            cornerMaximum = euclidean.getMaximumByComplexPath(largestLoop) + self.oribitalMargin
+    
+            largestLoop = euclidean.getSquareLoopWiddershins(cornerMaximum, cornerMinimum)
+            
+            if len(largestLoop) > 1 and remainingOrbitTime > 1.5 :
+                timeInOrbit = 0.0
+                
+                while timeInOrbit < remainingOrbitTime:
+                    for point in largestLoop:
+                        gcodeArgs = [('X', round(point.real, self.decimalPlaces)),
+                                     ('Y', round(point.imag, self.decimalPlaces)),
+                                     ('Z', round(layer.z, self.decimalPlaces)),
+                                     ('F', round(self.orbitalFeedRateMinute, self.decimalPlaces))]
+                        layer.preLayerGcodeCommands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
+                    timeInOrbit += euclidean.getLoopLength(largestLoop) / self.orbitalFeedRateSecond

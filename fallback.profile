@@ -7,9 +7,9 @@ delete.comments=true
 file.extension=gcode
 file.extension.profile=true
 replace.filename=replace.csv
-export.slicedmodel=true
-export.pickled.slicedmodel=true
-overwrite.pickled.slicedmodel=true
+export.slicedmodel=false
+export.pickled.slicedmodel=false
+overwrite.pickled.slicedmodel=false
 
 
 [preface]
@@ -59,13 +59,14 @@ fully.filled.layers=2
 ;LowerLeft | Nearest
 extrusion.sequence.start.layer=LowerLeft
 extrusion.sequence.print.order=perimeter,loops,infill
-; Only line is currently supported
-infill.pattern=Line
 diaphragm.every.n.layers=100
 diaphragm.thickness=0
 infill.rotation.begin=45.0
 infill.rotation.repeat=1
 infill.rotation.odd.layer=90.0
+; LineFillStrategy
+strategy.path=plugins/strategies
+strategy=LineFillStrategy
 
 [multiply]
 active=true
@@ -148,8 +149,8 @@ turn.off.fan.at.end=true
 cool.start.file=cool_start.gmc
 cool.end.file=cool_end.gmc
 ; OrbitCoolStrategy | SlowDownCoolStrategy
-cool.strategy.path=plugins/strategies
-cool.strategy=SlowDownCoolStrategy
+strategy.path=plugins/strategies
+strategy=SlowDownCoolStrategy
 orbital.margin=10.0
 
 [stretch]
