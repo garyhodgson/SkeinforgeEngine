@@ -14,7 +14,8 @@ from config import config
 from datetime import timedelta
 from fabmetheus_utilities import archive, euclidean
 from utilities import memory_tracker
-import StringIO
+from gcode_writer import GcodeWriter
+from StringIO import StringIO
 import datetime
 import logging
 import os
@@ -44,10 +45,10 @@ class ExportSkein:
 		self.deleteComments = config.getboolean(name, 'delete.comments')
 		self.fileExtension = config.get(name, 'file.extension')
 		self.nameOfReplaceFile = config.get(name, 'replace.filename')
-		self.savePenultimateGcode = config.getboolean(name, 'gcode.penultimate.save')
+		self.exportSlicedModel = config.getboolean(name, 'export.slicedmodel')
 		self.addProfileExtension = config.getboolean(name, 'file.extension.profile')
-		self.savePickledGcode = config.getboolean(name, 'gcode.pickled.save')
-		self.overwritePickledGcode = config.getboolean(name, 'gcode.pickled.overwrite')
+		self.exportPickledSlicedModel = config.getboolean(name, 'export.pickled.slicedmodel')
+		self.overwritePickledSlicedModel = config.getboolean(name, 'overwrite.pickled.slicedmodel')
 		
 	def getReplaceableExportGcode(self, nameOfReplaceFile, replaceableExportGcode):
 		'Get text with strings replaced according to replace.csv file.'
@@ -65,7 +66,7 @@ class ExportSkein:
 			splitLine = replaceLine.replace('\\n', '\t').split('\t')
 			if len(splitLine) > 0:
 				replaceableExportGcode = replaceableExportGcode.replace(splitLine[0], '\n'.join(splitLine[1 :]))
-		output = StringIO.StringIO()
+		output = StringIO()
 		
 		for line in archive.getTextLines(replaceableExportGcode):
 			if line != '':
@@ -89,21 +90,21 @@ class ExportSkein:
 				exportFileName += '.' + string.replace(profileName, ' ', '_')
 				exportFileName += '.' + self.fileExtension
 		
-		replaceableExportGcode = self.getReplaceableExportGcode(self.nameOfReplaceFile, self.gcode.getGcodeText())
+		replaceableExportGcode = self.getReplaceableExportGcode(self.nameOfReplaceFile, GcodeWriter(self.gcode).getSlicedModelAsGcode())		
 		archive.writeFileText(exportFileName, replaceableExportGcode)
 		
-		if self.savePenultimateGcode:
-			fileNamePenultimate = filenamePrefix + '.penultimate.gcode'
+		if self.exportSlicedModel:
+			fileNamePenultimate = filenamePrefix + '.slicedmodel'
 			archive.writeFileText(fileNamePenultimate, str(self.gcode))
-			logger.info('Penultimate gcode exported to: %s', fileNamePenultimate)
+			logger.info('Sliced Model gcode exported to: %s', fileNamePenultimate)
 		
-		if self.savePickledGcode:
-			fileNamePickled = filenamePrefix + '.pickledgcode'
-			if os.path.exists(fileNamePickled) and not self.overwritePickledGcode:
+		if self.exportPickledSlicedModel:
+			fileNamePickled = filenamePrefix + '.pickled_slicedmodel'
+			if os.path.exists(fileNamePickled) and not self.overwritePickledSlicedModel:
 				backupFilename = '%s.%s.bak' % (fileNamePickled, datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f'))
 				os.rename(fileNamePickled, backupFilename)
-				logger.info('Existing pickled gcode file backed up o: %s', backupFilename)
-			logger.info('Pickled gcode exported to: %s', fileNamePickled)
+				logger.info('Existing slicedmodel file backed up to: %s', backupFilename)
+			logger.info('Pickled slicedmodel exported to: %s', fileNamePickled)
 			archive.writeFileText(fileNamePickled, pickle.dumps(self.gcode))
 			
 		logger.info('Gcode exported to: %s', archive.getSummarizedFileName(exportFileName))

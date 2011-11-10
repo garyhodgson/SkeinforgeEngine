@@ -6,7 +6,7 @@ Skeins a 3D model into gcode.
 from config import config
 from datetime import timedelta
 from fabmetheus_utilities import archive
-from gcode import Gcode
+from entities import SlicedModel
 from importlib import import_module
 from utilities import memory_tracker
 import argparse
@@ -40,12 +40,12 @@ def getCraftedTextFromPlugins(pluginSequence, gcode):
 
 def main():
 	"Starting point for skeinforge engine."
-	parser = argparse.ArgumentParser(description='Skeins a 3D model into gcode.')
+	parser = argparse.ArgumentParser(description='Skeins a 3D model into slicedModel.')
 	parser.add_argument('file', help='The file to skein. Files accepted: stl, obj, gts, and svg or pickledgcode files produced by Skeinforge.')
 	parser.add_argument('-c', metavar='config', help='Configuration for skeinforge engine.', default='skeinforge_engine.cfg')
 	parser.add_argument('-p', metavar='profile', help='Profile for the skeining.')
 	parser.add_argument('-o', metavar='output', help='Output filename (including path). Overrides other export filename settings.')
-	parser.add_argument('-r', metavar='reprocess', help='Comma seperated list of plugins to reprocess a pickled gcode file. The export plugin is automatically appended.')
+	parser.add_argument('-r', metavar='reprocess', help='Comma seperated list of plugins to reprocess a pickled slicedModel file. The export plugin is automatically appended.')
 	
 	args = parser.parse_args()
 	
@@ -70,21 +70,21 @@ def main():
 		logger.error('File not found: %s', inputFilename)
 		return
 	
-	if inputFilename.endswith('.pickledgcode'):
-		pickledGcode = archive.getFileText(inputFilename)
-		gcode = pickle.loads(pickledGcode)
-		gcode.runtimeParameters.startTime = time.time()
-		gcode.runtimeParameters.endTime = None
+	if inputFilename.endswith('.pickled_slicedmodel'):
+		pickledSlicedModel = archive.getFileText(inputFilename)
+		slicedModel = pickle.loads(pickledSlicedModel)
+		slicedModel.runtimeParameters.startTime = time.time()
+		slicedModel.runtimeParameters.endTime = None
 	else:
-		gcode = Gcode()
+		slicedModel = SlicedModel()
 	
 	if args.o != None:
-		print os.path.isabs(gcode.runtimeParameters.outputFilename)
+		print os.path.isabs(slicedModel.runtimeParameters.outputFilename)
 
 	if args.r != None:
 		pluginSequence = args.r.split(',')
 		if 'carve' in pluginSequence:
-			logger.error('Reprocessing a pickled gcode file with carve is not possible. Please process the original file instead.')
+			logger.error('Reprocessing a pickled sliced model file with carve is not possible. Please process the original file instead.')
 			return
 		if 'export' not in pluginSequence:
 			pluginSequence.append('export')
@@ -95,19 +95,19 @@ def main():
 	logger.info("Profile: %s", profileName)
 	logger.debug("Plugin Sequence: %s", pluginSequence)
 
-	if gcode.runtimeParameters.profileMemory:
-		memory_tracker.track_object(gcode)
+	if slicedModel.runtimeParameters.profileMemory:
+		memory_tracker.track_object(slicedModel)
 		memory_tracker.create_snapshot('Start')
 	
-	gcode.runtimeParameters.profileName = profileName
-	gcode.runtimeParameters.inputFilename = inputFilename
-	getCraftedTextFromPlugins(pluginSequence[:], gcode)	
+	slicedModel.runtimeParameters.profileName = profileName
+	slicedModel.runtimeParameters.inputFilename = inputFilename
+	getCraftedTextFromPlugins(pluginSequence[:], slicedModel)	
 	
-	gcode.runtimeParameters.endTime = time.time()
+	slicedModel.runtimeParameters.endTime = time.time()
 	
-	logger.info('It took %s seconds to complete.', timedelta(seconds=gcode.runtimeParameters.endTime - gcode.runtimeParameters.startTime).total_seconds())
+	logger.info('It took %s seconds to complete.', timedelta(seconds=slicedModel.runtimeParameters.endTime - slicedModel.runtimeParameters.startTime).total_seconds())
 
-	if gcode.runtimeParameters.profileMemory:
+	if slicedModel.runtimeParameters.profileMemory:
 		memory_tracker.create_snapshot('End')
 		if config.getboolean('general', 'profile.memory.print.summary'):
 			memory_tracker.tracker.stats.print_summary()

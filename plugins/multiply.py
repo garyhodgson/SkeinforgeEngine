@@ -10,27 +10,26 @@ License:
 	GNU Affero General Public License http://www.gnu.org/licenses/agpl.html
 """
 
-from fabmetheus_utilities.vector3 import Vector3
-from fabmetheus_utilities import archive
-from fabmetheus_utilities import euclidean
 from config import config
-import logging
+from fabmetheus_utilities import archive, euclidean
+from fabmetheus_utilities.vector3 import Vector3
 import copy
+import logging
 
 logger = logging.getLogger(__name__)
 name = 'multiply'
 
-def performAction(gcode):
+def performAction(slicedModel):
 	'Multiply the 3D model.'
 	if not config.getboolean(name, 'active'):
 		logger.info("%s plugin is inactive", name.capitalize())
 		return
-	return MultiplySkein(gcode).multiply()
+	return MultiplySkein(slicedModel).multiply()
 
 class MultiplySkein:
 	'A class to multiply a skein of extrusions.'
-	def __init__(self, gcode):
-		self.gcode = gcode
+	def __init__(self, slicedModel):
+		self.slicedModel = slicedModel
 		self.isExtrusionActive = False
 		self.layerIndex = 0
 		self.layerLines = []
@@ -48,8 +47,8 @@ class MultiplySkein:
 		self.separationOverPerimeterWidth = config.getfloat(name, 'separation.over.perimeter.width')
 		self.extrusionWidth = config.getfloat('carve', 'extrusion.width')
 		self.centerOffset = complex(self.centerX, self.centerY)
-		cornerMaximumComplex = self.gcode.carvingCornerMaximum.dropAxis()
-		cornerMinimumComplex = self.gcode.carvingCornerMinimum.dropAxis()
+		cornerMaximumComplex = self.slicedModel.carvingCornerMaximum.dropAxis()
+		cornerMinimumComplex = self.slicedModel.carvingCornerMinimum.dropAxis()
 
 		self.extent = cornerMaximumComplex - cornerMinimumComplex
 		self.shapeCenter = 0.5 * (cornerMaximumComplex + cornerMinimumComplex)
@@ -65,10 +64,10 @@ class MultiplySkein:
 		
 		elementOffsets = self.getElementOffsets()
 		elementOffsetsCount = len(elementOffsets)
-		self.gcode.elementOffsets = elementOffsets
+		self.slicedModel.elementOffsets = elementOffsets
 		
-		for key in self.gcode.layers.iterkeys():
-			layer = self.gcode.layers[key]
+		for key in self.slicedModel.layers.iterkeys():
+			layer = self.slicedModel.layers[key]
 			offsetNestedRings = []
 			for nestedRing in layer.nestedRings:
 				for (index,elementOffset) in enumerate(elementOffsets):

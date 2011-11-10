@@ -11,25 +11,24 @@ License:
 """
 
 from config import config
+from entities import NestedRing, GcodeCommand, Layer, BoundaryPerimeter
 from fabmetheus_utilities import euclidean, archive
-from gcode import GcodeCommand, Layer, BoundaryPerimeter, NestedRing
 from time import strftime
 import gcodes
 import logging
 import os
 
-
 logger = logging.getLogger(__name__)
 name = __name__
 
-def performAction(gcode):
+def performAction(slicedModel):
 	"Preface and converts the layers."
-	PrefaceSkein(gcode).preface()
+	PrefaceSkein(slicedModel).preface()
 
 class PrefaceSkein:
 	"A class to preface a skein of extrusions."
-	def __init__(self, gcode):
-		self.gcode = gcode
+	def __init__(self, slicedModel):
+		self.slicedModel = slicedModel
 		self.setPositioningToAbsolute = config.getboolean(name, 'positioning.absolute')
 		self.setUnitsToMillimeters = config.getboolean(name, 'units.millimeters')
 		self.startAtHome = config.getboolean(name, 'startup.at.home')
@@ -42,18 +41,17 @@ class PrefaceSkein:
 		
 		self.addStartCommandsToGcode()
 		
-		for (index, rotatedLoopLayer) in enumerate(self.gcode.rotatedLoopLayers):
+		for (index, rotatedLoopLayer) in enumerate(self.slicedModel.rotatedLoopLayers):
 			self.addPrefaceToGcode(index, rotatedLoopLayer)
 		
 		self.addEndCommandsToGcode()		
 	
 	
 	def addPrefaceToGcode(self, index, rotatedLoopLayer):
-		decimalPlaces = self.gcode.runtimeParameters.decimalPlaces
+		decimalPlaces = self.slicedModel.runtimeParameters.decimalPlaces
 		z = round(rotatedLoopLayer.z, 3)
-		layer = Layer(z, index, self.gcode.runtimeParameters)		
+		layer = Layer(z, index, self.slicedModel.runtimeParameters)		
 		
-
 		if rotatedLoopLayer.rotation != None:
 			layer.bridgeRotation = complex(rotatedLoopLayer.rotation)
 		
@@ -62,7 +60,7 @@ class PrefaceSkein:
 		
 		nestRingPlaceholder = {}
 		for loop in loops:
-			nestedRing = NestedRing(z, self.gcode.runtimeParameters)
+			nestedRing = NestedRing(z, self.slicedModel.runtimeParameters)
 			nestedRing.setBoundaryPerimeter(loop)
 			nestRingPlaceholder[str(loop)] = nestedRing 
 		
@@ -77,7 +75,7 @@ class PrefaceSkein:
 				parentNestedRing = nestRingPlaceholder[str(internalLoops[internalLoop])]
 				parentNestedRing.innerNestedRings.append(childNestedRing)
 				 
-		self.gcode.layers[z] = layer
+		self.slicedModel.layers[z] = layer
 
 	def createLoopHierarchy(self, loops):
 		internalLoops = {}
@@ -95,19 +93,19 @@ class PrefaceSkein:
 	def addStartCommandsToGcode(self):		
 		if config.get(name, 'start.file') != None:
 			for line in archive.getLinesFromAlterationsFile(self.startFile):
-				self.gcode.startGcodeCommands.append(line)
+				self.slicedModel.startGcodeCommands.append(line)
 		
 		if self.setPositioningToAbsolute:
-			self.gcode.startGcodeCommands.append(GcodeCommand(gcodes.ABSOLUTE_POSITIONING))
+			self.slicedModel.startGcodeCommands.append(GcodeCommand(gcodes.ABSOLUTE_POSITIONING))
 		if self.setUnitsToMillimeters:
-			self.gcode.startGcodeCommands.append(GcodeCommand(gcodes.UNITS_IN_MILLIMETERS))
+			self.slicedModel.startGcodeCommands.append(GcodeCommand(gcodes.UNITS_IN_MILLIMETERS))
 		if self.startAtHome:
-			self.gcode.startGcodeCommands.append(GcodeCommand(gcodes.START_AT_HOME))
+			self.slicedModel.startGcodeCommands.append(GcodeCommand(gcodes.START_AT_HOME))
 		if self.resetExtruder:
-			self.gcode.startGcodeCommands.append(GcodeCommand(gcodes.RESET_EXTRUDER_DISTANCE, [('E', '0')]))
+			self.slicedModel.startGcodeCommands.append(GcodeCommand(gcodes.RESET_EXTRUDER_DISTANCE, [('E', '0')]))
 		
 	def addEndCommandsToGcode(self):
 		if config.get(name, 'end.file') != None:
 			for line in archive.getLinesFromAlterationsFile(self.endFile):
-				self.gcode.endGcodeCommands.append(line)
+				self.slicedModel.endGcodeCommands.append(line)
 

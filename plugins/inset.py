@@ -13,7 +13,7 @@ License:
 from config import config, config
 from fabmetheus_utilities import archive, euclidean, intercircle
 from fabmetheus_utilities.geometry.solids import triangle_mesh
-from gcode import GcodeCommand, Layer, BoundaryPerimeter, NestedRing
+from entities import NestedRing, Layer, GcodeCommand,  BoundaryPerimeter
 from multiprocessing import Pool, Manager, Process
 from utilities import class_pickler
 import copy_reg
@@ -28,28 +28,28 @@ from utilities import memory_tracker
 logger = logging.getLogger(__name__)
 name = __name__
 
-def performAction(gcode):
-	"Inset the gcode."
+def performAction(slicedModel):
+	"Inset the slicedModel."
 	
-	i = InsetSkein(gcode)
-	if gcode.runtimeParameters.profileMemory:
+	i = InsetSkein(slicedModel)
+	if slicedModel.runtimeParameters.profileMemory:
             memory_tracker.track_object(i)
 	i.inset()
 	
-	if gcode.runtimeParameters.profileMemory:
+	if slicedModel.runtimeParameters.profileMemory:
 		memory_tracker.create_snapshot("After inset")
 
 class InsetSkein:
 	
 	"A class to inset a skein of extrusions."
-	def __init__(self, gcode):
-		self.gcode = gcode
+	def __init__(self, slicedModel):
+		self.slicedModel = slicedModel
 		self.overlapRemovalWidthOverPerimeterWidth = config.getfloat(name, 'overlap.removal.scaler')
 		self.nozzleDiameter = config.getfloat(name, 'nozzle.diameter')
 		self.bridgeWidthMultiplier = config.getfloat(name, 'bridge.width.multiplier.ratio')
 		self.loopOrderAscendingArea = config.getboolean(name, 'loop.order.preferloops')
-		self.layerThickness = self.gcode.runtimeParameters.layerThickness
-		self.perimeterWidth = self.gcode.runtimeParameters.perimeterWidth
+		self.layerThickness = self.slicedModel.runtimeParameters.layerThickness
+		self.perimeterWidth = self.slicedModel.runtimeParameters.perimeterWidth
 		self.halfPerimeterWidth = 0.5 * self.perimeterWidth
 		self.overlapRemovalWidth = self.perimeterWidth * (0.7853) * self.overlapRemovalWidthOverPerimeterWidth
 		self.multiprocess = config.getboolean(name, 'multiprocess')
@@ -59,7 +59,7 @@ class InsetSkein:
 		
 		if self.multiprocess:
 			manager = Manager()
-			sharedLayers = manager.list(self.gcode.layers.values())
+			sharedLayers = manager.list(self.slicedModel.layers.values())
 			
 			p = Pool()
 			resultLayers = p.map(self.addInsetForLayer, sharedLayers)
@@ -67,11 +67,11 @@ class InsetSkein:
 			p.join()
 			
 			for resultLayer in resultLayers:
-				self.gcode.layers[resultLayer.z] = resultLayer
+				self.slicedModel.layers[resultLayer.z] = resultLayer
 			
 		else:
 			
-			for x in self.gcode.layers.values():
+			for x in self.slicedModel.layers.values():
 				self.addInsetForLayer(x)
 			
 	def addInsetForLayer(self, layer):

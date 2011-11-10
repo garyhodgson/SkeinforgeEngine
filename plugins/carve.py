@@ -19,9 +19,9 @@ name = 'carve'
 logger = logging.getLogger(name)
 
 
-def performAction(gcode):
+def performAction(slicedModel):
 	"Get carved text."
-	filename = gcode.runtimeParameters.inputFilename
+	filename = slicedModel.runtimeParameters.inputFilename
 	carving = svg_writer.getCarving(filename)
 	if carving == None:
 		return
@@ -29,14 +29,14 @@ def performAction(gcode):
 		carvingFilename = filename[: filename.rfind('.')] + '.carving.xml'
 		archive.writeFileText(carvingFilename , str(carving))
 		logger.info("Carving XML written to %s", carvingFilename)
-	CarveSkein(gcode).carve(carving)
+	CarveSkein(slicedModel).carve(carving)
 
 class CarveSkein:
 	"A class to carve a 3D model."
 	
-	def __init__(self, gcode):
+	def __init__(self, slicedModel):
 		'Initialize'
-		self.gcode = gcode
+		self.slicedModel = slicedModel
 		self.layerHeight = config.getfloat(name, 'layer.height')
 		self.extrusionWidth = config.getfloat(name, 'extrusion.width')
 		self.infillBridgeDirection = config.getboolean(name, 'infill.bridge.direction')
@@ -47,7 +47,7 @@ class CarveSkein:
 		self.layerPrintTo = config.getint(name, 'layer.print.to')
 				
 	def carve(self, carving):
-		"Parse 3D model file and store the carved gcode."
+		"Parse 3D model file and store the carved slicedModel."
 		
 		carving.setCarveInfillInDirectionOfBridge(self.infillBridgeDirection)
 		carving.setCarveLayerThickness(self.layerHeight)
@@ -61,8 +61,8 @@ class CarveSkein:
 			logger.warning('There are no slices for the model, this could be because the model is too small for the Layer Thickness.')
 			return
 		
-		self.gcode.carvingCornerMaximum = carving.getCarveCornerMaximum()
-		self.gcode.carvingCornerMinimum = carving.getCarveCornerMinimum()
+		self.slicedModel.carvingCornerMaximum = carving.getCarveCornerMaximum()
+		self.slicedModel.carvingCornerMinimum = carving.getCarveCornerMinimum()
 
 		toBePrintedLayers = rotatedLoopLayers[self.layerPrintFrom : self.layerPrintTo]
 		for toBePrintedLayer in toBePrintedLayers:
@@ -73,12 +73,19 @@ class CarveSkein:
 				sortedLoops.append(toBePrintedLayerLoop[lowerLeftIndex:] + toBePrintedLayerLoop[:lowerLeftIndex])
 			toBePrintedLayer.loops = sortedLoops
 
-		self.gcode.rotatedLoopLayers = toBePrintedLayers
+		self.slicedModel.rotatedLoopLayers = toBePrintedLayers
 				
 		if config.getboolean(name, 'debug'):
-			filename = self.gcode.runtimeParameters.inputFilename
+			filename = self.slicedModel.runtimeParameters.inputFilename
 			svgFilename = filename[: filename.rfind('.')] + '.svg'
-			archive.writeFileText(svgFilename , self.gcode.getSVGText())
+			svgWriter = svg_writer.SVGWriter(
+                                True,
+                                self.slicedModel.carvingCornerMaximum,
+                                self.slicedModel.carvingCornerMinimum,
+                                self.slicedModel.runtimeParameters.decimalPlaces,
+                                self.slicedModel.runtimeParameters.layerHeight,
+                                self.slicedModel.runtimeParameters.layerThickness)
+			archive.writeFileText(svgFilename , svgWriter.getReplacedSVGTemplate(self.slicedModel.runtimeParameters.inputFilename, '', self.slicedModel.rotatedLoopLayers))
 			logger.info("Carving SVG written to %s", svgFilename)
 			
 	def getLowerLeftCorner(self, points):

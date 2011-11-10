@@ -17,17 +17,17 @@ from config import config
 logger = logging.getLogger(__name__)
 name = __name__
 
-def performAction(gcode):
+def performAction(slicedModel):
 	"Align the model to the bottom of the printing plane"
 	if not config.getboolean(name, 'active'):
 		logger.info("%s plugin is not active", name.capitalize())
 		return
-	BottomSkein(gcode).bottom()
+	BottomSkein(slicedModel).bottom()
 	
 class BottomSkein:
 	"A class to bottom a skein of extrusions."
-	def __init__(self, gcode):
-		self.gcode = gcode
+	def __init__(self, slicedModel):
+		self.slicedModel = slicedModel
 		self.additionalHeightRatio = config.getfloat(name, 'additional.height.ratio')
 		self.altitude = config.getfloat(name, 'altitude')
 		self.layerThickness = config.getfloat('carve', 'layer.height')
@@ -37,10 +37,10 @@ class BottomSkein:
 	def bottom(self):
 		"Parse svgText and store the bottom svgText."
 		
-		fileName = self.gcode.runtimeParameters.inputFilename
-		svgText = self.gcode.svgText
+		fileName = self.slicedModel.runtimeParameters.inputFilename
+		svgText = self.slicedModel.svgText
 				
-		rotatedLoopLayers = self.gcode.rotatedLoopLayers
+		rotatedLoopLayers = self.slicedModel.rotatedLoopLayers
 		
 		zMinimum = 987654321.0
 		for rotatedLoopLayer in rotatedLoopLayers:

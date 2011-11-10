@@ -2,17 +2,18 @@
 name=default
 
 [export]
-debug=true
+debug=false
 delete.comments=true
 file.extension=gcode
-replace.filename=replace.csv
-gcode.penultimate.save=true
-gcode.pickled.save=false
-gcode.pickled.overwrite=true
 file.extension.profile=true
+replace.filename=replace.csv
+export.slicedmodel=true
+export.pickled.slicedmodel=true
+overwrite.pickled.slicedmodel=true
+
 
 [preface]
-debug=true
+debug=false
 start.file=start.gmc
 end.file=end.gmc
 positioning.absolute=true
@@ -21,18 +22,18 @@ startup.at.home=false
 startup.extruder.reset=true
 
 [carve]
-debug=true
+debug=false
 layer.height=0.4
 extrusion.width=0.6
 layer.print.from=0
 layer.print.to=912345678
 infill.bridge.direction=true
 mesh.correct=true
-mesh.unproven=false
 import.coarseness.ratio=1.0
 
 [inset]
-debug=true
+debug=false
+; The pypy interpreter produces faster results with multiprocessing turned off.
 multiprocess=false
 bridge.width.multiplier.ratio=1.0
 nozzle.diameter=0.5
@@ -47,7 +48,7 @@ altitude=0.0
 
 [fill]
 active=true
-debug=true
+debug=false
 infill.solidity.ratio=0.35
 extrusion.lines.extra.spacer.scaler=1.0
 infill.overlap.over.perimeter.scaler=1.0
@@ -60,7 +61,6 @@ extrusion.sequence.start.layer=LowerLeft
 extrusion.sequence.print.order=perimeter,loops,infill
 ; Only line is currently supported
 infill.pattern=Line
-grid.extra.overlap=0.1
 diaphragm.every.n.layers=100
 diaphragm.thickness=0
 infill.rotation.begin=45.0
@@ -91,8 +91,6 @@ feed.rate.bridge.ratio=1.0
 flow.rate.bridge.ratio=1.0
 acceleration.rate.bridge=1000.0
 feed.rate.travel=130.0
-dc.duty.cycle.beginning=1.0
-dc.duty.cycle.end=0.0
 
 [raft]
 active=true
@@ -136,15 +134,14 @@ filament.packing.density=1.0
 oozerate=75.0
 extruder.retraction.speed=15.0
 extrusion.units.relative=false
-decimal.places=6
+decimal.places=4
 
 [comb]
 active=true
 
 [cool]
 active=true
-; usually smaller....
-minimum.layer.time=120.0
+minimum.layer.time=10.0
 minimum.layer.feed.rate=15.0
 turn.on.fan.at.beginning=true
 turn.off.fan.at.end=true

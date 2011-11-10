@@ -21,23 +21,23 @@ from utilities import memory_tracker
 logger = logging.getLogger(__name__)
 name = __name__
 
-def performAction(gcode):
+def performAction(slicedModel):
 	'Fills the perimeters.'
 	if not config.getboolean(name, 'active'):
 		logger.info("%s plugin is inactive", name.capitalize())
 		return
 	
-	f = FillSkein(gcode)
-	if gcode.runtimeParameters.profileMemory:
+	f = FillSkein(slicedModel)
+	if slicedModel.runtimeParameters.profileMemory:
             memory_tracker.track_object(f)
 	f.fill()
-	if gcode.runtimeParameters.profileMemory:
+	if slicedModel.runtimeParameters.profileMemory:
 		memory_tracker.create_snapshot("After fill")
 	
 class FillSkein:
 	'A class to fill a skein of extrusions.'
-	def __init__(self, gcode):
-		self.gcode = gcode
+	def __init__(self, slicedModel):
+		self.slicedModel = slicedModel
 		self.extruderActive = False
 		self.previousExtraShells = -1
 		self.oldOrderedLocation = None
@@ -55,7 +55,6 @@ class FillSkein:
 		self.threadSequenceChoice = config.get(name, 'extrusion.sequence.print.order')
 		self.threadSequence = self.threadSequenceChoice.split(",")
 		self.infillPattern = config.get(name, 'infill.pattern')
-		self.gridExtraOverlap = config.getfloat(name, 'grid.extra.overlap')
 		self.diaphragmPeriod = config.getint(name, 'diaphragm.every.n.layers')
 		self.diaphragmThickness = config.getint(name, 'diaphragm.thickness')
 		self.infillBeginRotation = math.radians(config.getfloat(name, 'infill.rotation.begin'))
@@ -72,8 +71,8 @@ class FillSkein:
 			logger.warning('Nothing will be done because extrusion width FillSkein is None.')
 			return
 
-		for layerIndex in xrange(len(self.gcode.layers)):
-			layer = self.gcode.layers.values()[layerIndex]
+		for layerIndex in xrange(len(self.slicedModel.layers)):
+			layer = self.slicedModel.layers.values()[layerIndex]
 			self.addFill(layerIndex, layer)		
 		
 	def addFill(self, layerIndex, rotatedLayer):
@@ -196,10 +195,10 @@ class FillSkein:
 	def addRotatedCarve(self, currentLayer, layerDelta, reverseRotation, surroundingCarves):
 		'Add a rotated carve to the surrounding carves.'
 		layerIndex = currentLayer + layerDelta
-		if layerIndex < 0 or layerIndex >= len(self.gcode.layers):
+		if layerIndex < 0 or layerIndex >= len(self.slicedModel.layers):
 			return
 		
-		layer = self.gcode.layers.values()[layerIndex]
+		layer = self.slicedModel.layers.values()[layerIndex]
 		
 		nestedRings = layer.nestedRings
 		rotatedCarve = []

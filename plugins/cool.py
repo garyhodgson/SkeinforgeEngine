@@ -12,7 +12,7 @@ License:
 
 from config import config
 from fabmetheus_utilities import archive, euclidean, intercircle
-from gcode import GcodeCommand
+from entities import GcodeCommand
 import gcodes
 import logging
 from importlib import import_module
@@ -21,17 +21,17 @@ import os, sys
 name = __name__
 logger = logging.getLogger(name)
 
-def performAction(gcode):
+def performAction(slicedModel):
 	'Give the extrusion time to cool down.'
 	if not config.getboolean(name, 'active'):
 		logger.info("%s plugin is not active", name.capitalize())
 		return
-	CoolSkein(gcode).cool()
+	CoolSkein(slicedModel).cool()
 
 class CoolSkein:
 	'A class to cool a skein of extrusions.'
-	def __init__(self, gcode):
-		self.gcode = gcode
+	def __init__(self, slicedModel):
+		self.slicedModel = slicedModel
 		
 		self.turnFanOnAtBeginning = config.getboolean(name, 'turn.on.fan.at.beginning')
 		self.turnFanOffAtEnding = config.getboolean(name, 'turn.off.fan.at.end')
@@ -48,7 +48,7 @@ class CoolSkein:
 		'Apply the cool strategy.'
 		
 		if self.turnFanOnAtBeginning:
-			self.gcode.startGcodeCommands.append(GcodeCommand(gcodes.TURN_FAN_ON))
+			self.slicedModel.startGcodeCommands.append(GcodeCommand(gcodes.TURN_FAN_ON))
 		
 		coolStrategy = None
 		try:
@@ -58,15 +58,15 @@ class CoolSkein:
 		except:
 			logger.warning("Could not find module for cooling strategy called: %s", self.coolStrategyName)
 		
-		for layer in self.gcode.layers.values():
+		for layer in self.slicedModel.layers.values():
 			for line in self.coolStartLines:
 				layer.preLayerGcodeCommands.append(line)
 	            
 			if coolStrategy != None:
-				coolStrategy.cool(layer, self.gcode.runtimeParameters, dict(config.items(name)))
+				coolStrategy.cool(layer, self.slicedModel.runtimeParameters, dict(config.items(name)))
 				
 			for line in self.coolEndLines:
 				layer.postLayerGcodeCommands.append(line)
 
 		if self.turnFanOffAtEnding:
-			self.gcode.endGcodeCommands.append(GcodeCommand(gcodes.TURN_FAN_OFF))
+			self.slicedModel.endGcodeCommands.append(GcodeCommand(gcodes.TURN_FAN_OFF))

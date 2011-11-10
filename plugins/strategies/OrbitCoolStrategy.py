@@ -1,5 +1,5 @@
 from fabmetheus_utilities import intercircle, euclidean
-from gcode import GcodeCommand
+from data_structures import GcodeCommand
 import gcodes, math
 
 def cool(layer, runtimeParameters, coolOptions=None):
