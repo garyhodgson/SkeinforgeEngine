@@ -15,7 +15,11 @@ class Layer:
         self.nestedRings = []
         self.preLayerGcodeCommands = []
         self.postLayerGcodeCommands = []
-        self.feedAndFlowRateMultiplier = 1.0  
+        self.feedAndFlowRateMultiplier = 1.0
+        
+        self.preSupportGcodeCommands = []
+        self.postSupportGcodeCommands = []
+        self.supportPaths = []
         
         if runtimeParameters.profileMemory:
             memory_tracker.track_object(self)
@@ -37,19 +41,31 @@ class Layer:
         output.write('%2slayer feedAndFlowRateMultiplier:%s\n' % ('', self.feedAndFlowRateMultiplier))
         
         if self.bridgeRotation != None:
-            output.write('bridgeRotation %s, ' % self.bridgeRotation)
+            output.write('bridgeRotation: %s \n' % self.bridgeRotation)
             
-        output.write('%4spreLayerGcodeCommand:' % (''))
+        output.write('%4spreLayerGcodeCommand:\n' % (''))
         for preLayerGcodeCommand in self.preLayerGcodeCommands:
-            output.write(GcodeCommand.printCommand(preLayerGcodeCommand, self.runtimeParameters.verboseGcode))
+            output.write('%4s %s' % ('',GcodeCommand.printCommand(preLayerGcodeCommand, self.runtimeParameters.verboseGcode)))
             
+        output.write('%4spreSupportGcodeCommands:\n' % (''))
+        for preSupportGcodeCommand in self.preSupportGcodeCommands:
+            output.write('%4s %s' % ('',GcodeCommand.printCommand(preSupportGcodeCommand, self.runtimeParameters.verboseGcode)))
+            
+        output.write('%4ssupportLayerPaths:\n' % '')
+        for supportPath in self.supportPaths:
+            output.write(supportPath)
+        
+        output.write('%4spostSupportGcodeCommands:\n' % (''))
+        for postSupportGcodeCommand in self.postSupportGcodeCommands:
+            output.write('%4s %s' % ('',GcodeCommand.printCommand(postSupportGcodeCommand, self.runtimeParameters.verboseGcode)))
+                
         output.write('%4snestedRings:' % (''))
         for nestedRing in self.nestedRings:
             output.write(nestedRing)
             
-        output.write('%4spostLayerGcodeCommand:' % (''))
+        output.write('\n%4spostLayerGcodeCommand:' % (''))
         for postLayerGcodeCommand in self.postLayerGcodeCommands:
-            output.write(GcodeCommand.printCommand(postLayerGcodeCommand, self.runtimeParameters.verboseGcode))
+            output.write('%4s %s' % ('',GcodeCommand.printCommand(postLayerGcodeCommand, self.runtimeParameters.verboseGcode)))
            
         return output.getvalue()
     
@@ -66,6 +82,9 @@ class Layer:
 
     def getOrderedPathList(self):
         pathList = []
+        
+        self.getSupportPaths(pathList)
+        
         threadFunctionDictionary = {
             'infill':self.getInfillPaths, 'loops':self.getLoopPaths, 'perimeter':self.getPerimeterPaths}
         for threadType in self.runtimeParameters.extrusionPrintOrder:
@@ -73,18 +92,19 @@ class Layer:
         
         return pathList
     
+    def getSupportPaths(self, pathList):
+        for supportPath in self.supportPaths:
+            pathList.append(supportPath)
+    
     def getPerimeterPaths(self, pathList):
-
         for nestedRing in self.nestedRings:
             nestedRing.getPerimeterPaths(pathList)
     
     def getLoopPaths(self, pathList):
-
         for nestedRing in self.nestedRings:
             nestedRing.getLoopPaths(pathList)
     
     def getInfillPaths(self, pathList):
-
         for nestedRing in self.nestedRings:
             nestedRing.getInfillPaths(pathList)
     

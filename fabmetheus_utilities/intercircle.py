@@ -211,20 +211,12 @@ def getCentersFromCircleNodes( circleNodes, radius ):
 		return []
 	circleIntersections = getCircleIntersectionsFromCircleNodes( circleNodes )
 	circleIntersectionLoops = getCircleIntersectionLoops( circleIntersections )
-	return getCentersFromIntersectionLoops( circleIntersectionLoops, radius )
-
-def getCentersFromIntersectionLoop(circleIntersectionLoop, radius):
-	'Get the centers from the intersection loop.'
-	loop = []
-	for circleIntersection in circleIntersectionLoop:
-		loop.append(circleIntersection.circleNodeAhead.actualPoint)
-	return loop
-
-def getCentersFromIntersectionLoops( circleIntersectionLoops, radius ):
-	'Get the centers from the intersection loops.'
 	centers = []
 	for circleIntersectionLoop in circleIntersectionLoops:
-		centers.append( getCentersFromIntersectionLoop( circleIntersectionLoop, radius ) )
+		loop = []
+		for circleIntersection in circleIntersectionLoop:
+			loop.append(circleIntersection.circleNodeAhead.actualPoint)
+		centers.append( loop )
 	return centers
 
 def getCentersFromLoop( loop, radius ):

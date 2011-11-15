@@ -7,7 +7,7 @@ delete.comments=true
 file.extension=gcode
 file.extension.profile=true
 replace.filename=replace.csv
-export.slicedmodel=false
+export.slicedmodel=true
 export.pickled.slicedmodel=false
 overwrite.pickled.slicedmodel=false
 
@@ -92,23 +92,28 @@ feed.rate.bridge.ratio=1.0
 flow.rate.bridge.ratio=1.0
 acceleration.rate.bridge=1000.0
 feed.rate.travel=130.0
+feed.rate.support=15.0
+flow.rate.support.ratio=1.0
 
-[raft]
+[support]
 active=true
-add.raft.elevate.nozzle.orbit=true
-; None | EmptyLayersOnly | Everywhere | ExteriorOnly
-support.location=None
-support.min.angle=50.0
-support.crosshatch=false
-interface.infill.density=0.25
-interface.layer.thickness.ratio=1.0
-support.feed.rate=15.0
-support.flow.rate.ratio=1.0
-support.gap.over.perimeter.extrusion.width.ratio=1.0
-support.extension.percent=0.0
-support.extension.distance=2.0
+debug=true
+; location
+; 	ExteriorOnly: 		Support material will be added only the exterior of the object.  This is the best option for most objects which require support material.
+; 	EmptyLayersOnly: 		Support material will be only on the empty layers.  This is useful when making identical objects in a stack.
+; 	Everywhere:			Support material will be added wherever there are overhangs, even inside the object.  Because support material inside objects is hard or impossible to remove, this option should only be chosen if the object has a cavity that needs support and there is some way to extract the support material.
+location=ExteriorOnly
+min.angle=30.0
+crosshatch=false
+gap.over.perimeter.extrusion.width.ratio=1.0
+extension.percent=0.0
+extension.distance=2.0
 support.end.file=support_end.gmc
 support.start.file=support_start.gmc
+infill.overhang.ratio=3.0
+interface.infill.density=0.25
+interface.layer.thickness.ratio=1.0
+
 nozzle.clearance.ratio=0.0
 firstlayer.feed.rate=35.0
 firstlayer.feed.rate.perimeter=25.0
@@ -126,7 +131,7 @@ base.infill.density.ratio=0.5
 base.layer.thickness.ratio=2.0
 base.nozzle.clearance.ratio=0.4
 initial.circling=false
-infill.overhang.ratio=3.0
+
 
 [dimension]
 active=true

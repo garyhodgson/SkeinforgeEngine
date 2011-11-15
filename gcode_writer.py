@@ -46,7 +46,7 @@ class GcodeWriter:
         
         for preLayerGcodeCommand in layer.preLayerGcodeCommands:
             output.write(printCommand(preLayerGcodeCommand, verbose))
-            
+        
         if layer.runtimeParameters.combActive: 
             combSkein = CombSkein(layer)            
         

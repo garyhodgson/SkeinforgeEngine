@@ -50,6 +50,7 @@ class RuntimeParameters:
         self.bridgeFeedRateRatio = config.getfloat('speed', 'feed.rate.bridge.ratio')
         self.bridgeFlowRateRatio = config.getfloat('speed', 'flow.rate.bridge.ratio')
         self.travelFeedRate = config.getfloat('speed', 'feed.rate.travel')
+        self.supportFeedRate = config.getfloat('speed', 'feed.rate.support')
         
         self.dimensionActive = config.getboolean('dimension', 'active')
         self.filamentDiameter = config.getfloat('dimension', 'filament.diameter')
@@ -65,6 +66,8 @@ class RuntimeParameters:
         self.perimeterFeedRateMinute = self.perimeterFeedRate * 60
         self.extrusionFeedRateMinute = self.feedRate * 60.0
         self.travelFeedRateMinute = self.travelFeedRate * 60
+        
+        self.supportFeedRateMinute = self.supportFeedRate * 60
         
         self.minimumLayerFeedRate = config.getfloat('cool', 'minimum.layer.feed.rate')
         self.minimumLayerFeedRateMinute = self.minimumLayerFeedRate * 60

@@ -121,32 +121,33 @@ class NestedRing:
             
         return (distance, duration)
     
-    def getPerimeterPaths(self, pathList):
-        
+    
+    def getPerimeterPaths(self, pathList):        
         pathList.append(self.perimeter)
         
         for innerNestedRing in self.innerNestedRings:
             innerNestedRing.getPerimeterPaths(pathList)
-        
-    def getLoopPaths(self, pathList):
-        
+            
+    def getLoopPaths(self, pathList):        
         for loop in self.loops:
             pathList.append(loop)
         
         for innerNestedRing in self.innerNestedRings:
             innerNestedRing.getLoopPaths(pathList)
+            
         
-    def getInfillPaths(self, pathList):
-        
+    def getInfillPaths(self, pathList):        
         for infillPath in self.infillPaths:
             pathList.append(infillPath)
         
         for innerNestedRing in self.innerNestedRings:
             innerNestedRing.getInfillPaths(pathList)
             
+            
     def getStartPoint(self):
         if self.perimeter != None:
             return self.perimeter.getStartPoint()
+        
 
     def offset(self, offset):
         'Moves the nested ring by the offset amount'
@@ -160,9 +161,9 @@ class NestedRing:
             
         for infillPath in self.infillPaths:
             infillPath.offset(offset)
+            
                         
-    def setBoundaryPerimeter(self, boundaryPointsLoop, perimeterLoop=None):
-        
+    def setBoundaryPerimeter(self, boundaryPointsLoop, perimeterLoop=None):        
         self.perimeter = BoundaryPerimeter(self.z, self.runtimeParameters)
         
         for point in boundaryPointsLoop:
@@ -178,8 +179,9 @@ class NestedRing:
             self.perimeter.type = 'outer'
         else:
             self.perimeter.type = 'inner'
-        thread = perimeterLoop + [perimeterLoop[0]]
-        self.perimeter.addPathFromThread(thread)
+        path = perimeterLoop + [perimeterLoop[0]]
+        self.perimeter.addPath(path)
+        
     
     def addInfillGcodeFromThread(self, thread):
         'Add a thread to the output.'
@@ -197,18 +199,21 @@ class NestedRing:
         
         self.infillPaths.append(infillPath)    
 
+
     def getLoopsToBeFilled(self):
         'Get last fill loops from the outside loop and the loops inside the inside loops.'
         if self.lastFillLoops == None:
             return self.getSurroundingBoundaries()
         return self.lastFillLoops
-    
+
+
     def getXYBoundaries(self):
         '''Converts XYZ boundary points to XY'''
         xyBoundaries = []
         for boundaryPoint in self.perimeter.boundaryPoints:
             xyBoundaries.append(boundaryPoint.dropAxis())
         return xyBoundaries
+    
             
     def getSurroundingBoundaries(self):
         'Get the boundary of the surronding loop plus any boundaries of the innerNestedRings.'
@@ -218,6 +223,7 @@ class NestedRing:
             surroundingBoundaries.append(nestedRing.getXYBoundaries())
         
         return surroundingBoundaries
+    
     
     def getFillLoops(self, penultimateFillLoops):
         'Get last fill loops from the outside loop and the loops inside the inside loops.'
@@ -268,7 +274,7 @@ class NestedRing:
                 innerPerimeterLoop.type = 'outer'
             else:
                 innerPerimeterLoop.type = 'inner'
-            innerPerimeterLoop.addPathFromThread(loop + [loop[0]])
+            innerPerimeterLoop.addPath(loop + [loop[0]])
             self.loops.append(innerPerimeterLoop)
         
         for innerNestedRing in self.innerNestedRings:

@@ -18,8 +18,8 @@ import gcodes
 import logging
 import os
 
-logger = logging.getLogger(__name__)
 name = __name__
+logger = logging.getLogger(name)
 
 def performAction(slicedModel):
 	"Preface and converts the layers."

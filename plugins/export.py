@@ -1,5 +1,5 @@
 """
-Exports the gcode to a file.
+Exports the slicedModel to a file.
 
 Credits:
 	Original Author: Enrique Perez (http://skeinforge.com)
@@ -29,19 +29,19 @@ except:
 logger = logging.getLogger('export')
 name = 'export'
 
-def performAction(gcode):
-	'Export a gcode linear move text.'
-	e = ExportSkein(gcode)
-	if gcode.runtimeParameters.profileMemory:
+def performAction(slicedModel):
+	'Export a slicedModel linear move text.'
+	e = ExportSkein(slicedModel)
+	if slicedModel.runtimeParameters.profileMemory:
             memory_tracker.track_object(e)
 	e.export()
-	if gcode.runtimeParameters.profileMemory:
+	if slicedModel.runtimeParameters.profileMemory:
 		memory_tracker.create_snapshot("After export")
 
 class ExportSkein:
 	'A class to export a skein of extrusions.'
-	def __init__(self, gcode):
-		self.gcode = gcode		
+	def __init__(self, slicedModel):
+		self.slicedModel = slicedModel		
 		self.deleteComments = config.getboolean(name, 'delete.comments')
 		self.fileExtension = config.get(name, 'file.extension')
 		self.nameOfReplaceFile = config.get(name, 'replace.filename')
@@ -75,28 +75,28 @@ class ExportSkein:
 		return output.getvalue()
 
 	def export(self):
-		'Perform final modifications to gcode and performs export.'
+		'Perform final modifications to slicedModel and performs export.'
 		
-		filename = self.gcode.runtimeParameters.inputFilename
+		filename = self.slicedModel.runtimeParameters.inputFilename
 		filenamePrefix = os.path.splitext(filename)[0]
 		
-		if self.gcode.runtimeParameters.outputFilename != None:
-			exportFileName = self.gcode.runtimeParameters.outputFilename
+		if self.slicedModel.runtimeParameters.outputFilename != None:
+			exportFileName = self.slicedModel.runtimeParameters.outputFilename
 		else :
 			exportFileName = filenamePrefix
-			profileName = self.gcode.runtimeParameters.profileName
+			profileName = self.slicedModel.runtimeParameters.profileName
 	
 			if self.addProfileExtension and profileName:
 				exportFileName += '.' + string.replace(profileName, ' ', '_')
 				exportFileName += '.' + self.fileExtension
 		
-		replaceableExportGcode = self.getReplaceableExportGcode(self.nameOfReplaceFile, GcodeWriter(self.gcode).getSlicedModelAsGcode())		
+		replaceableExportGcode = self.getReplaceableExportGcode(self.nameOfReplaceFile, GcodeWriter(self.slicedModel).getSlicedModelAsGcode())		
 		archive.writeFileText(exportFileName, replaceableExportGcode)
 		
 		if self.exportSlicedModel:
 			fileNamePenultimate = filenamePrefix + '.slicedmodel'
-			archive.writeFileText(fileNamePenultimate, str(self.gcode))
-			logger.info('Sliced Model gcode exported to: %s', fileNamePenultimate)
+			archive.writeFileText(fileNamePenultimate, str(self.slicedModel))
+			logger.info('Sliced Model slicedModel exported to: %s', fileNamePenultimate)
 		
 		if self.exportPickledSlicedModel:
 			fileNamePickled = filenamePrefix + '.pickled_slicedmodel'
@@ -105,6 +105,6 @@ class ExportSkein:
 				os.rename(fileNamePickled, backupFilename)
 				logger.info('Existing slicedmodel file backed up to: %s', backupFilename)
 			logger.info('Pickled slicedmodel exported to: %s', fileNamePickled)
-			archive.writeFileText(fileNamePickled, pickle.dumps(self.gcode))
+			archive.writeFileText(fileNamePickled, pickle.dumps(self.slicedModel))
 			
 		logger.info('Gcode exported to: %s', archive.getSummarizedFileName(exportFileName))

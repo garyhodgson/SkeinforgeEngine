@@ -34,6 +34,7 @@ class Path:
         self.extrusionFeedRateMinute = self.runtimeParameters.extrusionFeedRateMinute
         self.travelFeedRateMinute = self.runtimeParameters.travelFeedRateMinute
         self.extrusionUnitsRelative = self.runtimeParameters.extrusionUnitsRelative
+        self.supportFeedRateMinute = self.runtimeParameters.supportFeedRateMinute
         
         self.dimensionActive = self.runtimeParameters.dimensionActive
         
@@ -102,6 +103,10 @@ class Path:
             return self.points[len(self.points) - 1]
         else:
             return None
+        
+    def getFeedRateMinute(self):
+        '''Allows subclasses to override the relevant feedrate method so we don't have to use large if statements.'''
+        return self.extrusionFeedRateMinute
 
     def generateGcode(self, lookaheadStartVector=None, feedAndFlowRateMultiplier=1.0):
         'Transforms paths and points to gcode'
@@ -117,10 +122,7 @@ class Path:
                          ('Y', round(point.imag, self.decimalPlaces)),
                          ('Z', round(self.z, self.decimalPlaces))]
             
-            if isinstance(self, BoundaryPerimeter):
-                pathFeedRateMinute = self.perimeterFeedRateMinute
-            else:
-                pathFeedRateMinute = self.extrusionFeedRateMinute
+            pathFeedRateMinute = self.getFeedRateMinute()
 
             (pathFeedRateMinute, pathFeedRateMultiplier) = self.getFeedRateAndMultiplier(pathFeedRateMinute, feedAndFlowRateMultiplier)
             
@@ -180,27 +182,32 @@ class Path:
             self.startPoint = complex(self.startPoint.real + offset.real, self.startPoint.imag + offset.imag)
         for (index, point) in enumerate(self.points):
             self.points[index] = complex(point.real + offset.real, point.imag + offset.imag)
-            
-class Loop(Path):
-    
-    def __init__(self, z, runtimeParameters):
-        Path.__init__(self, z, runtimeParameters)
-        
-    def addPathFromThread(self, thread):
-        'Add a thread to the output.'
-        if len(thread) > 0:        
-            self.startPoint = thread[0]
-            self.points = thread[1 :]
+
+    def addPath(self, path):
+        'Add a path to the output.'
+        if len(path) > 0:        
+            self.startPoint = path[0]
+            self.points = path[1 :]
         else:
             logger.warning('Zero length vertex positions array which was skipped over, this should never happen.')
-        if len(thread) < 2:
-            logger.warning('Thread of only one point: %s, this should never happen.', thread)
+        if len(path) < 2:
+            logger.warning('Path of only one point: %s, this should never happen.', path)
+
+class Loop(Path):
+    def __init__(self, z, runtimeParameters):
+        Path.__init__(self, z, runtimeParameters)
 
 class InfillPath(Path):
-    
     def __init__(self, z, runtimeParameters):        
         Path.__init__(self, z, runtimeParameters)
             
+class SupportPath(Path):
+    def __init__(self, z, runtimeParameters):        
+        Path.__init__(self, z, runtimeParameters)
+
+    def getFeedRateMinute(self):
+        return self.supportFeedRateMinute
+    
 class TravelPath(Path):
     '''Moves from one path to another without extruding. Optionally dodges gaps (comb) and retracts (dimension)'''
     
@@ -272,11 +279,7 @@ class TravelPath(Path):
             else:
                 retractionExtrusionDistance = 0.0
             
-            if isinstance(self, BoundaryPerimeter):
-                postRetractFeedRateMinute = self.perimeterFeedRateMinute
-            else:
-                postRetractFeedRateMinute = self.extrusionFeedRateMinute
-            self.gcodeCommands.extend(self.getRetractCommands(retractionExtrusionDistance, postRetractFeedRateMinute))
+            self.gcodeCommands.extend(self.getRetractCommands(retractionExtrusionDistance, self.getFeedRateMinute()))
             
             #Store for reverse retraction
             lastRetractionExtrusionDistance = retractionExtrusionDistance
@@ -339,4 +342,7 @@ class BoundaryPerimeter(Loop):
         for boundaryPoint in self.boundaryPoints:
             boundaryPoint.x += offset.real
             boundaryPoint.y += offset.imag            
-        Loop.offset(self, offset)       
+        Loop.offset(self, offset)
+        
+    def getFeedRateMinute(self):
+        return self.perimeterFeedRateMinute

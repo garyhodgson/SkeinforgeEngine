@@ -39,10 +39,10 @@ class CoolSkein:
 		self.nameOfCoolEndFile = config.get(name, 'cool.end.file')
 		self.coolStrategyName = config.get(name, 'strategy')
 		self.coolStrategyPath = config.get(name, 'strategy.path')
-		self.absoluteCoolStartFilePath = os.path.join(archive.getSkeinforgePath('alterations'), self.nameOfCoolStartFile)
-		self.absoluteCoolEndFilePath = os.path.join(archive.getSkeinforgePath('alterations'), self.nameOfCoolEndFile)
-		self.coolStartLines = archive.getFileText(self.absoluteCoolEndFilePath, printWarning=False)
-		self.coolEndLines = archive.getFileText(self.absoluteCoolEndFilePath, printWarning=False)
+		self.absoluteCoolStartFilePath = os.path.join('alterations', self.nameOfCoolStartFile)
+		self.absoluteCoolEndFilePath = os.path.join('alterations', self.nameOfCoolEndFile)
+		self.coolStartLines = archive.getTextLines(archive.getFileText(self.absoluteCoolEndFilePath, printWarning=False))
+		self.coolEndLines = archive.getTextLines(archive.getFileText(self.absoluteCoolEndFilePath, printWarning=False))
 		
 	def cool(self):
 		'Apply the cool strategy.'
