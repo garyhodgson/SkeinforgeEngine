@@ -1,3 +1,6 @@
+"""
+Apply the cooling by moving the nozzle around the print.
+"""
 from config import config
 from data_structures import GcodeCommand
 from fabmetheus_utilities import euclidean

@@ -1,3 +1,6 @@
+"""
+Allows a layer to cool slowing down the nozzle movement.
+"""
 from config import config
 from fabmetheus_utilities import euclidean
 import gcodes

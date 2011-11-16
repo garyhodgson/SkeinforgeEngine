@@ -325,24 +325,24 @@ class TravelPath(Path):
             commands.append(self.getResetExtruderDistanceCommand())
         return commands        
 
-class BoundaryPerimeter(Loop):
+class BoundaryPerimeter(Path):
     
     def __init__(self, z, runtimeParameters):
-        Loop.__init__(self, z, runtimeParameters)
+        Path.__init__(self, z, runtimeParameters)
         self.boundaryPoints = []
 
     def __str__(self):
         output = StringIO()
         output.write('%12sboundaryPerimeter:\n' % '')
         output.write('%14sboundaryPoints: %s\n' % ('', self.boundaryPoints))
-        output.write(Loop.__str__(self))
+        output.write(Path.__str__(self))
         return output.getvalue()
     
     def offset(self, offset):
         for boundaryPoint in self.boundaryPoints:
             boundaryPoint.x += offset.real
             boundaryPoint.y += offset.imag            
-        Loop.offset(self, offset)
+        Path.offset(self, offset)
         
     def getFeedRateMinute(self):
         return self.perimeterFeedRateMinute
