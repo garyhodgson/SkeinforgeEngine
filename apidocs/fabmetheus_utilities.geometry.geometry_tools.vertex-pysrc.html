@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>fabmetheus_utilities.geometry.geometry_tools.vertex</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="fabmetheus_utilities-module.html">Package&nbsp;fabmetheus_utilities</a> ::
+        <a href="fabmetheus_utilities.geometry-module.html">Package&nbsp;geometry</a> ::
+        <a href="fabmetheus_utilities.geometry.geometry_tools-module.html">Package&nbsp;geometry_tools</a> ::
+        Module&nbsp;vertex
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="fabmetheus_utilities.geometry.geometry_tools.vertex-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="fabmetheus_utilities.geometry.geometry_tools.vertex-module.html">Module fabmetheus_utilities.geometry.geometry_tools.vertex</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">Vertex of a triangle mesh.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package fabmetheus_utilities=fabmetheus_utilities-module.html"><a title="fabmetheus_utilities" class="py-name" href="#" onclick="return doclink('link-0', 'fabmetheus_utilities', 'link-0');">fabmetheus_utilities</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package fabmetheus_utilities.geometry=fabmetheus_utilities.geometry-module.html"><a title="fabmetheus_utilities.geometry" class="py-name" href="#" onclick="return doclink('link-1', 'geometry', 'link-1');">geometry</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package fabmetheus_utilities.geometry.geometry_utilities=fabmetheus_utilities.geometry.geometry_utilities-module.html"><a title="fabmetheus_utilities.geometry.geometry_utilities" class="py-name" href="#" onclick="return doclink('link-2', 'geometry_utilities', 'link-2');">geometry_utilities</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Module fabmetheus_utilities.geometry.geometry_utilities.evaluate=fabmetheus_utilities.geometry.geometry_utilities.evaluate-module.html"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate" class="py-name" href="#" onclick="return doclink('link-3', 'evaluate', 'link-3');">evaluate</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name"><a title="fabmetheus_utilities" class="py-name" href="#" onclick="return doclink('link-4', 'fabmetheus_utilities', 'link-0');">fabmetheus_utilities</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Module fabmetheus_utilities.xml_simple_reader=fabmetheus_utilities.xml_simple_reader-module.html"><a title="fabmetheus_utilities.xml_simple_reader" class="py-name" href="#" onclick="return doclink('link-5', 'xml_simple_reader', 'link-5');">xml_simple_reader</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-name">__author__</tt> <tt class="py-op">=</tt> <tt class="py-string">'Enrique Perez (perez_enrique@yahoo.com)'</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable fabmetheus_utilities.archive.__credits__=fabmetheus_utilities.archive-module.html#__credits__,Variable fabmetheus_utilities.fabmetheus_tools.interpret_plugins.gts.__credits__=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.gts-module.html#__credits__,Variable fabmetheus_utilities.fabmetheus_tools.interpret_plugins.obj.__credits__=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.obj-module.html#__credits__,Variable fabmetheus_utilities.fabmetheus_tools.interpret_plugins.stl.__credits__=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.stl-module.html#__credits__,Variable fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.__credits__=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_tools.dictionary.__credits__=fabmetheus_utilities.geometry.geometry_tools.dictionary-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_tools.face.__credits__=fabmetheus_utilities.geometry.geometry_tools.face-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_tools.path.__credits__=fabmetheus_utilities.geometry.geometry_tools.path-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_tools.vertex.__credits__=fabmetheus_utilities.geometry.geometry_tools.vertex-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.matrix.__credits__=fabmetheus_utilities.geometry.geometry_utilities.matrix-module.html#__credits__,Variable fabmetheus_utilities.geometry.solids.group.__credits__=fabmetheus_utilities.geometry.solids.group-module.html#__credits__,Variable fabmetheus_utilities.geometry.solids.triangle_mesh.__credits__=fabmetheus_utilities.geometry.solids.triangle_mesh-module.html#__credits__,Variable fabmetheus_utilities.svg_reader.__credits__=fabmetheus_utilities.svg_reader-module.html#__credits__,Variable fabmetheus_utilities.vector3.__credits__=fabmetheus_utilities.vector3-module.html#__credits__,Variable fabmetheus_utilities.vector3index.__credits__=fabmetheus_utilities.vector3index-module.html#__credits__,Variable fabmetheus_utilities.xml_simple_reader.__credits__=fabmetheus_utilities.xml_simple_reader-module.html#__credits__,Variable fabmetheus_utilities.xml_simple_writer.__credits__=fabmetheus_utilities.xml_simple_writer-module.html#__credits__"><a title="fabmetheus_utilities.archive.__credits__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.gts.__credits__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.obj.__credits__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.stl.__credits__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.__credits__
+fabmetheus_utilities.geometry.geometry_tools.dictionary.__credits__
+fabmetheus_utilities.geometry.geometry_tools.face.__credits__
+fabmetheus_utilities.geometry.geometry_tools.path.__credits__
+fabmetheus_utilities.geometry.geometry_tools.vertex.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.matrix.__credits__
+fabmetheus_utilities.geometry.solids.group.__credits__
+fabmetheus_utilities.geometry.solids.triangle_mesh.__credits__
+fabmetheus_utilities.svg_reader.__credits__
+fabmetheus_utilities.vector3.__credits__
+fabmetheus_utilities.vector3index.__credits__
+fabmetheus_utilities.xml_simple_reader.__credits__
+fabmetheus_utilities.xml_simple_writer.__credits__" class="py-name" href="#" onclick="return doclink('link-6', '__credits__', 'link-6');">__credits__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'Art of Illusion &lt;http://www.artofillusion.org/&gt;'</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-name">__date__</tt> <tt class="py-op">=</tt> <tt class="py-string">'$Date: 2008/02/05 $'</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-name">__license__</tt> <tt class="py-op">=</tt> <tt class="py-string">'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="addGeometryList"></a><div id="addGeometryList-def"><a name="L16"></a><tt class="py-lineno">16</tt> <a class="py-toggle" href="#" id="addGeometryList-toggle" onclick="return toggle('addGeometryList');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_tools.vertex-module.html#addGeometryList">addGeometryList</a><tt class="py-op">(</tt> <tt class="py-param">vertexes</tt><tt class="py-op">,</tt> <tt class="py-param">xmlElement</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="addGeometryList-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="addGeometryList-expanded"><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-docstring">"Add vertex elements to an xml element."</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-7" class="py-name" targets="Module fabmetheus_utilities.geometry.geometry_tools.vertex=fabmetheus_utilities.geometry.geometry_tools.vertex-module.html"><a title="fabmetheus_utilities.geometry.geometry_tools.vertex" class="py-name" href="#" onclick="return doclink('link-7', 'vertex', 'link-7');">vertex</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">vertexes</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">                <tt class="py-name">vertexElement</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name" targets="Function fabmetheus_utilities.geometry.geometry_tools.vertex.getUnboundVertexElement()=fabmetheus_utilities.geometry.geometry_tools.vertex-module.html#getUnboundVertexElement"><a title="fabmetheus_utilities.geometry.geometry_tools.vertex.getUnboundVertexElement" class="py-name" href="#" onclick="return doclink('link-8', 'getUnboundVertexElement', 'link-8');">getUnboundVertexElement</a></tt><tt class="py-op">(</tt><tt id="link-9" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.vertex" class="py-name" href="#" onclick="return doclink('link-9', 'vertex', 'link-7');">vertex</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">                <tt class="py-name">vertexElement</tt><tt class="py-op">.</tt><tt class="py-name">parentNode</tt> <tt class="py-op">=</tt> <tt class="py-name">xmlElement</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">                <tt class="py-name">xmlElement</tt><tt class="py-op">.</tt><tt class="py-name">childNodes</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute-class.html#append"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-10', 'append', 'link-10');">append</a></tt><tt class="py-op">(</tt> <tt class="py-name">vertexElement</tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
+<a name="addVertexToAttributeDictionary"></a><div id="addVertexToAttributeDictionary-def"><a name="L23"></a><tt class="py-lineno">23</tt> <a class="py-toggle" href="#" id="addVertexToAttributeDictionary-toggle" onclick="return toggle('addVertexToAttributeDictionary');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_tools.vertex-module.html#addVertexToAttributeDictionary">addVertexToAttributeDictionary</a><tt class="py-op">(</tt><tt class="py-param">attributeDictionary</tt><tt class="py-op">,</tt> <tt class="py-param">vertex</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="addVertexToAttributeDictionary-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="addVertexToAttributeDictionary-expanded"><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-docstring">"Add to the attribute dictionary."</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-11" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.vertex" class="py-name" href="#" onclick="return doclink('link-11', 'vertex', 'link-7');">vertex</a></tt><tt class="py-op">.</tt><tt class="py-name">x</tt> <tt class="py-op">!=</tt> <tt class="py-number">0.0</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">                <tt class="py-name">attributeDictionary</tt><tt class="py-op">[</tt><tt class="py-string">'x'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name" targets="Method entities.GcodeCommand'.GcodeCommand.str()=entities.GcodeCommand%27.GcodeCommand-class.html#str"><a title="entities.GcodeCommand'.GcodeCommand.str" class="py-name" href="#" onclick="return doclink('link-12', 'str', 'link-12');">str</a></tt><tt class="py-op">(</tt><tt id="link-13" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.vertex" class="py-name" href="#" onclick="return doclink('link-13', 'vertex', 'link-7');">vertex</a></tt><tt class="py-op">.</tt><tt class="py-name">x</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-14" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.vertex" class="py-name" href="#" onclick="return doclink('link-14', 'vertex', 'link-7');">vertex</a></tt><tt class="py-op">.</tt><tt class="py-name">y</tt> <tt class="py-op">!=</tt> <tt class="py-number">0.0</tt><tt class="py-op">:</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                <tt class="py-name">attributeDictionary</tt><tt class="py-op">[</tt><tt class="py-string">'y'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand.str" class="py-name" href="#" onclick="return doclink('link-15', 'str', 'link-12');">str</a></tt><tt class="py-op">(</tt><tt id="link-16" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.vertex" class="py-name" href="#" onclick="return doclink('link-16', 'vertex', 'link-7');">vertex</a></tt><tt class="py-op">.</tt><tt class="py-name">y</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-17" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.vertex" class="py-name" href="#" onclick="return doclink('link-17', 'vertex', 'link-7');">vertex</a></tt><tt class="py-op">.</tt><tt class="py-name">z</tt> <tt class="py-op">!=</tt> <tt class="py-number">0.0</tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">                <tt class="py-name">attributeDictionary</tt><tt class="py-op">[</tt><tt class="py-string">'z'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-18" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand.str" class="py-name" href="#" onclick="return doclink('link-18', 'str', 'link-12');">str</a></tt><tt class="py-op">(</tt><tt id="link-19" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.vertex" class="py-name" href="#" onclick="return doclink('link-19', 'vertex', 'link-7');">vertex</a></tt><tt class="py-op">.</tt><tt class="py-name">z</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="getUnboundVertexElement"></a><div id="getUnboundVertexElement-def"><a name="L32"></a><tt class="py-lineno">32</tt> <a class="py-toggle" href="#" id="getUnboundVertexElement-toggle" onclick="return toggle('getUnboundVertexElement');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_tools.vertex-module.html#getUnboundVertexElement">getUnboundVertexElement</a><tt class="py-op">(</tt><tt class="py-param">vertex</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getUnboundVertexElement-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="getUnboundVertexElement-expanded"><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-docstring">"Add vertex element to an xml element."</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-name">vertexElement</tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name"><a title="fabmetheus_utilities.xml_simple_reader" class="py-name" href="#" onclick="return doclink('link-20', 'xml_simple_reader', 'link-5');">xml_simple_reader</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Class fabmetheus_utilities.xml_simple_reader.XMLElement=fabmetheus_utilities.xml_simple_reader.XMLElement-class.html"><a title="fabmetheus_utilities.xml_simple_reader.XMLElement" class="py-name" href="#" onclick="return doclink('link-21', 'XMLElement', 'link-21');">XMLElement</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt id="link-22" class="py-name" targets="Function fabmetheus_utilities.geometry.geometry_tools.vertex.addVertexToAttributeDictionary()=fabmetheus_utilities.geometry.geometry_tools.vertex-module.html#addVertexToAttributeDictionary"><a title="fabmetheus_utilities.geometry.geometry_tools.vertex.addVertexToAttributeDictionary" class="py-name" href="#" onclick="return doclink('link-22', 'addVertexToAttributeDictionary', 'link-22');">addVertexToAttributeDictionary</a></tt><tt class="py-op">(</tt><tt class="py-name">vertexElement</tt><tt class="py-op">.</tt><tt class="py-name">attributeDictionary</tt><tt class="py-op">,</tt> <tt id="link-23" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.vertex" class="py-name" href="#" onclick="return doclink('link-23', 'vertex', 'link-7');">vertex</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-name">vertexElement</tt><tt class="py-op">.</tt><tt class="py-name">localName</tt> <tt class="py-op">=</tt> <tt class="py-string">'vertex'</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">vertexElement</tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="processXMLElement"></a><div id="processXMLElement-def"><a name="L39"></a><tt class="py-lineno">39</tt> <a class="py-toggle" href="#" id="processXMLElement-toggle" onclick="return toggle('processXMLElement');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_tools.vertex-module.html#processXMLElement">processXMLElement</a><tt class="py-op">(</tt><tt class="py-param">xmlElement</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="processXMLElement-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="processXMLElement-expanded"><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt class="py-docstring">"Process the xml element."</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-name">xmlElement</tt><tt class="py-op">.</tt><tt class="py-name">parentNode</tt><tt class="py-op">.</tt><tt class="py-name">xmlObject</tt><tt class="py-op">.</tt><tt class="py-name">vertexes</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-24', 'append', 'link-10');">append</a></tt><tt class="py-op">(</tt><tt id="link-25" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate" class="py-name" href="#" onclick="return doclink('link-25', 'evaluate', 'link-3');">evaluate</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Function fabmetheus_utilities.geometry.geometry_utilities.evaluate.getVector3FromXMLElement()=fabmetheus_utilities.geometry.geometry_utilities.evaluate-module.html#getVector3FromXMLElement"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate.getVector3FromXMLElement" class="py-name" href="#" onclick="return doclink('link-26', 'getVector3FromXMLElement', 'link-26');">getVector3FromXMLElement</a></tt><tt class="py-op">(</tt><tt class="py-name">xmlElement</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:46 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,1032 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>fabmetheus_utilities.intercircle</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="fabmetheus_utilities-module.html">Package&nbsp;fabmetheus_utilities</a> ::
+        Module&nbsp;intercircle
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="fabmetheus_utilities.intercircle-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module intercircle</h1><p class="nomargin-top"><span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html">source&nbsp;code</a></span></p>
+<p>Intercircle is a collection of utilities for intersecting circles, 
+  used to get smooth loops around a collection of points and inset &amp; 
+  outset loops.</p>
+
+<hr />
+<div class="fields">      <p><strong>Date:</strong>
+        $Date: 2008/21/04 $
+      </p>
+      <p><strong>Author:</strong>
+        Enrique Perez (perez_enrique@yahoo.com)
+      </p>
+      <p><strong>License:</strong>
+        GNU Affero General Public License 
+        http://www.gnu.org/licenses/agpl.html
+      </p>
+</div><!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.intercircle.BoundingLoop-class.html" class="summary-name">BoundingLoop</a><br />
+      A class to hold a bounding loop composed of a minimum complex, a 
+        maximum complex and an outset loop.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.intercircle.CenterOutset-class.html" class="summary-name">CenterOutset</a><br />
+      A class to hold a center and an outset.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.intercircle.CircleIntersection-class.html" class="summary-name">CircleIntersection</a><br />
+      An intersection of two complex circles.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.intercircle.CircleNode-class.html" class="summary-name">CircleNode</a><br />
+      A complex node of complex circle intersections.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addCircleIntersectionLoop"></a><span class="summary-sig-name">addCircleIntersectionLoop</span>(<span class="summary-sig-arg">circleIntersectionLoop</span>,
+        <span class="summary-sig-arg">circleIntersections</span>)</span><br />
+      Add a circle intersection loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#addCircleIntersectionLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addEndCap"></a><span class="summary-sig-name">addEndCap</span>(<span class="summary-sig-arg">begin</span>,
+        <span class="summary-sig-arg">end</span>,
+        <span class="summary-sig-arg">points</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Get circular end cap.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#addEndCap">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addHalfPath"></a><span class="summary-sig-name">addHalfPath</span>(<span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">points</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Add the points from every point on a half path and between points.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#addHalfPath">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addInsetPointFromClockwiseTriple"></a><span class="summary-sig-name">addInsetPointFromClockwiseTriple</span>(<span class="summary-sig-arg">begin</span>,
+        <span class="summary-sig-arg">center</span>,
+        <span class="summary-sig-arg">end</span>,
+        <span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Get inset point with possible intersection from clockwise triple, out
+      from widdershins loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#addInsetPointFromClockwiseTriple">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addOrbits"></a><span class="summary-sig-name">addOrbits</span>(<span class="summary-sig-arg">distanceFeedRate</span>,
+        <span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">orbitalFeedRatePerSecond</span>,
+        <span class="summary-sig-arg">temperatureChangeTime</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Add orbits with the extruder off.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#addOrbits">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addOrbitsIfLarge"></a><span class="summary-sig-name">addOrbitsIfLarge</span>(<span class="summary-sig-arg">distanceFeedRate</span>,
+        <span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">orbitalFeedRatePerSecond</span>,
+        <span class="summary-sig-arg">temperatureChangeTime</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Add orbits with the extruder off if the orbits are large enough.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#addOrbitsIfLarge">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPointsFromSegment"></a><span class="summary-sig-name">addPointsFromSegment</span>(<span class="summary-sig-arg">pointBegin</span>,
+        <span class="summary-sig-arg">pointEnd</span>,
+        <span class="summary-sig-arg">points</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Add point complexes between the endpoints of a segment.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#addPointsFromSegment">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="directLoop"></a><span class="summary-sig-name">directLoop</span>(<span class="summary-sig-arg">isWiddershins</span>,
+        <span class="summary-sig-arg">loop</span>)</span><br />
+      Direct the loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#directLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="directLoops"></a><span class="summary-sig-name">directLoops</span>(<span class="summary-sig-arg">isWiddershins</span>,
+        <span class="summary-sig-arg">loops</span>)</span><br />
+      Direct the loops.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#directLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="directLoopLists"></a><span class="summary-sig-name">directLoopLists</span>(<span class="summary-sig-arg">isWiddershins</span>,
+        <span class="summary-sig-arg">loopLists</span>)</span><br />
+      Direct the loop lists.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#directLoopLists">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getAroundsFromLoop"></a><span class="summary-sig-name">getAroundsFromLoop</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Get the arounds from the loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getAroundsFromLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getAroundsFromLoops"></a><span class="summary-sig-name">getAroundsFromLoops</span>(<span class="summary-sig-arg">loops</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Get the arounds from the loops.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getAroundsFromLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getAroundsFromPath"></a><span class="summary-sig-name">getAroundsFromPath</span>(<span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Get the arounds from the path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getAroundsFromPath">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getAroundsFromPathPoints"></a><span class="summary-sig-name">getAroundsFromPathPoints</span>(<span class="summary-sig-arg">points</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Get the arounds from the path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getAroundsFromPathPoints">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getAroundsFromPaths"></a><span class="summary-sig-name">getAroundsFromPaths</span>(<span class="summary-sig-arg">paths</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Get the arounds from the path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getAroundsFromPaths">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getAroundsFromPoints"></a><span class="summary-sig-name">getAroundsFromPoints</span>(<span class="summary-sig-arg">points</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Get the arounds from the points.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getAroundsFromPoints">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCentersFromCircleNodes"></a><span class="summary-sig-name">getCentersFromCircleNodes</span>(<span class="summary-sig-arg">circleNodes</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Get the complex centers of the circle intersection loops from circle 
+      nodes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getCentersFromCircleNodes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCentersFromLoop"></a><span class="summary-sig-name">getCentersFromLoop</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Get the centers of the loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getCentersFromLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCentersFromLoopDirection"></a><span class="summary-sig-name">getCentersFromLoopDirection</span>(<span class="summary-sig-arg">isWiddershins</span>,
+        <span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Get the centers of the loop which go around in the given direction.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getCentersFromLoopDirection">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCentersFromPoints"></a><span class="summary-sig-name">getCentersFromPoints</span>(<span class="summary-sig-arg">points</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Get the centers from the points.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getCentersFromPoints">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCircleIntersectionsFromCircleNodes"></a><span class="summary-sig-name">getCircleIntersectionsFromCircleNodes</span>(<span class="summary-sig-arg">circleNodes</span>)</span><br />
+      Get all the circle intersections which exist between all the circle 
+      nodes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getCircleIntersectionsFromCircleNodes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCircleIntersectionLoops"></a><span class="summary-sig-name">getCircleIntersectionLoops</span>(<span class="summary-sig-arg">circleIntersections</span>)</span><br />
+      Get all the loops going through the circle intersections.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getCircleIntersectionLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCircleNodesFromLoop"></a><span class="summary-sig-name">getCircleNodesFromLoop</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Get the circle nodes from every point on a loop and between points.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getCircleNodesFromLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCircleNodesFromPoints"></a><span class="summary-sig-name">getCircleNodesFromPoints</span>(<span class="summary-sig-arg">points</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Get the circle nodes from a path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getCircleNodesFromPoints">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getInsetLoopsFromLoop"></a><span class="summary-sig-name">getInsetLoopsFromLoop</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Get the inset loops, which might overlap.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getInsetLoopsFromLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getInsetLoopsFromLoops"></a><span class="summary-sig-name">getInsetLoopsFromLoops</span>(<span class="summary-sig-arg">inset</span>,
+        <span class="summary-sig-arg">loops</span>)</span><br />
+      Get the inset loops, which might overlap.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getInsetLoopsFromLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getInsetLoopsFromVector3Loop"></a><span class="summary-sig-name">getInsetLoopsFromVector3Loop</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Get the inset loops from vector3 loop, which might overlap.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getInsetLoopsFromVector3Loop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getInsetSeparateLoopsFromLoops"></a><span class="summary-sig-name">getInsetSeparateLoopsFromLoops</span>(<span class="summary-sig-arg">inset</span>,
+        <span class="summary-sig-arg">loops</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Get the separate inset loops.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getInsetSeparateLoopsFromLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getLargestCenterOutsetLoopFromLoop"></a><span class="summary-sig-name">getLargestCenterOutsetLoopFromLoop</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Get the largest circle outset loop from the loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getLargestCenterOutsetLoopFromLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getLargestCenterOutsetLoopFromLoopRegardless"></a><span class="summary-sig-name">getLargestCenterOutsetLoopFromLoopRegardless</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Get the largest circle outset loop from the loop, even if the radius 
+      has to be shrunk and even if there is still no outset loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getLargestCenterOutsetLoopFromLoopRegardless">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getLargestInsetLoopFromLoop"></a><span class="summary-sig-name">getLargestInsetLoopFromLoop</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Get the largest inset loop from the loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getLargestInsetLoopFromLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getLargestInsetLoopFromLoopRegardless"></a><span class="summary-sig-name">getLargestInsetLoopFromLoopRegardless</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Get the largest inset loop from the loop, even if the radius has to 
+      be shrunk and even if there is still no inset loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getLargestInsetLoopFromLoopRegardless">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getLoopsFromLoopsDirection"></a><span class="summary-sig-name">getLoopsFromLoopsDirection</span>(<span class="summary-sig-arg">isWiddershins</span>,
+        <span class="summary-sig-arg">loops</span>)</span><br />
+      Get the loops going round in a given direction.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getLoopsFromLoopsDirection">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getPointsFromLoop"></a><span class="summary-sig-name">getPointsFromLoop</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Get the points from every point on a loop and between points.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getPointsFromLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getPointsFromLoops"></a><span class="summary-sig-name">getPointsFromLoops</span>(<span class="summary-sig-arg">loops</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Get the points from every point on a loop and between points.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getPointsFromLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getPointsFromPath"></a><span class="summary-sig-name">getPointsFromPath</span>(<span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">thresholdRatio</span>=<span class="summary-sig-default">0.9</span>)</span><br />
+      Get the points from every point on a path and between points.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getPointsFromPath">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getSimplifiedInsetFromClockwiseLoop"></a><span class="summary-sig-name">getSimplifiedInsetFromClockwiseLoop</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Get loop inset from clockwise loop, out from widdershins loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getSimplifiedInsetFromClockwiseLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getWiddershinsByLength"></a><span class="summary-sig-name">getWiddershinsByLength</span>(<span class="summary-sig-arg">begin</span>,
+        <span class="summary-sig-arg">end</span>,
+        <span class="summary-sig-arg">length</span>)</span><br />
+      Get the widdershins by length.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getWiddershinsByLength">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getWithoutIntersections"></a><span class="summary-sig-name">getWithoutIntersections</span>(<span class="summary-sig-arg">loop</span>)</span><br />
+      Get loop without intersections.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#getWithoutIntersections">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isLargeSameDirection"></a><span class="summary-sig-name">isLargeSameDirection</span>(<span class="summary-sig-arg">inset</span>,
+        <span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Determine if the inset is in the same direction as the loop and it is
+      large enough.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#isLargeSameDirection">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isLoopIntersectingLoop"></a><span class="summary-sig-name">isLoopIntersectingLoop</span>(<span class="summary-sig-arg">anotherLoop</span>,
+        <span class="summary-sig-arg">loop</span>)</span><br />
+      Determine if the a loop is intersecting another loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#isLoopIntersectingLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="orbitsAreLarge"></a><span class="summary-sig-name">orbitsAreLarge</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">temperatureChangeTime</span>)</span><br />
+      Determine if the orbits are large enough.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#orbitsAreLarge">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="removeIntersection"></a><span class="summary-sig-name">removeIntersection</span>(<span class="summary-sig-arg">loop</span>)</span><br />
+      Get loop without the first intersection.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.intercircle-pysrc.html#removeIntersection">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="globalDecreasingRadiusMultipliers"></a><span class="summary-name">globalDecreasingRadiusMultipliers</span> = <code title="[1.0, 0.55, 0.35, 0.2]"><code class="variable-group">[</code>1.0<code class="variable-op">, </code>0.55<code class="variable-op">, </code>0.35<code class="variable-op">, </code>0.2<code class="variable-group">]</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'fabmetheus_utilities'"><code class="variable-quote">'</code><code class="variable-string">fabmetheus_utilities</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:39 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

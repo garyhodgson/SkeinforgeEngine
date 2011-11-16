@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>plugins.export</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="plugins-module.html">Package&nbsp;plugins</a> ::
+        Module&nbsp;export
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="plugins.export-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="plugins.export-module.html">Module plugins.export</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">Exports the slicedModel to a file.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">Credits:</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">        Original Author: Enrique Perez (http://skeinforge.com)</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">        Contributors: Please see the documentation in Skeinforge </tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">        Modifed as SFACT: Ahmet Cem Turan (github.com/ahmetcemturan/SFACT)      </tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">License: </tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">        GNU Affero General Public License http://www.gnu.org/licenses/agpl.html</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module config=config-module.html,Variable config.config=config-module.html#config,Variable entities.GcodeCommand'.config=entities.GcodeCommand%27-module.html#config,Variable entities.Layer'.config=entities.Layer%27-module.html#config,Variable entities.NestedRing'.config=entities.NestedRing%27-module.html#config,Variable entities.RuntimeParameters'.config=entities.RuntimeParameters%27-module.html#config,Variable entities.SlicedModel'.config=entities.SlicedModel%27-module.html#config"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-0', 'config', 'link-0');">config</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-1', 'config', 'link-0');">config</a></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">datetime</tt> <tt class="py-keyword">import</tt> <tt class="py-name">timedelta</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Package fabmetheus_utilities=fabmetheus_utilities-module.html"><a title="fabmetheus_utilities" class="py-name" href="#" onclick="return doclink('link-2', 'fabmetheus_utilities', 'link-2');">fabmetheus_utilities</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Module fabmetheus_utilities.archive=fabmetheus_utilities.archive-module.html"><a title="fabmetheus_utilities.archive" class="py-name" href="#" onclick="return doclink('link-3', 'archive', 'link-3');">archive</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Module fabmetheus_utilities.euclidean=fabmetheus_utilities.euclidean-module.html"><a title="fabmetheus_utilities.euclidean" class="py-name" href="#" onclick="return doclink('link-4', 'euclidean', 'link-4');">euclidean</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name" targets="Package utilities=utilities-module.html"><a title="utilities" class="py-name" href="#" onclick="return doclink('link-5', 'utilities', 'link-5');">utilities</a></tt> <tt class="py-keyword">import</tt> <tt id="link-6" class="py-name" targets="Module utilities.memory_tracker=utilities.memory_tracker-module.html"><a title="utilities.memory_tracker" class="py-name" href="#" onclick="return doclink('link-6', 'memory_tracker', 'link-6');">memory_tracker</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-7" class="py-name" targets="Module gcode_writer=gcode_writer-module.html"><a title="gcode_writer" class="py-name" href="#" onclick="return doclink('link-7', 'gcode_writer', 'link-7');">gcode_writer</a></tt> <tt class="py-keyword">import</tt> <tt id="link-8" class="py-name" targets="Class gcode_writer.GcodeWriter=gcode_writer.GcodeWriter-class.html"><a title="gcode_writer.GcodeWriter" class="py-name" href="#" onclick="return doclink('link-8', 'GcodeWriter', 'link-8');">GcodeWriter</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">StringIO</tt> <tt class="py-keyword">import</tt> <tt class="py-name">StringIO</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">datetime</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">string</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">time</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">   <tt class="py-keyword">import</tt> <tt class="py-name">cPickle</tt> <tt class="py-keyword">as</tt> <tt class="py-name">pickle</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">   <tt class="py-keyword">import</tt> <tt class="py-name">pickle</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable plugins.bottom.logger=plugins.bottom-module.html#logger,Variable plugins.carve.logger=plugins.carve-module.html#logger,Variable plugins.comb.logger=plugins.comb-module.html#logger,Variable plugins.cool.logger=plugins.cool-module.html#logger,Variable plugins.export.logger=plugins.export-module.html#logger,Variable plugins.fill.logger=plugins.fill-module.html#logger,Variable plugins.inset.logger=plugins.inset-module.html#logger,Variable plugins.multiply.logger=plugins.multiply-module.html#logger,Variable plugins.preface.logger=plugins.preface-module.html#logger,Variable plugins.support.logger=plugins.support-module.html#logger,Variable skeinforge_engine.logger=skeinforge_engine-module.html#logger"><a title="plugins.bottom.logger
+plugins.carve.logger
+plugins.comb.logger
+plugins.cool.logger
+plugins.export.logger
+plugins.fill.logger
+plugins.inset.logger
+plugins.multiply.logger
+plugins.preface.logger
+plugins.support.logger
+skeinforge_engine.logger" class="py-name" href="#" onclick="return doclink('link-9', 'logger', 'link-9');">logger</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-string">'export'</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt id="link-10" class="py-name" targets="Variable plugins.bottom.name=plugins.bottom-module.html#name,Variable plugins.carve.name=plugins.carve-module.html#name,Variable plugins.comb.name=plugins.comb-module.html#name,Variable plugins.cool.name=plugins.cool-module.html#name,Variable plugins.export.name=plugins.export-module.html#name,Variable plugins.fill.name=plugins.fill-module.html#name,Variable plugins.inset.name=plugins.inset-module.html#name,Variable plugins.multiply.name=plugins.multiply-module.html#name,Variable plugins.preface.name=plugins.preface-module.html#name,Variable plugins.support.name=plugins.support-module.html#name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-10', 'name', 'link-10');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'export'</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"> </tt>
+<a name="performAction"></a><div id="performAction-def"><a name="L32"></a><tt class="py-lineno"> 32</tt> <a class="py-toggle" href="#" id="performAction-toggle" onclick="return toggle('performAction');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="plugins.export-module.html#performAction">performAction</a><tt class="py-op">(</tt><tt class="py-param">slicedModel</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="performAction-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="performAction-expanded"><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-docstring">'Export a slicedModel linear move text.'</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-name">e</tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name" targets="Class plugins.export.ExportSkein=plugins.export.ExportSkein-class.html"><a title="plugins.export.ExportSkein" class="py-name" href="#" onclick="return doclink('link-11', 'ExportSkein', 'link-11');">ExportSkein</a></tt><tt class="py-op">(</tt><tt class="py-name">slicedModel</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">profileMemory</tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">            <tt id="link-12" class="py-name"><a title="utilities.memory_tracker" class="py-name" href="#" onclick="return doclink('link-12', 'memory_tracker', 'link-6');">memory_tracker</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Function utilities.memory_tracker.track_object()=utilities.memory_tracker-module.html#track_object"><a title="utilities.memory_tracker.track_object" class="py-name" href="#" onclick="return doclink('link-13', 'track_object', 'link-13');">track_object</a></tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-name">e</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Module plugins.export=plugins.export-module.html,Method plugins.export.ExportSkein.export()=plugins.export.ExportSkein-class.html#export"><a title="plugins.export
+plugins.export.ExportSkein.export" class="py-name" href="#" onclick="return doclink('link-14', 'export', 'link-14');">export</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">profileMemory</tt><tt class="py-op">:</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">                <tt id="link-15" class="py-name"><a title="utilities.memory_tracker" class="py-name" href="#" onclick="return doclink('link-15', 'memory_tracker', 'link-6');">memory_tracker</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Function utilities.memory_tracker.create_snapshot()=utilities.memory_tracker-module.html#create_snapshot"><a title="utilities.memory_tracker.create_snapshot" class="py-name" href="#" onclick="return doclink('link-16', 'create_snapshot', 'link-16');">create_snapshot</a></tt><tt class="py-op">(</tt><tt class="py-string">"After export"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"> </tt>
+<a name="ExportSkein"></a><div id="ExportSkein-def"><a name="L41"></a><tt class="py-lineno"> 41</tt> <a class="py-toggle" href="#" id="ExportSkein-toggle" onclick="return toggle('ExportSkein');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="plugins.export.ExportSkein-class.html">ExportSkein</a><tt class="py-op">:</tt> </tt>
+</div><div id="ExportSkein-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ExportSkein-expanded"><a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-docstring">'A class to export a skein of extrusions.'</tt> </tt>
+<a name="ExportSkein.__init__"></a><div id="ExportSkein.__init__-def"><a name="L43"></a><tt class="py-lineno"> 43</tt> <a class="py-toggle" href="#" id="ExportSkein.__init__-toggle" onclick="return toggle('ExportSkein.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="plugins.export.ExportSkein-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">slicedModel</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ExportSkein.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="ExportSkein.__init__-expanded"><a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt> <tt class="py-op">=</tt> <tt class="py-name">slicedModel</tt>           </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">deleteComments</tt> <tt class="py-op">=</tt> <tt id="link-17" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-17', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getboolean</tt><tt class="py-op">(</tt><tt id="link-18" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-18', 'name', 'link-10');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'delete.comments'</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fileExtension</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-19', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.get()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute-class.html#get,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.get()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute-class.html#get"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.get
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.get" class="py-name" href="#" onclick="return doclink('link-20', 'get', 'link-20');">get</a></tt><tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-21', 'name', 'link-10');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'file.extension'</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nameOfReplaceFile</tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-22', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.get
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.get" class="py-name" href="#" onclick="return doclink('link-23', 'get', 'link-20');">get</a></tt><tt class="py-op">(</tt><tt id="link-24" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-24', 'name', 'link-10');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'replace.filename'</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">exportSlicedModel</tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-25', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getboolean</tt><tt class="py-op">(</tt><tt id="link-26" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-26', 'name', 'link-10');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'export.slicedmodel'</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">addProfileExtension</tt> <tt class="py-op">=</tt> <tt id="link-27" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-27', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getboolean</tt><tt class="py-op">(</tt><tt id="link-28" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-28', 'name', 'link-10');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'file.extension.profile'</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">exportPickledSlicedModel</tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-29', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getboolean</tt><tt class="py-op">(</tt><tt id="link-30" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-30', 'name', 'link-10');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'export.pickled.slicedmodel'</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">overwritePickledSlicedModel</tt> <tt class="py-op">=</tt> <tt id="link-31" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-31', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getboolean</tt><tt class="py-op">(</tt><tt id="link-32" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-32', 'name', 'link-10');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'overwrite.pickled.slicedmodel'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">                 </tt>
+<a name="ExportSkein.getReplaceableExportGcode"></a><div id="ExportSkein.getReplaceableExportGcode-def"><a name="L53"></a><tt class="py-lineno"> 53</tt> <a class="py-toggle" href="#" id="ExportSkein.getReplaceableExportGcode-toggle" onclick="return toggle('ExportSkein.getReplaceableExportGcode');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="plugins.export.ExportSkein-class.html#getReplaceableExportGcode">getReplaceableExportGcode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nameOfReplaceFile</tt><tt class="py-op">,</tt> <tt class="py-param">replaceableExportGcode</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ExportSkein.getReplaceableExportGcode-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="ExportSkein.getReplaceableExportGcode-expanded"><a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">                <tt class="py-docstring">'Get text with strings replaced according to replace.csv file.'</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">                 </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">                <tt class="py-name">fullReplaceFilePath</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Module fabmetheus_utilities.geometry.geometry_tools.path=fabmetheus_utilities.geometry.geometry_tools.path-module.html"><a title="fabmetheus_utilities.geometry.geometry_tools.path" class="py-name" href="#" onclick="return doclink('link-33', 'path', 'link-33');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-string">'alterations'</tt><tt class="py-op">,</tt> <tt class="py-name">nameOfReplaceFile</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                 </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nameOfReplaceFile</tt> <tt class="py-op">==</tt> <tt class="py-string">''</tt> <tt class="py-keyword">or</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.path" class="py-name" href="#" onclick="return doclink('link-34', 'path', 'link-33');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">fullReplaceFilePath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> <tt class="py-name">replaceableExportGcode</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                                         </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">                <tt class="py-name">fullReplaceText</tt> <tt class="py-op">=</tt> <tt id="link-35" class="py-name"><a title="fabmetheus_utilities.archive" class="py-name" href="#" onclick="return doclink('link-35', 'archive', 'link-3');">archive</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Function fabmetheus_utilities.archive.getFileText()=fabmetheus_utilities.archive-module.html#getFileText"><a title="fabmetheus_utilities.archive.getFileText" class="py-name" href="#" onclick="return doclink('link-36', 'getFileText', 'link-36');">getFileText</a></tt><tt class="py-op">(</tt><tt class="py-name">fullReplaceFilePath</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">                <tt class="py-name">replaceLines</tt> <tt class="py-op">=</tt> <tt id="link-37" class="py-name"><a title="fabmetheus_utilities.archive" class="py-name" href="#" onclick="return doclink('link-37', 'archive', 'link-3');">archive</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Function fabmetheus_utilities.archive.getTextLines()=fabmetheus_utilities.archive-module.html#getTextLines"><a title="fabmetheus_utilities.archive.getTextLines" class="py-name" href="#" onclick="return doclink('link-38', 'getTextLines', 'link-38');">getTextLines</a></tt><tt class="py-op">(</tt><tt class="py-name">fullReplaceText</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">replaceLines</tt><tt class="py-op">)</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> <tt class="py-name">replaceableExportGcode</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">replaceLine</tt> <tt class="py-keyword">in</tt> <tt class="py-name">replaceLines</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">                        <tt class="py-name">splitLine</tt> <tt class="py-op">=</tt> <tt class="py-name">replaceLine</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'\\n'</tt><tt class="py-op">,</tt> <tt class="py-string">'\t'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'\t'</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">splitLine</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">                                <tt class="py-name">replaceableExportGcode</tt> <tt class="py-op">=</tt> <tt class="py-name">replaceableExportGcode</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-name">splitLine</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-string">'\n'</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">splitLine</tt><tt class="py-op">[</tt><tt class="py-number">1</tt> <tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                <tt class="py-name">output</tt> <tt class="py-op">=</tt> <tt class="py-name">StringIO</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">                 </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">line</tt> <tt class="py-keyword">in</tt> <tt id="link-39" class="py-name"><a title="fabmetheus_utilities.archive" class="py-name" href="#" onclick="return doclink('link-39', 'archive', 'link-3');">archive</a></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="fabmetheus_utilities.archive.getTextLines" class="py-name" href="#" onclick="return doclink('link-40', 'getTextLines', 'link-38');">getTextLines</a></tt><tt class="py-op">(</tt><tt class="py-name">replaceableExportGcode</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">line</tt> <tt class="py-op">!=</tt> <tt class="py-string">''</tt><tt class="py-op">:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">                                <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">line</tt> <tt class="py-op">+</tt> <tt class="py-string">'\n'</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                         </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">getvalue</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="ExportSkein.export"></a><div id="ExportSkein.export-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="ExportSkein.export-toggle" onclick="return toggle('ExportSkein.export');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="plugins.export.ExportSkein-class.html#export">export</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ExportSkein.export-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="ExportSkein.export-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">                <tt class="py-docstring">'Perform final modifications to slicedModel and performs export.'</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">                 </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                <tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">inputFilename</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">                <tt class="py-name">filenamePrefix</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.path" class="py-name" href="#" onclick="return doclink('link-41', 'path', 'link-33');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">splitext</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                 </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">outputFilename</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">                        <tt class="py-name">exportFileName</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">outputFilename</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt> <tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">                        <tt class="py-name">exportFileName</tt> <tt class="py-op">=</tt> <tt class="py-name">filenamePrefix</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                        <tt class="py-name">profileName</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">profileName</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">         </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">addProfileExtension</tt> <tt class="py-keyword">and</tt> <tt class="py-name">profileName</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                                <tt class="py-name">exportFileName</tt> <tt class="py-op">+=</tt> <tt class="py-string">'.'</tt> <tt class="py-op">+</tt> <tt class="py-name">string</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-name">profileName</tt><tt class="py-op">,</tt> <tt class="py-string">' '</tt><tt class="py-op">,</tt> <tt class="py-string">'_'</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">                                <tt class="py-name">exportFileName</tt> <tt class="py-op">+=</tt> <tt class="py-string">'.'</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fileExtension</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                 </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">                <tt class="py-name">replaceableExportGcode</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name" targets="Method plugins.export.ExportSkein.getReplaceableExportGcode()=plugins.export.ExportSkein-class.html#getReplaceableExportGcode"><a title="plugins.export.ExportSkein.getReplaceableExportGcode" class="py-name" href="#" onclick="return doclink('link-42', 'getReplaceableExportGcode', 'link-42');">getReplaceableExportGcode</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">nameOfReplaceFile</tt><tt class="py-op">,</tt> <tt id="link-43" class="py-name"><a title="gcode_writer.GcodeWriter" class="py-name" href="#" onclick="return doclink('link-43', 'GcodeWriter', 'link-8');">GcodeWriter</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Method gcode_writer.GcodeWriter.getSlicedModelAsGcode()=gcode_writer.GcodeWriter-class.html#getSlicedModelAsGcode"><a title="gcode_writer.GcodeWriter.getSlicedModelAsGcode" class="py-name" href="#" onclick="return doclink('link-44', 'getSlicedModelAsGcode', 'link-44');">getSlicedModelAsGcode</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt>           </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                <tt id="link-45" class="py-name"><a title="fabmetheus_utilities.archive" class="py-name" href="#" onclick="return doclink('link-45', 'archive', 'link-3');">archive</a></tt><tt class="py-op">.</tt><tt id="link-46" class="py-name" targets="Function fabmetheus_utilities.archive.writeFileText()=fabmetheus_utilities.archive-module.html#writeFileText"><a title="fabmetheus_utilities.archive.writeFileText" class="py-name" href="#" onclick="return doclink('link-46', 'writeFileText', 'link-46');">writeFileText</a></tt><tt class="py-op">(</tt><tt class="py-name">exportFileName</tt><tt class="py-op">,</tt> <tt class="py-name">replaceableExportGcode</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                 </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">exportSlicedModel</tt><tt class="py-op">:</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                        <tt class="py-name">fileNamePenultimate</tt> <tt class="py-op">=</tt> <tt class="py-name">filenamePrefix</tt> <tt class="py-op">+</tt> <tt class="py-string">'.slicedmodel'</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                        <tt id="link-47" class="py-name"><a title="fabmetheus_utilities.archive" class="py-name" href="#" onclick="return doclink('link-47', 'archive', 'link-3');">archive</a></tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="fabmetheus_utilities.archive.writeFileText" class="py-name" href="#" onclick="return doclink('link-48', 'writeFileText', 'link-46');">writeFileText</a></tt><tt class="py-op">(</tt><tt class="py-name">fileNamePenultimate</tt><tt class="py-op">,</tt> <tt id="link-49" class="py-name" targets="Method entities.GcodeCommand'.GcodeCommand.str()=entities.GcodeCommand%27.GcodeCommand-class.html#str"><a title="entities.GcodeCommand'.GcodeCommand.str" class="py-name" href="#" onclick="return doclink('link-49', 'str', 'link-49');">str</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">                        <tt id="link-50" class="py-name"><a title="plugins.bottom.logger
+plugins.carve.logger
+plugins.comb.logger
+plugins.cool.logger
+plugins.export.logger
+plugins.fill.logger
+plugins.inset.logger
+plugins.multiply.logger
+plugins.preface.logger
+plugins.support.logger
+skeinforge_engine.logger" class="py-name" href="#" onclick="return doclink('link-50', 'logger', 'link-9');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">'Sliced Model slicedModel exported to: %s'</tt><tt class="py-op">,</tt> <tt class="py-name">fileNamePenultimate</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">                 </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">exportPickledSlicedModel</tt><tt class="py-op">:</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">                        <tt class="py-name">fileNamePickled</tt> <tt class="py-op">=</tt> <tt class="py-name">filenamePrefix</tt> <tt class="py-op">+</tt> <tt class="py-string">'.pickled_slicedmodel'</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.path" class="py-name" href="#" onclick="return doclink('link-51', 'path', 'link-33');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">fileNamePickled</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">overwritePickledSlicedModel</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                                <tt class="py-name">backupFilename</tt> <tt class="py-op">=</tt> <tt class="py-string">'%s.%s.bak'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">fileNamePickled</tt><tt class="py-op">,</tt> <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">now</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">strftime</tt><tt class="py-op">(</tt><tt class="py-string">'%Y%m%d_%H%M%S_%f'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">                                <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">rename</tt><tt class="py-op">(</tt><tt class="py-name">fileNamePickled</tt><tt class="py-op">,</tt> <tt class="py-name">backupFilename</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">                                <tt id="link-52" class="py-name"><a title="plugins.bottom.logger
+plugins.carve.logger
+plugins.comb.logger
+plugins.cool.logger
+plugins.export.logger
+plugins.fill.logger
+plugins.inset.logger
+plugins.multiply.logger
+plugins.preface.logger
+plugins.support.logger
+skeinforge_engine.logger" class="py-name" href="#" onclick="return doclink('link-52', 'logger', 'link-9');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">'Existing slicedmodel file backed up to: %s'</tt><tt class="py-op">,</tt> <tt class="py-name">backupFilename</tt><tt class="py-op">)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">                        <tt id="link-53" class="py-name"><a title="plugins.bottom.logger
+plugins.carve.logger
+plugins.comb.logger
+plugins.cool.logger
+plugins.export.logger
+plugins.fill.logger
+plugins.inset.logger
+plugins.multiply.logger
+plugins.preface.logger
+plugins.support.logger
+skeinforge_engine.logger" class="py-name" href="#" onclick="return doclink('link-53', 'logger', 'link-9');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">'Pickled slicedmodel exported to: %s'</tt><tt class="py-op">,</tt> <tt class="py-name">fileNamePickled</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">                        <tt id="link-54" class="py-name"><a title="fabmetheus_utilities.archive" class="py-name" href="#" onclick="return doclink('link-54', 'archive', 'link-3');">archive</a></tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="fabmetheus_utilities.archive.writeFileText" class="py-name" href="#" onclick="return doclink('link-55', 'writeFileText', 'link-46');">writeFileText</a></tt><tt class="py-op">(</tt><tt class="py-name">fileNamePickled</tt><tt class="py-op">,</tt> <tt class="py-name">pickle</tt><tt class="py-op">.</tt><tt class="py-name">dumps</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">                         </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">                <tt id="link-56" class="py-name"><a title="plugins.bottom.logger
+plugins.carve.logger
+plugins.comb.logger
+plugins.cool.logger
+plugins.export.logger
+plugins.fill.logger
+plugins.inset.logger
+plugins.multiply.logger
+plugins.preface.logger
+plugins.support.logger
+skeinforge_engine.logger" class="py-name" href="#" onclick="return doclink('link-56', 'logger', 'link-9');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">'Gcode exported to: %s'</tt><tt class="py-op">,</tt> <tt id="link-57" class="py-name"><a title="fabmetheus_utilities.archive" class="py-name" href="#" onclick="return doclink('link-57', 'archive', 'link-3');">archive</a></tt><tt class="py-op">.</tt><tt id="link-58" class="py-name" targets="Function fabmetheus_utilities.archive.getSummarizedFileName()=fabmetheus_utilities.archive-module.html#getSummarizedFileName"><a title="fabmetheus_utilities.archive.getSummarizedFileName" class="py-name" href="#" onclick="return doclink('link-58', 'getSummarizedFileName', 'link-58');">getSummarizedFileName</a></tt><tt class="py-op">(</tt><tt class="py-name">exportFileName</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:47 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

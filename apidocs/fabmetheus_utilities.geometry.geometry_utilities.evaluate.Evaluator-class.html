@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="fabmetheus_utilities-module.html">Package&nbsp;fabmetheus_utilities</a> ::
+        <a href="fabmetheus_utilities.geometry-module.html">Package&nbsp;geometry</a> ::
+        <a href="fabmetheus_utilities.geometry.geometry_utilities-module.html">Package&nbsp;geometry_utilities</a> ::
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-module.html">Module&nbsp;evaluate</a> ::
+        Class&nbsp;Evaluator
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Evaluator</h1><p class="nomargin-top"><span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#Evaluator">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_fabmethe_7" name="uml_class_diagram_for_fabmethe_7">
+<area shape="rect" id="node1" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorMultiplication-class.html" title="Class to multiply two evaluators." alt="" coords="1489,425,1655,463"/>
+<area shape="rect" id="node2" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorValue-class.html" title="Class to evaluate a string." alt="" coords="5,307,128,346"/>
+<area shape="rect" id="node3" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketSquare-class.html" title="Class to evaluate a string." alt="" coords="157,307,333,346"/>
+<area shape="rect" id="node4" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorPower-class.html" title="Class to power two evaluators." alt="" coords="708,366,833,405"/>
+<area shape="rect" id="node5" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorConcatenate-class.html" title="Class to join two evaluators." alt="" coords="363,307,525,346"/>
+<area shape="rect" id="node6" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorSubtraction-class.html" title="Class to subtract two evaluators." alt="" coords="863,366,1017,405"/>
+<area shape="rect" id="node28" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNot-class.html" title="Class to compare two evaluators." alt="" coords="497,425,607,463"/>
+<area shape="rect" id="node7" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorEqual-class.html" title="Class to compare two evaluators." alt="" coords="1047,366,1169,405"/>
+<area shape="rect" id="node10" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorLess-class.html" title="Class to compare two evaluators." alt="" coords="636,425,753,463"/>
+<area shape="rect" id="node16" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorGreater-class.html" title="Class to compare two evaluators." alt="" coords="783,425,916,463"/>
+<area shape="rect" id="node25" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorLessEqual-class.html" title="Class to compare two evaluators." alt="" coords="945,425,1095,463"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNotEqual-class.html" title="Class to compare two evaluators." alt="" coords="1124,425,1265,463"/>
+<area shape="rect" id="node31" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorGreaterEqual-class.html" title="Class to compare two evaluators." alt="" coords="1295,425,1460,463"/>
+<area shape="rect" id="node8" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorDivision-class.html" title="Class to divide two evaluators." alt="" coords="1505,366,1639,405"/>
+<area shape="rect" id="node19" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorModulo-class.html" title="Class to modulo two evaluators." alt="" coords="1684,425,1815,463"/>
+<area shape="rect" id="node9" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorElement-class.html" title="Element evaluator class." alt="" coords="555,307,691,346"/>
+<area shape="rect" id="node11" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorLocal-class.html" title="Class to get a local variable." alt="" coords="417,366,537,405"/>
+<area shape="rect" id="node22" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorSelf-class.html" title="Class to handle self." alt="" coords="567,366,679,405"/>
+<area shape="rect" id="node12" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFunction-class.html" title="Function evaluator class." alt="" coords="720,307,859,346"/>
+<area shape="rect" id="node13" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorAnd-class.html" title="Class to compare two evaluators." alt="" coords="1753,366,1865,405"/>
+<area shape="rect" id="node33" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorOr-class.html" title="Class to compare two evaluators." alt="" coords="1844,425,1948,463"/>
+<area shape="rect" id="node14" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorAddition-class.html" title="Class to add two evaluators." alt="" coords="888,307,1024,346"/>
+<area shape="rect" id="node15" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketCurly-class.html" title="Class to evaluate a string." alt="" coords="1053,307,1219,346"/>
+<area shape="rect" id="node17" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorDictionary-class.html" title="Class to join two evaluators." alt="" coords="1248,307,1395,346"/>
+<area shape="rect" id="node33" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#__init__" title="Set value to none." alt="" coords="1251,39,1732,57"/>
+<area shape="rect" id="node33" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#__repr__" title="Get the string representation of this Class." alt="" coords="1251,57,1732,76"/>
+<area shape="rect" id="node33" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#executeBracket" title="Execute the bracket." alt="" coords="1251,76,1732,95"/>
+<area shape="rect" id="node33" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#executeCenterOperation" title="Execute operator which acts on the center." alt="" coords="1251,95,1732,113"/>
+<area shape="rect" id="node33" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#executeDictionary" title="Execute the dictionary." alt="" coords="1251,113,1732,132"/>
+<area shape="rect" id="node33" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#executeFunction" title="Execute the function." alt="" coords="1251,132,1732,151"/>
+<area shape="rect" id="node33" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#executeKey" title="Execute the key index." alt="" coords="1251,151,1732,169"/>
+<area shape="rect" id="node33" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#executeLeftOperation" title="Execute operator which acts from the left." alt="" coords="1251,169,1732,188"/>
+<area shape="rect" id="node33" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#executeList" title="Execute the key index." alt="" coords="1251,188,1732,207"/>
+<area shape="rect" id="node33" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#executePairOperation" title="Operate on two evaluators." alt="" coords="1251,207,1732,225"/>
+<area shape="rect" id="node33" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#executeRightOperation" title="Execute operator which acts from the right." alt="" coords="1251,225,1732,244"/>
+<area shape="rect" id="node33" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#executeString" title="Execute the string." alt="" coords="1251,244,1732,263"/>
+<area shape="rect" id="node33" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#getIsInRange" title="Determine if the keyIndex is in range." alt="" coords="1251,263,1732,281"/>
+<area shape="rect" id="node18" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html" title="Base evaluator class." alt="" coords="1239,6,1743,287"/>
+<area shape="rect" id="node20" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNumeric-class.html" title="Class to evaluate a string." alt="" coords="1424,307,1560,346"/>
+<area shape="rect" id="node21" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorTrue-class.html" title="Class to evaluate a string." alt="" coords="1589,307,1704,346"/>
+<area shape="rect" id="node23" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFundamental-class.html" title="Fundamental evaluator class." alt="" coords="1733,307,1899,346"/>
+<area shape="rect" id="node24" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNone-class.html" title="Class to evaluate None." alt="" coords="1928,307,2048,346"/>
+<area shape="rect" id="node26" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorComma-class.html" title="Class to join two evaluators." alt="" coords="2077,307,2211,346"/>
+<area shape="rect" id="node29" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketRound-class.html" title="Class to evaluate a string." alt="" coords="2240,307,2411,346"/>
+<area shape="rect" id="node30" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorAttribute-class.html" title="Class to handle an attribute." alt="" coords="2440,307,2579,346"/>
+<area shape="rect" id="node32" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFalse-class.html" title="Class to evaluate a string." alt="" coords="2608,307,2728,346"/>
+<area shape="rect" id="node34" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorClass-class.html" title="Class evaluator class." alt="" coords="2757,307,2880,346"/>
+</map>
+  <img src="uml_class_diagram_for_fabmethe_7.gif" alt='' usemap="#uml_class_diagram_for_fabmethe_7" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>Base evaluator class.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__init__"></a><span class="summary-sig-name">__init__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">word</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Set value to none.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#Evaluator.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__repr__"></a><span class="summary-sig-name">__repr__</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the string representation of this Class.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#Evaluator.__repr__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="executeBracket"></a><span class="summary-sig-name">executeBracket</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">bracketBeginIndex</span>,
+        <span class="summary-sig-arg">bracketEndIndex</span>,
+        <span class="summary-sig-arg">evaluators</span>)</span><br />
+      Execute the bracket.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#Evaluator.executeBracket">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="executeCenterOperation"></a><span class="summary-sig-name">executeCenterOperation</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">evaluators</span>,
+        <span class="summary-sig-arg">evaluatorIndex</span>)</span><br />
+      Execute operator which acts on the center.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#Evaluator.executeCenterOperation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="executeDictionary"></a><span class="summary-sig-name">executeDictionary</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dictionary</span>,
+        <span class="summary-sig-arg">evaluators</span>,
+        <span class="summary-sig-arg">keys</span>,
+        <span class="summary-sig-arg">evaluatorIndex</span>,
+        <span class="summary-sig-arg">nextEvaluator</span>)</span><br />
+      Execute the dictionary.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#Evaluator.executeDictionary">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="executeFunction"></a><span class="summary-sig-name">executeFunction</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">evaluators</span>,
+        <span class="summary-sig-arg">evaluatorIndex</span>,
+        <span class="summary-sig-arg">nextEvaluator</span>)</span><br />
+      Execute the function.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#Evaluator.executeFunction">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="executeKey"></a><span class="summary-sig-name">executeKey</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">evaluators</span>,
+        <span class="summary-sig-arg">keys</span>,
+        <span class="summary-sig-arg">evaluatorIndex</span>,
+        <span class="summary-sig-arg">nextEvaluator</span>)</span><br />
+      Execute the key index.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#Evaluator.executeKey">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="executeLeftOperation"></a><span class="summary-sig-name">executeLeftOperation</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">evaluators</span>,
+        <span class="summary-sig-arg">evaluatorIndex</span>,
+        <span class="summary-sig-arg">operationLevel</span>)</span><br />
+      Execute operator which acts from the left.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#Evaluator.executeLeftOperation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="executeList"></a><span class="summary-sig-name">executeList</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">evaluators</span>,
+        <span class="summary-sig-arg">keys</span>,
+        <span class="summary-sig-arg">evaluatorIndex</span>,
+        <span class="summary-sig-arg">nextEvaluator</span>)</span><br />
+      Execute the key index.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#Evaluator.executeList">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="executePairOperation"></a><span class="summary-sig-name">executePairOperation</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">evaluators</span>,
+        <span class="summary-sig-arg">evaluatorIndex</span>,
+        <span class="summary-sig-arg">operationLevel</span>)</span><br />
+      Operate on two evaluators.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#Evaluator.executePairOperation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="executeRightOperation"></a><span class="summary-sig-name">executeRightOperation</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">evaluators</span>,
+        <span class="summary-sig-arg">evaluatorIndex</span>)</span><br />
+      Execute operator which acts from the right.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#Evaluator.executeRightOperation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="executeString"></a><span class="summary-sig-name">executeString</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">evaluators</span>,
+        <span class="summary-sig-arg">keys</span>,
+        <span class="summary-sig-arg">evaluatorIndex</span>,
+        <span class="summary-sig-arg">nextEvaluator</span>)</span><br />
+      Execute the string.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#Evaluator.executeString">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getIsInRange"></a><span class="summary-sig-name">getIsInRange</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">keyIndex</span>)</span><br />
+      Determine if the keyIndex is in range.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#Evaluator.getIsInRange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:41 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>plugins.preface</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="plugins-module.html">Package&nbsp;plugins</a> ::
+        Module&nbsp;preface
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="plugins.preface-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="plugins.preface-module.html">Module plugins.preface</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">Preface creates the nested ring structure from the rotated layers, and adds optional start and end gcodes.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">Credits:</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">        Original Author: Enrique Perez (http://skeinforge.com)</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">        Contributors: Please see the documentation in Skeinforge </tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">        Modifed as SFACT: Ahmet Cem Turan (github.com/ahmetcemturan/SFACT)      </tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">License: </tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">        GNU Affero General Public License http://www.gnu.org/licenses/agpl.html</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module config=config-module.html,Variable config.config=config-module.html#config,Variable entities.GcodeCommand'.config=entities.GcodeCommand%27-module.html#config,Variable entities.Layer'.config=entities.Layer%27-module.html#config,Variable entities.NestedRing'.config=entities.NestedRing%27-module.html#config,Variable entities.RuntimeParameters'.config=entities.RuntimeParameters%27-module.html#config,Variable entities.SlicedModel'.config=entities.SlicedModel%27-module.html#config"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-0', 'config', 'link-0');">config</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-1', 'config', 'link-0');">config</a></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Package entities=entities-module.html"><a title="entities" class="py-name" href="#" onclick="return doclink('link-2', 'entities', 'link-2');">entities</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class entities.NestedRing'.NestedRing=entities.NestedRing%27.NestedRing-class.html,Class fabmetheus_utilities.euclidean.NestedRing=fabmetheus_utilities.euclidean.NestedRing-class.html"><a title="entities.NestedRing'.NestedRing
+fabmetheus_utilities.euclidean.NestedRing" class="py-name" href="#" onclick="return doclink('link-3', 'NestedRing', 'link-3');">NestedRing</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Class entities.GcodeCommand'.GcodeCommand=entities.GcodeCommand%27.GcodeCommand-class.html"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-4', 'GcodeCommand', 'link-4');">GcodeCommand</a></tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Class entities.Layer'.Layer=entities.Layer%27.Layer-class.html"><a title="entities.Layer'.Layer" class="py-name" href="#" onclick="return doclink('link-5', 'Layer', 'link-5');">Layer</a></tt><tt class="py-op">,</tt> <tt id="link-6" class="py-name" targets="Class entities.paths.BoundaryPerimeter=entities.paths.BoundaryPerimeter-class.html"><a title="entities.paths.BoundaryPerimeter" class="py-name" href="#" onclick="return doclink('link-6', 'BoundaryPerimeter', 'link-6');">BoundaryPerimeter</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-7" class="py-name" targets="Package fabmetheus_utilities=fabmetheus_utilities-module.html"><a title="fabmetheus_utilities" class="py-name" href="#" onclick="return doclink('link-7', 'fabmetheus_utilities', 'link-7');">fabmetheus_utilities</a></tt> <tt class="py-keyword">import</tt> <tt id="link-8" class="py-name" targets="Module fabmetheus_utilities.euclidean=fabmetheus_utilities.euclidean-module.html"><a title="fabmetheus_utilities.euclidean" class="py-name" href="#" onclick="return doclink('link-8', 'euclidean', 'link-8');">euclidean</a></tt><tt class="py-op">,</tt> <tt id="link-9" class="py-name" targets="Module fabmetheus_utilities.archive=fabmetheus_utilities.archive-module.html"><a title="fabmetheus_utilities.archive" class="py-name" href="#" onclick="return doclink('link-9', 'archive', 'link-9');">archive</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">time</tt> <tt class="py-keyword">import</tt> <tt class="py-name">strftime</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-10" class="py-name" targets="Module gcodes=gcodes-module.html"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-10', 'gcodes', 'link-10');">gcodes</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable plugins.bottom.name=plugins.bottom-module.html#name,Variable plugins.carve.name=plugins.carve-module.html#name,Variable plugins.comb.name=plugins.comb-module.html#name,Variable plugins.cool.name=plugins.cool-module.html#name,Variable plugins.export.name=plugins.export-module.html#name,Variable plugins.fill.name=plugins.fill-module.html#name,Variable plugins.inset.name=plugins.inset-module.html#name,Variable plugins.multiply.name=plugins.multiply-module.html#name,Variable plugins.preface.name=plugins.preface-module.html#name,Variable plugins.support.name=plugins.support-module.html#name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-11', 'name', 'link-11');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">__name__</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt id="link-12" class="py-name" targets="Variable plugins.bottom.logger=plugins.bottom-module.html#logger,Variable plugins.carve.logger=plugins.carve-module.html#logger,Variable plugins.comb.logger=plugins.comb-module.html#logger,Variable plugins.cool.logger=plugins.cool-module.html#logger,Variable plugins.export.logger=plugins.export-module.html#logger,Variable plugins.fill.logger=plugins.fill-module.html#logger,Variable plugins.inset.logger=plugins.inset-module.html#logger,Variable plugins.multiply.logger=plugins.multiply-module.html#logger,Variable plugins.preface.logger=plugins.preface-module.html#logger,Variable plugins.support.logger=plugins.support-module.html#logger,Variable skeinforge_engine.logger=skeinforge_engine-module.html#logger"><a title="plugins.bottom.logger
+plugins.carve.logger
+plugins.comb.logger
+plugins.cool.logger
+plugins.export.logger
+plugins.fill.logger
+plugins.inset.logger
+plugins.multiply.logger
+plugins.preface.logger
+plugins.support.logger
+skeinforge_engine.logger" class="py-name" href="#" onclick="return doclink('link-12', 'logger', 'link-12');">logger</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt id="link-13" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-13', 'name', 'link-11');">name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"> </tt>
+<a name="performAction"></a><div id="performAction-def"><a name="L24"></a><tt class="py-lineno"> 24</tt> <a class="py-toggle" href="#" id="performAction-toggle" onclick="return toggle('performAction');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="plugins.preface-module.html#performAction">performAction</a><tt class="py-op">(</tt><tt class="py-param">slicedModel</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="performAction-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="performAction-expanded"><a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">        <tt class="py-docstring">"Preface and converts the layers."</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">        <tt id="link-14" class="py-name" targets="Class plugins.preface.PrefaceSkein=plugins.preface.PrefaceSkein-class.html"><a title="plugins.preface.PrefaceSkein" class="py-name" href="#" onclick="return doclink('link-14', 'PrefaceSkein', 'link-14');">PrefaceSkein</a></tt><tt class="py-op">(</tt><tt class="py-name">slicedModel</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Module plugins.preface=plugins.preface-module.html,Method plugins.preface.PrefaceSkein.preface()=plugins.preface.PrefaceSkein-class.html#preface"><a title="plugins.preface
+plugins.preface.PrefaceSkein.preface" class="py-name" href="#" onclick="return doclink('link-15', 'preface', 'link-15');">preface</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="PrefaceSkein"></a><div id="PrefaceSkein-def"><a name="L28"></a><tt class="py-lineno"> 28</tt> <a class="py-toggle" href="#" id="PrefaceSkein-toggle" onclick="return toggle('PrefaceSkein');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="plugins.preface.PrefaceSkein-class.html">PrefaceSkein</a><tt class="py-op">:</tt> </tt>
+</div><div id="PrefaceSkein-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="PrefaceSkein-expanded"><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-docstring">"A class to preface a skein of extrusions."</tt> </tt>
+<a name="PrefaceSkein.__init__"></a><div id="PrefaceSkein.__init__-def"><a name="L30"></a><tt class="py-lineno"> 30</tt> <a class="py-toggle" href="#" id="PrefaceSkein.__init__-toggle" onclick="return toggle('PrefaceSkein.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="plugins.preface.PrefaceSkein-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">slicedModel</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PrefaceSkein.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="PrefaceSkein.__init__-expanded"><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt> <tt class="py-op">=</tt> <tt class="py-name">slicedModel</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">setPositioningToAbsolute</tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-16', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getboolean</tt><tt class="py-op">(</tt><tt id="link-17" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-17', 'name', 'link-11');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'positioning.absolute'</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">setUnitsToMillimeters</tt> <tt class="py-op">=</tt> <tt id="link-18" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-18', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getboolean</tt><tt class="py-op">(</tt><tt id="link-19" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-19', 'name', 'link-11');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'units.millimeters'</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startAtHome</tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-20', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getboolean</tt><tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-21', 'name', 'link-11');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'startup.at.home'</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">resetExtruder</tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-22', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getboolean</tt><tt class="py-op">(</tt><tt id="link-23" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-23', 'name', 'link-11');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'startup.extruder.reset'</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">endFile</tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-24', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.get()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute-class.html#get,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.get()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute-class.html#get"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.get
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.get" class="py-name" href="#" onclick="return doclink('link-25', 'get', 'link-25');">get</a></tt><tt class="py-op">(</tt><tt id="link-26" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-26', 'name', 'link-11');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'end.file'</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startFile</tt> <tt class="py-op">=</tt> <tt id="link-27" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-27', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.get
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.get" class="py-name" href="#" onclick="return doclink('link-28', 'get', 'link-25');">get</a></tt><tt class="py-op">(</tt><tt id="link-29" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-29', 'name', 'link-11');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'start.file'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">                 </tt>
+<a name="PrefaceSkein.preface"></a><div id="PrefaceSkein.preface-def"><a name="L39"></a><tt class="py-lineno"> 39</tt> <a class="py-toggle" href="#" id="PrefaceSkein.preface-toggle" onclick="return toggle('PrefaceSkein.preface');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="plugins.preface.PrefaceSkein-class.html#preface">preface</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PrefaceSkein.preface-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="PrefaceSkein.preface-expanded"><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">                <tt class="py-docstring">"Prefaces and converts the svg text to Gcode."</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">                 </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Method plugins.preface.PrefaceSkein.addStartCommandsToGcode()=plugins.preface.PrefaceSkein-class.html#addStartCommandsToGcode"><a title="plugins.preface.PrefaceSkein.addStartCommandsToGcode" class="py-name" href="#" onclick="return doclink('link-30', 'addStartCommandsToGcode', 'link-30');">addStartCommandsToGcode</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">                 </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt id="link-31" class="py-name" targets="Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.index()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#index"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.index" class="py-name" href="#" onclick="return doclink('link-31', 'index', 'link-31');">index</a></tt><tt class="py-op">,</tt> <tt class="py-name">rotatedLoopLayer</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-name">enumerate</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">rotatedLoopLayers</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Method plugins.preface.PrefaceSkein.addPrefaceToGcode()=plugins.preface.PrefaceSkein-class.html#addPrefaceToGcode"><a title="plugins.preface.PrefaceSkein.addPrefaceToGcode" class="py-name" href="#" onclick="return doclink('link-32', 'addPrefaceToGcode', 'link-32');">addPrefaceToGcode</a></tt><tt class="py-op">(</tt><tt id="link-33" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.index" class="py-name" href="#" onclick="return doclink('link-33', 'index', 'link-31');">index</a></tt><tt class="py-op">,</tt> <tt class="py-name">rotatedLoopLayer</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                 </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Method plugins.preface.PrefaceSkein.addEndCommandsToGcode()=plugins.preface.PrefaceSkein-class.html#addEndCommandsToGcode"><a title="plugins.preface.PrefaceSkein.addEndCommandsToGcode" class="py-name" href="#" onclick="return doclink('link-34', 'addEndCommandsToGcode', 'link-34');">addEndCommandsToGcode</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt>             </tt>
+</div><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">         </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">         </tt>
+<a name="PrefaceSkein.addPrefaceToGcode"></a><div id="PrefaceSkein.addPrefaceToGcode-def"><a name="L50"></a><tt class="py-lineno"> 50</tt> <a class="py-toggle" href="#" id="PrefaceSkein.addPrefaceToGcode-toggle" onclick="return toggle('PrefaceSkein.addPrefaceToGcode');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="plugins.preface.PrefaceSkein-class.html#addPrefaceToGcode">addPrefaceToGcode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">index</tt><tt class="py-op">,</tt> <tt class="py-param">rotatedLoopLayer</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PrefaceSkein.addPrefaceToGcode-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="PrefaceSkein.addPrefaceToGcode-expanded"><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                <tt class="py-name">decimalPlaces</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">                <tt class="py-name">z</tt> <tt class="py-op">=</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-name">rotatedLoopLayer</tt><tt class="py-op">.</tt><tt class="py-name">z</tt><tt class="py-op">,</tt> <tt class="py-number">3</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">                <tt class="py-name">layer</tt> <tt class="py-op">=</tt> <tt id="link-35" class="py-name"><a title="entities.Layer'.Layer" class="py-name" href="#" onclick="return doclink('link-35', 'Layer', 'link-5');">Layer</a></tt><tt class="py-op">(</tt><tt class="py-name">z</tt><tt class="py-op">,</tt> <tt id="link-36" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.index" class="py-name" href="#" onclick="return doclink('link-36', 'index', 'link-31');">index</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">)</tt>              </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">                 </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">rotatedLoopLayer</tt><tt class="py-op">.</tt><tt class="py-name">rotation</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">                        <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt class="py-name">bridgeRotation</tt> <tt class="py-op">=</tt> <tt class="py-name">complex</tt><tt class="py-op">(</tt><tt class="py-name">rotatedLoopLayer</tt><tt class="py-op">.</tt><tt class="py-name">rotation</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                 </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">                <tt class="py-name">loops</tt> <tt class="py-op">=</tt> <tt class="py-name">rotatedLoopLayer</tt><tt class="py-op">.</tt><tt class="py-name">loops</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">                <tt class="py-name">internalLoops</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method plugins.preface.PrefaceSkein.createLoopHierarchy()=plugins.preface.PrefaceSkein-class.html#createLoopHierarchy"><a title="plugins.preface.PrefaceSkein.createLoopHierarchy" class="py-name" href="#" onclick="return doclink('link-37', 'createLoopHierarchy', 'link-37');">createLoopHierarchy</a></tt><tt class="py-op">(</tt><tt class="py-name">loops</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                 </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">                <tt class="py-name">nestRingPlaceholder</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">loop</tt> <tt class="py-keyword">in</tt> <tt class="py-name">loops</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">                        <tt class="py-name">nestedRing</tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="entities.NestedRing'.NestedRing
+fabmetheus_utilities.euclidean.NestedRing" class="py-name" href="#" onclick="return doclink('link-38', 'NestedRing', 'link-3');">NestedRing</a></tt><tt class="py-op">(</tt><tt class="py-name">z</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">                        <tt class="py-name">nestedRing</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Method entities.NestedRing'.NestedRing.setBoundaryPerimeter()=entities.NestedRing%27.NestedRing-class.html#setBoundaryPerimeter"><a title="entities.NestedRing'.NestedRing.setBoundaryPerimeter" class="py-name" href="#" onclick="return doclink('link-39', 'setBoundaryPerimeter', 'link-39');">setBoundaryPerimeter</a></tt><tt class="py-op">(</tt><tt class="py-name">loop</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                        <tt class="py-name">nestRingPlaceholder</tt><tt class="py-op">[</tt><tt id="link-40" class="py-name" targets="Method entities.GcodeCommand'.GcodeCommand.str()=entities.GcodeCommand%27.GcodeCommand-class.html#str"><a title="entities.GcodeCommand'.GcodeCommand.str" class="py-name" href="#" onclick="return doclink('link-40', 'str', 'link-40');">str</a></tt><tt class="py-op">(</tt><tt class="py-name">loop</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">nestedRing</tt>  </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">                 </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">internalLoop</tt> <tt class="py-keyword">in</tt> <tt class="py-name">internalLoops</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">                        <tt class="py-name">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">internalLoops</tt><tt class="py-op">[</tt><tt class="py-name">internalLoop</tt><tt class="py-op">]</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                        <tt class="py-name">child</tt> <tt class="py-op">=</tt> <tt class="py-name">loops</tt><tt class="py-op">[</tt><tt class="py-name">internalLoop</tt><tt class="py-op">]</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">                        <tt class="py-name">childNestedRing</tt> <tt class="py-op">=</tt> <tt class="py-name">nestRingPlaceholder</tt><tt class="py-op">[</tt><tt id="link-41" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand.str" class="py-name" href="#" onclick="return doclink('link-41', 'str', 'link-40');">str</a></tt><tt class="py-op">(</tt><tt class="py-name">loops</tt><tt class="py-op">[</tt><tt class="py-name">internalLoop</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">                         </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">parent</tt> <tt class="py-op">==</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">                                <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name" targets="Method entities.Layer'.Layer.addNestedRing()=entities.Layer%27.Layer-class.html#addNestedRing"><a title="entities.Layer'.Layer.addNestedRing" class="py-name" href="#" onclick="return doclink('link-42', 'addNestedRing', 'link-42');">addNestedRing</a></tt><tt class="py-op">(</tt><tt class="py-name">childNestedRing</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">                                <tt class="py-name">parentNestedRing</tt> <tt class="py-op">=</tt> <tt class="py-name">nestRingPlaceholder</tt><tt class="py-op">[</tt><tt id="link-43" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand.str" class="py-name" href="#" onclick="return doclink('link-43', 'str', 'link-40');">str</a></tt><tt class="py-op">(</tt><tt class="py-name">internalLoops</tt><tt class="py-op">[</tt><tt class="py-name">internalLoop</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">                                <tt class="py-name">parentNestedRing</tt><tt class="py-op">.</tt><tt class="py-name">innerNestedRings</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute-class.html#append"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-44', 'append', 'link-44');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">childNestedRing</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">                                  </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">layers</tt><tt class="py-op">[</tt><tt class="py-name">z</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">layer</tt> </tt>
+</div><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="PrefaceSkein.createLoopHierarchy"></a><div id="PrefaceSkein.createLoopHierarchy-def"><a name="L80"></a><tt class="py-lineno"> 80</tt> <a class="py-toggle" href="#" id="PrefaceSkein.createLoopHierarchy-toggle" onclick="return toggle('PrefaceSkein.createLoopHierarchy');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="plugins.preface.PrefaceSkein-class.html#createLoopHierarchy">createLoopHierarchy</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">loops</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PrefaceSkein.createLoopHierarchy-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="PrefaceSkein.createLoopHierarchy-expanded"><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">                <tt class="py-name">internalLoops</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                 </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt class="py-name">loopIndex</tt><tt class="py-op">,</tt> <tt class="py-name">loop</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-name">enumerate</tt><tt class="py-op">(</tt><tt class="py-name">loops</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">                        <tt class="py-name">internalLoops</tt><tt class="py-op">[</tt><tt class="py-name">loopIndex</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">                        <tt class="py-name">otherLoops</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">                        <tt class="py-keyword">for</tt> <tt class="py-name">beforeIndex</tt> <tt class="py-keyword">in</tt> <tt class="py-name">xrange</tt><tt class="py-op">(</tt><tt class="py-name">loopIndex</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                                <tt class="py-name">otherLoops</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-45', 'append', 'link-44');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">loops</tt><tt class="py-op">[</tt><tt class="py-name">beforeIndex</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                        <tt class="py-keyword">for</tt> <tt class="py-name">afterIndex</tt> <tt class="py-keyword">in</tt> <tt class="py-name">xrange</tt><tt class="py-op">(</tt><tt class="py-name">loopIndex</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">loops</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">                                <tt class="py-name">otherLoops</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-46', 'append', 'link-44');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">loops</tt><tt class="py-op">[</tt><tt class="py-name">afterIndex</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                        <tt class="py-name">internalLoops</tt><tt class="py-op">[</tt><tt class="py-name">loopIndex</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-47" class="py-name"><a title="fabmetheus_utilities.euclidean" class="py-name" href="#" onclick="return doclink('link-47', 'euclidean', 'link-8');">euclidean</a></tt><tt class="py-op">.</tt><tt id="link-48" class="py-name" targets="Function fabmetheus_utilities.euclidean.getClosestEnclosingLoop()=fabmetheus_utilities.euclidean-module.html#getClosestEnclosingLoop"><a title="fabmetheus_utilities.euclidean.getClosestEnclosingLoop" class="py-name" href="#" onclick="return doclink('link-48', 'getClosestEnclosingLoop', 'link-48');">getClosestEnclosingLoop</a></tt><tt class="py-op">(</tt><tt class="py-name">otherLoops</tt><tt class="py-op">,</tt> <tt class="py-name">loop</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">internalLoops</tt> </tt>
+</div><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">         </tt>
+<a name="PrefaceSkein.addStartCommandsToGcode"></a><div id="PrefaceSkein.addStartCommandsToGcode-def"><a name="L93"></a><tt class="py-lineno"> 93</tt> <a class="py-toggle" href="#" id="PrefaceSkein.addStartCommandsToGcode-toggle" onclick="return toggle('PrefaceSkein.addStartCommandsToGcode');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="plugins.preface.PrefaceSkein-class.html#addStartCommandsToGcode">addStartCommandsToGcode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>               </tt>
+</div><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-49" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-49', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt id="link-50" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.get
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.get" class="py-name" href="#" onclick="return doclink('link-50', 'get', 'link-25');">get</a></tt><tt class="py-op">(</tt><tt id="link-51" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-51', 'name', 'link-11');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'start.file'</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                        <tt class="py-keyword">for</tt> <tt class="py-name">line</tt> <tt class="py-keyword">in</tt> <tt id="link-52" class="py-name"><a title="fabmetheus_utilities.archive" class="py-name" href="#" onclick="return doclink('link-52', 'archive', 'link-9');">archive</a></tt><tt class="py-op">.</tt><tt id="link-53" class="py-name" targets="Function fabmetheus_utilities.archive.getLinesFromAlterationsFile()=fabmetheus_utilities.archive-module.html#getLinesFromAlterationsFile"><a title="fabmetheus_utilities.archive.getLinesFromAlterationsFile" class="py-name" href="#" onclick="return doclink('link-53', 'getLinesFromAlterationsFile', 'link-53');">getLinesFromAlterationsFile</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startFile</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">startGcodeCommands</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-54', 'append', 'link-44');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                 </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">setPositioningToAbsolute</tt><tt class="py-op">:</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">startGcodeCommands</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-55', 'append', 'link-44');">append</a></tt><tt class="py-op">(</tt><tt id="link-56" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-56', 'GcodeCommand', 'link-4');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-57" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-57', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-58" class="py-name" targets="Variable gcodes.ABSOLUTE_POSITIONING=gcodes-module.html#ABSOLUTE_POSITIONING"><a title="gcodes.ABSOLUTE_POSITIONING" class="py-name" href="#" onclick="return doclink('link-58', 'ABSOLUTE_POSITIONING', 'link-58');">ABSOLUTE_POSITIONING</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">setUnitsToMillimeters</tt><tt class="py-op">:</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">startGcodeCommands</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-59', 'append', 'link-44');">append</a></tt><tt class="py-op">(</tt><tt id="link-60" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-60', 'GcodeCommand', 'link-4');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-61" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-61', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-62" class="py-name" targets="Variable gcodes.UNITS_IN_MILLIMETERS=gcodes-module.html#UNITS_IN_MILLIMETERS"><a title="gcodes.UNITS_IN_MILLIMETERS" class="py-name" href="#" onclick="return doclink('link-62', 'UNITS_IN_MILLIMETERS', 'link-62');">UNITS_IN_MILLIMETERS</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startAtHome</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">startGcodeCommands</tt><tt class="py-op">.</tt><tt id="link-63" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-63', 'append', 'link-44');">append</a></tt><tt class="py-op">(</tt><tt id="link-64" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-64', 'GcodeCommand', 'link-4');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-65" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-65', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-66" class="py-name" targets="Variable gcodes.START_AT_HOME=gcodes-module.html#START_AT_HOME"><a title="gcodes.START_AT_HOME" class="py-name" href="#" onclick="return doclink('link-66', 'START_AT_HOME', 'link-66');">START_AT_HOME</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">resetExtruder</tt><tt class="py-op">:</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">startGcodeCommands</tt><tt class="py-op">.</tt><tt id="link-67" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-67', 'append', 'link-44');">append</a></tt><tt class="py-op">(</tt><tt id="link-68" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-68', 'GcodeCommand', 'link-4');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-69" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-69', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-70" class="py-name" targets="Variable gcodes.RESET_EXTRUDER_DISTANCE=gcodes-module.html#RESET_EXTRUDER_DISTANCE"><a title="gcodes.RESET_EXTRUDER_DISTANCE" class="py-name" href="#" onclick="return doclink('link-70', 'RESET_EXTRUDER_DISTANCE', 'link-70');">RESET_EXTRUDER_DISTANCE</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-string">'E'</tt><tt class="py-op">,</tt> <tt class="py-string">'0'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">                 </tt>
+<a name="PrefaceSkein.addEndCommandsToGcode"></a><div id="PrefaceSkein.addEndCommandsToGcode-def"><a name="L107"></a><tt class="py-lineno">107</tt> <a class="py-toggle" href="#" id="PrefaceSkein.addEndCommandsToGcode-toggle" onclick="return toggle('PrefaceSkein.addEndCommandsToGcode');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="plugins.preface.PrefaceSkein-class.html#addEndCommandsToGcode">addEndCommandsToGcode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PrefaceSkein.addEndCommandsToGcode-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="PrefaceSkein.addEndCommandsToGcode-expanded"><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-71" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-71', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt id="link-72" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.get
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.get" class="py-name" href="#" onclick="return doclink('link-72', 'get', 'link-25');">get</a></tt><tt class="py-op">(</tt><tt id="link-73" class="py-name"><a title="plugins.bottom.name
+plugins.carve.name
+plugins.comb.name
+plugins.cool.name
+plugins.export.name
+plugins.fill.name
+plugins.inset.name
+plugins.multiply.name
+plugins.preface.name
+plugins.support.name" class="py-name" href="#" onclick="return doclink('link-73', 'name', 'link-11');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'end.file'</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">                        <tt class="py-keyword">for</tt> <tt class="py-name">line</tt> <tt class="py-keyword">in</tt> <tt id="link-74" class="py-name"><a title="fabmetheus_utilities.archive" class="py-name" href="#" onclick="return doclink('link-74', 'archive', 'link-9');">archive</a></tt><tt class="py-op">.</tt><tt id="link-75" class="py-name"><a title="fabmetheus_utilities.archive.getLinesFromAlterationsFile" class="py-name" href="#" onclick="return doclink('link-75', 'getLinesFromAlterationsFile', 'link-53');">getLinesFromAlterationsFile</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">endFile</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">                                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">slicedModel</tt><tt class="py-op">.</tt><tt class="py-name">endGcodeCommands</tt><tt class="py-op">.</tt><tt id="link-76" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-76', 'append', 'link-44');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:44 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

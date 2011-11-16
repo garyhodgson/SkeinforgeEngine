@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>LineFillStrategy</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;LineFillStrategy
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="LineFillStrategy-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module LineFillStrategy</h1><p class="nomargin-top"><span class="codelink"><a href="LineFillStrategy-pysrc.html">source&nbsp;code</a></span></p>
+<pre class="literalblock">
+
+Fills a layer using a line pattern.
+
+Credits:
+    Original Author: Enrique Perez (http://skeinforge.com)
+    Contributors: Please see the documentation in Skeinforge 
+    Modifed as SFACT: Ahmet Cem Turan (github.com/ahmetcemturan/SFACT)    
+
+License: 
+    GNU Affero General Public License http://www.gnu.org/licenses/agpl.html
+
+</pre>
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="LineFillStrategy.LineFillStrategy-class.html" class="summary-name">LineFillStrategy</a>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getStrategy"></a><span class="summary-sig-name">getStrategy</span>(<span class="summary-sig-arg">slicedModel</span>)</span><br />
+      Returns an instance of the strategy</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#getStrategy">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPathToInfillPaths"></a><span class="summary-sig-name">addPathToInfillPaths</span>(<span class="summary-sig-arg">infillWidth</span>,
+        <span class="summary-sig-arg">infillPaths</span>,
+        <span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">rotationPlaneAngle</span>)</span><br />
+      Add simplified path to fill.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#addPathToInfillPaths">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPointOnPath"></a><span class="summary-sig-name">addPointOnPath</span>(<span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">pathIndex</span>,
+        <span class="summary-sig-arg">pixelTable</span>,
+        <span class="summary-sig-arg">point</span>,
+        <span class="summary-sig-arg">pointIndex</span>,
+        <span class="summary-sig-arg">width</span>)</span><br />
+      Add a point to a path and the pixel table.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#addPointOnPath">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPointOnPathIfFree"></a><span class="summary-sig-name">addPointOnPathIfFree</span>(<span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">pathIndex</span>,
+        <span class="summary-sig-arg">pixelTable</span>,
+        <span class="summary-sig-arg">point</span>,
+        <span class="summary-sig-arg">pointIndex</span>,
+        <span class="summary-sig-arg">width</span>)</span><br />
+      Add the closest point to a path, if the point added to a path is 
+      free.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#addPointOnPathIfFree">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addSparseEndpoints"></a><span class="summary-sig-name">addSparseEndpoints</span>(<span class="summary-sig-arg">doubleExtrusionWidth</span>,
+        <span class="summary-sig-arg">endpoints</span>,
+        <span class="summary-sig-arg">fillLine</span>,
+        <span class="summary-sig-arg">horizontalSegmentLists</span>,
+        <span class="summary-sig-arg">infillSolidity</span>,
+        <span class="summary-sig-arg">removedEndpoints</span>,
+        <span class="summary-sig-arg">solidSurfaceThickness</span>,
+        <span class="summary-sig-arg">surroundingXIntersections</span>)</span><br />
+      Add sparse endpoints.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#addSparseEndpoints">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addSparseEndpointsFromSegment"></a><span class="summary-sig-name">addSparseEndpointsFromSegment</span>(<span class="summary-sig-arg">doubleExtrusionWidth</span>,
+        <span class="summary-sig-arg">endpoints</span>,
+        <span class="summary-sig-arg">fillLine</span>,
+        <span class="summary-sig-arg">horizontalSegmentLists</span>,
+        <span class="summary-sig-arg">infillSolidity</span>,
+        <span class="summary-sig-arg">removedEndpoints</span>,
+        <span class="summary-sig-arg">segment</span>,
+        <span class="summary-sig-arg">solidSurfaceThickness</span>,
+        <span class="summary-sig-arg">surroundingXIntersections</span>)</span><br />
+      Add sparse endpoints from a segment.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#addSparseEndpointsFromSegment">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="createExtraFillLoops"></a><span class="summary-sig-name">createExtraFillLoops</span>(<span class="summary-sig-arg">nestedRing</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">shouldExtraLoopsBeAdded</span>)</span><br />
+      Create extra fill loops.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#createExtraFillLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="createFillForSurroundings"></a><span class="summary-sig-name">createFillForSurroundings</span>(<span class="summary-sig-arg">nestedRings</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">shouldExtraLoopsBeAdded</span>)</span><br />
+      Create extra fill loops for surrounding loops.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#createFillForSurroundings">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getAdditionalLength"></a><span class="summary-sig-name">getAdditionalLength</span>(<span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">point</span>,
+        <span class="summary-sig-arg">pointIndex</span>)</span><br />
+      Get the additional length added by inserting a point into a path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#getAdditionalLength">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="LineFillStrategy-module.html#getExtraFillLoops" class="summary-sig-name">getExtraFillLoops</a>(<span class="summary-sig-arg">loops</span>,
+        <span class="summary-sig-arg">radius</span>)</span><br />
+      Get extra loops between inside and outside loops.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#getExtraFillLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getLowerLeftCorner"></a><span class="summary-sig-name">getLowerLeftCorner</span>(<span class="summary-sig-arg">nestedRings</span>)</span><br />
+      Get the lower left corner from the nestedRings.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#getLowerLeftCorner">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getWithLeastLength"></a><span class="summary-sig-name">getWithLeastLength</span>(<span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">point</span>)</span><br />
+      Insert a point into a path, at the index at which the path would be 
+      shortest.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#getWithLeastLength">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isAddedPointOnPathFree"></a><span class="summary-sig-name">isAddedPointOnPathFree</span>(<span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">pixelTable</span>,
+        <span class="summary-sig-arg">point</span>,
+        <span class="summary-sig-arg">pointIndex</span>,
+        <span class="summary-sig-arg">width</span>)</span><br />
+      Determine if the point added to a path is intersecting the pixel 
+      table or the path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#isAddedPointOnPathFree">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isAddedPointOnPathIntersectingPath"></a><span class="summary-sig-name">isAddedPointOnPathIntersectingPath</span>(<span class="summary-sig-arg">begin</span>,
+        <span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">point</span>,
+        <span class="summary-sig-arg">pointIndex</span>)</span><br />
+      Determine if the point added to a path is intersecting the path by 
+      checking line intersection.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#isAddedPointOnPathIntersectingPath">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isPointAddedAroundClosest"></a><span class="summary-sig-name">isPointAddedAroundClosest</span>(<span class="summary-sig-arg">pixelTable</span>,
+        <span class="summary-sig-arg">layerExtrusionWidth</span>,
+        <span class="summary-sig-arg">paths</span>,
+        <span class="summary-sig-arg">removedEndpointPoint</span>,
+        <span class="summary-sig-arg">width</span>)</span><br />
+      Add the closest removed endpoint to the path, with minimal twisting.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#isPointAddedAroundClosest">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isSegmentAround"></a><span class="summary-sig-name">isSegmentAround</span>(<span class="summary-sig-arg">aroundSegments</span>,
+        <span class="summary-sig-arg">segment</span>)</span><br />
+      Determine if there is another segment around.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#isSegmentAround">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isSegmentCompletelyInAnIntersection"></a><span class="summary-sig-name">isSegmentCompletelyInAnIntersection</span>(<span class="summary-sig-arg">segment</span>,
+        <span class="summary-sig-arg">xIntersections</span>)</span><br />
+      Add sparse endpoints from a segment.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#isSegmentCompletelyInAnIntersection">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isSegmentInX"></a><span class="summary-sig-name">isSegmentInX</span>(<span class="summary-sig-arg">segment</span>,
+        <span class="summary-sig-arg">xFirst</span>,
+        <span class="summary-sig-arg">xSecond</span>)</span><br />
+      Determine if the segment overlaps within x.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#isSegmentInX">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isSharpCorner"></a><span class="summary-sig-name">isSharpCorner</span>(<span class="summary-sig-arg">beginComplex</span>,
+        <span class="summary-sig-arg">centerComplex</span>,
+        <span class="summary-sig-arg">endComplex</span>)</span><br />
+      Determine if the three complex points form a sharp corner.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#isSharpCorner">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isSidePointAdded"></a><span class="summary-sig-name">isSidePointAdded</span>(<span class="summary-sig-arg">pixelTable</span>,
+        <span class="summary-sig-arg">closestPath</span>,
+        <span class="summary-sig-arg">closestPathIndex</span>,
+        <span class="summary-sig-arg">closestPointIndex</span>,
+        <span class="summary-sig-arg">layerExtrusionWidth</span>,
+        <span class="summary-sig-arg">removedEndpointPoint</span>,
+        <span class="summary-sig-arg">width</span>)</span><br />
+      Add side point along with the closest removed endpoint to the path, 
+      with minimal twisting.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#isSidePointAdded">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="removeEndpoints"></a><span class="summary-sig-name">removeEndpoints</span>(<span class="summary-sig-arg">pixelTable</span>,
+        <span class="summary-sig-arg">layerExtrusionWidth</span>,
+        <span class="summary-sig-arg">paths</span>,
+        <span class="summary-sig-arg">removedEndpoints</span>,
+        <span class="summary-sig-arg">aroundWidth</span>)</span><br />
+      Remove endpoints which are added to the path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="LineFillStrategy-pysrc.html#removeEndpoints">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="None">None</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="getExtraFillLoops"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getExtraFillLoops</span>(<span class="sig-arg">loops</span>,
+        <span class="sig-arg">radius</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="LineFillStrategy-pysrc.html#getExtraFillLoops">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get extra loops between inside and outside loops. Extra perimeters</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:39 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

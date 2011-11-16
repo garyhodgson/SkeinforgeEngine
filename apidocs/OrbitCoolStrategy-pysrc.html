@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>OrbitCoolStrategy</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;OrbitCoolStrategy
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="OrbitCoolStrategy-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="OrbitCoolStrategy-module.html">Module OrbitCoolStrategy</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module config=config-module.html,Variable config.config=config-module.html#config,Variable entities.GcodeCommand'.config=entities.GcodeCommand%27-module.html#config,Variable entities.Layer'.config=entities.Layer%27-module.html#config,Variable entities.NestedRing'.config=entities.NestedRing%27-module.html#config,Variable entities.RuntimeParameters'.config=entities.RuntimeParameters%27-module.html#config,Variable entities.SlicedModel'.config=entities.SlicedModel%27-module.html#config"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-0', 'config', 'link-0');">config</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-1', 'config', 'link-0');">config</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">data_structures</tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class entities.GcodeCommand'.GcodeCommand=entities.GcodeCommand%27.GcodeCommand-class.html"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-2', 'GcodeCommand', 'link-2');">GcodeCommand</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name" targets="Package fabmetheus_utilities=fabmetheus_utilities-module.html"><a title="fabmetheus_utilities" class="py-name" href="#" onclick="return doclink('link-3', 'fabmetheus_utilities', 'link-3');">fabmetheus_utilities</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Module fabmetheus_utilities.euclidean=fabmetheus_utilities.euclidean-module.html"><a title="fabmetheus_utilities.euclidean" class="py-name" href="#" onclick="return doclink('link-4', 'euclidean', 'link-4');">euclidean</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Module gcodes=gcodes-module.html"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-5', 'gcodes', 'link-5');">gcodes</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="getStrategy"></a><div id="getStrategy-def"><a name="L6"></a><tt class="py-lineno"> 6</tt> <a class="py-toggle" href="#" id="getStrategy-toggle" onclick="return toggle('getStrategy');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="OrbitCoolStrategy-module.html#getStrategy">getStrategy</a><tt class="py-op">(</tt><tt class="py-param">runtimeParameters</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getStrategy-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="getStrategy-expanded"><a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">    <tt class="py-docstring">'''Returns an instance of the strategy'''</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-6" class="py-name" targets="Module OrbitCoolStrategy=OrbitCoolStrategy-module.html,Class OrbitCoolStrategy.OrbitCoolStrategy=OrbitCoolStrategy.OrbitCoolStrategy-class.html"><a title="OrbitCoolStrategy
+OrbitCoolStrategy.OrbitCoolStrategy" class="py-name" href="#" onclick="return doclink('link-6', 'OrbitCoolStrategy', 'link-6');">OrbitCoolStrategy</a></tt><tt class="py-op">(</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="OrbitCoolStrategy"></a><div id="OrbitCoolStrategy-def"><a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="OrbitCoolStrategy-toggle" onclick="return toggle('OrbitCoolStrategy');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="OrbitCoolStrategy.OrbitCoolStrategy-class.html">OrbitCoolStrategy</a><tt class="py-op">:</tt> </tt>
+</div><div id="OrbitCoolStrategy-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="OrbitCoolStrategy-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt class="py-docstring">'''Allows a layer to cool by orbiting around the model for a set time.'''</tt> </tt>
+<a name="OrbitCoolStrategy.__init__"></a><div id="OrbitCoolStrategy.__init__-def"><a name="L12"></a><tt class="py-lineno">12</tt> <a class="py-toggle" href="#" id="OrbitCoolStrategy.__init__-toggle" onclick="return toggle('OrbitCoolStrategy.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="OrbitCoolStrategy.OrbitCoolStrategy-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">runtimeParameters</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="OrbitCoolStrategy.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="OrbitCoolStrategy.__init__-expanded"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">         </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">minimumLayerTime</tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-7', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getfloat</tt><tt class="py-op">(</tt><tt class="py-string">'cool'</tt><tt class="py-op">,</tt><tt class="py-string">'minimum.layer.time'</tt><tt class="py-op">)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">orbitalFeedRateSecond</tt> <tt class="py-op">=</tt> <tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">orbitalFeedRateSecond</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">orbitalFeedRateMinute</tt> <tt class="py-op">=</tt> <tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">orbitalFeedRateMinute</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oribitalMarginDistance</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-8', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getfloat</tt><tt class="py-op">(</tt><tt class="py-string">'cool'</tt><tt class="py-op">,</tt><tt class="py-string">'orbital.margin'</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oribitalMargin</tt> <tt class="py-op">=</tt> <tt class="py-name">complex</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oribitalMarginDistance</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oribitalMarginDistance</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt> <tt class="py-op">=</tt> <tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt> </tt>
+</div><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">         </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">         </tt>
+<a name="OrbitCoolStrategy.cool"></a><div id="OrbitCoolStrategy.cool-def"><a name="L22"></a><tt class="py-lineno">22</tt> <a class="py-toggle" href="#" id="OrbitCoolStrategy.cool-toggle" onclick="return toggle('OrbitCoolStrategy.cool');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="OrbitCoolStrategy.OrbitCoolStrategy-class.html#cool">cool</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">layer</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="OrbitCoolStrategy.cool-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="OrbitCoolStrategy.cool-expanded"><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-docstring">'''Apply the cooling by moving the nozzle around the print.'''</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">         </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.index()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#index"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.index" class="py-name" href="#" onclick="return doclink('link-9', 'index', 'link-9');">index</a></tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">            <tt class="py-comment"># We don't have to slow down on the first layer</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">         </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-name">layerDistance</tt><tt class="py-op">,</tt> <tt class="py-name">layerDuration</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method entities.Layer'.Layer.getDistanceAndDuration()=entities.Layer%27.Layer-class.html#getDistanceAndDuration,Method entities.NestedRing'.NestedRing.getDistanceAndDuration()=entities.NestedRing%27.NestedRing-class.html#getDistanceAndDuration,Method entities.paths.Path.getDistanceAndDuration()=entities.paths.Path-class.html#getDistanceAndDuration"><a title="entities.Layer'.Layer.getDistanceAndDuration
+entities.NestedRing'.NestedRing.getDistanceAndDuration
+entities.paths.Path.getDistanceAndDuration" class="py-name" href="#" onclick="return doclink('link-10', 'getDistanceAndDuration', 'link-10');">getDistanceAndDuration</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-name">remainingOrbitTime</tt> <tt class="py-op">=</tt> <tt class="py-name">max</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">minimumLayerTime</tt> <tt class="py-op">-</tt> <tt class="py-name">layerDuration</tt><tt class="py-op">,</tt> <tt class="py-number">0.0</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-name">boundaryLayerLoops</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">nestedRing</tt> <tt class="py-keyword">in</tt> <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt class="py-name">nestedRings</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">            <tt class="py-name">boundaryLayerLoops</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute-class.html#append"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-11', 'append', 'link-11');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">nestedRing</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method entities.NestedRing'.NestedRing.getXYBoundaries()=entities.NestedRing%27.NestedRing-class.html#getXYBoundaries"><a title="entities.NestedRing'.NestedRing.getXYBoundaries" class="py-name" href="#" onclick="return doclink('link-12', 'getXYBoundaries', 'link-12');">getXYBoundaries</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">         </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">remainingOrbitTime</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0.0</tt> <tt class="py-keyword">and</tt> <tt class="py-name">boundaryLayerLoops</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt>           </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">boundaryLayerLoops</tt><tt class="py-op">)</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">             </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">            <tt class="py-name">largestLoop</tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="fabmetheus_utilities.euclidean" class="py-name" href="#" onclick="return doclink('link-13', 'euclidean', 'link-4');">euclidean</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Function fabmetheus_utilities.euclidean.getLargestLoop()=fabmetheus_utilities.euclidean-module.html#getLargestLoop"><a title="fabmetheus_utilities.euclidean.getLargestLoop" class="py-name" href="#" onclick="return doclink('link-14', 'getLargestLoop', 'link-14');">getLargestLoop</a></tt><tt class="py-op">(</tt><tt class="py-name">boundaryLayerLoops</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">            <tt class="py-name">cornerMinimum</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name"><a title="fabmetheus_utilities.euclidean" class="py-name" href="#" onclick="return doclink('link-15', 'euclidean', 'link-4');">euclidean</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Function fabmetheus_utilities.euclidean.getMinimumByComplexPath()=fabmetheus_utilities.euclidean-module.html#getMinimumByComplexPath"><a title="fabmetheus_utilities.euclidean.getMinimumByComplexPath" class="py-name" href="#" onclick="return doclink('link-16', 'getMinimumByComplexPath', 'link-16');">getMinimumByComplexPath</a></tt><tt class="py-op">(</tt><tt class="py-name">largestLoop</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oribitalMargin</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">            <tt class="py-name">cornerMaximum</tt> <tt class="py-op">=</tt> <tt id="link-17" class="py-name"><a title="fabmetheus_utilities.euclidean" class="py-name" href="#" onclick="return doclink('link-17', 'euclidean', 'link-4');">euclidean</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Function fabmetheus_utilities.euclidean.getMaximumByComplexPath()=fabmetheus_utilities.euclidean-module.html#getMaximumByComplexPath"><a title="fabmetheus_utilities.euclidean.getMaximumByComplexPath" class="py-name" href="#" onclick="return doclink('link-18', 'getMaximumByComplexPath', 'link-18');">getMaximumByComplexPath</a></tt><tt class="py-op">(</tt><tt class="py-name">largestLoop</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oribitalMargin</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">     </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">            <tt class="py-name">largestLoop</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="fabmetheus_utilities.euclidean" class="py-name" href="#" onclick="return doclink('link-19', 'euclidean', 'link-4');">euclidean</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Function fabmetheus_utilities.euclidean.getSquareLoopWiddershins()=fabmetheus_utilities.euclidean-module.html#getSquareLoopWiddershins"><a title="fabmetheus_utilities.euclidean.getSquareLoopWiddershins" class="py-name" href="#" onclick="return doclink('link-20', 'getSquareLoopWiddershins', 'link-20');">getSquareLoopWiddershins</a></tt><tt class="py-op">(</tt><tt class="py-name">cornerMaximum</tt><tt class="py-op">,</tt> <tt class="py-name">cornerMinimum</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">             </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">largestLoop</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1</tt> <tt class="py-keyword">and</tt> <tt class="py-name">remainingOrbitTime</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1.5</tt> <tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">                <tt class="py-name">timeInOrbit</tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">                 </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">                <tt class="py-keyword">while</tt> <tt class="py-name">timeInOrbit</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">remainingOrbitTime</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">                    <tt class="py-keyword">for</tt> <tt class="py-name">point</tt> <tt class="py-keyword">in</tt> <tt class="py-name">largestLoop</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">                        <tt class="py-name">gcodeArgs</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-string">'X'</tt><tt class="py-op">,</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-name">point</tt><tt class="py-op">.</tt><tt class="py-name">real</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">                                     <tt class="py-op">(</tt><tt class="py-string">'Y'</tt><tt class="py-op">,</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-name">point</tt><tt class="py-op">.</tt><tt class="py-name">imag</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">                                     <tt class="py-op">(</tt><tt class="py-string">'Z'</tt><tt class="py-op">,</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-name">layer</tt><tt class="py-op">.</tt><tt class="py-name">z</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">                                     <tt class="py-op">(</tt><tt class="py-string">'F'</tt><tt class="py-op">,</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">orbitalFeedRateMinute</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">                        <tt class="py-name">layer</tt><tt class="py-op">.</tt><tt class="py-name">preLayerGcodeCommands</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-21', 'append', 'link-11');">append</a></tt><tt class="py-op">(</tt><tt id="link-22" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-22', 'GcodeCommand', 'link-2');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-23" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-23', 'gcodes', 'link-5');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Variable gcodes.LINEAR_GCODE_MOVEMENT=gcodes-module.html#LINEAR_GCODE_MOVEMENT"><a title="gcodes.LINEAR_GCODE_MOVEMENT" class="py-name" href="#" onclick="return doclink('link-24', 'LINEAR_GCODE_MOVEMENT', 'link-24');">LINEAR_GCODE_MOVEMENT</a></tt><tt class="py-op">,</tt> <tt class="py-name">gcodeArgs</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">                    <tt class="py-name">timeInOrbit</tt> <tt class="py-op">+=</tt> <tt id="link-25" class="py-name"><a title="fabmetheus_utilities.euclidean" class="py-name" href="#" onclick="return doclink('link-25', 'euclidean', 'link-4');">euclidean</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Function fabmetheus_utilities.euclidean.getLoopLength()=fabmetheus_utilities.euclidean-module.html#getLoopLength"><a title="fabmetheus_utilities.euclidean.getLoopLength" class="py-name" href="#" onclick="return doclink('link-26', 'getLoopLength', 'link-26');">getLoopLength</a></tt><tt class="py-op">(</tt><tt class="py-name">largestLoop</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">orbitalFeedRateSecond</tt> </tt>
+</div></div><a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:47 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>entities.paths</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="entities-module.html">Package&nbsp;entities</a> ::
+        Module&nbsp;paths
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="entities.paths-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="entities.paths-module.html">Module entities.paths</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Class entities.GcodeCommand'.GcodeCommand=entities.GcodeCommand%27.GcodeCommand-class.html"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-0', 'GcodeCommand', 'link-0');">GcodeCommand</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-1', 'GcodeCommand', 'link-0');">GcodeCommand</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">StringIO</tt> <tt class="py-keyword">import</tt> <tt class="py-name">StringIO</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">collections</tt> <tt class="py-keyword">import</tt> <tt class="py-name">OrderedDict</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Module config=config-module.html,Variable config.config=config-module.html#config,Variable entities.GcodeCommand'.config=entities.GcodeCommand%27-module.html#config,Variable entities.Layer'.config=entities.Layer%27-module.html#config,Variable entities.NestedRing'.config=entities.NestedRing%27-module.html#config,Variable entities.RuntimeParameters'.config=entities.RuntimeParameters%27-module.html#config,Variable entities.SlicedModel'.config=entities.SlicedModel%27-module.html#config"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-2', 'config', 'link-2');">config</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-3', 'config', 'link-2');">config</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name" targets="Package fabmetheus_utilities=fabmetheus_utilities-module.html"><a title="fabmetheus_utilities" class="py-name" href="#" onclick="return doclink('link-4', 'fabmetheus_utilities', 'link-4');">fabmetheus_utilities</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Module fabmetheus_utilities.vector3=fabmetheus_utilities.vector3-module.html"><a title="fabmetheus_utilities.vector3" class="py-name" href="#" onclick="return doclink('link-5', 'vector3', 'link-5');">vector3</a></tt> <tt class="py-keyword">import</tt> <tt id="link-6" class="py-name" targets="Class fabmetheus_utilities.vector3.Vector3=fabmetheus_utilities.vector3.Vector3-class.html"><a title="fabmetheus_utilities.vector3.Vector3" class="py-name" href="#" onclick="return doclink('link-6', 'Vector3', 'link-6');">Vector3</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">math</tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Variable entities.GcodeCommand'.pi=entities.GcodeCommand%27-module.html#pi,Variable entities.NestedRing'.pi=entities.NestedRing%27-module.html#pi,Variable entities.RuntimeParameters'.pi=entities.RuntimeParameters%27-module.html#pi"><a title="entities.GcodeCommand'.pi
+entities.NestedRing'.pi
+entities.RuntimeParameters'.pi" class="py-name" href="#" onclick="return doclink('link-7', 'pi', 'link-7');">pi</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-8" class="py-name" targets="Package utilities=utilities-module.html"><a title="utilities" class="py-name" href="#" onclick="return doclink('link-8', 'utilities', 'link-8');">utilities</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Module utilities.memory_tracker=utilities.memory_tracker-module.html"><a title="utilities.memory_tracker" class="py-name" href="#" onclick="return doclink('link-9', 'memory_tracker', 'link-9');">memory_tracker</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-10" class="py-name" targets="Module gcodes=gcodes-module.html"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-10', 'gcodes', 'link-10');">gcodes</a></tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">math</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">time</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># globals used as an easy way to maintain state between layer changes</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable entities.paths._totalExtrusionDistance=entities.paths-module.html#_totalExtrusionDistance"><a title="entities.paths._totalExtrusionDistance" class="py-name" href="#" onclick="return doclink('link-11', '_totalExtrusionDistance', 'link-11');">_totalExtrusionDistance</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt id="link-12" class="py-name" targets="Variable entities.paths._previousPoint=entities.paths-module.html#_previousPoint"><a title="entities.paths._previousPoint" class="py-name" href="#" onclick="return doclink('link-12', '_previousPoint', 'link-12');">_previousPoint</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="Path"></a><div id="Path-def"><a name="L17"></a><tt class="py-lineno"> 17</tt> <a class="py-toggle" href="#" id="Path-toggle" onclick="return toggle('Path');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="entities.paths.Path-class.html">Path</a><tt class="py-op">:</tt> </tt>
+</div><div id="Path-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Path-expanded"><a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-docstring">''' A Path the tool will follow within a nested ring.'''</tt> </tt>
+<a name="Path.__init__"></a><div id="Path.__init__-def"><a name="L19"></a><tt class="py-lineno"> 19</tt> <a class="py-toggle" href="#" id="Path.__init__-toggle" onclick="return toggle('Path.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.Path-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">z</tt><tt class="py-op">,</tt> <tt class="py-param">runtimeParameters</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Path.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Path.__init__-expanded"><a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">         </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">z</tt> <tt class="py-op">=</tt> <tt class="py-name">z</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt> <tt class="py-op">=</tt> <tt class="py-name">runtimeParameters</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">         </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">type</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startPoint</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">points</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">gcodeCommands</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">         </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimensionDecimalPlaces</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">dimensionDecimalPlaces</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">speedActive</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">speedActive</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bridgeFeedRateMinute</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">bridgeFeedRateMinute</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">perimeterFeedRateMinute</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">perimeterFeedRateMinute</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extrusionFeedRateMinute</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">extrusionFeedRateMinute</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">travelFeedRateMinute</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">travelFeedRateMinute</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extrusionUnitsRelative</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">extrusionUnitsRelative</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">supportFeedRateMinute</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">supportFeedRateMinute</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">         </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimensionActive</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">dimensionActive</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">         </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oozeRate</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">oozeRate</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">zDistanceRatio</tt> <tt class="py-op">=</tt> <tt class="py-number">5.0</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extruderRetractionSpeedMinute</tt> <tt class="py-op">=</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-number">60.0</tt> <tt class="py-op">*</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">extruderRetractionSpeed</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimensionDecimalPlaces</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerThickness</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">layerThickness</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">perimeterWidth</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">perimeterWidth</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filamentDiameter</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">filamentDiameter</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filamentPackingDensity</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">filamentPackingDensity</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">absolutePositioning</tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="config
+config.config
+entities.GcodeCommand'.config
+entities.Layer'.config
+entities.NestedRing'.config
+entities.RuntimeParameters'.config
+entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-13', 'config', 'link-2');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getboolean</tt><tt class="py-op">(</tt><tt class="py-string">'preface'</tt><tt class="py-op">,</tt> <tt class="py-string">'positioning.absolute'</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">flowRate</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">flowRate</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">perimeterFlowRate</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">perimeterFlowRate</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bridgeFlowRate</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">bridgeFlowRate</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">         </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-name">filamentRadius</tt> <tt class="py-op">=</tt> <tt class="py-number">0.5</tt> <tt class="py-op">*</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filamentDiameter</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-name">filamentPackingArea</tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="entities.GcodeCommand'.pi
+entities.NestedRing'.pi
+entities.RuntimeParameters'.pi" class="py-name" href="#" onclick="return doclink('link-14', 'pi', 'link-7');">pi</a></tt> <tt class="py-op">*</tt> <tt class="py-name">filamentRadius</tt> <tt class="py-op">*</tt> <tt class="py-name">filamentRadius</tt> <tt class="py-op">*</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filamentPackingDensity</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">flowScaleSixty</tt> <tt class="py-op">=</tt> <tt class="py-number">60.0</tt> <tt class="py-op">*</tt> <tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerThickness</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">perimeterWidth</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-number">4</tt><tt class="py-op">)</tt> <tt class="py-op">**</tt> <tt class="py-number">2</tt> <tt class="py-op">*</tt> <tt id="link-15" class="py-name"><a title="entities.GcodeCommand'.pi
+entities.NestedRing'.pi
+entities.RuntimeParameters'.pi" class="py-name" href="#" onclick="return doclink('link-15', 'pi', 'link-7');">pi</a></tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">filamentPackingArea</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">         </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">minimumBridgeFeedRateMultiplier</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">minimumBridgeFeedRateMultiplier</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">minimumPerimeterFeedRateMultiplier</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">minimumPerimeterFeedRateMultiplier</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">minimumExtrusionFeedRateMultiplier</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">minimumExtrusionFeedRateMultiplier</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">minimumTravelFeedRateMultiplier</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">minimumTravelFeedRateMultiplier</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">minimumLayerFeedRateMinute</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">minimumLayerFeedRateMinute</tt> </tt>
+</div><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">         </tt>
+<a name="Path.__str__"></a><div id="Path.__str__-def"><a name="L64"></a><tt class="py-lineno"> 64</tt> <a class="py-toggle" href="#" id="Path.__str__-toggle" onclick="return toggle('Path.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.Path-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Path.__str__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Path.__str__-expanded"><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-docstring">'''Get the string representation.'''</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-name">output</tt> <tt class="py-op">=</tt> <tt class="py-name">StringIO</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">'%14stype: %s\n'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">type</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">'%14sstartPoint: %s\n'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startPoint</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">'%14spoints: %s\n'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">points</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">'%14sgcodeCommands:\n'</tt> <tt class="py-op">%</tt> <tt class="py-string">''</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">command</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">gcodeCommands</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">            <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">'%16s%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> <tt id="link-16" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-16', 'GcodeCommand', 'link-0');">GcodeCommand</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Static Method entities.GcodeCommand'.GcodeCommand.printCommand()=entities.GcodeCommand%27.GcodeCommand-class.html#printCommand,Function gcode_writer.printCommand()=gcode_writer-module.html#printCommand"><a title="entities.GcodeCommand'.GcodeCommand.printCommand
+gcode_writer.printCommand" class="py-name" href="#" onclick="return doclink('link-17', 'printCommand', 'link-17');">printCommand</a></tt><tt class="py-op">(</tt><tt class="py-name">command</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">getvalue</tt><tt class="py-op">(</tt><tt class="py-op">)</tt>     </tt>
+</div><a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">     </tt>
+<a name="Path.getDistanceAndDuration"></a><div id="Path.getDistanceAndDuration-def"><a name="L75"></a><tt class="py-lineno"> 75</tt> <a class="py-toggle" href="#" id="Path.getDistanceAndDuration-toggle" onclick="return toggle('Path.getDistanceAndDuration');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.Path-class.html#getDistanceAndDuration">getDistanceAndDuration</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Path.getDistanceAndDuration-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Path.getDistanceAndDuration-expanded"><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-docstring">'''Returns the time taken to follow the path and the distance'''</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-name">oldLocation</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startPoint</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-name">feedRate</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">travelFeedRateMinute</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-name">duration</tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt id="link-18" class="py-name" targets="Method fabmetheus_utilities.vector3.Vector3.distance()=fabmetheus_utilities.vector3.Vector3-class.html#distance,Method fabmetheus_utilities.vector3index.Vector3Index.distance()=fabmetheus_utilities.vector3index.Vector3Index-class.html#distance"><a title="fabmetheus_utilities.vector3.Vector3.distance
+fabmetheus_utilities.vector3index.Vector3Index.distance" class="py-name" href="#" onclick="return doclink('link-18', 'distance', 'link-18');">distance</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">point</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">points</tt><tt class="py-op">:</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">            <tt class="py-name">feedRateSecond</tt> <tt class="py-op">=</tt> <tt class="py-name">feedRate</tt> <tt class="py-op">/</tt> <tt class="py-number">60.0</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">             </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">            <tt class="py-name">separationX</tt> <tt class="py-op">=</tt> <tt class="py-name">point</tt><tt class="py-op">.</tt><tt class="py-name">real</tt> <tt class="py-op">-</tt> <tt class="py-name">oldLocation</tt><tt class="py-op">.</tt><tt class="py-name">real</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">            <tt class="py-name">separationY</tt> <tt class="py-op">=</tt> <tt class="py-name">point</tt><tt class="py-op">.</tt><tt class="py-name">imag</tt> <tt class="py-op">-</tt> <tt class="py-name">oldLocation</tt><tt class="py-op">.</tt><tt class="py-name">imag</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt class="py-name">segmentDistance</tt> <tt class="py-op">=</tt> <tt class="py-name">math</tt><tt class="py-op">.</tt><tt class="py-name">sqrt</tt><tt class="py-op">(</tt><tt class="py-name">separationX</tt> <tt class="py-op">**</tt> <tt class="py-number">2</tt> <tt class="py-op">+</tt> <tt class="py-name">separationY</tt> <tt class="py-op">**</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">             </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">            <tt class="py-name">duration</tt> <tt class="py-op">+=</tt> <tt class="py-name">segmentDistance</tt> <tt class="py-op">/</tt> <tt class="py-name">feedRateSecond</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">            <tt id="link-19" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3.distance
+fabmetheus_utilities.vector3index.Vector3Index.distance" class="py-name" href="#" onclick="return doclink('link-19', 'distance', 'link-18');">distance</a></tt> <tt class="py-op">+=</tt> <tt class="py-name">segmentDistance</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">            <tt class="py-name">oldLocation</tt> <tt class="py-op">=</tt> <tt class="py-name">point</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-20" class="py-name" targets="Class entities.paths.BoundaryPerimeter=entities.paths.BoundaryPerimeter-class.html"><a title="entities.paths.BoundaryPerimeter" class="py-name" href="#" onclick="return doclink('link-20', 'BoundaryPerimeter', 'link-20');">BoundaryPerimeter</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                <tt class="py-name">feedRate</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">perimeterFeedRateMinute</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                <tt class="py-name">feedRate</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extrusionFeedRateMinute</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                 </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3.distance
+fabmetheus_utilities.vector3index.Vector3Index.distance" class="py-name" href="#" onclick="return doclink('link-21', 'distance', 'link-18');">distance</a></tt><tt class="py-op">,</tt> <tt class="py-name">duration</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">         </tt>
+<a name="Path.getStartPoint"></a><div id="Path.getStartPoint-def"><a name="L98"></a><tt class="py-lineno"> 98</tt> <a class="py-toggle" href="#" id="Path.getStartPoint-toggle" onclick="return toggle('Path.getStartPoint');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.Path-class.html#getStartPoint">getStartPoint</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Path.getStartPoint-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Path.getStartPoint-expanded"><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startPoint</tt> </tt>
+</div><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">     </tt>
+<a name="Path.getEndPoint"></a><div id="Path.getEndPoint-def"><a name="L101"></a><tt class="py-lineno">101</tt> <a class="py-toggle" href="#" id="Path.getEndPoint-toggle" onclick="return toggle('Path.getEndPoint');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.Path-class.html#getEndPoint">getEndPoint</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Path.getEndPoint-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Path.getEndPoint-expanded"><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">points</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">points</tt><tt class="py-op">[</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">points</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">         </tt>
+<a name="Path.getFeedRateMinute"></a><div id="Path.getFeedRateMinute-def"><a name="L107"></a><tt class="py-lineno">107</tt> <a class="py-toggle" href="#" id="Path.getFeedRateMinute-toggle" onclick="return toggle('Path.getFeedRateMinute');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.Path-class.html#getFeedRateMinute">getFeedRateMinute</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Path.getFeedRateMinute-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Path.getFeedRateMinute-expanded"><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-docstring">'''Allows subclasses to override the relevant feedrate method so we don't have to use large if statements.'''</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extrusionFeedRateMinute</tt> </tt>
+</div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="Path.generateGcode"></a><div id="Path.generateGcode-def"><a name="L111"></a><tt class="py-lineno">111</tt> <a class="py-toggle" href="#" id="Path.generateGcode-toggle" onclick="return toggle('Path.generateGcode');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.Path-class.html#generateGcode">generateGcode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">lookaheadStartVector</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">feedAndFlowRateMultiplier</tt><tt class="py-op">=</tt><tt class="py-number">1.0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Path.generateGcode-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Path.generateGcode-expanded"><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-docstring">'Transforms paths and points to gcode'</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-keyword">global</tt> <tt id="link-22" class="py-name"><a title="entities.paths._previousPoint" class="py-name" href="#" onclick="return doclink('link-22', '_previousPoint', 'link-12');">_previousPoint</a></tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">gcodeCommands</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">         </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-23" class="py-name"><a title="entities.paths._previousPoint" class="py-name" href="#" onclick="return doclink('link-23', '_previousPoint', 'link-12');">_previousPoint</a></tt> <tt class="py-op">==</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">            <tt id="link-24" class="py-name"><a title="entities.paths._previousPoint" class="py-name" href="#" onclick="return doclink('link-24', '_previousPoint', 'link-12');">_previousPoint</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startPoint</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">             </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">point</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">points</tt><tt class="py-op">:</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">             </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">            <tt class="py-name">gcodeArgs</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-string">'X'</tt><tt class="py-op">,</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-name">point</tt><tt class="py-op">.</tt><tt class="py-name">real</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">                         <tt class="py-op">(</tt><tt class="py-string">'Y'</tt><tt class="py-op">,</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-name">point</tt><tt class="py-op">.</tt><tt class="py-name">imag</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">                         <tt class="py-op">(</tt><tt class="py-string">'Z'</tt><tt class="py-op">,</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">z</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">             </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">            <tt class="py-name">pathFeedRateMinute</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method entities.paths.BoundaryPerimeter.getFeedRateMinute()=entities.paths.BoundaryPerimeter-class.html#getFeedRateMinute,Method entities.paths.Path.getFeedRateMinute()=entities.paths.Path-class.html#getFeedRateMinute,Method entities.paths.SupportPath.getFeedRateMinute()=entities.paths.SupportPath-class.html#getFeedRateMinute"><a title="entities.paths.BoundaryPerimeter.getFeedRateMinute
+entities.paths.Path.getFeedRateMinute
+entities.paths.SupportPath.getFeedRateMinute" class="py-name" href="#" onclick="return doclink('link-25', 'getFeedRateMinute', 'link-25');">getFeedRateMinute</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-name">pathFeedRateMinute</tt><tt class="py-op">,</tt> <tt class="py-name">pathFeedRateMultiplier</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method entities.paths.Path.getFeedRateAndMultiplier()=entities.paths.Path-class.html#getFeedRateAndMultiplier"><a title="entities.paths.Path.getFeedRateAndMultiplier" class="py-name" href="#" onclick="return doclink('link-26', 'getFeedRateAndMultiplier', 'link-26');">getFeedRateAndMultiplier</a></tt><tt class="py-op">(</tt><tt class="py-name">pathFeedRateMinute</tt><tt class="py-op">,</tt> <tt class="py-name">feedAndFlowRateMultiplier</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">             </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">speedActive</tt><tt class="py-op">:</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">                <tt class="py-name">gcodeArgs</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute-class.html#append"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-27', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-string">'F'</tt><tt class="py-op">,</tt> <tt class="py-name">pathFeedRateMinute</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">                 </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimensionActive</tt><tt class="py-op">:</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">                <tt class="py-name">extrusionDistance</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Method entities.paths.Path.getExtrusionDistance()=entities.paths.Path-class.html#getExtrusionDistance"><a title="entities.paths.Path.getExtrusionDistance" class="py-name" href="#" onclick="return doclink('link-28', 'getExtrusionDistance', 'link-28');">getExtrusionDistance</a></tt><tt class="py-op">(</tt><tt class="py-name">point</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">flowRate</tt> <tt class="py-op">*</tt> <tt class="py-name">pathFeedRateMultiplier</tt><tt class="py-op">,</tt> <tt class="py-name">pathFeedRateMinute</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">                <tt class="py-name">gcodeArgs</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-29', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-string">'E'</tt><tt class="py-op">,</tt> <tt class="py-string">'%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">extrusionDistance</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">                 </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">gcodeCommands</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-30', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">                <tt id="link-31" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-31', 'GcodeCommand', 'link-0');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-32" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-32', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Variable gcodes.LINEAR_GCODE_MOVEMENT=gcodes-module.html#LINEAR_GCODE_MOVEMENT"><a title="gcodes.LINEAR_GCODE_MOVEMENT" class="py-name" href="#" onclick="return doclink('link-33', 'LINEAR_GCODE_MOVEMENT', 'link-33');">LINEAR_GCODE_MOVEMENT</a></tt><tt class="py-op">,</tt> <tt class="py-name">gcodeArgs</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">         </tt>
+<a name="Path.getFeedRateAndMultiplier"></a><div id="Path.getFeedRateAndMultiplier-def"><a name="L139"></a><tt class="py-lineno">139</tt> <a class="py-toggle" href="#" id="Path.getFeedRateAndMultiplier-toggle" onclick="return toggle('Path.getFeedRateAndMultiplier');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.Path-class.html#getFeedRateAndMultiplier">getFeedRateAndMultiplier</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">feedRateMinute</tt><tt class="py-op">,</tt> <tt class="py-param">feedRateMultiplier</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Path.getFeedRateAndMultiplier-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Path.getFeedRateAndMultiplier-expanded"><a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-docstring">'Returns the multiplier that results in either the minimum feed rate or the slowed down feed rate'</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">feedRateMultiplier</tt> <tt class="py-op">*</tt> <tt class="py-name">feedRateMinute</tt><tt class="py-op">)</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">minimumLayerFeedRateMinute</tt><tt class="py-op">:</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">minimumLayerFeedRateMinute</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">minimumLayerFeedRateMinute</tt> <tt class="py-op">/</tt> <tt class="py-name">feedRateMinute</tt><tt class="py-op">)</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">feedRateMinute</tt><tt class="py-op">,</tt> <tt class="py-name">feedRateMultiplier</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">     </tt>
+<a name="Path.getResetExtruderDistanceCommand"></a><div id="Path.getResetExtruderDistanceCommand-def"><a name="L146"></a><tt class="py-lineno">146</tt> <a class="py-toggle" href="#" id="Path.getResetExtruderDistanceCommand-toggle" onclick="return toggle('Path.getResetExtruderDistanceCommand');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.Path-class.html#getResetExtruderDistanceCommand">getResetExtruderDistanceCommand</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Path.getResetExtruderDistanceCommand-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Path.getResetExtruderDistanceCommand-expanded"><a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">        <tt class="py-keyword">global</tt> <tt id="link-34" class="py-name"><a title="entities.paths._totalExtrusionDistance" class="py-name" href="#" onclick="return doclink('link-34', '_totalExtrusionDistance', 'link-11');">_totalExtrusionDistance</a></tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt id="link-35" class="py-name"><a title="entities.paths._totalExtrusionDistance" class="py-name" href="#" onclick="return doclink('link-35', '_totalExtrusionDistance', 'link-11');">_totalExtrusionDistance</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-36" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-36', 'GcodeCommand', 'link-0');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-37" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-37', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Variable gcodes.RESET_EXTRUDER_DISTANCE=gcodes-module.html#RESET_EXTRUDER_DISTANCE"><a title="gcodes.RESET_EXTRUDER_DISTANCE" class="py-name" href="#" onclick="return doclink('link-38', 'RESET_EXTRUDER_DISTANCE', 'link-38');">RESET_EXTRUDER_DISTANCE</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-string">'E'</tt><tt class="py-op">,</tt> <tt class="py-string">'0'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">         </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"> </tt>
+<a name="Path.getExtrusionDistance"></a><div id="Path.getExtrusionDistance-def"><a name="L152"></a><tt class="py-lineno">152</tt> <a class="py-toggle" href="#" id="Path.getExtrusionDistance-toggle" onclick="return toggle('Path.getExtrusionDistance');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.Path-class.html#getExtrusionDistance">getExtrusionDistance</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">point</tt><tt class="py-op">,</tt> <tt class="py-param">flowRate</tt><tt class="py-op">,</tt> <tt class="py-param">feedRateMinute</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Path.getExtrusionDistance-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Path.getExtrusionDistance-expanded"><a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-keyword">global</tt> <tt id="link-39" class="py-name"><a title="entities.paths._totalExtrusionDistance" class="py-name" href="#" onclick="return doclink('link-39', '_totalExtrusionDistance', 'link-11');">_totalExtrusionDistance</a></tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">        <tt class="py-keyword">global</tt> <tt id="link-40" class="py-name"><a title="entities.paths._previousPoint" class="py-name" href="#" onclick="return doclink('link-40', '_previousPoint', 'link-12');">_previousPoint</a></tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt id="link-41" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3.distance
+fabmetheus_utilities.vector3index.Vector3Index.distance" class="py-name" href="#" onclick="return doclink('link-41', 'distance', 'link-18');">distance</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">         </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">absolutePositioning</tt><tt class="py-op">:</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-42" class="py-name"><a title="entities.paths._previousPoint" class="py-name" href="#" onclick="return doclink('link-42', '_previousPoint', 'link-12');">_previousPoint</a></tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">                <tt id="link-43" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3.distance
+fabmetheus_utilities.vector3index.Vector3Index.distance" class="py-name" href="#" onclick="return doclink('link-43', 'distance', 'link-18');">distance</a></tt> <tt class="py-op">=</tt> <tt class="py-name">abs</tt><tt class="py-op">(</tt><tt class="py-name">point</tt> <tt class="py-op">-</tt> <tt id="link-44" class="py-name"><a title="entities.paths._previousPoint" class="py-name" href="#" onclick="return doclink('link-44', '_previousPoint', 'link-12');">_previousPoint</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">            <tt id="link-45" class="py-name"><a title="entities.paths._previousPoint" class="py-name" href="#" onclick="return doclink('link-45', '_previousPoint', 'link-12');">_previousPoint</a></tt> <tt class="py-op">=</tt> <tt class="py-name">point</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-46" class="py-name"><a title="entities.paths._previousPoint" class="py-name" href="#" onclick="return doclink('link-46', '_previousPoint', 'link-12');">_previousPoint</a></tt> <tt class="py-op">==</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">                <tt id="link-47" class="py-name" targets="Variable plugins.bottom.logger=plugins.bottom-module.html#logger,Variable plugins.carve.logger=plugins.carve-module.html#logger,Variable plugins.comb.logger=plugins.comb-module.html#logger,Variable plugins.cool.logger=plugins.cool-module.html#logger,Variable plugins.export.logger=plugins.export-module.html#logger,Variable plugins.fill.logger=plugins.fill-module.html#logger,Variable plugins.inset.logger=plugins.inset-module.html#logger,Variable plugins.multiply.logger=plugins.multiply-module.html#logger,Variable plugins.preface.logger=plugins.preface-module.html#logger,Variable plugins.support.logger=plugins.support-module.html#logger,Variable skeinforge_engine.logger=skeinforge_engine-module.html#logger"><a title="plugins.bottom.logger
+plugins.carve.logger
+plugins.comb.logger
+plugins.cool.logger
+plugins.export.logger
+plugins.fill.logger
+plugins.inset.logger
+plugins.multiply.logger
+plugins.preface.logger
+plugins.support.logger
+skeinforge_engine.logger" class="py-name" href="#" onclick="return doclink('link-47', 'logger', 'link-47');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">'There was no absolute location when the G91 command was parsed, so the absolute location will be set to the origin.'</tt><tt class="py-op">)</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">                <tt id="link-48" class="py-name"><a title="entities.paths._previousPoint" class="py-name" href="#" onclick="return doclink('link-48', '_previousPoint', 'link-12');">_previousPoint</a></tt> <tt class="py-op">=</tt> <tt id="link-49" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3" class="py-name" href="#" onclick="return doclink('link-49', 'Vector3', 'link-6');">Vector3</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">            <tt id="link-50" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3.distance
+fabmetheus_utilities.vector3index.Vector3Index.distance" class="py-name" href="#" onclick="return doclink('link-50', 'distance', 'link-18');">distance</a></tt> <tt class="py-op">=</tt> <tt class="py-name">abs</tt><tt class="py-op">(</tt><tt class="py-name">point</tt><tt class="py-op">)</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">            <tt id="link-51" class="py-name"><a title="entities.paths._previousPoint" class="py-name" href="#" onclick="return doclink('link-51', '_previousPoint', 'link-12');">_previousPoint</a></tt> <tt class="py-op">+=</tt> <tt class="py-name">point</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">             </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">         </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">        <tt class="py-name">scaledFlowRate</tt> <tt class="py-op">=</tt> <tt class="py-name">flowRate</tt> <tt class="py-op">*</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">flowScaleSixty</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">        <tt class="py-name">extrusionDistance</tt> <tt class="py-op">=</tt> <tt class="py-name">scaledFlowRate</tt> <tt class="py-op">/</tt> <tt class="py-name">feedRateMinute</tt> <tt class="py-op">*</tt> <tt id="link-52" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3.distance
+fabmetheus_utilities.vector3index.Vector3Index.distance" class="py-name" href="#" onclick="return doclink('link-52', 'distance', 'link-18');">distance</a></tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">         </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extrusionUnitsRelative</tt><tt class="py-op">:</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">            <tt class="py-name">extrusionDistance</tt> <tt class="py-op">=</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-name">extrusionDistance</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimensionDecimalPlaces</tt><tt class="py-op">)</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">            <tt id="link-53" class="py-name"><a title="entities.paths._totalExtrusionDistance" class="py-name" href="#" onclick="return doclink('link-53', '_totalExtrusionDistance', 'link-11');">_totalExtrusionDistance</a></tt> <tt class="py-op">+=</tt> <tt class="py-name">extrusionDistance</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">            <tt class="py-name">extrusionDistance</tt> <tt class="py-op">=</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt id="link-54" class="py-name"><a title="entities.paths._totalExtrusionDistance" class="py-name" href="#" onclick="return doclink('link-54', '_totalExtrusionDistance', 'link-11');">_totalExtrusionDistance</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimensionDecimalPlaces</tt><tt class="py-op">)</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">             </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">extrusionDistance</tt> </tt>
+</div><a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"> </tt>
+<a name="Path.offset"></a><div id="Path.offset-def"><a name="L180"></a><tt class="py-lineno">180</tt> <a class="py-toggle" href="#" id="Path.offset-toggle" onclick="return toggle('Path.offset');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.Path-class.html#offset">offset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">offset</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Path.offset-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Path.offset-expanded"><a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startPoint</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startPoint</tt> <tt class="py-op">=</tt> <tt class="py-name">complex</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startPoint</tt><tt class="py-op">.</tt><tt class="py-name">real</tt> <tt class="py-op">+</tt> <tt id="link-55" class="py-name" targets="Method entities.NestedRing'.NestedRing.offset()=entities.NestedRing%27.NestedRing-class.html#offset,Method entities.paths.BoundaryPerimeter.offset()=entities.paths.BoundaryPerimeter-class.html#offset,Method entities.paths.Path.offset()=entities.paths.Path-class.html#offset,Method entities.paths.TravelPath.offset()=entities.paths.TravelPath-class.html#offset"><a title="entities.NestedRing'.NestedRing.offset
+entities.paths.BoundaryPerimeter.offset
+entities.paths.Path.offset
+entities.paths.TravelPath.offset" class="py-name" href="#" onclick="return doclink('link-55', 'offset', 'link-55');">offset</a></tt><tt class="py-op">.</tt><tt class="py-name">real</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startPoint</tt><tt class="py-op">.</tt><tt class="py-name">imag</tt> <tt class="py-op">+</tt> <tt id="link-56" class="py-name"><a title="entities.NestedRing'.NestedRing.offset
+entities.paths.BoundaryPerimeter.offset
+entities.paths.Path.offset
+entities.paths.TravelPath.offset" class="py-name" href="#" onclick="return doclink('link-56', 'offset', 'link-55');">offset</a></tt><tt class="py-op">.</tt><tt class="py-name">imag</tt><tt class="py-op">)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt id="link-57" class="py-name" targets="Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.index()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#index"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.index" class="py-name" href="#" onclick="return doclink('link-57', 'index', 'link-57');">index</a></tt><tt class="py-op">,</tt> <tt class="py-name">point</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-name">enumerate</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">points</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">points</tt><tt class="py-op">[</tt><tt id="link-58" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.index" class="py-name" href="#" onclick="return doclink('link-58', 'index', 'link-57');">index</a></tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">complex</tt><tt class="py-op">(</tt><tt class="py-name">point</tt><tt class="py-op">.</tt><tt class="py-name">real</tt> <tt class="py-op">+</tt> <tt id="link-59" class="py-name"><a title="entities.NestedRing'.NestedRing.offset
+entities.paths.BoundaryPerimeter.offset
+entities.paths.Path.offset
+entities.paths.TravelPath.offset" class="py-name" href="#" onclick="return doclink('link-59', 'offset', 'link-55');">offset</a></tt><tt class="py-op">.</tt><tt class="py-name">real</tt><tt class="py-op">,</tt> <tt class="py-name">point</tt><tt class="py-op">.</tt><tt class="py-name">imag</tt> <tt class="py-op">+</tt> <tt id="link-60" class="py-name"><a title="entities.NestedRing'.NestedRing.offset
+entities.paths.BoundaryPerimeter.offset
+entities.paths.Path.offset
+entities.paths.TravelPath.offset" class="py-name" href="#" onclick="return doclink('link-60', 'offset', 'link-55');">offset</a></tt><tt class="py-op">.</tt><tt class="py-name">imag</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"> </tt>
+<a name="Path.addPath"></a><div id="Path.addPath-def"><a name="L186"></a><tt class="py-lineno">186</tt> <a class="py-toggle" href="#" id="Path.addPath-toggle" onclick="return toggle('Path.addPath');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.Path-class.html#addPath">addPath</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Path.addPath-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Path.addPath-expanded"><a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">        <tt class="py-docstring">'Add a path to the output.'</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-61" class="py-name" targets="Module fabmetheus_utilities.geometry.geometry_tools.path=fabmetheus_utilities.geometry.geometry_tools.path-module.html"><a title="fabmetheus_utilities.geometry.geometry_tools.path" class="py-name" href="#" onclick="return doclink('link-61', 'path', 'link-61');">path</a></tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt>         </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startPoint</tt> <tt class="py-op">=</tt> <tt id="link-62" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.path" class="py-name" href="#" onclick="return doclink('link-62', 'path', 'link-61');">path</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">points</tt> <tt class="py-op">=</tt> <tt id="link-63" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.path" class="py-name" href="#" onclick="return doclink('link-63', 'path', 'link-61');">path</a></tt><tt class="py-op">[</tt><tt class="py-number">1</tt> <tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">            <tt id="link-64" class="py-name"><a title="plugins.bottom.logger
+plugins.carve.logger
+plugins.comb.logger
+plugins.cool.logger
+plugins.export.logger
+plugins.fill.logger
+plugins.inset.logger
+plugins.multiply.logger
+plugins.preface.logger
+plugins.support.logger
+skeinforge_engine.logger" class="py-name" href="#" onclick="return doclink('link-64', 'logger', 'link-47');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">'Zero length vertex positions array which was skipped over, this should never happen.'</tt><tt class="py-op">)</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-65" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.path" class="py-name" href="#" onclick="return doclink('link-65', 'path', 'link-61');">path</a></tt><tt class="py-op">)</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">2</tt><tt class="py-op">:</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">            <tt id="link-66" class="py-name"><a title="plugins.bottom.logger
+plugins.carve.logger
+plugins.comb.logger
+plugins.cool.logger
+plugins.export.logger
+plugins.fill.logger
+plugins.inset.logger
+plugins.multiply.logger
+plugins.preface.logger
+plugins.support.logger
+skeinforge_engine.logger" class="py-name" href="#" onclick="return doclink('link-66', 'logger', 'link-47');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">'Path of only one point: %s, this should never happen.'</tt><tt class="py-op">,</tt> <tt id="link-67" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_tools.path" class="py-name" href="#" onclick="return doclink('link-67', 'path', 'link-61');">path</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"> </tt>
+<a name="Loop"></a><div id="Loop-def"><a name="L196"></a><tt class="py-lineno">196</tt> <a class="py-toggle" href="#" id="Loop-toggle" onclick="return toggle('Loop');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="entities.paths.Loop-class.html">Loop</a><tt class="py-op">(</tt><tt class="py-base-class">Path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Loop-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Loop-expanded"><a name="Loop.__init__"></a><div id="Loop.__init__-def"><a name="L197"></a><tt class="py-lineno">197</tt> <a class="py-toggle" href="#" id="Loop.__init__-toggle" onclick="return toggle('Loop.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.Loop-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">z</tt><tt class="py-op">,</tt> <tt class="py-param">runtimeParameters</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Loop.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Loop.__init__-expanded"><a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">        <tt id="link-68" class="py-name" targets="Class entities.paths.Path=entities.paths.Path-class.html,Class fabmetheus_utilities.geometry.geometry_tools.path.Path=fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html"><a title="entities.paths.Path
+fabmetheus_utilities.geometry.geometry_tools.path.Path" class="py-name" href="#" onclick="return doclink('link-68', 'Path', 'link-68');">Path</a></tt><tt class="py-op">.</tt><tt id="link-69" class="py-name" targets="Method LineFillStrategy.LineFillStrategy.__init__()=LineFillStrategy.LineFillStrategy-class.html#__init__,Method OrbitCoolStrategy.OrbitCoolStrategy.__init__()=OrbitCoolStrategy.OrbitCoolStrategy-class.html#__init__,Method SlowDownCoolStrategy.SlowDownCoolStrategy.__init__()=SlowDownCoolStrategy.SlowDownCoolStrategy-class.html#__init__,Method entities.GcodeCommand'.GcodeCommand.__init__()=entities.GcodeCommand%27.GcodeCommand-class.html#__init__,Method entities.Layer'.Layer.__init__()=entities.Layer%27.Layer-class.html#__init__,Method entities.NestedRing'.NestedRing.__init__()=entities.NestedRing%27.NestedRing-class.html#__init__,Method entities.RuntimeParameters'.RuntimeParameters.__init__()=entities.RuntimeParameters%27.RuntimeParameters-class.html#__init__,Method entities.SlicedModel'.SlicedModel.__init__()=entities.SlicedModel%27.SlicedModel-class.html#__init__,Method entities.paths.BoundaryPerimeter.__init__()=entities.paths.BoundaryPerimeter-class.html#__init__,Method entities.paths.InfillPath.__init__()=entities.paths.InfillPath-class.html#__init__,Method entities.paths.Loop.__init__()=entities.paths.Loop-class.html#__init__,Method entities.paths.Path.__init__()=entities.paths.Path-class.html#__init__,Method entities.paths.SupportPath.__init__()=entities.paths.SupportPath-class.html#__init__,Method entities.paths.TravelPath.__init__()=entities.paths.TravelPath-class.html#__init__,Method fabmetheus_utilities.euclidean.DistanceIndex.__init__()=fabmetheus_utilities.euclidean.DistanceIndex-class.html#__init__,Method fabmetheus_utilities.euclidean.LoopLayer.__init__()=fabmetheus_utilities.euclidean.LoopLayer-class.html#__init__,Method fabmetheus_utilities.euclidean.NestedBand.__init__()=fabmetheus_utilities.euclidean.NestedBand-class.html#__init__,Method fabmetheus_utilities.euclidean.NestedRing.__init__()=fabmetheus_utilities.euclidean.NestedRing-class.html#__init__,Method fabmetheus_utilities.euclidean.PathZ.__init__()=fabmetheus_utilities.euclidean.PathZ-class.html#__init__,Method fabmetheus_utilities.euclidean.ProjectiveSpace.__init__()=fabmetheus_utilities.euclidean.ProjectiveSpace-class.html#__init__,Method fabmetheus_utilities.euclidean.RotatedLoopLayer.__init__()=fabmetheus_utilities.euclidean.RotatedLoopLayer-class.html#__init__,Method fabmetheus_utilities.euclidean.XIntersectionIndex.__init__()=fabmetheus_utilities.euclidean.XIntersectionIndex-class.html#__init__,Method fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving.__init__()=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary.__init__()=fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_tools.face.Edge.__init__()=fabmetheus_utilities.geometry.geometry_tools.face.Edge-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_tools.face.Face.__init__()=fabmetheus_utilities.geometry.geometry_tools.face.Face-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_tools.path.Path.__init__()=fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_tools.path.SVGFabricationCarving.__init__()=fabmetheus_utilities.geometry.geometry_tools.path.SVGFabricationCarving-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.BaseFunction.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.BaseFunction-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.ClassObject.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.ClassObject-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketRound.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketRound-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorClass.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorClass-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorElement.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorElement-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFalse.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFalse-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFunction.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFunction-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNone.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNone-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNumeric.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNumeric-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorTrue.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorTrue-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorValue.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorValue-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.Function.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.Function-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.FunctionVariable.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.FunctionVariable-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.KeyValue.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.KeyValue-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.ModuleXMLElement.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.ModuleXMLElement-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.Setting.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.Setting-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.matrix.Matrix.__init__()=fabmetheus_utilities.geometry.geometry_utilities.matrix.Matrix-class.html#__init__,Method fabmetheus_utilities.geometry.solids.group.Group.__init__()=fabmetheus_utilities.geometry.solids.group.Group-class.html#__init__,Method fabmetheus_utilities.geometry.solids.triangle_mesh.EdgePair.__init__()=fabmetheus_utilities.geometry.solids.triangle_mesh.EdgePair-class.html#__init__,Method fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh.__init__()=fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#__init__,Method fabmetheus_utilities.geometry.solids.triangle_mesh.ZoneArrangement.__init__()=fabmetheus_utilities.geometry.solids.triangle_mesh.ZoneArrangement-class.html#__init__,Method fabmetheus_utilities.intercircle.CenterOutset.__init__()=fabmetheus_utilities.intercircle.CenterOutset-class.html#__init__,Method fabmetheus_utilities.intercircle.CircleIntersection.__init__()=fabmetheus_utilities.intercircle.CircleIntersection-class.html#__init__,Method fabmetheus_utilities.intercircle.CircleNode.__init__()=fabmetheus_utilities.intercircle.CircleNode-class.html#__init__,Method fabmetheus_utilities.svg_reader.FontReader.__init__()=fabmetheus_utilities.svg_reader.FontReader-class.html#__init__,Method fabmetheus_utilities.svg_reader.Glyph.__init__()=fabmetheus_utilities.svg_reader.Glyph-class.html#__init__,Method fabmetheus_utilities.svg_reader.MatrixSVG.__init__()=fabmetheus_utilities.svg_reader.MatrixSVG-class.html#__init__,Method fabmetheus_utilities.svg_reader.PathReader.__init__()=fabmetheus_utilities.svg_reader.PathReader-class.html#__init__,Method fabmetheus_utilities.svg_reader.SVGReader.__init__()=fabmetheus_utilities.svg_reader.SVGReader-class.html#__init__,Method fabmetheus_utilities.svg_writer.SVGWriter.__init__()=fabmetheus_utilities.svg_writer.SVGWriter-class.html#__init__,Method fabmetheus_utilities.vector3.Vector3.__init__()=fabmetheus_utilities.vector3.Vector3-class.html#__init__,Method fabmetheus_utilities.vector3index.Vector3Index.__init__()=fabmetheus_utilities.vector3index.Vector3Index-class.html#__init__,Method fabmetheus_utilities.xml_simple_reader.XMLElement.__init__()=fabmetheus_utilities.xml_simple_reader.XMLElement-class.html#__init__,Method fabmetheus_utilities.xml_simple_reader.XMLSimpleReader.__init__()=fabmetheus_utilities.xml_simple_reader.XMLSimpleReader-class.html#__init__,Method gcode_writer.GcodeWriter.__init__()=gcode_writer.GcodeWriter-class.html#__init__,Method plugins.bottom.BottomSkein.__init__()=plugins.bottom.BottomSkein-class.html#__init__,Method plugins.carve.CarveSkein.__init__()=plugins.carve.CarveSkein-class.html#__init__,Method plugins.comb.CombSkein.__init__()=plugins.comb.CombSkein-class.html#__init__,Method plugins.cool.CoolSkein.__init__()=plugins.cool.CoolSkein-class.html#__init__,Method plugins.export.ExportSkein.__init__()=plugins.export.ExportSkein-class.html#__init__,Method plugins.fill.FillSkein.__init__()=plugins.fill.FillSkein-class.html#__init__,Method plugins.inset.InsetSkein.__init__()=plugins.inset.InsetSkein-class.html#__init__,Method plugins.multiply.MultiplySkein.__init__()=plugins.multiply.MultiplySkein-class.html#__init__,Method plugins.preface.PrefaceSkein.__init__()=plugins.preface.PrefaceSkein-class.html#__init__,Method plugins.support.SupportLayer.__init__()=plugins.support.SupportLayer-class.html#__init__,Method plugins.support.SupportSkein.__init__()=plugins.support.SupportSkein-class.html#__init__"><a title="LineFillStrategy.LineFillStrategy.__init__
+OrbitCoolStrategy.OrbitCoolStrategy.__init__
+SlowDownCoolStrategy.SlowDownCoolStrategy.__init__
+entities.GcodeCommand'.GcodeCommand.__init__
+entities.Layer'.Layer.__init__
+entities.NestedRing'.NestedRing.__init__
+entities.RuntimeParameters'.RuntimeParameters.__init__
+entities.SlicedModel'.SlicedModel.__init__
+entities.paths.BoundaryPerimeter.__init__
+entities.paths.InfillPath.__init__
+entities.paths.Loop.__init__
+entities.paths.Path.__init__
+entities.paths.SupportPath.__init__
+entities.paths.TravelPath.__init__
+fabmetheus_utilities.euclidean.DistanceIndex.__init__
+fabmetheus_utilities.euclidean.LoopLayer.__init__
+fabmetheus_utilities.euclidean.NestedBand.__init__
+fabmetheus_utilities.euclidean.NestedRing.__init__
+fabmetheus_utilities.euclidean.PathZ.__init__
+fabmetheus_utilities.euclidean.ProjectiveSpace.__init__
+fabmetheus_utilities.euclidean.RotatedLoopLayer.__init__
+fabmetheus_utilities.euclidean.XIntersectionIndex.__init__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving.__init__
+fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary.__init__
+fabmetheus_utilities.geometry.geometry_tools.face.Edge.__init__
+fabmetheus_utilities.geometry.geometry_tools.face.Face.__init__
+fabmetheus_utilities.geometry.geometry_tools.path.Path.__init__
+fabmetheus_utilities.geometry.geometry_tools.path.SVGFabricationCarving.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.BaseFunction.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.ClassObject.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketRound.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorClass.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorElement.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFalse.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFunction.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNone.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNumeric.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorTrue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorValue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.Function.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.FunctionVariable.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.KeyValue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.ModuleXMLElement.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.Setting.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.matrix.Matrix.__init__
+fabmetheus_utilities.geometry.solids.group.Group.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.EdgePair.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.ZoneArrangement.__init__
+fabmetheus_utilities.intercircle.CenterOutset.__init__
+fabmetheus_utilities.intercircle.CircleIntersection.__init__
+fabmetheus_utilities.intercircle.CircleNode.__init__
+fabmetheus_utilities.svg_reader.FontReader.__init__
+fabmetheus_utilities.svg_reader.Glyph.__init__
+fabmetheus_utilities.svg_reader.MatrixSVG.__init__
+fabmetheus_utilities.svg_reader.PathReader.__init__
+fabmetheus_utilities.svg_reader.SVGReader.__init__
+fabmetheus_utilities.svg_writer.SVGWriter.__init__
+fabmetheus_utilities.vector3.Vector3.__init__
+fabmetheus_utilities.vector3index.Vector3Index.__init__
+fabmetheus_utilities.xml_simple_reader.XMLElement.__init__
+fabmetheus_utilities.xml_simple_reader.XMLSimpleReader.__init__
+gcode_writer.GcodeWriter.__init__
+plugins.bottom.BottomSkein.__init__
+plugins.carve.CarveSkein.__init__
+plugins.comb.CombSkein.__init__
+plugins.cool.CoolSkein.__init__
+plugins.export.ExportSkein.__init__
+plugins.fill.FillSkein.__init__
+plugins.inset.InsetSkein.__init__
+plugins.multiply.MultiplySkein.__init__
+plugins.preface.PrefaceSkein.__init__
+plugins.support.SupportLayer.__init__
+plugins.support.SupportSkein.__init__" class="py-name" href="#" onclick="return doclink('link-69', '__init__', 'link-69');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">z</tt><tt class="py-op">,</tt> <tt class="py-name">runtimeParameters</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"> </tt>
+<a name="InfillPath"></a><div id="InfillPath-def"><a name="L200"></a><tt class="py-lineno">200</tt> <a class="py-toggle" href="#" id="InfillPath-toggle" onclick="return toggle('InfillPath');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="entities.paths.InfillPath-class.html">InfillPath</a><tt class="py-op">(</tt><tt class="py-base-class">Path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="InfillPath-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="InfillPath-expanded"><a name="InfillPath.__init__"></a><div id="InfillPath.__init__-def"><a name="L201"></a><tt class="py-lineno">201</tt> <a class="py-toggle" href="#" id="InfillPath.__init__-toggle" onclick="return toggle('InfillPath.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.InfillPath-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">z</tt><tt class="py-op">,</tt> <tt class="py-param">runtimeParameters</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>         </tt>
+</div><a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">        <tt id="link-70" class="py-name"><a title="entities.paths.Path
+fabmetheus_utilities.geometry.geometry_tools.path.Path" class="py-name" href="#" onclick="return doclink('link-70', 'Path', 'link-68');">Path</a></tt><tt class="py-op">.</tt><tt id="link-71" class="py-name"><a title="LineFillStrategy.LineFillStrategy.__init__
+OrbitCoolStrategy.OrbitCoolStrategy.__init__
+SlowDownCoolStrategy.SlowDownCoolStrategy.__init__
+entities.GcodeCommand'.GcodeCommand.__init__
+entities.Layer'.Layer.__init__
+entities.NestedRing'.NestedRing.__init__
+entities.RuntimeParameters'.RuntimeParameters.__init__
+entities.SlicedModel'.SlicedModel.__init__
+entities.paths.BoundaryPerimeter.__init__
+entities.paths.InfillPath.__init__
+entities.paths.Loop.__init__
+entities.paths.Path.__init__
+entities.paths.SupportPath.__init__
+entities.paths.TravelPath.__init__
+fabmetheus_utilities.euclidean.DistanceIndex.__init__
+fabmetheus_utilities.euclidean.LoopLayer.__init__
+fabmetheus_utilities.euclidean.NestedBand.__init__
+fabmetheus_utilities.euclidean.NestedRing.__init__
+fabmetheus_utilities.euclidean.PathZ.__init__
+fabmetheus_utilities.euclidean.ProjectiveSpace.__init__
+fabmetheus_utilities.euclidean.RotatedLoopLayer.__init__
+fabmetheus_utilities.euclidean.XIntersectionIndex.__init__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving.__init__
+fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary.__init__
+fabmetheus_utilities.geometry.geometry_tools.face.Edge.__init__
+fabmetheus_utilities.geometry.geometry_tools.face.Face.__init__
+fabmetheus_utilities.geometry.geometry_tools.path.Path.__init__
+fabmetheus_utilities.geometry.geometry_tools.path.SVGFabricationCarving.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.BaseFunction.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.ClassObject.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketRound.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorClass.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorElement.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFalse.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFunction.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNone.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNumeric.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorTrue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorValue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.Function.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.FunctionVariable.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.KeyValue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.ModuleXMLElement.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.Setting.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.matrix.Matrix.__init__
+fabmetheus_utilities.geometry.solids.group.Group.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.EdgePair.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.ZoneArrangement.__init__
+fabmetheus_utilities.intercircle.CenterOutset.__init__
+fabmetheus_utilities.intercircle.CircleIntersection.__init__
+fabmetheus_utilities.intercircle.CircleNode.__init__
+fabmetheus_utilities.svg_reader.FontReader.__init__
+fabmetheus_utilities.svg_reader.Glyph.__init__
+fabmetheus_utilities.svg_reader.MatrixSVG.__init__
+fabmetheus_utilities.svg_reader.PathReader.__init__
+fabmetheus_utilities.svg_reader.SVGReader.__init__
+fabmetheus_utilities.svg_writer.SVGWriter.__init__
+fabmetheus_utilities.vector3.Vector3.__init__
+fabmetheus_utilities.vector3index.Vector3Index.__init__
+fabmetheus_utilities.xml_simple_reader.XMLElement.__init__
+fabmetheus_utilities.xml_simple_reader.XMLSimpleReader.__init__
+gcode_writer.GcodeWriter.__init__
+plugins.bottom.BottomSkein.__init__
+plugins.carve.CarveSkein.__init__
+plugins.comb.CombSkein.__init__
+plugins.cool.CoolSkein.__init__
+plugins.export.ExportSkein.__init__
+plugins.fill.FillSkein.__init__
+plugins.inset.InsetSkein.__init__
+plugins.multiply.MultiplySkein.__init__
+plugins.preface.PrefaceSkein.__init__
+plugins.support.SupportLayer.__init__
+plugins.support.SupportSkein.__init__" class="py-name" href="#" onclick="return doclink('link-71', '__init__', 'link-69');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">z</tt><tt class="py-op">,</tt> <tt class="py-name">runtimeParameters</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">             </tt>
+<a name="SupportPath"></a><div id="SupportPath-def"><a name="L204"></a><tt class="py-lineno">204</tt> <a class="py-toggle" href="#" id="SupportPath-toggle" onclick="return toggle('SupportPath');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="entities.paths.SupportPath-class.html">SupportPath</a><tt class="py-op">(</tt><tt class="py-base-class">Path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SupportPath-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SupportPath-expanded"><a name="SupportPath.__init__"></a><div id="SupportPath.__init__-def"><a name="L205"></a><tt class="py-lineno">205</tt> <a class="py-toggle" href="#" id="SupportPath.__init__-toggle" onclick="return toggle('SupportPath.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.SupportPath-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">z</tt><tt class="py-op">,</tt> <tt class="py-param">runtimeParameters</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>         </tt>
+</div><a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">        <tt id="link-72" class="py-name"><a title="entities.paths.Path
+fabmetheus_utilities.geometry.geometry_tools.path.Path" class="py-name" href="#" onclick="return doclink('link-72', 'Path', 'link-68');">Path</a></tt><tt class="py-op">.</tt><tt id="link-73" class="py-name"><a title="LineFillStrategy.LineFillStrategy.__init__
+OrbitCoolStrategy.OrbitCoolStrategy.__init__
+SlowDownCoolStrategy.SlowDownCoolStrategy.__init__
+entities.GcodeCommand'.GcodeCommand.__init__
+entities.Layer'.Layer.__init__
+entities.NestedRing'.NestedRing.__init__
+entities.RuntimeParameters'.RuntimeParameters.__init__
+entities.SlicedModel'.SlicedModel.__init__
+entities.paths.BoundaryPerimeter.__init__
+entities.paths.InfillPath.__init__
+entities.paths.Loop.__init__
+entities.paths.Path.__init__
+entities.paths.SupportPath.__init__
+entities.paths.TravelPath.__init__
+fabmetheus_utilities.euclidean.DistanceIndex.__init__
+fabmetheus_utilities.euclidean.LoopLayer.__init__
+fabmetheus_utilities.euclidean.NestedBand.__init__
+fabmetheus_utilities.euclidean.NestedRing.__init__
+fabmetheus_utilities.euclidean.PathZ.__init__
+fabmetheus_utilities.euclidean.ProjectiveSpace.__init__
+fabmetheus_utilities.euclidean.RotatedLoopLayer.__init__
+fabmetheus_utilities.euclidean.XIntersectionIndex.__init__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving.__init__
+fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary.__init__
+fabmetheus_utilities.geometry.geometry_tools.face.Edge.__init__
+fabmetheus_utilities.geometry.geometry_tools.face.Face.__init__
+fabmetheus_utilities.geometry.geometry_tools.path.Path.__init__
+fabmetheus_utilities.geometry.geometry_tools.path.SVGFabricationCarving.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.BaseFunction.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.ClassObject.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketRound.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorClass.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorElement.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFalse.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFunction.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNone.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNumeric.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorTrue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorValue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.Function.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.FunctionVariable.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.KeyValue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.ModuleXMLElement.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.Setting.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.matrix.Matrix.__init__
+fabmetheus_utilities.geometry.solids.group.Group.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.EdgePair.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.ZoneArrangement.__init__
+fabmetheus_utilities.intercircle.CenterOutset.__init__
+fabmetheus_utilities.intercircle.CircleIntersection.__init__
+fabmetheus_utilities.intercircle.CircleNode.__init__
+fabmetheus_utilities.svg_reader.FontReader.__init__
+fabmetheus_utilities.svg_reader.Glyph.__init__
+fabmetheus_utilities.svg_reader.MatrixSVG.__init__
+fabmetheus_utilities.svg_reader.PathReader.__init__
+fabmetheus_utilities.svg_reader.SVGReader.__init__
+fabmetheus_utilities.svg_writer.SVGWriter.__init__
+fabmetheus_utilities.vector3.Vector3.__init__
+fabmetheus_utilities.vector3index.Vector3Index.__init__
+fabmetheus_utilities.xml_simple_reader.XMLElement.__init__
+fabmetheus_utilities.xml_simple_reader.XMLSimpleReader.__init__
+gcode_writer.GcodeWriter.__init__
+plugins.bottom.BottomSkein.__init__
+plugins.carve.CarveSkein.__init__
+plugins.comb.CombSkein.__init__
+plugins.cool.CoolSkein.__init__
+plugins.export.ExportSkein.__init__
+plugins.fill.FillSkein.__init__
+plugins.inset.InsetSkein.__init__
+plugins.multiply.MultiplySkein.__init__
+plugins.preface.PrefaceSkein.__init__
+plugins.support.SupportLayer.__init__
+plugins.support.SupportSkein.__init__" class="py-name" href="#" onclick="return doclink('link-73', '__init__', 'link-69');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">z</tt><tt class="py-op">,</tt> <tt class="py-name">runtimeParameters</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"> </tt>
+<a name="SupportPath.getFeedRateMinute"></a><div id="SupportPath.getFeedRateMinute-def"><a name="L208"></a><tt class="py-lineno">208</tt> <a class="py-toggle" href="#" id="SupportPath.getFeedRateMinute-toggle" onclick="return toggle('SupportPath.getFeedRateMinute');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.SupportPath-class.html#getFeedRateMinute">getFeedRateMinute</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SupportPath.getFeedRateMinute-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SupportPath.getFeedRateMinute-expanded"><a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">supportFeedRateMinute</tt> </tt>
+</div></div><a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">     </tt>
+<a name="TravelPath"></a><div id="TravelPath-def"><a name="L211"></a><tt class="py-lineno">211</tt> <a class="py-toggle" href="#" id="TravelPath-toggle" onclick="return toggle('TravelPath');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="entities.paths.TravelPath-class.html">TravelPath</a><tt class="py-op">(</tt><tt class="py-base-class">Path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TravelPath-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="TravelPath-expanded"><a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">    <tt class="py-docstring">'''Moves from one path to another without extruding. Optionally dodges gaps (comb) and retracts (dimension)'''</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">     </tt>
+<a name="TravelPath.__init__"></a><div id="TravelPath.__init__-def"><a name="L214"></a><tt class="py-lineno">214</tt> <a class="py-toggle" href="#" id="TravelPath.__init__-toggle" onclick="return toggle('TravelPath.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.TravelPath-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">z</tt><tt class="py-op">,</tt> <tt class="py-param">runtimeParameters</tt><tt class="py-op">,</tt> <tt class="py-param">fromLocation</tt><tt class="py-op">,</tt> <tt class="py-param">toLocation</tt><tt class="py-op">,</tt> <tt class="py-param">combSkein</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TravelPath.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TravelPath.__init__-expanded"><a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">        <tt id="link-74" class="py-name"><a title="entities.paths.Path
+fabmetheus_utilities.geometry.geometry_tools.path.Path" class="py-name" href="#" onclick="return doclink('link-74', 'Path', 'link-68');">Path</a></tt><tt class="py-op">.</tt><tt id="link-75" class="py-name"><a title="LineFillStrategy.LineFillStrategy.__init__
+OrbitCoolStrategy.OrbitCoolStrategy.__init__
+SlowDownCoolStrategy.SlowDownCoolStrategy.__init__
+entities.GcodeCommand'.GcodeCommand.__init__
+entities.Layer'.Layer.__init__
+entities.NestedRing'.NestedRing.__init__
+entities.RuntimeParameters'.RuntimeParameters.__init__
+entities.SlicedModel'.SlicedModel.__init__
+entities.paths.BoundaryPerimeter.__init__
+entities.paths.InfillPath.__init__
+entities.paths.Loop.__init__
+entities.paths.Path.__init__
+entities.paths.SupportPath.__init__
+entities.paths.TravelPath.__init__
+fabmetheus_utilities.euclidean.DistanceIndex.__init__
+fabmetheus_utilities.euclidean.LoopLayer.__init__
+fabmetheus_utilities.euclidean.NestedBand.__init__
+fabmetheus_utilities.euclidean.NestedRing.__init__
+fabmetheus_utilities.euclidean.PathZ.__init__
+fabmetheus_utilities.euclidean.ProjectiveSpace.__init__
+fabmetheus_utilities.euclidean.RotatedLoopLayer.__init__
+fabmetheus_utilities.euclidean.XIntersectionIndex.__init__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving.__init__
+fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary.__init__
+fabmetheus_utilities.geometry.geometry_tools.face.Edge.__init__
+fabmetheus_utilities.geometry.geometry_tools.face.Face.__init__
+fabmetheus_utilities.geometry.geometry_tools.path.Path.__init__
+fabmetheus_utilities.geometry.geometry_tools.path.SVGFabricationCarving.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.BaseFunction.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.ClassObject.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketRound.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorClass.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorElement.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFalse.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFunction.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNone.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNumeric.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorTrue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorValue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.Function.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.FunctionVariable.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.KeyValue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.ModuleXMLElement.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.Setting.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.matrix.Matrix.__init__
+fabmetheus_utilities.geometry.solids.group.Group.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.EdgePair.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.ZoneArrangement.__init__
+fabmetheus_utilities.intercircle.CenterOutset.__init__
+fabmetheus_utilities.intercircle.CircleIntersection.__init__
+fabmetheus_utilities.intercircle.CircleNode.__init__
+fabmetheus_utilities.svg_reader.FontReader.__init__
+fabmetheus_utilities.svg_reader.Glyph.__init__
+fabmetheus_utilities.svg_reader.MatrixSVG.__init__
+fabmetheus_utilities.svg_reader.PathReader.__init__
+fabmetheus_utilities.svg_reader.SVGReader.__init__
+fabmetheus_utilities.svg_writer.SVGWriter.__init__
+fabmetheus_utilities.vector3.Vector3.__init__
+fabmetheus_utilities.vector3index.Vector3Index.__init__
+fabmetheus_utilities.xml_simple_reader.XMLElement.__init__
+fabmetheus_utilities.xml_simple_reader.XMLSimpleReader.__init__
+gcode_writer.GcodeWriter.__init__
+plugins.bottom.BottomSkein.__init__
+plugins.carve.CarveSkein.__init__
+plugins.comb.CombSkein.__init__
+plugins.cool.CoolSkein.__init__
+plugins.export.ExportSkein.__init__
+plugins.fill.FillSkein.__init__
+plugins.inset.InsetSkein.__init__
+plugins.multiply.MultiplySkein.__init__
+plugins.preface.PrefaceSkein.__init__
+plugins.support.SupportLayer.__init__
+plugins.support.SupportSkein.__init__" class="py-name" href="#" onclick="return doclink('link-75', '__init__', 'link-69');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">z</tt><tt class="py-op">,</tt> <tt class="py-name">runtimeParameters</tt><tt class="py-op">)</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fromLocation</tt> <tt class="py-op">=</tt> <tt class="py-name">fromLocation</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">toLocation</tt> <tt class="py-op">=</tt> <tt class="py-name">toLocation</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">combSkein</tt> <tt class="py-op">=</tt> <tt class="py-name">combSkein</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">         </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">fromLocation</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startPoint</tt> <tt class="py-op">=</tt> <tt class="py-name">fromLocation</tt><tt class="py-op">.</tt><tt id="link-76" class="py-name" targets="Method fabmetheus_utilities.vector3.Vector3.dropAxis()=fabmetheus_utilities.vector3.Vector3-class.html#dropAxis,Method fabmetheus_utilities.vector3index.Vector3Index.dropAxis()=fabmetheus_utilities.vector3index.Vector3Index-class.html#dropAxis"><a title="fabmetheus_utilities.vector3.Vector3.dropAxis
+fabmetheus_utilities.vector3index.Vector3Index.dropAxis" class="py-name" href="#" onclick="return doclink('link-76', 'dropAxis', 'link-76');">dropAxis</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt>   </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startPoint</tt> <tt class="py-op">=</tt> <tt class="py-name">toLocation</tt><tt class="py-op">.</tt><tt id="link-77" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3.dropAxis
+fabmetheus_utilities.vector3index.Vector3Index.dropAxis" class="py-name" href="#" onclick="return doclink('link-77', 'dropAxis', 'link-76');">dropAxis</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">             </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">points</tt><tt class="py-op">.</tt><tt id="link-78" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-78', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">toLocation</tt><tt class="py-op">.</tt><tt id="link-79" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3.dropAxis
+fabmetheus_utilities.vector3index.Vector3Index.dropAxis" class="py-name" href="#" onclick="return doclink('link-79', 'dropAxis', 'link-76');">dropAxis</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">         </tt>
+<a name="TravelPath.offset"></a><div id="TravelPath.offset-def"><a name="L227"></a><tt class="py-lineno">227</tt> <a class="py-toggle" href="#" id="TravelPath.offset-toggle" onclick="return toggle('TravelPath.offset');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.TravelPath-class.html#offset">offset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">offset</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TravelPath.offset-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TravelPath.offset-expanded"><a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fromLocation</tt><tt class="py-op">.</tt><tt class="py-name">x</tt> <tt class="py-op">+=</tt> <tt id="link-80" class="py-name"><a title="entities.NestedRing'.NestedRing.offset
+entities.paths.BoundaryPerimeter.offset
+entities.paths.Path.offset
+entities.paths.TravelPath.offset" class="py-name" href="#" onclick="return doclink('link-80', 'offset', 'link-55');">offset</a></tt><tt class="py-op">.</tt><tt class="py-name">real</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fromLocation</tt><tt class="py-op">.</tt><tt class="py-name">y</tt> <tt class="py-op">+=</tt> <tt id="link-81" class="py-name"><a title="entities.NestedRing'.NestedRing.offset
+entities.paths.BoundaryPerimeter.offset
+entities.paths.Path.offset
+entities.paths.TravelPath.offset" class="py-name" href="#" onclick="return doclink('link-81', 'offset', 'link-55');">offset</a></tt><tt class="py-op">.</tt><tt class="py-name">imag</tt>             </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">toLocation</tt><tt class="py-op">.</tt><tt class="py-name">x</tt> <tt class="py-op">+=</tt> <tt id="link-82" class="py-name"><a title="entities.NestedRing'.NestedRing.offset
+entities.paths.BoundaryPerimeter.offset
+entities.paths.Path.offset
+entities.paths.TravelPath.offset" class="py-name" href="#" onclick="return doclink('link-82', 'offset', 'link-55');">offset</a></tt><tt class="py-op">.</tt><tt class="py-name">real</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">toLocation</tt><tt class="py-op">.</tt><tt class="py-name">y</tt> <tt class="py-op">+=</tt> <tt id="link-83" class="py-name"><a title="entities.NestedRing'.NestedRing.offset
+entities.paths.BoundaryPerimeter.offset
+entities.paths.Path.offset
+entities.paths.TravelPath.offset" class="py-name" href="#" onclick="return doclink('link-83', 'offset', 'link-55');">offset</a></tt><tt class="py-op">.</tt><tt class="py-name">imag</tt>             </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">        <tt id="link-84" class="py-name"><a title="entities.paths.Path
+fabmetheus_utilities.geometry.geometry_tools.path.Path" class="py-name" href="#" onclick="return doclink('link-84', 'Path', 'link-68');">Path</a></tt><tt class="py-op">.</tt><tt id="link-85" class="py-name"><a title="entities.NestedRing'.NestedRing.offset
+entities.paths.BoundaryPerimeter.offset
+entities.paths.Path.offset
+entities.paths.TravelPath.offset" class="py-name" href="#" onclick="return doclink('link-85', 'offset', 'link-55');">offset</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-86" class="py-name"><a title="entities.NestedRing'.NestedRing.offset
+entities.paths.BoundaryPerimeter.offset
+entities.paths.Path.offset
+entities.paths.TravelPath.offset" class="py-name" href="#" onclick="return doclink('link-86', 'offset', 'link-55');">offset</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">         </tt>
+<a name="TravelPath.__str__"></a><div id="TravelPath.__str__-def"><a name="L234"></a><tt class="py-lineno">234</tt> <a class="py-toggle" href="#" id="TravelPath.__str__-toggle" onclick="return toggle('TravelPath.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.TravelPath-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TravelPath.__str__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TravelPath.__str__-expanded"><a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">        <tt class="py-name">output</tt> <tt class="py-op">=</tt> <tt class="py-name">StringIO</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">'\n%12sfromLocation: %s\n'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fromLocation</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">'%12stoLocation: %s\n'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">toLocation</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt id="link-87" class="py-name"><a title="entities.paths.Path
+fabmetheus_utilities.geometry.geometry_tools.path.Path" class="py-name" href="#" onclick="return doclink('link-87', 'Path', 'link-68');">Path</a></tt><tt class="py-op">.</tt><tt id="link-88" class="py-name" targets="Method entities.GcodeCommand'.GcodeCommand.__str__()=entities.GcodeCommand%27.GcodeCommand-class.html#__str__,Method entities.Layer'.Layer.__str__()=entities.Layer%27.Layer-class.html#__str__,Method entities.NestedRing'.NestedRing.__str__()=entities.NestedRing%27.NestedRing-class.html#__str__,Method entities.SlicedModel'.SlicedModel.__str__()=entities.SlicedModel%27.SlicedModel-class.html#__str__,Method entities.paths.BoundaryPerimeter.__str__()=entities.paths.BoundaryPerimeter-class.html#__str__,Method entities.paths.Path.__str__()=entities.paths.Path-class.html#__str__,Method entities.paths.TravelPath.__str__()=entities.paths.TravelPath-class.html#__str__"><a title="entities.GcodeCommand'.GcodeCommand.__str__
+entities.Layer'.Layer.__str__
+entities.NestedRing'.NestedRing.__str__
+entities.SlicedModel'.SlicedModel.__str__
+entities.paths.BoundaryPerimeter.__str__
+entities.paths.Path.__str__
+entities.paths.TravelPath.__str__" class="py-name" href="#" onclick="return doclink('link-88', '__str__', 'link-88');">__str__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">getvalue</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line"> </tt>
+<a name="TravelPath.moveToStartPoint"></a><div id="TravelPath.moveToStartPoint-def"><a name="L241"></a><tt class="py-lineno">241</tt> <a class="py-toggle" href="#" id="TravelPath.moveToStartPoint-toggle" onclick="return toggle('TravelPath.moveToStartPoint');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.TravelPath-class.html#moveToStartPoint">moveToStartPoint</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">feedAndFlowRateMultiplier</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TravelPath.moveToStartPoint-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TravelPath.moveToStartPoint-expanded"><a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">        <tt class="py-docstring">'''Adds gcode to move the nozzle to the startpoint of the path. </tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line"><tt class="py-docstring">            If comb is active the path will dodge all open spaces.</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">        <tt class="py-name">startPointPath</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">         </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">combActive</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fromLocation</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">combSkein</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt>  </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">             </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">            <tt class="py-name">additionalCommands</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">combSkein</tt><tt class="py-op">.</tt><tt id="link-89" class="py-name" targets="Method plugins.comb.CombSkein.getPathsBetween()=plugins.comb.CombSkein-class.html#getPathsBetween"><a title="plugins.comb.CombSkein.getPathsBetween" class="py-name" href="#" onclick="return doclink('link-89', 'getPathsBetween', 'link-89');">getPathsBetween</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">z</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fromLocation</tt><tt class="py-op">.</tt><tt id="link-90" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3.dropAxis
+fabmetheus_utilities.vector3index.Vector3Index.dropAxis" class="py-name" href="#" onclick="return doclink('link-90', 'dropAxis', 'link-76');">dropAxis</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">toLocation</tt><tt class="py-op">.</tt><tt id="link-91" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3.dropAxis
+fabmetheus_utilities.vector3index.Vector3Index.dropAxis" class="py-name" href="#" onclick="return doclink('link-91', 'dropAxis', 'link-76');">dropAxis</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line">            <tt class="py-name">startPointPath</tt><tt class="py-op">.</tt><tt class="py-name">extend</tt><tt class="py-op">(</tt><tt class="py-name">additionalCommands</tt><tt class="py-op">)</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">         </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">        <tt class="py-name">startPointPath</tt><tt class="py-op">.</tt><tt id="link-92" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-92', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">toLocation</tt><tt class="py-op">.</tt><tt id="link-93" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3.dropAxis
+fabmetheus_utilities.vector3index.Vector3Index.dropAxis" class="py-name" href="#" onclick="return doclink('link-93', 'dropAxis', 'link-76');">dropAxis</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line">         </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">point</tt> <tt class="py-keyword">in</tt> <tt class="py-name">startPointPath</tt><tt class="py-op">:</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line">            <tt class="py-name">gcodeArgs</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-string">'X'</tt><tt class="py-op">,</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-name">point</tt><tt class="py-op">.</tt><tt class="py-name">real</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt class="py-string">'Y'</tt><tt class="py-op">,</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-name">point</tt><tt class="py-op">.</tt><tt class="py-name">imag</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt class="py-string">'Z'</tt><tt class="py-op">,</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">z</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">             </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">speedActive</tt><tt class="py-op">:</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line">                <tt class="py-name">travelFeedRateMinute</tt><tt class="py-op">,</tt> <tt class="py-name">travelFeedRateMultiplier</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-94" class="py-name"><a title="entities.paths.Path.getFeedRateAndMultiplier" class="py-name" href="#" onclick="return doclink('link-94', 'getFeedRateAndMultiplier', 'link-26');">getFeedRateAndMultiplier</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">travelFeedRateMinute</tt><tt class="py-op">,</tt> <tt class="py-name">feedAndFlowRateMultiplier</tt><tt class="py-op">)</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">                <tt class="py-name">gcodeArgs</tt><tt class="py-op">.</tt><tt id="link-95" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-95', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-string">'F'</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">travelFeedRateMinute</tt> <tt class="py-op">*</tt> <tt class="py-name">travelFeedRateMultiplier</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line">                 </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">gcodeCommands</tt><tt class="py-op">.</tt><tt id="link-96" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-96', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt id="link-97" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-97', 'GcodeCommand', 'link-0');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-98" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-98', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-99" class="py-name"><a title="gcodes.LINEAR_GCODE_MOVEMENT" class="py-name" href="#" onclick="return doclink('link-99', 'LINEAR_GCODE_MOVEMENT', 'link-33');">LINEAR_GCODE_MOVEMENT</a></tt><tt class="py-op">,</tt> <tt class="py-name">gcodeArgs</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line">                         </tt>
+<a name="TravelPath.generateGcode"></a><div id="TravelPath.generateGcode-def"><a name="L265"></a><tt class="py-lineno">265</tt> <a class="py-toggle" href="#" id="TravelPath.generateGcode-toggle" onclick="return toggle('TravelPath.generateGcode');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.TravelPath-class.html#generateGcode">generateGcode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">lookaheadStartVector</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">feedAndFlowRateMultiplier</tt><tt class="py-op">=</tt><tt class="py-number">1.0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TravelPath.generateGcode-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TravelPath.generateGcode-expanded"><a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">        <tt class="py-docstring">'Transforms paths and points to gcode'</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line">        <tt class="py-name">lastRetractionExtrusionDistance</tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line">         </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimensionActive</tt><tt class="py-op">:</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">             </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">lookaheadStartVector</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fromLocation</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">                 </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">                <tt class="py-name">toLocation</tt> <tt class="py-op">=</tt> <tt class="py-name">lookaheadStartVector</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">                <tt class="py-name">locationMinusOld</tt> <tt class="py-op">=</tt> <tt class="py-name">toLocation</tt> <tt class="py-op">-</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fromLocation</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">                <tt class="py-name">xyTravel</tt> <tt class="py-op">=</tt> <tt class="py-name">abs</tt><tt class="py-op">(</tt><tt class="py-name">locationMinusOld</tt><tt class="py-op">.</tt><tt id="link-100" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3.dropAxis
+fabmetheus_utilities.vector3index.Vector3Index.dropAxis" class="py-name" href="#" onclick="return doclink('link-100', 'dropAxis', 'link-76');">dropAxis</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">                <tt class="py-name">zTravelMultiplied</tt> <tt class="py-op">=</tt> <tt class="py-name">locationMinusOld</tt><tt class="py-op">.</tt><tt class="py-name">z</tt> <tt class="py-op">*</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">zDistanceRatio</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">                <tt class="py-name">timeToNextThread</tt> <tt class="py-op">=</tt> <tt class="py-name">math</tt><tt class="py-op">.</tt><tt class="py-name">sqrt</tt><tt class="py-op">(</tt><tt class="py-name">xyTravel</tt> <tt class="py-op">*</tt> <tt class="py-name">xyTravel</tt> <tt class="py-op">+</tt> <tt class="py-name">zTravelMultiplied</tt> <tt class="py-op">*</tt> <tt class="py-name">zTravelMultiplied</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extrusionFeedRateMinute</tt> <tt class="py-op">*</tt> <tt class="py-number">60</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">                <tt class="py-name">retractionExtrusionDistance</tt> <tt class="py-op">=</tt> <tt class="py-name">timeToNextThread</tt> <tt class="py-op">*</tt> <tt class="py-name">abs</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oozeRate</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-number">60</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line">                <tt class="py-name">retractionExtrusionDistance</tt> <tt class="py-op">=</tt> <tt class="py-number">0.0</tt> </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line">             </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">gcodeCommands</tt><tt class="py-op">.</tt><tt class="py-name">extend</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-101" class="py-name" targets="Method entities.paths.TravelPath.getRetractCommands()=entities.paths.TravelPath-class.html#getRetractCommands"><a title="entities.paths.TravelPath.getRetractCommands" class="py-name" href="#" onclick="return doclink('link-101', 'getRetractCommands', 'link-101');">getRetractCommands</a></tt><tt class="py-op">(</tt><tt class="py-name">retractionExtrusionDistance</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-102" class="py-name"><a title="entities.paths.BoundaryPerimeter.getFeedRateMinute
+entities.paths.Path.getFeedRateMinute
+entities.paths.SupportPath.getFeedRateMinute" class="py-name" href="#" onclick="return doclink('link-102', 'getFeedRateMinute', 'link-25');">getFeedRateMinute</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line">             </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line">            <tt class="py-comment">#Store for reverse retraction</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line">            <tt class="py-name">lastRetractionExtrusionDistance</tt> <tt class="py-op">=</tt> <tt class="py-name">retractionExtrusionDistance</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line">             </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">gcodeCommands</tt><tt class="py-op">.</tt><tt id="link-103" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-103', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt id="link-104" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-104', 'GcodeCommand', 'link-0');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-105" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-105', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-106" class="py-name" targets="Variable gcodes.TURN_EXTRUDER_OFF=gcodes-module.html#TURN_EXTRUDER_OFF"><a title="gcodes.TURN_EXTRUDER_OFF" class="py-name" href="#" onclick="return doclink('link-106', 'TURN_EXTRUDER_OFF', 'link-106');">TURN_EXTRUDER_OFF</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line">         </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-107" class="py-name" targets="Method entities.paths.TravelPath.moveToStartPoint()=entities.paths.TravelPath-class.html#moveToStartPoint"><a title="entities.paths.TravelPath.moveToStartPoint" class="py-name" href="#" onclick="return doclink('link-107', 'moveToStartPoint', 'link-107');">moveToStartPoint</a></tt><tt class="py-op">(</tt><tt class="py-name">feedAndFlowRateMultiplier</tt><tt class="py-op">)</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line">     </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimensionActive</tt><tt class="py-op">:</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">previousPoint</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">startPoint</tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">gcodeCommands</tt><tt class="py-op">.</tt><tt class="py-name">extend</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-108" class="py-name" targets="Method entities.paths.TravelPath.getRetractReverseCommands()=entities.paths.TravelPath-class.html#getRetractReverseCommands"><a title="entities.paths.TravelPath.getRetractReverseCommands" class="py-name" href="#" onclick="return doclink('link-108', 'getRetractReverseCommands', 'link-108');">getRetractReverseCommands</a></tt><tt class="py-op">(</tt><tt class="py-name">lastRetractionExtrusionDistance</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line">             </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">gcodeCommands</tt><tt class="py-op">.</tt><tt id="link-109" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-109', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt id="link-110" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-110', 'GcodeCommand', 'link-0');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-111" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-111', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-112" class="py-name" targets="Variable gcodes.TURN_EXTRUDER_ON=gcodes-module.html#TURN_EXTRUDER_ON"><a title="gcodes.TURN_EXTRUDER_ON" class="py-name" href="#" onclick="return doclink('link-112', 'TURN_EXTRUDER_ON', 'link-112');">TURN_EXTRUDER_ON</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt>         </tt>
+</div><a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line">         </tt>
+<a name="TravelPath.getRetractCommands"></a><div id="TravelPath.getRetractCommands-def"><a name="L297"></a><tt class="py-lineno">297</tt> <a class="py-toggle" href="#" id="TravelPath.getRetractCommands-toggle" onclick="return toggle('TravelPath.getRetractCommands');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.TravelPath-class.html#getRetractCommands">getRetractCommands</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">extrusionDistance</tt><tt class="py-op">,</tt> <tt class="py-param">resumingSpeed</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TravelPath.getRetractCommands-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TravelPath.getRetractCommands-expanded"><a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line">        <tt class="py-keyword">global</tt> <tt id="link-113" class="py-name"><a title="entities.paths._totalExtrusionDistance" class="py-name" href="#" onclick="return doclink('link-113', '_totalExtrusionDistance', 'link-11');">_totalExtrusionDistance</a></tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line">        <tt class="py-name">commands</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extrusionUnitsRelative</tt><tt class="py-op">:</tt> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line">            <tt class="py-name">retractDistance</tt> <tt class="py-op">=</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-name">extrusionDistance</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimensionDecimalPlaces</tt><tt class="py-op">)</tt> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line">            <tt id="link-114" class="py-name"><a title="entities.paths._totalExtrusionDistance" class="py-name" href="#" onclick="return doclink('link-114', '_totalExtrusionDistance', 'link-11');">_totalExtrusionDistance</a></tt> <tt class="py-op">-=</tt> <tt class="py-name">extrusionDistance</tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line">            <tt class="py-name">retractDistance</tt> <tt class="py-op">=</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt id="link-115" class="py-name"><a title="entities.paths._totalExtrusionDistance" class="py-name" href="#" onclick="return doclink('link-115', '_totalExtrusionDistance', 'link-11');">_totalExtrusionDistance</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimensionDecimalPlaces</tt><tt class="py-op">)</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line">     </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line">        <tt class="py-name">commands</tt><tt class="py-op">.</tt><tt id="link-116" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-116', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt id="link-117" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-117', 'GcodeCommand', 'link-0');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-118" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-118', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-119" class="py-name"><a title="gcodes.LINEAR_GCODE_MOVEMENT" class="py-name" href="#" onclick="return doclink('link-119', 'LINEAR_GCODE_MOVEMENT', 'link-33');">LINEAR_GCODE_MOVEMENT</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-string">'F'</tt><tt class="py-op">,</tt> <tt class="py-string">'%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extruderRetractionSpeedMinute</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line">        <tt class="py-name">commands</tt><tt class="py-op">.</tt><tt id="link-120" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-120', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt id="link-121" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-121', 'GcodeCommand', 'link-0');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-122" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-122', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-123" class="py-name"><a title="gcodes.LINEAR_GCODE_MOVEMENT" class="py-name" href="#" onclick="return doclink('link-123', 'LINEAR_GCODE_MOVEMENT', 'link-33');">LINEAR_GCODE_MOVEMENT</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-string">'E'</tt><tt class="py-op">,</tt> <tt class="py-string">'%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">retractDistance</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line">        <tt class="py-name">commands</tt><tt class="py-op">.</tt><tt id="link-124" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-124', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt id="link-125" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-125', 'GcodeCommand', 'link-0');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-126" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-126', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-127" class="py-name"><a title="gcodes.LINEAR_GCODE_MOVEMENT" class="py-name" href="#" onclick="return doclink('link-127', 'LINEAR_GCODE_MOVEMENT', 'link-33');">LINEAR_GCODE_MOVEMENT</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-string">'F'</tt><tt class="py-op">,</tt> <tt class="py-string">'%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">resumingSpeed</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">commands</tt> </tt>
+</div><a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line">     </tt>
+<a name="TravelPath.getRetractReverseCommands"></a><div id="TravelPath.getRetractReverseCommands-def"><a name="L311"></a><tt class="py-lineno">311</tt> <a class="py-toggle" href="#" id="TravelPath.getRetractReverseCommands-toggle" onclick="return toggle('TravelPath.getRetractReverseCommands');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.TravelPath-class.html#getRetractReverseCommands">getRetractReverseCommands</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">extrusionDistance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TravelPath.getRetractReverseCommands-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TravelPath.getRetractReverseCommands-expanded"><a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line">        <tt class="py-keyword">global</tt> <tt id="link-128" class="py-name"><a title="entities.paths._totalExtrusionDistance" class="py-name" href="#" onclick="return doclink('link-128', '_totalExtrusionDistance', 'link-11');">_totalExtrusionDistance</a></tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line">        <tt class="py-name">commands</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extrusionUnitsRelative</tt><tt class="py-op">:</tt> </tt>
+<a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line">            <tt class="py-name">retractDistance</tt> <tt class="py-op">=</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-name">extrusionDistance</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimensionDecimalPlaces</tt><tt class="py-op">)</tt> </tt>
+<a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line">            <tt id="link-129" class="py-name"><a title="entities.paths._totalExtrusionDistance" class="py-name" href="#" onclick="return doclink('link-129', '_totalExtrusionDistance', 'link-11');">_totalExtrusionDistance</a></tt> <tt class="py-op">+=</tt> <tt class="py-name">extrusionDistance</tt> </tt>
+<a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line">            <tt class="py-name">retractDistance</tt> <tt class="py-op">=</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt id="link-130" class="py-name"><a title="entities.paths._totalExtrusionDistance" class="py-name" href="#" onclick="return doclink('link-130', '_totalExtrusionDistance', 'link-11');">_totalExtrusionDistance</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dimensionDecimalPlaces</tt><tt class="py-op">)</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line">     </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line">        <tt class="py-name">commands</tt><tt class="py-op">.</tt><tt id="link-131" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-131', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt id="link-132" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-132', 'GcodeCommand', 'link-0');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-133" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-133', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-134" class="py-name"><a title="gcodes.LINEAR_GCODE_MOVEMENT" class="py-name" href="#" onclick="return doclink('link-134', 'LINEAR_GCODE_MOVEMENT', 'link-33');">LINEAR_GCODE_MOVEMENT</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-string">'F'</tt><tt class="py-op">,</tt> <tt class="py-string">'%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extruderRetractionSpeedMinute</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line">        <tt class="py-name">commands</tt><tt class="py-op">.</tt><tt id="link-135" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-135', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt id="link-136" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-136', 'GcodeCommand', 'link-0');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-137" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-137', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-138" class="py-name"><a title="gcodes.LINEAR_GCODE_MOVEMENT" class="py-name" href="#" onclick="return doclink('link-138', 'LINEAR_GCODE_MOVEMENT', 'link-33');">LINEAR_GCODE_MOVEMENT</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-string">'E'</tt><tt class="py-op">,</tt> <tt class="py-string">'%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">retractDistance</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line">        <tt class="py-name">commands</tt><tt class="py-op">.</tt><tt id="link-139" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-139', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt id="link-140" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-140', 'GcodeCommand', 'link-0');">GcodeCommand</a></tt><tt class="py-op">(</tt><tt id="link-141" class="py-name"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-141', 'gcodes', 'link-10');">gcodes</a></tt><tt class="py-op">.</tt><tt id="link-142" class="py-name"><a title="gcodes.LINEAR_GCODE_MOVEMENT" class="py-name" href="#" onclick="return doclink('link-142', 'LINEAR_GCODE_MOVEMENT', 'link-33');">LINEAR_GCODE_MOVEMENT</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-string">'F'</tt><tt class="py-op">,</tt> <tt class="py-string">'%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">travelFeedRateMinute</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line">                         </tt>
+<a name="L324"></a><tt class="py-lineno">324</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extrusionUnitsRelative</tt><tt class="py-op">:</tt> </tt>
+<a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line">            <tt class="py-name">commands</tt><tt class="py-op">.</tt><tt id="link-143" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.append" class="py-name" href="#" onclick="return doclink('link-143', 'append', 'link-27');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-144" class="py-name" targets="Method entities.paths.Path.getResetExtruderDistanceCommand()=entities.paths.Path-class.html#getResetExtruderDistanceCommand"><a title="entities.paths.Path.getResetExtruderDistanceCommand" class="py-name" href="#" onclick="return doclink('link-144', 'getResetExtruderDistanceCommand', 'link-144');">getResetExtruderDistanceCommand</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L326"></a><tt class="py-lineno">326</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">commands</tt>         </tt>
+</div></div><a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line"> </tt>
+<a name="BoundaryPerimeter"></a><div id="BoundaryPerimeter-def"><a name="L328"></a><tt class="py-lineno">328</tt> <a class="py-toggle" href="#" id="BoundaryPerimeter-toggle" onclick="return toggle('BoundaryPerimeter');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="entities.paths.BoundaryPerimeter-class.html">BoundaryPerimeter</a><tt class="py-op">(</tt><tt class="py-base-class">Loop</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BoundaryPerimeter-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BoundaryPerimeter-expanded"><a name="L329"></a><tt class="py-lineno">329</tt>  <tt class="py-line">     </tt>
+<a name="BoundaryPerimeter.__init__"></a><div id="BoundaryPerimeter.__init__-def"><a name="L330"></a><tt class="py-lineno">330</tt> <a class="py-toggle" href="#" id="BoundaryPerimeter.__init__-toggle" onclick="return toggle('BoundaryPerimeter.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.BoundaryPerimeter-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">z</tt><tt class="py-op">,</tt> <tt class="py-param">runtimeParameters</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BoundaryPerimeter.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BoundaryPerimeter.__init__-expanded"><a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line">        <tt id="link-145" class="py-name" targets="Class entities.paths.Loop=entities.paths.Loop-class.html"><a title="entities.paths.Loop" class="py-name" href="#" onclick="return doclink('link-145', 'Loop', 'link-145');">Loop</a></tt><tt class="py-op">.</tt><tt id="link-146" class="py-name"><a title="LineFillStrategy.LineFillStrategy.__init__
+OrbitCoolStrategy.OrbitCoolStrategy.__init__
+SlowDownCoolStrategy.SlowDownCoolStrategy.__init__
+entities.GcodeCommand'.GcodeCommand.__init__
+entities.Layer'.Layer.__init__
+entities.NestedRing'.NestedRing.__init__
+entities.RuntimeParameters'.RuntimeParameters.__init__
+entities.SlicedModel'.SlicedModel.__init__
+entities.paths.BoundaryPerimeter.__init__
+entities.paths.InfillPath.__init__
+entities.paths.Loop.__init__
+entities.paths.Path.__init__
+entities.paths.SupportPath.__init__
+entities.paths.TravelPath.__init__
+fabmetheus_utilities.euclidean.DistanceIndex.__init__
+fabmetheus_utilities.euclidean.LoopLayer.__init__
+fabmetheus_utilities.euclidean.NestedBand.__init__
+fabmetheus_utilities.euclidean.NestedRing.__init__
+fabmetheus_utilities.euclidean.PathZ.__init__
+fabmetheus_utilities.euclidean.ProjectiveSpace.__init__
+fabmetheus_utilities.euclidean.RotatedLoopLayer.__init__
+fabmetheus_utilities.euclidean.XIntersectionIndex.__init__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving.__init__
+fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary.__init__
+fabmetheus_utilities.geometry.geometry_tools.face.Edge.__init__
+fabmetheus_utilities.geometry.geometry_tools.face.Face.__init__
+fabmetheus_utilities.geometry.geometry_tools.path.Path.__init__
+fabmetheus_utilities.geometry.geometry_tools.path.SVGFabricationCarving.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.BaseFunction.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.ClassObject.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketRound.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorClass.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorElement.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFalse.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFunction.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNone.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNumeric.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorTrue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorValue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.Function.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.FunctionVariable.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.KeyValue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.ModuleXMLElement.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.Setting.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.matrix.Matrix.__init__
+fabmetheus_utilities.geometry.solids.group.Group.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.EdgePair.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.ZoneArrangement.__init__
+fabmetheus_utilities.intercircle.CenterOutset.__init__
+fabmetheus_utilities.intercircle.CircleIntersection.__init__
+fabmetheus_utilities.intercircle.CircleNode.__init__
+fabmetheus_utilities.svg_reader.FontReader.__init__
+fabmetheus_utilities.svg_reader.Glyph.__init__
+fabmetheus_utilities.svg_reader.MatrixSVG.__init__
+fabmetheus_utilities.svg_reader.PathReader.__init__
+fabmetheus_utilities.svg_reader.SVGReader.__init__
+fabmetheus_utilities.svg_writer.SVGWriter.__init__
+fabmetheus_utilities.vector3.Vector3.__init__
+fabmetheus_utilities.vector3index.Vector3Index.__init__
+fabmetheus_utilities.xml_simple_reader.XMLElement.__init__
+fabmetheus_utilities.xml_simple_reader.XMLSimpleReader.__init__
+gcode_writer.GcodeWriter.__init__
+plugins.bottom.BottomSkein.__init__
+plugins.carve.CarveSkein.__init__
+plugins.comb.CombSkein.__init__
+plugins.cool.CoolSkein.__init__
+plugins.export.ExportSkein.__init__
+plugins.fill.FillSkein.__init__
+plugins.inset.InsetSkein.__init__
+plugins.multiply.MultiplySkein.__init__
+plugins.preface.PrefaceSkein.__init__
+plugins.support.SupportLayer.__init__
+plugins.support.SupportSkein.__init__" class="py-name" href="#" onclick="return doclink('link-146', '__init__', 'link-69');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">z</tt><tt class="py-op">,</tt> <tt class="py-name">runtimeParameters</tt><tt class="py-op">)</tt> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">boundaryPoints</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line"> </tt>
+<a name="BoundaryPerimeter.__str__"></a><div id="BoundaryPerimeter.__str__-def"><a name="L334"></a><tt class="py-lineno">334</tt> <a class="py-toggle" href="#" id="BoundaryPerimeter.__str__-toggle" onclick="return toggle('BoundaryPerimeter.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.BoundaryPerimeter-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BoundaryPerimeter.__str__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BoundaryPerimeter.__str__-expanded"><a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line">        <tt class="py-name">output</tt> <tt class="py-op">=</tt> <tt class="py-name">StringIO</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">'%12sboundaryPerimeter:\n'</tt> <tt class="py-op">%</tt> <tt class="py-string">''</tt><tt class="py-op">)</tt> </tt>
+<a name="L337"></a><tt class="py-lineno">337</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">'%14sboundaryPoints: %s\n'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-string">''</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">boundaryPoints</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L338"></a><tt class="py-lineno">338</tt>  <tt class="py-line">        <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt id="link-147" class="py-name"><a title="entities.paths.Loop" class="py-name" href="#" onclick="return doclink('link-147', 'Loop', 'link-145');">Loop</a></tt><tt class="py-op">.</tt><tt id="link-148" class="py-name"><a title="entities.GcodeCommand'.GcodeCommand.__str__
+entities.Layer'.Layer.__str__
+entities.NestedRing'.NestedRing.__str__
+entities.SlicedModel'.SlicedModel.__str__
+entities.paths.BoundaryPerimeter.__str__
+entities.paths.Path.__str__
+entities.paths.TravelPath.__str__" class="py-name" href="#" onclick="return doclink('link-148', '__str__', 'link-88');">__str__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L339"></a><tt class="py-lineno">339</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">output</tt><tt class="py-op">.</tt><tt class="py-name">getvalue</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L340"></a><tt class="py-lineno">340</tt>  <tt class="py-line">     </tt>
+<a name="BoundaryPerimeter.offset"></a><div id="BoundaryPerimeter.offset-def"><a name="L341"></a><tt class="py-lineno">341</tt> <a class="py-toggle" href="#" id="BoundaryPerimeter.offset-toggle" onclick="return toggle('BoundaryPerimeter.offset');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.BoundaryPerimeter-class.html#offset">offset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">offset</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BoundaryPerimeter.offset-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BoundaryPerimeter.offset-expanded"><a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">boundaryPoint</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">boundaryPoints</tt><tt class="py-op">:</tt> </tt>
+<a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line">            <tt class="py-name">boundaryPoint</tt><tt class="py-op">.</tt><tt class="py-name">x</tt> <tt class="py-op">+=</tt> <tt id="link-149" class="py-name"><a title="entities.NestedRing'.NestedRing.offset
+entities.paths.BoundaryPerimeter.offset
+entities.paths.Path.offset
+entities.paths.TravelPath.offset" class="py-name" href="#" onclick="return doclink('link-149', 'offset', 'link-55');">offset</a></tt><tt class="py-op">.</tt><tt class="py-name">real</tt> </tt>
+<a name="L344"></a><tt class="py-lineno">344</tt>  <tt class="py-line">            <tt class="py-name">boundaryPoint</tt><tt class="py-op">.</tt><tt class="py-name">y</tt> <tt class="py-op">+=</tt> <tt id="link-150" class="py-name"><a title="entities.NestedRing'.NestedRing.offset
+entities.paths.BoundaryPerimeter.offset
+entities.paths.Path.offset
+entities.paths.TravelPath.offset" class="py-name" href="#" onclick="return doclink('link-150', 'offset', 'link-55');">offset</a></tt><tt class="py-op">.</tt><tt class="py-name">imag</tt>             </tt>
+<a name="L345"></a><tt class="py-lineno">345</tt>  <tt class="py-line">        <tt id="link-151" class="py-name"><a title="entities.paths.Loop" class="py-name" href="#" onclick="return doclink('link-151', 'Loop', 'link-145');">Loop</a></tt><tt class="py-op">.</tt><tt id="link-152" class="py-name"><a title="entities.NestedRing'.NestedRing.offset
+entities.paths.BoundaryPerimeter.offset
+entities.paths.Path.offset
+entities.paths.TravelPath.offset" class="py-name" href="#" onclick="return doclink('link-152', 'offset', 'link-55');">offset</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-153" class="py-name"><a title="entities.NestedRing'.NestedRing.offset
+entities.paths.BoundaryPerimeter.offset
+entities.paths.Path.offset
+entities.paths.TravelPath.offset" class="py-name" href="#" onclick="return doclink('link-153', 'offset', 'link-55');">offset</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line">         </tt>
+<a name="BoundaryPerimeter.getFeedRateMinute"></a><div id="BoundaryPerimeter.getFeedRateMinute-def"><a name="L347"></a><tt class="py-lineno">347</tt> <a class="py-toggle" href="#" id="BoundaryPerimeter.getFeedRateMinute-toggle" onclick="return toggle('BoundaryPerimeter.getFeedRateMinute');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="entities.paths.BoundaryPerimeter-class.html#getFeedRateMinute">getFeedRateMinute</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BoundaryPerimeter.getFeedRateMinute-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BoundaryPerimeter.getFeedRateMinute-expanded"><a name="L348"></a><tt class="py-lineno">348</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">perimeterFeedRateMinute</tt> </tt>
+</div></div><a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:47 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

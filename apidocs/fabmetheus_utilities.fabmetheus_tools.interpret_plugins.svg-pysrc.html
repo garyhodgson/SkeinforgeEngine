@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="fabmetheus_utilities-module.html">Package&nbsp;fabmetheus_utilities</a> ::
+        <a href="fabmetheus_utilities.fabmetheus_tools-module.html">Package&nbsp;fabmetheus_tools</a> ::
+        <a href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins-module.html">Package&nbsp;interpret_plugins</a> ::
+        Module&nbsp;svg
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg-module.html">Module fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">This page is in the table of contents.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">The svg.py script is an import translator plugin to get a carving from an svg file.  This script will read an svg file made by skeinforge or by inkscape.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">An example inkscape svg file is inkscape_star.svg in the models folder.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">An import plugin is a script in the interpret_plugins folder which has the function getCarving.  It is meant to be run from the interpret tool.  To ensure that the plugin works on platforms which do not handle file capitalization properly, give the plugin a lower case name.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">The getCarving function takes the file name of an svg file and returns the carving.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package fabmetheus_utilities=fabmetheus_utilities-module.html"><a title="fabmetheus_utilities" class="py-name" href="#" onclick="return doclink('link-0', 'fabmetheus_utilities', 'link-0');">fabmetheus_utilities</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module fabmetheus_utilities.svg_reader=fabmetheus_utilities.svg_reader-module.html"><a title="fabmetheus_utilities.svg_reader" class="py-name" href="#" onclick="return doclink('link-1', 'svg_reader', 'link-1');">svg_reader</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class fabmetheus_utilities.svg_reader.SVGReader=fabmetheus_utilities.svg_reader.SVGReader-class.html"><a title="fabmetheus_utilities.svg_reader.SVGReader" class="py-name" href="#" onclick="return doclink('link-2', 'SVGReader', 'link-2');">SVGReader</a></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name"><a title="fabmetheus_utilities" class="py-name" href="#" onclick="return doclink('link-3', 'fabmetheus_utilities', 'link-0');">fabmetheus_utilities</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module fabmetheus_utilities.vector3=fabmetheus_utilities.vector3-module.html"><a title="fabmetheus_utilities.vector3" class="py-name" href="#" onclick="return doclink('link-4', 'vector3', 'link-4');">vector3</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Class fabmetheus_utilities.vector3.Vector3=fabmetheus_utilities.vector3.Vector3-class.html"><a title="fabmetheus_utilities.vector3.Vector3" class="py-name" href="#" onclick="return doclink('link-5', 'Vector3', 'link-5');">Vector3</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-6" class="py-name"><a title="fabmetheus_utilities" class="py-name" href="#" onclick="return doclink('link-6', 'fabmetheus_utilities', 'link-0');">fabmetheus_utilities</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Module fabmetheus_utilities.archive=fabmetheus_utilities.archive-module.html"><a title="fabmetheus_utilities.archive" class="py-name" href="#" onclick="return doclink('link-7', 'archive', 'link-7');">archive</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-8" class="py-name"><a title="fabmetheus_utilities" class="py-name" href="#" onclick="return doclink('link-8', 'fabmetheus_utilities', 'link-0');">fabmetheus_utilities</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Module fabmetheus_utilities.euclidean=fabmetheus_utilities.euclidean-module.html"><a title="fabmetheus_utilities.euclidean" class="py-name" href="#" onclick="return doclink('link-9', 'euclidean', 'link-9');">euclidean</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-10" class="py-name"><a title="fabmetheus_utilities" class="py-name" href="#" onclick="return doclink('link-10', 'fabmetheus_utilities', 'link-0');">fabmetheus_utilities</a></tt> <tt class="py-keyword">import</tt> <tt id="link-11" class="py-name" targets="Module fabmetheus_utilities.svg_writer=fabmetheus_utilities.svg_writer-module.html"><a title="fabmetheus_utilities.svg_writer" class="py-name" href="#" onclick="return doclink('link-11', 'svg_writer', 'link-11');">svg_writer</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-12" class="py-name"><a title="fabmetheus_utilities" class="py-name" href="#" onclick="return doclink('link-12', 'fabmetheus_utilities', 'link-0');">fabmetheus_utilities</a></tt> <tt class="py-keyword">import</tt> <tt id="link-13" class="py-name" targets="Module fabmetheus_utilities.xml_simple_writer=fabmetheus_utilities.xml_simple_writer-module.html"><a title="fabmetheus_utilities.xml_simple_writer" class="py-name" href="#" onclick="return doclink('link-13', 'xml_simple_writer', 'link-13');">xml_simple_writer</a></tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">math</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-name">__author__</tt> <tt class="py-op">=</tt> <tt class="py-string">'Enrique Perez (perez_enrique@yahoo.com)'</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt id="link-14" class="py-name" targets="Variable fabmetheus_utilities.archive.__credits__=fabmetheus_utilities.archive-module.html#__credits__,Variable fabmetheus_utilities.fabmetheus_tools.interpret_plugins.gts.__credits__=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.gts-module.html#__credits__,Variable fabmetheus_utilities.fabmetheus_tools.interpret_plugins.obj.__credits__=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.obj-module.html#__credits__,Variable fabmetheus_utilities.fabmetheus_tools.interpret_plugins.stl.__credits__=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.stl-module.html#__credits__,Variable fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.__credits__=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_tools.dictionary.__credits__=fabmetheus_utilities.geometry.geometry_tools.dictionary-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_tools.face.__credits__=fabmetheus_utilities.geometry.geometry_tools.face-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_tools.path.__credits__=fabmetheus_utilities.geometry.geometry_tools.path-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_tools.vertex.__credits__=fabmetheus_utilities.geometry.geometry_tools.vertex-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.matrix.__credits__=fabmetheus_utilities.geometry.geometry_utilities.matrix-module.html#__credits__,Variable fabmetheus_utilities.geometry.solids.group.__credits__=fabmetheus_utilities.geometry.solids.group-module.html#__credits__,Variable fabmetheus_utilities.geometry.solids.triangle_mesh.__credits__=fabmetheus_utilities.geometry.solids.triangle_mesh-module.html#__credits__,Variable fabmetheus_utilities.svg_reader.__credits__=fabmetheus_utilities.svg_reader-module.html#__credits__,Variable fabmetheus_utilities.vector3.__credits__=fabmetheus_utilities.vector3-module.html#__credits__,Variable fabmetheus_utilities.vector3index.__credits__=fabmetheus_utilities.vector3index-module.html#__credits__,Variable fabmetheus_utilities.xml_simple_reader.__credits__=fabmetheus_utilities.xml_simple_reader-module.html#__credits__,Variable fabmetheus_utilities.xml_simple_writer.__credits__=fabmetheus_utilities.xml_simple_writer-module.html#__credits__"><a title="fabmetheus_utilities.archive.__credits__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.gts.__credits__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.obj.__credits__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.stl.__credits__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.__credits__
+fabmetheus_utilities.geometry.geometry_tools.dictionary.__credits__
+fabmetheus_utilities.geometry.geometry_tools.face.__credits__
+fabmetheus_utilities.geometry.geometry_tools.path.__credits__
+fabmetheus_utilities.geometry.geometry_tools.vertex.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.matrix.__credits__
+fabmetheus_utilities.geometry.solids.group.__credits__
+fabmetheus_utilities.geometry.solids.triangle_mesh.__credits__
+fabmetheus_utilities.svg_reader.__credits__
+fabmetheus_utilities.vector3.__credits__
+fabmetheus_utilities.vector3index.__credits__
+fabmetheus_utilities.xml_simple_reader.__credits__
+fabmetheus_utilities.xml_simple_writer.__credits__" class="py-name" href="#" onclick="return doclink('link-14', '__credits__', 'link-14');">__credits__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'Nophead &lt;http://hydraraptor.blogspot.com/&gt;\nArt of Illusion &lt;http://www.artofillusion.org/&gt;'</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-name">__date__</tt> <tt class="py-op">=</tt> <tt class="py-string">'$Date: 2008/21/04 $'</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-name">__license__</tt> <tt class="py-op">=</tt> <tt class="py-string">'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="getCarving"></a><div id="getCarving-def"><a name="L28"></a><tt class="py-lineno"> 28</tt> <a class="py-toggle" href="#" id="getCarving-toggle" onclick="return toggle('getCarving');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg-module.html#getCarving">getCarving</a><tt class="py-op">(</tt><tt class="py-param">fileName</tt><tt class="py-op">=</tt><tt class="py-string">''</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getCarving-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="getCarving-expanded"><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-docstring">'Get the triangle mesh for the gts file.'</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-name">carving</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name" targets="Class fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html"><a title="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving" class="py-name" href="#" onclick="return doclink('link-15', 'SVGCarving', 'link-15');">SVGCarving</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-name">carving</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving.parseSVG()=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#parseSVG,Method fabmetheus_utilities.svg_reader.SVGReader.parseSVG()=fabmetheus_utilities.svg_reader.SVGReader-class.html#parseSVG"><a title="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving.parseSVG
+fabmetheus_utilities.svg_reader.SVGReader.parseSVG" class="py-name" href="#" onclick="return doclink('link-16', 'parseSVG', 'link-16');">parseSVG</a></tt><tt class="py-op">(</tt><tt class="py-name">fileName</tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name"><a title="fabmetheus_utilities.archive" class="py-name" href="#" onclick="return doclink('link-17', 'archive', 'link-7');">archive</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Function fabmetheus_utilities.archive.getFileText()=fabmetheus_utilities.archive-module.html#getFileText"><a title="fabmetheus_utilities.archive.getFileText" class="py-name" href="#" onclick="return doclink('link-18', 'getFileText', 'link-18');">getFileText</a></tt><tt class="py-op">(</tt><tt class="py-name">fileName</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">carving</tt> </tt>
+</div><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving"></a><div id="SVGCarving-def"><a name="L35"></a><tt class="py-lineno"> 35</tt> <a class="py-toggle" href="#" id="SVGCarving-toggle" onclick="return toggle('SVGCarving');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html">SVGCarving</a><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SVGCarving-expanded"><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-docstring">'An svg carving.'</tt> </tt>
+<a name="SVGCarving.__init__"></a><div id="SVGCarving.__init__-def"><a name="L37"></a><tt class="py-lineno"> 37</tt> <a class="py-toggle" href="#" id="SVGCarving.__init__-toggle" onclick="return toggle('SVGCarving.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.__init__-expanded"><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">                <tt class="py-docstring">'Add empty lists.'</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerThickness</tt> <tt class="py-op">=</tt> <tt class="py-number">1.0</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">maximumZ</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt> <tt class="py-number">987654321.0</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">minimumZ</tt> <tt class="py-op">=</tt> <tt class="py-number">987654321.0</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">svgReader</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="fabmetheus_utilities.svg_reader.SVGReader" class="py-name" href="#" onclick="return doclink('link-19', 'SVGReader', 'link-2');">SVGReader</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving.__repr__"></a><div id="SVGCarving.__repr__-def"><a name="L44"></a><tt class="py-lineno"> 44</tt> <a class="py-toggle" href="#" id="SVGCarving.__repr__-toggle" onclick="return toggle('SVGCarving.__repr__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.__repr__-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.__repr__-expanded"><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">                <tt class="py-docstring">'Get the string representation of this carving.'</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving.getCarvedSVG()=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#getCarvedSVG,Method fabmetheus_utilities.geometry.geometry_tools.path.SVGFabricationCarving.getCarvedSVG()=fabmetheus_utilities.geometry.geometry_tools.path.SVGFabricationCarving-class.html#getCarvedSVG"><a title="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving.getCarvedSVG
+fabmetheus_utilities.geometry.geometry_tools.path.SVGFabricationCarving.getCarvedSVG" class="py-name" href="#" onclick="return doclink('link-20', 'getCarvedSVG', 'link-20');">getCarvedSVG</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving.addXML"></a><div id="SVGCarving.addXML-def"><a name="L48"></a><tt class="py-lineno"> 48</tt> <a class="py-toggle" href="#" id="SVGCarving.addXML-toggle" onclick="return toggle('SVGCarving.addXML');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#addXML">addXML</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">depth</tt><tt class="py-op">,</tt> <tt class="py-param">output</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.addXML-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.addXML-expanded"><a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">                <tt class="py-docstring">'Add xml for this object.'</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                <tt id="link-21" class="py-name"><a title="fabmetheus_utilities.xml_simple_writer" class="py-name" href="#" onclick="return doclink('link-21', 'xml_simple_writer', 'link-13');">xml_simple_writer</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Function fabmetheus_utilities.xml_simple_writer.addXMLFromObjects()=fabmetheus_utilities.xml_simple_writer-module.html#addXMLFromObjects"><a title="fabmetheus_utilities.xml_simple_writer.addXMLFromObjects" class="py-name" href="#" onclick="return doclink('link-22', 'addXMLFromObjects', 'link-22');">addXMLFromObjects</a></tt><tt class="py-op">(</tt><tt class="py-name">depth</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">svgReader</tt><tt class="py-op">.</tt><tt class="py-name">rotatedLoopLayers</tt><tt class="py-op">,</tt> <tt class="py-name">output</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving.getCarveCornerMaximum"></a><div id="SVGCarving.getCarveCornerMaximum-def"><a name="L52"></a><tt class="py-lineno"> 52</tt> <a class="py-toggle" href="#" id="SVGCarving.getCarveCornerMaximum-toggle" onclick="return toggle('SVGCarving.getCarveCornerMaximum');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#getCarveCornerMaximum">getCarveCornerMaximum</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.getCarveCornerMaximum-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.getCarveCornerMaximum-expanded"><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">                <tt class="py-docstring">'Get the corner maximum of the vertexes.'</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cornerMaximum</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving.getCarveCornerMinimum"></a><div id="SVGCarving.getCarveCornerMinimum-def"><a name="L56"></a><tt class="py-lineno"> 56</tt> <a class="py-toggle" href="#" id="SVGCarving.getCarveCornerMinimum-toggle" onclick="return toggle('SVGCarving.getCarveCornerMinimum');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#getCarveCornerMinimum">getCarveCornerMinimum</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.getCarveCornerMinimum-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.getCarveCornerMinimum-expanded"><a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                <tt class="py-docstring">'Get the corner minimum of the vertexes.'</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cornerMinimum</tt> </tt>
+</div><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving.getCarvedSVG"></a><div id="SVGCarving.getCarvedSVG-def"><a name="L60"></a><tt class="py-lineno"> 60</tt> <a class="py-toggle" href="#" id="SVGCarving.getCarvedSVG-toggle" onclick="return toggle('SVGCarving.getCarvedSVG');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#getCarvedSVG">getCarvedSVG</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.getCarvedSVG-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.getCarvedSVG-expanded"><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">                <tt class="py-docstring">'Get the carved svg text.'</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt id="link-23" class="py-name"><a title="fabmetheus_utilities.svg_writer" class="py-name" href="#" onclick="return doclink('link-23', 'svg_writer', 'link-11');">svg_writer</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Function fabmetheus_utilities.svg_writer.getSVGByLoopLayers()=fabmetheus_utilities.svg_writer-module.html#getSVGByLoopLayers"><a title="fabmetheus_utilities.svg_writer.getSVGByLoopLayers" class="py-name" href="#" onclick="return doclink('link-24', 'getSVGByLoopLayers', 'link-24');">getSVGByLoopLayers</a></tt><tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">svgReader</tt><tt class="py-op">.</tt><tt class="py-name">rotatedLoopLayers</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving.getCarveLayerThickness"></a><div id="SVGCarving.getCarveLayerThickness-def"><a name="L64"></a><tt class="py-lineno"> 64</tt> <a class="py-toggle" href="#" id="SVGCarving.getCarveLayerThickness-toggle" onclick="return toggle('SVGCarving.getCarveLayerThickness');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#getCarveLayerThickness">getCarveLayerThickness</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.getCarveLayerThickness-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.getCarveLayerThickness-expanded"><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                <tt class="py-docstring">'Get the layer thickness.'</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerThickness</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving.getCarveRotatedBoundaryLayers"></a><div id="SVGCarving.getCarveRotatedBoundaryLayers-def"><a name="L68"></a><tt class="py-lineno"> 68</tt> <a class="py-toggle" href="#" id="SVGCarving.getCarveRotatedBoundaryLayers-toggle" onclick="return toggle('SVGCarving.getCarveRotatedBoundaryLayers');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#getCarveRotatedBoundaryLayers">getCarveRotatedBoundaryLayers</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.getCarveRotatedBoundaryLayers-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.getCarveRotatedBoundaryLayers-expanded"><a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                <tt class="py-docstring">'Get the rotated boundary layers.'</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">svgReader</tt><tt class="py-op">.</tt><tt class="py-name">rotatedLoopLayers</tt> </tt>
+</div><a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving.getFabmetheusXML"></a><div id="SVGCarving.getFabmetheusXML-def"><a name="L72"></a><tt class="py-lineno"> 72</tt> <a class="py-toggle" href="#" id="SVGCarving.getFabmetheusXML-toggle" onclick="return toggle('SVGCarving.getFabmetheusXML');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#getFabmetheusXML">getFabmetheusXML</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.getFabmetheusXML-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.getFabmetheusXML-expanded"><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">                <tt class="py-docstring">'Return the fabmetheus XML.'</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving.getInterpretationSuffix"></a><div id="SVGCarving.getInterpretationSuffix-def"><a name="L76"></a><tt class="py-lineno"> 76</tt> <a class="py-toggle" href="#" id="SVGCarving.getInterpretationSuffix-toggle" onclick="return toggle('SVGCarving.getInterpretationSuffix');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#getInterpretationSuffix">getInterpretationSuffix</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.getInterpretationSuffix-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.getInterpretationSuffix-expanded"><a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">                <tt class="py-docstring">'Return the suffix for a carving.'</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-string">'svg'</tt> </tt>
+</div><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving.parseSVG"></a><div id="SVGCarving.parseSVG-def"><a name="L80"></a><tt class="py-lineno"> 80</tt> <a class="py-toggle" href="#" id="SVGCarving.parseSVG-toggle" onclick="return toggle('SVGCarving.parseSVG');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#parseSVG">parseSVG</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">fileName</tt><tt class="py-op">,</tt> <tt class="py-param">svgText</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.parseSVG-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.parseSVG-expanded"><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">                <tt class="py-docstring">'Parse SVG text and store the layers.'</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">svgText</tt> <tt class="py-op">==</tt> <tt class="py-string">''</tt><tt class="py-op">:</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fileName</tt> <tt class="py-op">=</tt> <tt class="py-name">fileName</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">svgReader</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving.parseSVG
+fabmetheus_utilities.svg_reader.SVGReader.parseSVG" class="py-name" href="#" onclick="return doclink('link-25', 'parseSVG', 'link-16');">parseSVG</a></tt><tt class="py-op">(</tt><tt class="py-name">fileName</tt><tt class="py-op">,</tt> <tt class="py-name">svgText</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerThickness</tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name"><a title="fabmetheus_utilities.euclidean" class="py-name" href="#" onclick="return doclink('link-26', 'euclidean', 'link-9');">euclidean</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Function fabmetheus_utilities.euclidean.getFloatDefaultByDictionary()=fabmetheus_utilities.euclidean-module.html#getFloatDefaultByDictionary"><a title="fabmetheus_utilities.euclidean.getFloatDefaultByDictionary" class="py-name" href="#" onclick="return doclink('link-27', 'getFloatDefaultByDictionary', 'link-27');">getFloatDefaultByDictionary</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerThickness</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">svgReader</tt><tt class="py-op">.</tt><tt class="py-name">sliceDictionary</tt><tt class="py-op">,</tt> <tt class="py-string">'layerThickness'</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cornerMaximum</tt> <tt class="py-op">=</tt> <tt id="link-28" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3" class="py-name" href="#" onclick="return doclink('link-28', 'Vector3', 'link-5');">Vector3</a></tt><tt class="py-op">(</tt><tt class="py-op">-</tt><tt class="py-number">987654321.0</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">987654321.0</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">maximumZ</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cornerMinimum</tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name"><a title="fabmetheus_utilities.vector3.Vector3" class="py-name" href="#" onclick="return doclink('link-29', 'Vector3', 'link-5');">Vector3</a></tt><tt class="py-op">(</tt><tt class="py-number">987654321.0</tt><tt class="py-op">,</tt> <tt class="py-number">987654321.0</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">minimumZ</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                <tt id="link-30" class="py-name"><a title="fabmetheus_utilities.svg_writer" class="py-name" href="#" onclick="return doclink('link-30', 'svg_writer', 'link-11');">svg_writer</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Function fabmetheus_utilities.svg_writer.setSVGCarvingCorners()=fabmetheus_utilities.svg_writer-module.html#setSVGCarvingCorners"><a title="fabmetheus_utilities.svg_writer.setSVGCarvingCorners" class="py-name" href="#" onclick="return doclink('link-31', 'setSVGCarvingCorners', 'link-31');">setSVGCarvingCorners</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cornerMaximum</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cornerMinimum</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerThickness</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">svgReader</tt><tt class="py-op">.</tt><tt class="py-name">rotatedLoopLayers</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving.setCarveInfillInDirectionOfBridge"></a><div id="SVGCarving.setCarveInfillInDirectionOfBridge-def"><a name="L93"></a><tt class="py-lineno"> 93</tt> <a class="py-toggle" href="#" id="SVGCarving.setCarveInfillInDirectionOfBridge-toggle" onclick="return toggle('SVGCarving.setCarveInfillInDirectionOfBridge');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#setCarveInfillInDirectionOfBridge">setCarveInfillInDirectionOfBridge</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">infillInDirectionOfBridge</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.setCarveInfillInDirectionOfBridge-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.setCarveInfillInDirectionOfBridge-expanded"><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                <tt class="py-docstring">'Set the infill in direction of bridge.'</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving.setCarveLayerThickness"></a><div id="SVGCarving.setCarveLayerThickness-def"><a name="L97"></a><tt class="py-lineno"> 97</tt> <a class="py-toggle" href="#" id="SVGCarving.setCarveLayerThickness-toggle" onclick="return toggle('SVGCarving.setCarveLayerThickness');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#setCarveLayerThickness">setCarveLayerThickness</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">layerThickness</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.setCarveLayerThickness-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.setCarveLayerThickness-expanded"><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                <tt class="py-docstring">'Set the layer thickness.'</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">layerThickness</tt> <tt class="py-op">=</tt> <tt class="py-name">layerThickness</tt> </tt>
+</div><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving.setCarveImportRadius"></a><div id="SVGCarving.setCarveImportRadius-def"><a name="L101"></a><tt class="py-lineno">101</tt> <a class="py-toggle" href="#" id="SVGCarving.setCarveImportRadius-toggle" onclick="return toggle('SVGCarving.setCarveImportRadius');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#setCarveImportRadius">setCarveImportRadius</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">importRadius</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.setCarveImportRadius-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.setCarveImportRadius-expanded"><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">                <tt class="py-docstring">'Set the import radius.'</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">                <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
+<a name="SVGCarving.setCarveIsCorrectMesh"></a><div id="SVGCarving.setCarveIsCorrectMesh-def"><a name="L105"></a><tt class="py-lineno">105</tt> <a class="py-toggle" href="#" id="SVGCarving.setCarveIsCorrectMesh-toggle" onclick="return toggle('SVGCarving.setCarveIsCorrectMesh');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#setCarveIsCorrectMesh">setCarveIsCorrectMesh</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">isCorrectMesh</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SVGCarving.setCarveIsCorrectMesh-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="SVGCarving.setCarveIsCorrectMesh-expanded"><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">                <tt class="py-docstring">'Set the is correct mesh flag.'</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">                <tt class="py-keyword">pass</tt> </tt>
+</div></div><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:44 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>fabmetheus_utilities.svg_reader.PathReader</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="fabmetheus_utilities-module.html">Package&nbsp;fabmetheus_utilities</a> ::
+        <a href="fabmetheus_utilities.svg_reader-module.html">Module&nbsp;svg_reader</a> ::
+        Class&nbsp;PathReader
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="fabmetheus_utilities.svg_reader.PathReader-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class PathReader</h1><p class="nomargin-top"><span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader">source&nbsp;code</a></span></p>
+<p>Class to read svg path.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__init__"></a><span class="summary-sig-name">__init__</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">loops</span>,
+        <span class="summary-sig-arg">xmlElement</span>,
+        <span class="summary-sig-arg">yAxisPointingUpward</span>)</span><br />
+      Add to path string to loops.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPathArc"></a><span class="summary-sig-name">addPathArc</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">end</span>)</span><br />
+      Add an arc to the path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.addPathArc">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPathCubic"></a><span class="summary-sig-name">addPathCubic</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">controlPoints</span>,
+        <span class="summary-sig-arg">end</span>)</span><br />
+      Add a cubic curve to the path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.addPathCubic">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPathCubicReflected"></a><span class="summary-sig-name">addPathCubicReflected</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">controlPoint</span>,
+        <span class="summary-sig-arg">end</span>)</span><br />
+      Add a cubic curve to the path from a reflected control point.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.addPathCubicReflected">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPathLine"></a><span class="summary-sig-name">addPathLine</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">lineFunction</span>,
+        <span class="summary-sig-arg">point</span>)</span><br />
+      Add a line to the path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.addPathLine">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPathLineAxis"></a><span class="summary-sig-name">addPathLineAxis</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">point</span>)</span><br />
+      Add an axis line to the path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.addPathLineAxis">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPathLineByFunction"></a><span class="summary-sig-name">addPathLineByFunction</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">lineFunction</span>)</span><br />
+      Add a line to the path by line function.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.addPathLineByFunction">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPathMove"></a><span class="summary-sig-name">addPathMove</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">lineFunction</span>,
+        <span class="summary-sig-arg">point</span>)</span><br />
+      Add an axis line to the path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.addPathMove">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPathQuadratic"></a><span class="summary-sig-name">addPathQuadratic</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">controlPoint</span>,
+        <span class="summary-sig-arg">end</span>)</span><br />
+      Add a quadratic curve to the path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.addPathQuadratic">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPathQuadraticReflected"></a><span class="summary-sig-name">addPathQuadraticReflected</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">end</span>)</span><br />
+      Add a quadratic curve to the path from a reflected control point.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.addPathQuadraticReflected">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getComplexByExtraIndex"></a><span class="summary-sig-name">getComplexByExtraIndex</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">extraIndex</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Get complex from the extraIndex.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.getComplexByExtraIndex">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getComplexRelative"></a><span class="summary-sig-name">getComplexRelative</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get relative complex.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.getComplexRelative">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getFloatByExtraIndex"></a><span class="summary-sig-name">getFloatByExtraIndex</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">extraIndex</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Get float from the extraIndex.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.getFloatByExtraIndex">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getOldPoint"></a><span class="summary-sig-name">getOldPoint</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the old point.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.getOldPoint">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordA"></a><span class="summary-sig-name">processPathWordA</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word A.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordA">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWorda"></a><span class="summary-sig-name">processPathWorda</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word a.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWorda">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordC"></a><span class="summary-sig-name">processPathWordC</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word C.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordC">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordc"></a><span class="summary-sig-name">processPathWordc</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word C.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordc">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordH"></a><span class="summary-sig-name">processPathWordH</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word H.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordH">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordh"></a><span class="summary-sig-name">processPathWordh</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word h.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordh">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordL"></a><span class="summary-sig-name">processPathWordL</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word L.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordL">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordl"></a><span class="summary-sig-name">processPathWordl</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word l.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordl">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordM"></a><span class="summary-sig-name">processPathWordM</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word M.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordM">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordm"></a><span class="summary-sig-name">processPathWordm</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word m.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordm">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordQ"></a><span class="summary-sig-name">processPathWordQ</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word Q.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordQ">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordq"></a><span class="summary-sig-name">processPathWordq</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word q.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordq">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordS"></a><span class="summary-sig-name">processPathWordS</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word S.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWords"></a><span class="summary-sig-name">processPathWords</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word s.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWords">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordT"></a><span class="summary-sig-name">processPathWordT</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word T.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordT">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordt"></a><span class="summary-sig-name">processPathWordt</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word t.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordt">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordV"></a><span class="summary-sig-name">processPathWordV</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word V.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordV">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordv"></a><span class="summary-sig-name">processPathWordv</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word v.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordv">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordZ"></a><span class="summary-sig-name">processPathWordZ</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word Z.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordZ">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processPathWordz"></a><span class="summary-sig-name">processPathWordz</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process path word z.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.svg_reader-pysrc.html#PathReader.processPathWordz">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:44 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

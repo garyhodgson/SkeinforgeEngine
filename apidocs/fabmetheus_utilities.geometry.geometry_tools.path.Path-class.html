@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>fabmetheus_utilities.geometry.geometry_tools.path.Path</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="fabmetheus_utilities-module.html">Package&nbsp;fabmetheus_utilities</a> ::
+        <a href="fabmetheus_utilities.geometry-module.html">Package&nbsp;geometry</a> ::
+        <a href="fabmetheus_utilities.geometry.geometry_tools-module.html">Package&nbsp;geometry_tools</a> ::
+        <a href="fabmetheus_utilities.geometry.geometry_tools.path-module.html">Module&nbsp;path</a> ::
+        Class&nbsp;Path
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Path</h1><p class="nomargin-top"><span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_fabmethe_4" name="uml_class_diagram_for_fabmethe_4">
+<area shape="rect" id="node26" href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#__init__" title="Add empty lists." alt="" coords="24,377,280,396"/>
+<area shape="rect" id="node26" href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#addXMLInnerSection" title="Add the xml section for this object." alt="" coords="24,396,280,415"/>
+<area shape="rect" id="node26" href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#getFabricationExtension" title="Get fabrication extension." alt="" coords="24,415,280,433"/>
+<area shape="rect" id="node26" href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#getFabricationText" title="Get fabrication text." alt="" coords="24,433,280,452"/>
+<area shape="rect" id="node26" href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#getMatrix4X4" title="Get the matrix4X4." alt="" coords="24,452,280,471"/>
+<area shape="rect" id="node26" href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#getMatrixChainTetragrid" title="Get the matrix chain tetragrid." alt="" coords="24,471,280,489"/>
+<area shape="rect" id="node26" href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#getPaths" title="Get all paths." alt="" coords="24,489,280,508"/>
+<area shape="rect" id="node26" href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#getTransformedPaths" title="Get all transformed paths." alt="" coords="24,508,280,527"/>
+<area shape="rect" id="node1" href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html" title="A path." alt="" coords="12,345,292,533"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#__repr__" title="Get the string representation of this object info." alt="" coords="17,39,287,57"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#addXML" title="Add xml for this object." alt="" coords="17,57,287,76"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#addXMLArchivableObjects" title="Add xml for this object." alt="" coords="17,76,287,95"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#createShape" title="Create the shape." alt="" coords="17,95,287,113"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getAttributeDictionary" title="Get attribute table." alt="" coords="17,113,287,132"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getComplexTransformedPathLists" title="Get complex transformed path lists." alt="" coords="17,132,287,151"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getGeometryOutput" title="Get geometry output dictionary." alt="" coords="17,151,287,169"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getMinimumZ" title="Get the minimum z." alt="" coords="17,169,287,188"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getTransformedVertexes" title="Get all transformed vertexes." alt="" coords="17,188,287,207"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getTriangleMeshes" title="Get all triangleMeshes." alt="" coords="17,207,287,225"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getType" title="Get type." alt="" coords="17,225,287,244"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getVertexes" title="Get all vertexes." alt="" coords="17,244,287,263"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getVisible" title="Get visible." alt="" coords="17,263,287,281"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getXMLLocalName" title="Get xml local name." alt="" coords="17,281,287,300"/>
+<area shape="rect" id="node27" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#setToXMLElement" title="Set the shape of this carvable object info." alt="" coords="17,300,287,319"/>
+<area shape="rect" id="node2" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html" title="A dictionary object." alt="" coords="5,6,299,325"/>
+</map>
+  <img src="uml_class_diagram_for_fabmethe_4.gif" alt='' usemap="#uml_class_diagram_for_fabmethe_4" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>A path.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Add empty lists.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#addXMLInnerSection" class="summary-sig-name">addXMLInnerSection</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">depth</span>,
+        <span class="summary-sig-arg">output</span>)</span><br />
+      Add the xml section for this object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.addXMLInnerSection">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#getFabricationExtension" class="summary-sig-name">getFabricationExtension</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get fabrication extension.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.getFabricationExtension">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#getFabricationText" class="summary-sig-name">getFabricationText</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">addLayerTemplate</span>)</span><br />
+      Get fabrication text.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.getFabricationText">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#getMatrix4X4" class="summary-sig-name">getMatrix4X4</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the matrix4X4.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.getMatrix4X4">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#getMatrixChainTetragrid" class="summary-sig-name">getMatrixChainTetragrid</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the matrix chain tetragrid.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.getMatrixChainTetragrid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#getPaths" class="summary-sig-name">getPaths</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get all paths.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.getPaths">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#getTransformedPaths" class="summary-sig-name">getTransformedPaths</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get all transformed paths.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.getTransformedPaths">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html">dictionary.Dictionary</a></code></b>:
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#__repr__">__repr__</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#addXML">addXML</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#addXMLArchivableObjects">addXMLArchivableObjects</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#createShape">createShape</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getAttributeDictionary">getAttributeDictionary</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getComplexTransformedPathLists">getComplexTransformedPathLists</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getGeometryOutput">getGeometryOutput</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getMinimumZ">getMinimumZ</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getTransformedVertexes">getTransformedVertexes</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getTriangleMeshes">getTriangleMeshes</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getType">getType</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getVertexes">getVertexes</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getVisible">getVisible</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getXMLLocalName">getXMLLocalName</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#setToXMLElement">setToXMLElement</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add empty lists.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#__init__">dictionary.Dictionary.__init__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="addXMLInnerSection"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">addXMLInnerSection</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">depth</span>,
+        <span class="sig-arg">output</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.addXMLInnerSection">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add the xml section for this object.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#addXMLInnerSection">dictionary.Dictionary.addXMLInnerSection</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getFabricationExtension"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getFabricationExtension</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.getFabricationExtension">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get fabrication extension.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getFabricationExtension">dictionary.Dictionary.getFabricationExtension</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getFabricationText"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getFabricationText</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">addLayerTemplate</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.getFabricationText">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get fabrication text.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getFabricationText">dictionary.Dictionary.getFabricationText</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getMatrix4X4"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getMatrix4X4</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.getMatrix4X4">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the matrix4X4.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getMatrix4X4">dictionary.Dictionary.getMatrix4X4</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getMatrixChainTetragrid"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getMatrixChainTetragrid</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.getMatrixChainTetragrid">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the matrix chain tetragrid.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getMatrixChainTetragrid">dictionary.Dictionary.getMatrixChainTetragrid</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getPaths"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getPaths</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.getPaths">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get all paths.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getPaths">dictionary.Dictionary.getPaths</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getTransformedPaths"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getTransformedPaths</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_tools.path-pysrc.html#Path.getTransformedPaths">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get all transformed paths.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getTransformedPaths">dictionary.Dictionary.getTransformedPaths</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:40 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

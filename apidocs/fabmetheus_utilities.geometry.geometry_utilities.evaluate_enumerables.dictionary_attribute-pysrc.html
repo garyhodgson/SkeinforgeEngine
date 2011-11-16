@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="fabmetheus_utilities-module.html">Package&nbsp;fabmetheus_utilities</a> ::
+        <a href="fabmetheus_utilities.geometry-module.html">Package&nbsp;geometry</a> ::
+        <a href="fabmetheus_utilities.geometry.geometry_utilities-module.html">Package&nbsp;geometry_utilities</a> ::
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables-module.html">Package&nbsp;evaluate_enumerables</a> ::
+        Module&nbsp;dictionary_attribute
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute-module.html">Module fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">Dictionary object attributes.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package fabmetheus_utilities=fabmetheus_utilities-module.html"><a title="fabmetheus_utilities" class="py-name" href="#" onclick="return doclink('link-0', 'fabmetheus_utilities', 'link-0');">fabmetheus_utilities</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module fabmetheus_utilities.euclidean=fabmetheus_utilities.euclidean-module.html"><a title="fabmetheus_utilities.euclidean" class="py-name" href="#" onclick="return doclink('link-1', 'euclidean', 'link-1');">euclidean</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-name">__author__</tt> <tt class="py-op">=</tt> <tt class="py-string">'Enrique Perez (perez_enrique@yahoo.com)'</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable fabmetheus_utilities.archive.__credits__=fabmetheus_utilities.archive-module.html#__credits__,Variable fabmetheus_utilities.fabmetheus_tools.interpret_plugins.gts.__credits__=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.gts-module.html#__credits__,Variable fabmetheus_utilities.fabmetheus_tools.interpret_plugins.obj.__credits__=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.obj-module.html#__credits__,Variable fabmetheus_utilities.fabmetheus_tools.interpret_plugins.stl.__credits__=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.stl-module.html#__credits__,Variable fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.__credits__=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_tools.dictionary.__credits__=fabmetheus_utilities.geometry.geometry_tools.dictionary-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_tools.face.__credits__=fabmetheus_utilities.geometry.geometry_tools.face-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_tools.path.__credits__=fabmetheus_utilities.geometry.geometry_tools.path-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_tools.vertex.__credits__=fabmetheus_utilities.geometry.geometry_tools.vertex-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.__credits__=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute-module.html#__credits__,Variable fabmetheus_utilities.geometry.geometry_utilities.matrix.__credits__=fabmetheus_utilities.geometry.geometry_utilities.matrix-module.html#__credits__,Variable fabmetheus_utilities.geometry.solids.group.__credits__=fabmetheus_utilities.geometry.solids.group-module.html#__credits__,Variable fabmetheus_utilities.geometry.solids.triangle_mesh.__credits__=fabmetheus_utilities.geometry.solids.triangle_mesh-module.html#__credits__,Variable fabmetheus_utilities.svg_reader.__credits__=fabmetheus_utilities.svg_reader-module.html#__credits__,Variable fabmetheus_utilities.vector3.__credits__=fabmetheus_utilities.vector3-module.html#__credits__,Variable fabmetheus_utilities.vector3index.__credits__=fabmetheus_utilities.vector3index-module.html#__credits__,Variable fabmetheus_utilities.xml_simple_reader.__credits__=fabmetheus_utilities.xml_simple_reader-module.html#__credits__,Variable fabmetheus_utilities.xml_simple_writer.__credits__=fabmetheus_utilities.xml_simple_writer-module.html#__credits__"><a title="fabmetheus_utilities.archive.__credits__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.gts.__credits__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.obj.__credits__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.stl.__credits__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.__credits__
+fabmetheus_utilities.geometry.geometry_tools.dictionary.__credits__
+fabmetheus_utilities.geometry.geometry_tools.face.__credits__
+fabmetheus_utilities.geometry.geometry_tools.path.__credits__
+fabmetheus_utilities.geometry.geometry_tools.vertex.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.__credits__
+fabmetheus_utilities.geometry.geometry_utilities.matrix.__credits__
+fabmetheus_utilities.geometry.solids.group.__credits__
+fabmetheus_utilities.geometry.solids.triangle_mesh.__credits__
+fabmetheus_utilities.svg_reader.__credits__
+fabmetheus_utilities.vector3.__credits__
+fabmetheus_utilities.vector3index.__credits__
+fabmetheus_utilities.xml_simple_reader.__credits__
+fabmetheus_utilities.xml_simple_writer.__credits__" class="py-name" href="#" onclick="return doclink('link-2', '__credits__', 'link-2');">__credits__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'Art of Illusion &lt;http://www.artofillusion.org/&gt;'</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-name">__date__</tt> <tt class="py-op">=</tt> <tt class="py-string">'$Date: 2008/02/05 $'</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-name">__license__</tt> <tt class="py-op">=</tt> <tt class="py-string">'GNU Affero General Public License http://www.gnu.org/licenses/agpl.html'</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
+<a name="_getAccessibleAttribute"></a><div id="_getAccessibleAttribute-def"><a name="L14"></a><tt class="py-lineno">14</tt> <a class="py-toggle" href="#" id="_getAccessibleAttribute-toggle" onclick="return toggle('_getAccessibleAttribute');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute-module.html#_getAccessibleAttribute">_getAccessibleAttribute</a><tt class="py-op">(</tt><tt class="py-param">attributeName</tt><tt class="py-op">,</tt> <tt class="py-param">dictionaryObject</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_getAccessibleAttribute-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="_getAccessibleAttribute-expanded"><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-docstring">'Get the accessible attribute.'</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">attributeName</tt> <tt class="py-keyword">in</tt> <tt id="link-3" class="py-name" targets="Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.globalNativeFunctionSet=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute-module.html#globalNativeFunctionSet,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.globalNativeFunctionSet=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute-module.html#globalNativeFunctionSet,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.globalNativeFunctionSet=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute-module.html#globalNativeFunctionSet"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.globalNativeFunctionSet
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.globalNativeFunctionSet
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.globalNativeFunctionSet" class="py-name" href="#" onclick="return doclink('link-3', 'globalNativeFunctionSet', 'link-3');">globalNativeFunctionSet</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">getattr</tt><tt class="py-op">(</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">,</tt> <tt class="py-name">attributeName</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">attributeName</tt> <tt class="py-keyword">in</tt> <tt id="link-4" class="py-name" targets="Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.globalGetAccessibleAttributeSet=fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting-module.html#globalGetAccessibleAttributeSet,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.globalGetAccessibleAttributeSet=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute-module.html#globalGetAccessibleAttributeSet,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.globalGetAccessibleAttributeSet=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute-module.html#globalGetAccessibleAttributeSet,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.globalGetAccessibleAttributeSet=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute-module.html#globalGetAccessibleAttributeSet,Variable fabmetheus_utilities.vector3.globalGetAccessibleAttributeSet=fabmetheus_utilities.vector3-module.html#globalGetAccessibleAttributeSet,Variable fabmetheus_utilities.vector3index.globalGetAccessibleAttributeSet=fabmetheus_utilities.vector3index-module.html#globalGetAccessibleAttributeSet,Variable fabmetheus_utilities.xml_simple_reader.globalGetAccessibleAttributeSet=fabmetheus_utilities.xml_simple_reader-module.html#globalGetAccessibleAttributeSet"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.globalGetAccessibleAttributeSet
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.globalGetAccessibleAttributeSet
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.globalGetAccessibleAttributeSet
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.globalGetAccessibleAttributeSet
+fabmetheus_utilities.vector3.globalGetAccessibleAttributeSet
+fabmetheus_utilities.vector3index.globalGetAccessibleAttributeSet
+fabmetheus_utilities.xml_simple_reader.globalGetAccessibleAttributeSet" class="py-name" href="#" onclick="return doclink('link-4', 'globalGetAccessibleAttributeSet', 'link-4');">globalGetAccessibleAttributeSet</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">                <tt class="py-name">stringAttribute</tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name" targets="Class fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute" class="py-name" href="#" onclick="return doclink('link-5', 'DictionaryAttribute', 'link-5');">DictionaryAttribute</a></tt><tt class="py-op">(</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">getattr</tt><tt class="py-op">(</tt><tt class="py-name">stringAttribute</tt><tt class="py-op">,</tt> <tt class="py-name">attributeName</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="DictionaryAttribute"></a><div id="DictionaryAttribute-def"><a name="L24"></a><tt class="py-lineno">24</tt> <a class="py-toggle" href="#" id="DictionaryAttribute-toggle" onclick="return toggle('DictionaryAttribute');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html">DictionaryAttribute</a><tt class="py-op">:</tt> </tt>
+</div><div id="DictionaryAttribute-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="DictionaryAttribute-expanded"><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-docstring">'Class to handle a dictionary.'</tt> </tt>
+<a name="DictionaryAttribute.__init__"></a><div id="DictionaryAttribute.__init__-def"><a name="L26"></a><tt class="py-lineno">26</tt> <a class="py-toggle" href="#" id="DictionaryAttribute.__init__-toggle" onclick="return toggle('DictionaryAttribute.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dictionaryObject</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DictionaryAttribute.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DictionaryAttribute.__init__-expanded"><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">                <tt class="py-docstring">'Initialize.'</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt> <tt class="py-op">=</tt> <tt class="py-name">dictionaryObject</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="DictionaryAttribute.__repr__"></a><div id="DictionaryAttribute.__repr__-def"><a name="L30"></a><tt class="py-lineno">30</tt> <a class="py-toggle" href="#" id="DictionaryAttribute.__repr__-toggle" onclick="return toggle('DictionaryAttribute.__repr__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DictionaryAttribute.__repr__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DictionaryAttribute.__repr__-expanded"><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">                <tt class="py-docstring">"Get the dictionary representation of this DictionaryAttribute."</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt id="link-6" class="py-name" targets="Method entities.GcodeCommand'.GcodeCommand.str()=entities.GcodeCommand%27.GcodeCommand-class.html#str"><a title="entities.GcodeCommand'.GcodeCommand.str" class="py-name" href="#" onclick="return doclink('link-6', 'str', 'link-6');">str</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
+<a name="DictionaryAttribute.count"></a><div id="DictionaryAttribute.count-def"><a name="L34"></a><tt class="py-lineno">34</tt> <a class="py-toggle" href="#" id="DictionaryAttribute.count-toggle" onclick="return toggle('DictionaryAttribute.count');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#count">count</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DictionaryAttribute.count-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DictionaryAttribute.count-expanded"><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">                <tt class="py-docstring">'Get the count.'</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">                <tt class="py-name">countTotal</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">key</tt><tt class="py-op">,</tt> <tt class="py-name">iteratorValue</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">.</tt><tt class="py-name">iteritems</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">iteratorValue</tt> <tt class="py-op">==</tt> <tt class="py-name">value</tt><tt class="py-op">:</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                                <tt class="py-name">countTotal</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">countTotal</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="DictionaryAttribute.delete"></a><div id="DictionaryAttribute.delete-def"><a name="L42"></a><tt class="py-lineno">42</tt> <a class="py-toggle" href="#" id="DictionaryAttribute.delete-toggle" onclick="return toggle('DictionaryAttribute.delete');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#delete">delete</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">arguments</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DictionaryAttribute.delete-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DictionaryAttribute.delete-expanded"><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">                <tt class="py-docstring">'Get the delete dictionary.'</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">arguments</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt> <tt class="py-op">!=</tt> <tt class="py-name">list</tt><tt class="py-op">:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">                        <tt class="py-keyword">del</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">[</tt><tt class="py-name">arguments</tt><tt class="py-op">]</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">arguments</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">.</tt><tt class="py-name">clear</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">arguments</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">                        <tt class="py-keyword">del</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">[</tt><tt class="py-name">arguments</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">]</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">enumeratorKey</tt> <tt class="py-keyword">in</tt> <tt id="link-7" class="py-name"><a title="fabmetheus_utilities.euclidean" class="py-name" href="#" onclick="return doclink('link-7', 'euclidean', 'link-1');">euclidean</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Function fabmetheus_utilities.euclidean.getEnumeratorKeysAlwaysList()=fabmetheus_utilities.euclidean-module.html#getEnumeratorKeysAlwaysList"><a title="fabmetheus_utilities.euclidean.getEnumeratorKeysAlwaysList" class="py-name" href="#" onclick="return doclink('link-8', 'getEnumeratorKeysAlwaysList', 'link-8');">getEnumeratorKeysAlwaysList</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">,</tt> <tt class="py-name">arguments</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">                        <tt class="py-keyword">del</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">[</tt><tt class="py-name">enumeratorKey</tt><tt class="py-op">]</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"> </tt>
+<a name="DictionaryAttribute.getIsIn"></a><div id="DictionaryAttribute.getIsIn-def"><a name="L57"></a><tt class="py-lineno">57</tt> <a class="py-toggle" href="#" id="DictionaryAttribute.getIsIn-toggle" onclick="return toggle('DictionaryAttribute.getIsIn');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#getIsIn">getIsIn</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DictionaryAttribute.getIsIn-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DictionaryAttribute.getIsIn-expanded"><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">                <tt class="py-docstring">'Determine if the value is in.'</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">value</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt> </tt>
+</div><a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"> </tt>
+<a name="DictionaryAttribute.getIsNotIn"></a><div id="DictionaryAttribute.getIsNotIn-def"><a name="L61"></a><tt class="py-lineno">61</tt> <a class="py-toggle" href="#" id="DictionaryAttribute.getIsNotIn-toggle" onclick="return toggle('DictionaryAttribute.getIsNotIn');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#getIsNotIn">getIsNotIn</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DictionaryAttribute.getIsNotIn-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DictionaryAttribute.getIsNotIn-expanded"><a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">                <tt class="py-docstring">'Determine if the value is in.'</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-keyword">not</tt><tt class="py-op">(</tt><tt class="py-name">value</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"> </tt>
+<a name="DictionaryAttribute.getLength"></a><div id="DictionaryAttribute.getLength-def"><a name="L65"></a><tt class="py-lineno">65</tt> <a class="py-toggle" href="#" id="DictionaryAttribute.getLength-toggle" onclick="return toggle('DictionaryAttribute.getLength');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#getLength">getLength</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DictionaryAttribute.getLength-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DictionaryAttribute.getLength-expanded"><a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">                <tt class="py-docstring">'Get the length.'</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"> </tt>
+<a name="DictionaryAttribute.getMax"></a><div id="DictionaryAttribute.getMax-def"><a name="L69"></a><tt class="py-lineno">69</tt> <a class="py-toggle" href="#" id="DictionaryAttribute.getMax-toggle" onclick="return toggle('DictionaryAttribute.getMax');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#getMax">getMax</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DictionaryAttribute.getMax-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DictionaryAttribute.getMax-expanded"><a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">                <tt class="py-docstring">'Get the max.'</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">max</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line"> </tt>
+<a name="DictionaryAttribute.getMin"></a><div id="DictionaryAttribute.getMin-def"><a name="L73"></a><tt class="py-lineno">73</tt> <a class="py-toggle" href="#" id="DictionaryAttribute.getMin-toggle" onclick="return toggle('DictionaryAttribute.getMin');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#getMin">getMin</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DictionaryAttribute.getMin-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DictionaryAttribute.getMin-expanded"><a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">                <tt class="py-docstring">'Get the min.'</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">min</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line"> </tt>
+<a name="DictionaryAttribute.index"></a><div id="DictionaryAttribute.index-def"><a name="L77"></a><tt class="py-lineno">77</tt> <a class="py-toggle" href="#" id="DictionaryAttribute.index-toggle" onclick="return toggle('DictionaryAttribute.index');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#index">index</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DictionaryAttribute.index-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DictionaryAttribute.index-expanded"><a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">                <tt class="py-docstring">'Get the index element.'</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">key</tt><tt class="py-op">,</tt> <tt class="py-name">iteratorValue</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">.</tt><tt class="py-name">iteritems</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">                        <tt class="py-keyword">if</tt> <tt class="py-name">iteratorValue</tt> <tt class="py-op">==</tt> <tt class="py-name">value</tt><tt class="py-op">:</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">                                <tt class="py-keyword">return</tt> <tt class="py-name">key</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'Value (%s) not found in index in DictionaryAttribute for (%s).'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line"> </tt>
+<a name="DictionaryAttribute.length"></a><div id="DictionaryAttribute.length-def"><a name="L84"></a><tt class="py-lineno">84</tt> <a class="py-toggle" href="#" id="DictionaryAttribute.length-toggle" onclick="return toggle('DictionaryAttribute.length');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#length">length</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DictionaryAttribute.length-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DictionaryAttribute.length-expanded"><a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line">                <tt class="py-docstring">'Get the length.'</tt> </tt>
+<a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line"> </tt>
+<a name="DictionaryAttribute.set"></a><div id="DictionaryAttribute.set-def"><a name="L88"></a><tt class="py-lineno">88</tt> <a class="py-toggle" href="#" id="DictionaryAttribute.set-toggle" onclick="return toggle('DictionaryAttribute.set');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#set">set</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">itemIndex</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="DictionaryAttribute.set-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="DictionaryAttribute.set-expanded"><a name="L89"></a><tt class="py-lineno">89</tt>  <tt class="py-line">                <tt class="py-docstring">'Set value.'</tt> </tt>
+<a name="L90"></a><tt class="py-lineno">90</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt><tt class="py-op">[</tt><tt class="py-name">itemIndex</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">value</tt> </tt>
+<a name="L91"></a><tt class="py-lineno">91</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dictionaryObject</tt> </tt>
+</div></div><a name="L92"></a><tt class="py-lineno">92</tt>  <tt class="py-line"> </tt>
+<a name="L93"></a><tt class="py-lineno">93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno">94</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.globalAccessibleAttributes=fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting-module.html#globalAccessibleAttributes,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.globalAccessibleAttributes=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute-module.html#globalAccessibleAttributes,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.globalAccessibleAttributes=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute-module.html#globalAccessibleAttributes,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.globalAccessibleAttributes=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute-module.html#globalAccessibleAttributes"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.globalAccessibleAttributes
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.globalAccessibleAttributes
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.globalAccessibleAttributes
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.globalAccessibleAttributes" class="py-name" href="#" onclick="return doclink('link-9', 'globalAccessibleAttributes', 'link-9');">globalAccessibleAttributes</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'count delete getIsIn getIsNotIn getLength getMax getMin index length set'</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno">95</tt>  <tt class="py-line"><tt id="link-10" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.globalGetAccessibleAttributeSet
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.globalGetAccessibleAttributeSet
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.globalGetAccessibleAttributeSet
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.globalGetAccessibleAttributeSet
+fabmetheus_utilities.vector3.globalGetAccessibleAttributeSet
+fabmetheus_utilities.vector3index.globalGetAccessibleAttributeSet
+fabmetheus_utilities.xml_simple_reader.globalGetAccessibleAttributeSet" class="py-name" href="#" onclick="return doclink('link-10', 'globalGetAccessibleAttributeSet', 'link-4');">globalGetAccessibleAttributeSet</a></tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name" targets="Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.set()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#set,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.set()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute-class.html#set,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.set()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute-class.html#set"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.set
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.set
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.set" class="py-name" href="#" onclick="return doclink('link-11', 'set', 'link-11');">set</a></tt><tt class="py-op">(</tt><tt id="link-12" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.globalAccessibleAttributes
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.globalAccessibleAttributes
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.globalAccessibleAttributes
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.globalAccessibleAttributes" class="py-name" href="#" onclick="return doclink('link-12', 'globalAccessibleAttributes', 'link-9');">globalAccessibleAttributes</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno">96</tt>  <tt class="py-line"><tt id="link-13" class="py-name" targets="Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.globalNativeFunctions=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute-module.html#globalNativeFunctions,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.globalNativeFunctions=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute-module.html#globalNativeFunctions,Variable fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.globalNativeFunctions=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute-module.html#globalNativeFunctions"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.globalNativeFunctions
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.globalNativeFunctions
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.globalNativeFunctions" class="py-name" href="#" onclick="return doclink('link-13', 'globalNativeFunctions', 'link-13');">globalNativeFunctions</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'clear copy fromkeys get items keys pop popitem remove setdefault update values'</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno">97</tt>  <tt class="py-line"><tt id="link-14" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.globalNativeFunctionSet
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.globalNativeFunctionSet
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.globalNativeFunctionSet" class="py-name" href="#" onclick="return doclink('link-14', 'globalNativeFunctionSet', 'link-3');">globalNativeFunctionSet</a></tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.set
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.set
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.set" class="py-name" href="#" onclick="return doclink('link-15', 'set', 'link-11');">set</a></tt><tt class="py-op">(</tt><tt id="link-16" class="py-name"><a title="fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.globalNativeFunctions
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.globalNativeFunctions
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.globalNativeFunctions" class="py-name" href="#" onclick="return doclink('link-16', 'globalNativeFunctions', 'link-13');">globalNativeFunctions</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno">98</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:44 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

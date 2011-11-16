@@ -1,0 +1,2074 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>fabmetheus_utilities.geometry.geometry_utilities.evaluate</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="fabmetheus_utilities-module.html">Package&nbsp;fabmetheus_utilities</a> ::
+        <a href="fabmetheus_utilities.geometry-module.html">Package&nbsp;geometry</a> ::
+        <a href="fabmetheus_utilities.geometry.geometry_utilities-module.html">Package&nbsp;geometry_utilities</a> ::
+        Module&nbsp;evaluate
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module evaluate</h1><p class="nomargin-top"><span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html">source&nbsp;code</a></span></p>
+<p>Boolean geometry utilities.</p>
+
+<hr />
+<div class="fields">      <p><strong>Date:</strong>
+        $Date: 2008/02/05 $
+      </p>
+      <p><strong>Author:</strong>
+        Enrique Perez (perez_enrique@yahoo.com)
+      </p>
+      <p><strong>License:</strong>
+        GNU Affero General Public License 
+        http://www.gnu.org/licenses/agpl.html
+      </p>
+</div><!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.BaseFunction-class.html" class="summary-name">BaseFunction</a><br />
+      Class to get equation results.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.ClassFunction-class.html" class="summary-name">ClassFunction</a><br />
+      Class to get class results.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.ClassObject-class.html" class="summary-name">ClassObject</a><br />
+      Class to hold class attributes and functions.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html" class="summary-name">Evaluator</a><br />
+      Base evaluator class.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorAddition-class.html" class="summary-name">EvaluatorAddition</a><br />
+      Class to add two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorEqual-class.html" class="summary-name">EvaluatorEqual</a><br />
+      Class to compare two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorSubtraction-class.html" class="summary-name">EvaluatorSubtraction</a><br />
+      Class to subtract two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorAnd-class.html" class="summary-name">EvaluatorAnd</a><br />
+      Class to compare two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorAttribute-class.html" class="summary-name">EvaluatorAttribute</a><br />
+      Class to handle an attribute.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketCurly-class.html" class="summary-name">EvaluatorBracketCurly</a><br />
+      Class to evaluate a string.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketRound-class.html" class="summary-name">EvaluatorBracketRound</a><br />
+      Class to evaluate a string.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketSquare-class.html" class="summary-name">EvaluatorBracketSquare</a><br />
+      Class to evaluate a string.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorClass-class.html" class="summary-name">EvaluatorClass</a><br />
+      Class evaluator class.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorComma-class.html" class="summary-name">EvaluatorComma</a><br />
+      Class to join two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorConcatenate-class.html" class="summary-name">EvaluatorConcatenate</a><br />
+      Class to join two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorDictionary-class.html" class="summary-name">EvaluatorDictionary</a><br />
+      Class to join two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorDivision-class.html" class="summary-name">EvaluatorDivision</a><br />
+      Class to divide two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorElement-class.html" class="summary-name">EvaluatorElement</a><br />
+      Element evaluator class.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFalse-class.html" class="summary-name">EvaluatorFalse</a><br />
+      Class to evaluate a string.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFunction-class.html" class="summary-name">EvaluatorFunction</a><br />
+      Function evaluator class.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFundamental-class.html" class="summary-name">EvaluatorFundamental</a><br />
+      Fundamental evaluator class.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorGreaterEqual-class.html" class="summary-name">EvaluatorGreaterEqual</a><br />
+      Class to compare two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorGreater-class.html" class="summary-name">EvaluatorGreater</a><br />
+      Class to compare two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorLessEqual-class.html" class="summary-name">EvaluatorLessEqual</a><br />
+      Class to compare two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorLess-class.html" class="summary-name">EvaluatorLess</a><br />
+      Class to compare two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorLocal-class.html" class="summary-name">EvaluatorLocal</a><br />
+      Class to get a local variable.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorModulo-class.html" class="summary-name">EvaluatorModulo</a><br />
+      Class to modulo two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorMultiplication-class.html" class="summary-name">EvaluatorMultiplication</a><br />
+      Class to multiply two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNone-class.html" class="summary-name">EvaluatorNone</a><br />
+      Class to evaluate None.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNot-class.html" class="summary-name">EvaluatorNot</a><br />
+      Class to compare two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNotEqual-class.html" class="summary-name">EvaluatorNotEqual</a><br />
+      Class to compare two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNumeric-class.html" class="summary-name">EvaluatorNumeric</a><br />
+      Class to evaluate a string.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorOr-class.html" class="summary-name">EvaluatorOr</a><br />
+      Class to compare two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorPower-class.html" class="summary-name">EvaluatorPower</a><br />
+      Class to power two evaluators.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorSelf-class.html" class="summary-name">EvaluatorSelf</a><br />
+      Class to handle self.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorTrue-class.html" class="summary-name">EvaluatorTrue</a><br />
+      Class to evaluate a string.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorValue-class.html" class="summary-name">EvaluatorValue</a><br />
+      Class to evaluate a string.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.Function-class.html" class="summary-name">Function</a><br />
+      Class to get equation results.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.FunctionVariable-class.html" class="summary-name">FunctionVariable</a><br />
+      Class to hold class functions and variable set.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.KeyValue-class.html" class="summary-name">KeyValue</a><br />
+      Class to hold a key value.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate.ModuleXMLElement-class.html" class="summary-name">ModuleXMLElement</a><br />
+      Class to get the in attribute, the index name and the value name.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addQuoteWord"></a><span class="summary-sig-name">addQuoteWord</span>(<span class="summary-sig-arg">evaluatorWords</span>,
+        <span class="summary-sig-arg">word</span>)</span><br />
+      Add quote word and remainder if the word starts with a quote 
+      character or dollar sign, otherwise add the word.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#addQuoteWord">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPrefixDictionary"></a><span class="summary-sig-name">addPrefixDictionary</span>(<span class="summary-sig-arg">dictionary</span>,
+        <span class="summary-sig-arg">keys</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Add prefixed key values to dictionary.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#addPrefixDictionary">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addToPathsRecursively"></a><span class="summary-sig-name">addToPathsRecursively</span>(<span class="summary-sig-arg">paths</span>,
+        <span class="summary-sig-arg">vector3Lists</span>)</span><br />
+      Add to vector3 paths recursively.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#addToPathsRecursively">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addValueToEvaluatedDictionary"></a><span class="summary-sig-name">addValueToEvaluatedDictionary</span>(<span class="summary-sig-arg">evaluatedDictionary</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the evaluated dictionary.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#addValueToEvaluatedDictionary">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addVector3ToXMLElement"></a><span class="summary-sig-name">addVector3ToXMLElement</span>(<span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">vector3</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Add vector3 to xml element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#addVector3ToXMLElement">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="compareExecutionOrderAscending"></a><span class="summary-sig-name">compareExecutionOrderAscending</span>(<span class="summary-sig-arg">module</span>,
+        <span class="summary-sig-arg">otherModule</span>)</span><br />
+      Get comparison in order to sort modules in ascending execution order.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#compareExecutionOrderAscending">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="convertToPaths"></a><span class="summary-sig-name">convertToPaths</span>(<span class="summary-sig-arg">dictionary</span>)</span><br />
+      Recursively convert any XMLElements to paths.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#convertToPaths">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="convertToTransformedPaths"></a><span class="summary-sig-name">convertToTransformedPaths</span>(<span class="summary-sig-arg">dictionary</span>)</span><br />
+      Recursively convert any XMLElements to paths.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#convertToTransformedPaths">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="executeLeftOperations"></a><span class="summary-sig-name">executeLeftOperations</span>(<span class="summary-sig-arg">evaluators</span>,
+        <span class="summary-sig-arg">operationLevel</span>)</span><br />
+      Evaluate the expression value from the numeric and operation 
+      evaluators.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#executeLeftOperations">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="executeNextEvaluatorArguments"></a><span class="summary-sig-name">executeNextEvaluatorArguments</span>(<span class="summary-sig-arg">evaluator</span>,
+        <span class="summary-sig-arg">evaluators</span>,
+        <span class="summary-sig-arg">evaluatorIndex</span>,
+        <span class="summary-sig-arg">nextEvaluator</span>)</span><br />
+      Execute the nextEvaluator arguments.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#executeNextEvaluatorArguments">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="executePairOperations"></a><span class="summary-sig-name">executePairOperations</span>(<span class="summary-sig-arg">evaluators</span>,
+        <span class="summary-sig-arg">operationLevel</span>)</span><br />
+      Evaluate the expression value from the numeric and operation 
+      evaluators.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#executePairOperations">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getBracketEvaluators"></a><span class="summary-sig-name">getBracketEvaluators</span>(<span class="summary-sig-arg">bracketBeginIndex</span>,
+        <span class="summary-sig-arg">bracketEndIndex</span>,
+        <span class="summary-sig-arg">evaluators</span>)</span><br />
+      Get the bracket evaluators.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getBracketEvaluators">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getBracketsExist"></a><span class="summary-sig-name">getBracketsExist</span>(<span class="summary-sig-arg">evaluators</span>)</span><br />
+      Evaluate the expression value.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getBracketsExist">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getBracketValuesDeleteEvaluator"></a><span class="summary-sig-name">getBracketValuesDeleteEvaluator</span>(<span class="summary-sig-arg">bracketBeginIndex</span>,
+        <span class="summary-sig-arg">bracketEndIndex</span>,
+        <span class="summary-sig-arg">evaluators</span>)</span><br />
+      Get the bracket values and delete the evaluator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getBracketValuesDeleteEvaluator">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCapitalizedSuffixKey"></a><span class="summary-sig-name">getCapitalizedSuffixKey</span>(<span class="summary-sig-arg">prefix</span>,
+        <span class="summary-sig-arg">suffix</span>)</span><br />
+      Get key with capitalized suffix.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getCapitalizedSuffixKey">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getDictionarySplitWords"></a><span class="summary-sig-name">getDictionarySplitWords</span>(<span class="summary-sig-arg">dictionary</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Get split line for evaluators.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getDictionarySplitWords">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEndIndexConvertEquationValue"></a><span class="summary-sig-name">getEndIndexConvertEquationValue</span>(<span class="summary-sig-arg">bracketEndIndex</span>,
+        <span class="summary-sig-arg">evaluatorIndex</span>,
+        <span class="summary-sig-arg">evaluators</span>)</span><br />
+      Get the bracket end index and convert the equation value evaluators 
+      into a string.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEndIndexConvertEquationValue">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatedBoolean"></a><span class="summary-sig-name">getEvaluatedBoolean</span>(<span class="summary-sig-arg">defaultValue</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the evaluated boolean.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatedBoolean">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatedDictionaryByCopyKeys"></a><span class="summary-sig-name">getEvaluatedDictionaryByCopyKeys</span>(<span class="summary-sig-arg">copyKeys</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the evaluated dictionary by copyKeys.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatedDictionaryByCopyKeys">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatedDictionaryByEvaluationKeys"></a><span class="summary-sig-name">getEvaluatedDictionaryByEvaluationKeys</span>(<span class="summary-sig-arg">evaluationKeys</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the evaluated dictionary.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatedDictionaryByEvaluationKeys">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatedExpressionValue"></a><span class="summary-sig-name">getEvaluatedExpressionValue</span>(<span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Evaluate the expression value.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatedExpressionValue">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatedExpressionValueBySplitLine"></a><span class="summary-sig-name">getEvaluatedExpressionValueBySplitLine</span>(<span class="summary-sig-arg">words</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Evaluate the expression value.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatedExpressionValueBySplitLine">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatedExpressionValueEvaluators"></a><span class="summary-sig-name">getEvaluatedExpressionValueEvaluators</span>(<span class="summary-sig-arg">evaluators</span>)</span><br />
+      Evaluate the expression value from the numeric and operation 
+      evaluators.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatedExpressionValueEvaluators">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatedFloat"></a><span class="summary-sig-name">getEvaluatedFloat</span>(<span class="summary-sig-arg">defaultValue</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the evaluated float.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatedFloat">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatedFloatByKeys"></a><span class="summary-sig-name">getEvaluatedFloatByKeys</span>(<span class="summary-sig-arg">defaultValue</span>,
+        <span class="summary-sig-arg">keys</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the evaluated float by keys.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatedFloatByKeys">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatedInt"></a><span class="summary-sig-name">getEvaluatedInt</span>(<span class="summary-sig-arg">defaultValue</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the evaluated int.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatedInt">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatedIntByKeys"></a><span class="summary-sig-name">getEvaluatedIntByKeys</span>(<span class="summary-sig-arg">defaultValue</span>,
+        <span class="summary-sig-arg">keys</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the evaluated int by keys.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatedIntByKeys">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatedLinkValue"></a><span class="summary-sig-name">getEvaluatedLinkValue</span>(<span class="summary-sig-arg">word</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the evaluated link value.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatedLinkValue">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatedString"></a><span class="summary-sig-name">getEvaluatedString</span>(<span class="summary-sig-arg">defaultValue</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the evaluated string.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatedString">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatedValue"></a><span class="summary-sig-name">getEvaluatedValue</span>(<span class="summary-sig-arg">defaultValue</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the evaluated value.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatedValue">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatedValueObliviously"></a><span class="summary-sig-name">getEvaluatedValueObliviously</span>(<span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the evaluated value.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatedValueObliviously">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluator"></a><span class="summary-sig-name">getEvaluator</span>(<span class="summary-sig-arg">evaluators</span>,
+        <span class="summary-sig-arg">nextWord</span>,
+        <span class="summary-sig-arg">word</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the evaluator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluator">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getEvaluatorSplitWords"></a><span class="summary-sig-name">getEvaluatorSplitWords</span>(<span class="summary-sig-arg">value</span>)</span><br />
+      Get split words for evaluators.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getEvaluatorSplitWords">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getFloatListFromBracketedString"></a><span class="summary-sig-name">getFloatListFromBracketedString</span>(<span class="summary-sig-arg">bracketedString</span>)</span><br />
+      Get list from a bracketed string.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getFloatListFromBracketedString">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getFloatListListsByPaths"></a><span class="summary-sig-name">getFloatListListsByPaths</span>(<span class="summary-sig-arg">paths</span>)</span><br />
+      Get float lists by paths.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getFloatListListsByPaths">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getFromCreationEvaluatorPlugins"></a><span class="summary-sig-name">getFromCreationEvaluatorPlugins</span>(<span class="summary-sig-arg">namePathDictionary</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the creation evaluator plugins if the xmlElement is from the 
+      creation evaluator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getFromCreationEvaluatorPlugins">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getKeys"></a><span class="summary-sig-name">getKeys</span>(<span class="summary-sig-arg">repository</span>)</span><br />
+      Get keys for repository.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getKeys">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getIntFromFloatString"></a><span class="summary-sig-name">getIntFromFloatString</span>(<span class="summary-sig-arg">value</span>)</span><br />
+      Get the int from the string.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getIntFromFloatString">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getIsBracketed"></a><span class="summary-sig-name">getIsBracketed</span>(<span class="summary-sig-arg">word</span>)</span><br />
+      Determine if the word is bracketed.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getIsBracketed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getIsQuoted"></a><span class="summary-sig-name">getIsQuoted</span>(<span class="summary-sig-arg">word</span>)</span><br />
+      Determine if the word is quoted.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getIsQuoted">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getLocalAttributeValueString"></a><span class="summary-sig-name">getLocalAttributeValueString</span>(<span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">valueString</span>)</span><br />
+      Get the local attribute value string with augmented assignment.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getLocalAttributeValueString">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getMatchingPlugins"></a><span class="summary-sig-name">getMatchingPlugins</span>(<span class="summary-sig-arg">namePathDictionary</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the plugins whose names are in the attribute dictionary.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getMatchingPlugins">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getNextChildIndex"></a><span class="summary-sig-name">getNextChildIndex</span>(<span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the next childNode index.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getNextChildIndex">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getPathByKey"></a><span class="summary-sig-name">getPathByKey</span>(<span class="summary-sig-arg">defaultPath</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get path from prefix and xml element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getPathByKey">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getPathByList"></a><span class="summary-sig-name">getPathByList</span>(<span class="summary-sig-arg">vertexList</span>)</span><br />
+      Get the paths by list.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getPathByList">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getPathByPrefix"></a><span class="summary-sig-name">getPathByPrefix</span>(<span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">prefix</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get path from prefix and xml element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getPathByPrefix">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getPathsByKey"></a><span class="summary-sig-name">getPathsByKey</span>(<span class="summary-sig-arg">defaultPaths</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get paths by key.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getPathsByKey">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getPathsByLists"></a><span class="summary-sig-name">getPathsByLists</span>(<span class="summary-sig-arg">vertexLists</span>)</span><br />
+      Get paths by lists.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getPathsByLists">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getSidesBasedOnPrecision"></a><span class="summary-sig-name">getSidesBasedOnPrecision</span>(<span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the number of poygon sides.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getSidesBasedOnPrecision">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getSidesMinimumThreeBasedOnPrecision"></a><span class="summary-sig-name">getSidesMinimumThreeBasedOnPrecision</span>(<span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the number of poygon sides, with a minimum of three.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getSidesMinimumThreeBasedOnPrecision">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getSidesMinimumThreeBasedOnPrecisionSides"></a><span class="summary-sig-name">getSidesMinimumThreeBasedOnPrecisionSides</span>(<span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the number of poygon sides, with a minimum of three.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getSidesMinimumThreeBasedOnPrecisionSides">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getSplitDictionary"></a><span class="summary-sig-name">getSplitDictionary</span>()</span><br />
+      Get split dictionary.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getSplitDictionary">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getStartsWithCurlyEqualRoundSquare"></a><span class="summary-sig-name">getStartsWithCurlyEqualRoundSquare</span>(<span class="summary-sig-arg">word</span>)</span><br />
+      Determine if the word starts with round or square brackets.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getStartsWithCurlyEqualRoundSquare">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getTokenByNumber"></a><span class="summary-sig-name">getTokenByNumber</span>(<span class="summary-sig-arg">number</span>)</span><br />
+      Get token by number.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getTokenByNumber">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getTransformedPathByKey"></a><span class="summary-sig-name">getTransformedPathByKey</span>(<span class="summary-sig-arg">defaultTransformedPath</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get transformed path from prefix and xml element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getTransformedPathByKey">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getTransformedPathByPrefix"></a><span class="summary-sig-name">getTransformedPathByPrefix</span>(<span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">prefix</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get path from prefix and xml element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getTransformedPathByPrefix">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getTransformedPathsByKey"></a><span class="summary-sig-name">getTransformedPathsByKey</span>(<span class="summary-sig-arg">defaultTransformedPaths</span>,
+        <span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get transformed paths by key.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getTransformedPathsByKey">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getUniqueQuoteIndex"></a><span class="summary-sig-name">getUniqueQuoteIndex</span>(<span class="summary-sig-arg">uniqueQuoteIndex</span>,
+        <span class="summary-sig-arg">word</span>)</span><br />
+      Get uniqueQuoteIndex.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getUniqueQuoteIndex">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getUniqueToken"></a><span class="summary-sig-name">getUniqueToken</span>(<span class="summary-sig-arg">word</span>)</span><br />
+      Get unique token.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getUniqueToken">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getVector3ByDictionary"></a><span class="summary-sig-name">getVector3ByDictionary</span>(<span class="summary-sig-arg">dictionary</span>,
+        <span class="summary-sig-arg">vector3</span>)</span><br />
+      Get vector3 by dictionary.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getVector3ByDictionary">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getVector3ByDictionaryListValue"></a><span class="summary-sig-name">getVector3ByDictionaryListValue</span>(<span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">vector3</span>)</span><br />
+      Get vector3 by dictionary, list or value.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getVector3ByDictionaryListValue">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getVector3ByFloatList"></a><span class="summary-sig-name">getVector3ByFloatList</span>(<span class="summary-sig-arg">floatList</span>,
+        <span class="summary-sig-arg">vector3</span>)</span><br />
+      Get vector3 by float list.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getVector3ByFloatList">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getVector3ByMultiplierPrefix"></a><span class="summary-sig-name">getVector3ByMultiplierPrefix</span>(<span class="summary-sig-arg">multiplier</span>,
+        <span class="summary-sig-arg">prefix</span>,
+        <span class="summary-sig-arg">vector3</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get vector3 from multiplier, prefix and xml element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getVector3ByMultiplierPrefix">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getVector3ByMultiplierPrefixes"></a><span class="summary-sig-name">getVector3ByMultiplierPrefixes</span>(<span class="summary-sig-arg">multiplier</span>,
+        <span class="summary-sig-arg">prefixes</span>,
+        <span class="summary-sig-arg">vector3</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get vector3 from multiplier, prefixes and xml element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getVector3ByMultiplierPrefixes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getVector3ByPrefix"></a><span class="summary-sig-name">getVector3ByPrefix</span>(<span class="summary-sig-arg">defaultVector3</span>,
+        <span class="summary-sig-arg">prefix</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get vector3 from prefix and xml element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getVector3ByPrefix">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getVector3ByPrefixes"></a><span class="summary-sig-name">getVector3ByPrefixes</span>(<span class="summary-sig-arg">prefixes</span>,
+        <span class="summary-sig-arg">vector3</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get vector3 from prefixes and xml element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getVector3ByPrefixes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getVector3FromXMLElement"></a><span class="summary-sig-name">getVector3FromXMLElement</span>(<span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get vector3 from xml element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getVector3FromXMLElement">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getVector3IfNone"></a><span class="summary-sig-name">getVector3IfNone</span>(<span class="summary-sig-arg">vector3</span>)</span><br />
+      Get new vector3 if the original vector3 is none.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getVector3IfNone">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getVector3ListsRecursively"></a><span class="summary-sig-name">getVector3ListsRecursively</span>(<span class="summary-sig-arg">floatLists</span>)</span><br />
+      Get vector3 lists recursively.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getVector3ListsRecursively">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getVisibleObjects"></a><span class="summary-sig-name">getVisibleObjects</span>(<span class="summary-sig-arg">archivableObjects</span>)</span><br />
+      Get the visible objects.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getVisibleObjects">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getXMLElementByKey"></a><span class="summary-sig-name">getXMLElementByKey</span>(<span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the xml element by key.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getXMLElementByKey">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getXMLElementObject"></a><span class="summary-sig-name">getXMLElementObject</span>(<span class="summary-sig-arg">evaluatedLinkValue</span>)</span><br />
+      Get XMLElementObject.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getXMLElementObject">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getXMLElementsByKey"></a><span class="summary-sig-name">getXMLElementsByKey</span>(<span class="summary-sig-arg">key</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get the xml elements by key.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#getXMLElementsByKey">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processArchivable"></a><span class="summary-sig-name">processArchivable</span>(<span class="summary-sig-arg">archivableClass</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Get any new elements and process the archivable.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#processArchivable">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processCondition"></a><span class="summary-sig-name">processCondition</span>(<span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Process the xml element condition.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#processCondition">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="removeIdentifiersFromDictionary"></a><span class="summary-sig-name">removeIdentifiersFromDictionary</span>(<span class="summary-sig-arg">dictionary</span>)</span><br />
+      Remove the identifier elements from a dictionary.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#removeIdentifiersFromDictionary">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setAttributeDictionaryByArguments"></a><span class="summary-sig-name">setAttributeDictionaryByArguments</span>(<span class="summary-sig-arg">argumentNames</span>,
+        <span class="summary-sig-arg">arguments</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Set the attribute dictionary to the arguments.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#setAttributeDictionaryByArguments">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setFunctionLocalDictionary"></a><span class="summary-sig-name">setFunctionLocalDictionary</span>(<span class="summary-sig-arg">arguments</span>,
+        <span class="summary-sig-arg">function</span>)</span><br />
+      Evaluate the function statement and delete the evaluators.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#setFunctionLocalDictionary">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setLocalAttribute"></a><span class="summary-sig-name">setLocalAttribute</span>(<span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Set the local attribute if any.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-pysrc.html#setLocalAttribute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__credits__"></a><span class="summary-name">__credits__</span> = <code title="'Art of Illusion &lt;http://www.artofillusion.org/&gt;'"><code class="variable-quote">'</code><code class="variable-string">Art of Illusion &lt;http://www.artofillusion.org/&gt;</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="globalModuleFunctionsDictionary"></a><span class="summary-name">globalModuleFunctionsDictionary</span> = <code title="{}"><code class="variable-group">{</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="globalCreationDictionary"></a><span class="summary-name">globalCreationDictionary</span> = <code title="{}"><code class="variable-group">{</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-module.html#globalDictionaryOperatorBegin" class="summary-name">globalDictionaryOperatorBegin</a> = <code title="{'||': EvaluatorConcatenate, '==': EvaluatorEqual, '&gt;=': EvaluatorGrea\
+terEqual, '&lt;=': EvaluatorLessEqual, '!=': EvaluatorNotEqual, '**': Eva\
+luatorPower}">{'||': EvaluatorConcatenate, '<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="globalModuleEvaluatorDictionary"></a><span class="summary-name">globalModuleEvaluatorDictionary</span> = <code title="{}">{}</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="globalFundamentalNameSet"></a><span class="summary-name">globalFundamentalNameSet</span> = <code title="set([])"><code class="variable-group">set([</code><code class="variable-group">])</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="globalElementNameSet"></a><span class="summary-name">globalElementNameSet</span> = <code title="set(['setting'])"><code class="variable-group">set([</code><code class="variable-quote">'</code><code class="variable-string">setting</code><code class="variable-quote">'</code><code class="variable-group">])</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.geometry_utilities.evaluate-module.html#globalSplitDictionaryOperator" class="summary-name">globalSplitDictionaryOperator</a> = <code title="{'+': EvaluatorAddition, '{': EvaluatorBracketCurly, '}': Evaluator, '\
+(': EvaluatorBracketRound, ')': Evaluator, '[': EvaluatorBracketSquare\
+, ']': Evaluator, ',': EvaluatorComma, ':': EvaluatorDictionary, '/': \
+EvaluatorDivision, '&gt;': EvaluatorGreater, '&lt;': EvaluatorLess, '%': Eva\
+luatorModulo, '*': EvaluatorMultiplication, '-': EvaluatorSubtraction}">{'+': EvaluatorAddition, '{': <code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="globalSplitDictionary"></a><span class="summary-name">globalSplitDictionary</span> = <code title="getSplitDictionary()">getSplitDictionary()</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'fabmetheus_utilities.geometry.geometry_utilities'"><code class="variable-quote">'</code><code class="variable-string">fabmetheus_utilities.geometry.geometry_utilities</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="globalDictionaryOperatorBegin"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">globalDictionaryOperatorBegin</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+{'||': EvaluatorConcatenate, '==': EvaluatorEqual, '&gt;=': EvaluatorGrea<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+terEqual, '&lt;=': EvaluatorLessEqual, '!=': EvaluatorNotEqual, '**': Eva<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+luatorPower}
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="globalSplitDictionaryOperator"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">globalSplitDictionaryOperator</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+{'+': EvaluatorAddition, '{': EvaluatorBracketCurly, '}': Evaluator, '<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+(': EvaluatorBracketRound, ')': Evaluator, '[': EvaluatorBracketSquare<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+, ']': Evaluator, ',': EvaluatorComma, ':': EvaluatorDictionary, '/': <span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+EvaluatorDivision, '&gt;': EvaluatorGreater, '&lt;': EvaluatorLess, '%': Eva<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+luatorModulo, '*': EvaluatorMultiplication, '-': EvaluatorSubtraction}
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:39 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

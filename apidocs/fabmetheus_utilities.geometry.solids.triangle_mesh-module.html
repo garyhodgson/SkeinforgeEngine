@@ -1,0 +1,1356 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>fabmetheus_utilities.geometry.solids.triangle_mesh</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="fabmetheus_utilities-module.html">Package&nbsp;fabmetheus_utilities</a> ::
+        <a href="fabmetheus_utilities.geometry-module.html">Package&nbsp;geometry</a> ::
+        <a href="fabmetheus_utilities.geometry.solids-module.html">Package&nbsp;solids</a> ::
+        Module&nbsp;triangle_mesh
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="fabmetheus_utilities.geometry.solids.triangle_mesh-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module triangle_mesh</h1><p class="nomargin-top"><span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html">source&nbsp;code</a></span></p>
+<p>Triangle Mesh holds the faces and edges of a triangular mesh.</p>
+
+<hr />
+<div class="fields">      <p><strong>Date:</strong>
+        $Date: 2008/02/05 $
+      </p>
+      <p><strong>Author:</strong>
+        Enrique Perez (perez_enrique@yahoo.com)
+      </p>
+      <p><strong>License:</strong>
+        GNU Affero General Public License 
+        http://www.gnu.org/licenses/agpl.html
+      </p>
+</div><!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.solids.triangle_mesh.EdgePair-class.html" class="summary-name">EdgePair</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html" class="summary-name">TriangleMesh</a><br />
+      A triangle mesh.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="fabmetheus_utilities.geometry.solids.triangle_mesh.ZoneArrangement-class.html" class="summary-name">ZoneArrangement</a><br />
+      A zone arrangement.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addEdgePair"></a><span class="summary-sig-name">addEdgePair</span>(<span class="summary-sig-arg">edgePairTable</span>,
+        <span class="summary-sig-arg">edges</span>,
+        <span class="summary-sig-arg">faceEdgeIndex</span>,
+        <span class="summary-sig-arg">remainingEdgeIndex</span>,
+        <span class="summary-sig-arg">remainingEdgeTable</span>)</span><br />
+      Add edge pair to the edge pair table.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addEdgePair">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addFacesByConcaveLoop"></a><span class="summary-sig-name">addFacesByConcaveLoop</span>(<span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">indexedLoop</span>)</span><br />
+      Add faces from a polygon which is concave.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addFacesByConcaveLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addFacesByConvex"></a><span class="summary-sig-name">addFacesByConvex</span>(<span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">indexedLoop</span>)</span><br />
+      Add faces from a convex polygon.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addFacesByConvex">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addFacesByConvexBottomTopLoop"></a><span class="summary-sig-name">addFacesByConvexBottomTopLoop</span>(<span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">indexedLoopBottom</span>,
+        <span class="summary-sig-arg">indexedLoopTop</span>)</span><br />
+      Add faces from loops.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addFacesByConvexBottomTopLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addFacesByConvexLoops"></a><span class="summary-sig-name">addFacesByConvexLoops</span>(<span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">indexedLoops</span>)</span><br />
+      Add faces from loops.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addFacesByConvexLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addFacesByConvexReversed"></a><span class="summary-sig-name">addFacesByConvexReversed</span>(<span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">indexedLoop</span>)</span><br />
+      Add faces from a reversed convex polygon.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addFacesByConvexReversed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addFacesByGrid"></a><span class="summary-sig-name">addFacesByGrid</span>(<span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">grid</span>)</span><br />
+      Add faces from grid.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addFacesByGrid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addFacesByLoop"></a><span class="summary-sig-name">addFacesByLoop</span>(<span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">indexedLoop</span>)</span><br />
+      Add faces from a polygon which may be concave.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addFacesByLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addFacesByLoopReversed"></a><span class="summary-sig-name">addFacesByLoopReversed</span>(<span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">indexedLoop</span>)</span><br />
+      Add faces from a reversed convex polygon.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addFacesByLoopReversed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addLoopToPointTable"></a><span class="summary-sig-name">addLoopToPointTable</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">pointTable</span>)</span><br />
+      Add the points in the loop to the point table.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addLoopToPointTable">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPillarByLoops"></a><span class="summary-sig-name">addPillarByLoops</span>(<span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">indexedLoops</span>)</span><br />
+      Add pillar by loops which may be concave.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addPillarByLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPillarFromConvexLoopsGrids"></a><span class="summary-sig-name">addPillarFromConvexLoopsGrids</span>(<span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">indexedGrids</span>,
+        <span class="summary-sig-arg">indexedLoops</span>)</span><br />
+      Add pillar from convex loops and grids.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addPillarFromConvexLoopsGrids">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPillarFromConvexLoopsGridTop"></a><span class="summary-sig-name">addPillarFromConvexLoopsGridTop</span>(<span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">indexedGridTop</span>,
+        <span class="summary-sig-arg">indexedLoops</span>)</span><br />
+      Add pillar from convex loops and grid top.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addPillarFromConvexLoopsGridTop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addPointsAtZ"></a><span class="summary-sig-name">addPointsAtZ</span>(<span class="summary-sig-arg">edgePair</span>,
+        <span class="summary-sig-arg">points</span>,
+        <span class="summary-sig-arg">radius</span>,
+        <span class="summary-sig-arg">vertexes</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Add point complexes on the segment between the edge intersections 
+      with z.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addPointsAtZ">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addSymmetricXPath"></a><span class="summary-sig-name">addSymmetricXPath</span>(<span class="summary-sig-arg">outputs</span>,
+        <span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">x</span>)</span><br />
+      Add x path output to outputs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addSymmetricXPath">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addSymmetricXPaths"></a><span class="summary-sig-name">addSymmetricXPaths</span>(<span class="summary-sig-arg">outputs</span>,
+        <span class="summary-sig-arg">paths</span>,
+        <span class="summary-sig-arg">x</span>)</span><br />
+      Add x paths outputs to outputs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addSymmetricXPaths">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addSymmetricYPath"></a><span class="summary-sig-name">addSymmetricYPath</span>(<span class="summary-sig-arg">outputs</span>,
+        <span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">y</span>)</span><br />
+      Add y path output to outputs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addSymmetricYPath">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addSymmetricYPaths"></a><span class="summary-sig-name">addSymmetricYPaths</span>(<span class="summary-sig-arg">outputs</span>,
+        <span class="summary-sig-arg">paths</span>,
+        <span class="summary-sig-arg">y</span>)</span><br />
+      Add y paths outputs to outputs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addSymmetricYPaths">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="addWithLeastLength"></a><span class="summary-sig-name">addWithLeastLength</span>(<span class="summary-sig-arg">importRadius</span>,
+        <span class="summary-sig-arg">loops</span>,
+        <span class="summary-sig-arg">point</span>)</span><br />
+      Insert a point into a loop, at the index at which the loop would be 
+      shortest.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#addWithLeastLength">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="convertXMLElement"></a><span class="summary-sig-name">convertXMLElement</span>(<span class="summary-sig-arg">geometryOutput</span>,
+        <span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Convert the xml element to a TriangleMesh xml element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#convertXMLElement">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getAddIndexedGrid"></a><span class="summary-sig-name">getAddIndexedGrid</span>(<span class="summary-sig-arg">grid</span>,
+        <span class="summary-sig-arg">vertexes</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Get and add an indexed grid.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getAddIndexedGrid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getAddIndexedLoop"></a><span class="summary-sig-name">getAddIndexedLoop</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">vertexes</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Get and add an indexed loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getAddIndexedLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getAddIndexedLoops"></a><span class="summary-sig-name">getAddIndexedLoops</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">vertexes</span>,
+        <span class="summary-sig-arg">zList</span>)</span><br />
+      Get and add indexed loops.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getAddIndexedLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getAdditionalLoopLength"></a><span class="summary-sig-name">getAdditionalLoopLength</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">point</span>,
+        <span class="summary-sig-arg">pointIndex</span>)</span><br />
+      Get the additional length added by inserting a point into a loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getAdditionalLoopLength">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getBridgeDirection"></a><span class="summary-sig-name">getBridgeDirection</span>(<span class="summary-sig-arg">belowLoops</span>,
+        <span class="summary-sig-arg">layerLoops</span>,
+        <span class="summary-sig-arg">layerThickness</span>)</span><br />
+      Get span direction for the majority of the overhanging extrusion 
+      perimeter, if any.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getBridgeDirection">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getBridgeLoops"></a><span class="summary-sig-name">getBridgeLoops</span>(<span class="summary-sig-arg">layerThickness</span>,
+        <span class="summary-sig-arg">loop</span>)</span><br />
+      Get the inset bridge loops from the loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getBridgeLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCarveIntersectionFromEdge"></a><span class="summary-sig-name">getCarveIntersectionFromEdge</span>(<span class="summary-sig-arg">edge</span>,
+        <span class="summary-sig-arg">vertexes</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Get the complex where the carve intersects the edge.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getCarveIntersectionFromEdge">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getDescendingAreaLoops"></a><span class="summary-sig-name">getDescendingAreaLoops</span>(<span class="summary-sig-arg">allPoints</span>,
+        <span class="summary-sig-arg">corners</span>,
+        <span class="summary-sig-arg">importRadius</span>)</span><br />
+      Get descending area loops which include most of the points.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getDescendingAreaLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getDescendingAreaOrientedLoops"></a><span class="summary-sig-name">getDescendingAreaOrientedLoops</span>(<span class="summary-sig-arg">allPoints</span>,
+        <span class="summary-sig-arg">corners</span>,
+        <span class="summary-sig-arg">importRadius</span>)</span><br />
+      Get descending area oriented loops which include most of the points.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getDescendingAreaOrientedLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getDoubledRoundZ"></a><span class="summary-sig-name">getDoubledRoundZ</span>(<span class="summary-sig-arg">overhangingSegment</span>,
+        <span class="summary-sig-arg">segmentRoundZ</span>)</span><br />
+      Get doubled plane angle around z of the overhanging segment.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getDoubledRoundZ">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getGeometryOutputByFacesVertexes"></a><span class="summary-sig-name">getGeometryOutputByFacesVertexes</span>(<span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">vertexes</span>)</span><br />
+      Get geometry output dictionary by faces and vertexes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getGeometryOutputByFacesVertexes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getGeometryOutputCopy"></a><span class="summary-sig-name">getGeometryOutputCopy</span>(<span class="summary-sig-arg">object</span>)</span><br />
+      Get the geometry output copy.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getGeometryOutputCopy">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getIndexedCellLoopsFromIndexedGrid"></a><span class="summary-sig-name">getIndexedCellLoopsFromIndexedGrid</span>(<span class="summary-sig-arg">grid</span>)</span><br />
+      Get indexed cell loops from an indexed grid.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getIndexedCellLoopsFromIndexedGrid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getIndexedLoopFromIndexedGrid"></a><span class="summary-sig-name">getIndexedLoopFromIndexedGrid</span>(<span class="summary-sig-arg">indexedGrid</span>)</span><br />
+      Get indexed loop from around the indexed grid.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getIndexedLoopFromIndexedGrid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getInsetPoint"></a><span class="summary-sig-name">getInsetPoint</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">tinyRadius</span>)</span><br />
+      Get the inset vertex.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getInsetPoint">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getIsPointCloseInline"></a><span class="summary-sig-name">getIsPointCloseInline</span>(<span class="summary-sig-arg">close</span>,
+        <span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">point</span>,
+        <span class="summary-sig-arg">pointIndex</span>)</span><br />
+      Insert a point into a loop, at the index at which the loop would be 
+      shortest.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getIsPointCloseInline">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getIsPathEntirelyOutsideTriangle"></a><span class="summary-sig-name">getIsPathEntirelyOutsideTriangle</span>(<span class="summary-sig-arg">begin</span>,
+        <span class="summary-sig-arg">center</span>,
+        <span class="summary-sig-arg">end</span>,
+        <span class="summary-sig-arg">vector3Path</span>)</span><br />
+      Determine if a path is entirely outside another loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getIsPathEntirelyOutsideTriangle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getLoopsFromCorrectMesh"></a><span class="summary-sig-name">getLoopsFromCorrectMesh</span>(<span class="summary-sig-arg">edges</span>,
+        <span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">vertexes</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Get loops from a carve of a correct mesh.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getLoopsFromCorrectMesh">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getLoopsFromUnprovenMesh"></a><span class="summary-sig-name">getLoopsFromUnprovenMesh</span>(<span class="summary-sig-arg">edges</span>,
+        <span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">importRadius</span>,
+        <span class="summary-sig-arg">vertexes</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Get loops from a carve of an unproven mesh.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getLoopsFromUnprovenMesh">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getLoopsWithCorners"></a><span class="summary-sig-name">getLoopsWithCorners</span>(<span class="summary-sig-arg">corners</span>,
+        <span class="summary-sig-arg">importRadius</span>,
+        <span class="summary-sig-arg">loops</span>,
+        <span class="summary-sig-arg">pointTable</span>)</span><br />
+      Add corners to the loops.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getLoopsWithCorners">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getNextEdgeIndexAroundZ"></a><span class="summary-sig-name">getNextEdgeIndexAroundZ</span>(<span class="summary-sig-arg">edge</span>,
+        <span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">remainingEdgeTable</span>)</span><br />
+      Get the next edge index in the mesh carve.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getNextEdgeIndexAroundZ">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getOrientedLoops"></a><span class="summary-sig-name">getOrientedLoops</span>(<span class="summary-sig-arg">loops</span>)</span><br />
+      Orient the loops which must be in descending order.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getOrientedLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getOverhangDirection"></a><span class="summary-sig-name">getOverhangDirection</span>(<span class="summary-sig-arg">belowOutsetLoops</span>,
+        <span class="summary-sig-arg">segmentBegin</span>,
+        <span class="summary-sig-arg">segmentEnd</span>)</span><br />
+      Add to span direction from the endpoint segments which overhang the 
+      layer below.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getOverhangDirection">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getOverlapRatio"></a><span class="summary-sig-name">getOverlapRatio</span>(<span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">pointTable</span>)</span><br />
+      Get the overlap ratio between the loop and the point table.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getOverlapRatio">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getPath"></a><span class="summary-sig-name">getPath</span>(<span class="summary-sig-arg">edges</span>,
+        <span class="summary-sig-arg">pathIndexes</span>,
+        <span class="summary-sig-arg">loop</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Get the path from the edge intersections.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getPath">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getPillarOutput"></a><span class="summary-sig-name">getPillarOutput</span>(<span class="summary-sig-arg">loops</span>)</span><br />
+      Get pillar output.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getPillarOutput">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getPillarsOutput"></a><span class="summary-sig-name">getPillarsOutput</span>(<span class="summary-sig-arg">loopLists</span>)</span><br />
+      Get pillars output.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getPillarsOutput">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getRemainingEdgeTable"></a><span class="summary-sig-name">getRemainingEdgeTable</span>(<span class="summary-sig-arg">edges</span>,
+        <span class="summary-sig-arg">vertexes</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Get the remaining edge hashtable.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getRemainingEdgeTable">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getRemainingLoopAddFace"></a><span class="summary-sig-name">getRemainingLoopAddFace</span>(<span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">remainingLoop</span>)</span><br />
+      Get the remaining loop and add face.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getRemainingLoopAddFace">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getSharedFace"></a><span class="summary-sig-name">getSharedFace</span>(<span class="summary-sig-arg">firstEdge</span>,
+        <span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">secondEdge</span>)</span><br />
+      Get the face which is shared by two edges.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getSharedFace">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getSymmetricXLoop"></a><span class="summary-sig-name">getSymmetricXLoop</span>(<span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">vertexes</span>,
+        <span class="summary-sig-arg">x</span>)</span><br />
+      Get symmetrix x loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getSymmetricXLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getSymmetricYLoop"></a><span class="summary-sig-name">getSymmetricYLoop</span>(<span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">vertexes</span>,
+        <span class="summary-sig-arg">y</span>)</span><br />
+      Get symmetrix y loop.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getSymmetricYLoop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getUnifiedOutput"></a><span class="summary-sig-name">getUnifiedOutput</span>(<span class="summary-sig-arg">outputs</span>)</span><br />
+      Get unified output.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getUnifiedOutput">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getUniqueVertexes"></a><span class="summary-sig-name">getUniqueVertexes</span>(<span class="summary-sig-arg">loops</span>)</span><br />
+      Get unique vertexes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getUniqueVertexes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getWideAnglePointIndex"></a><span class="summary-sig-name">getWideAnglePointIndex</span>(<span class="summary-sig-arg">loop</span>)</span><br />
+      Get a point index which has a wide enough angle, most point indexes 
+      have a wide enough angle, this is just to make sure.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getWideAnglePointIndex">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getZAddExtruderPathsBySolidCarving"></a><span class="summary-sig-name">getZAddExtruderPathsBySolidCarving</span>(<span class="summary-sig-arg">rotatedLoopLayer</span>,
+        <span class="summary-sig-arg">solidCarving</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Get next z and add extruder loops by solid carving.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#getZAddExtruderPathsBySolidCarving">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isInline"></a><span class="summary-sig-name">isInline</span>(<span class="summary-sig-arg">beginComplex</span>,
+        <span class="summary-sig-arg">centerComplex</span>,
+        <span class="summary-sig-arg">endComplex</span>)</span><br />
+      Determine if the three complex points form a line.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#isInline">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isPathAdded"></a><span class="summary-sig-name">isPathAdded</span>(<span class="summary-sig-arg">edges</span>,
+        <span class="summary-sig-arg">faces</span>,
+        <span class="summary-sig-arg">loops</span>,
+        <span class="summary-sig-arg">remainingEdgeTable</span>,
+        <span class="summary-sig-arg">vertexes</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Get the path indexes around a triangle mesh carve and add the path to
+      the flat loops.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#isPathAdded">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="processXMLElement"></a><span class="summary-sig-name">processXMLElement</span>(<span class="summary-sig-arg">xmlElement</span>)</span><br />
+      Process the xml element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#processXMLElement">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setEdgeMaximumMinimum"></a><span class="summary-sig-name">setEdgeMaximumMinimum</span>(<span class="summary-sig-arg">edge</span>,
+        <span class="summary-sig-arg">vertexes</span>)</span><br />
+      Set the edge maximum and minimum.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#setEdgeMaximumMinimum">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="sortLoopsInOrderOfArea"></a><span class="summary-sig-name">sortLoopsInOrderOfArea</span>(<span class="summary-sig-arg">isDescending</span>,
+        <span class="summary-sig-arg">loops</span>)</span><br />
+      Sort the loops in the order of area according isDescending.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#sortLoopsInOrderOfArea">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__credits__"></a><span class="summary-name">__credits__</span> = <code title="'Art of Illusion &lt;http://www.artofillusion.org/&gt;'"><code class="variable-quote">'</code><code class="variable-string">Art of Illusion &lt;http://www.artofillusion.org/&gt;</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'fabmetheus_utilities.geometry.solids'"><code class="variable-quote">'</code><code class="variable-string">fabmetheus_utilities.geometry.solids</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:39 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

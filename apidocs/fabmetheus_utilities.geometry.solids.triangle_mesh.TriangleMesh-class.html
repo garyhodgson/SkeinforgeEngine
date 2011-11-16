@@ -1,0 +1,782 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="fabmetheus_utilities-module.html">Package&nbsp;fabmetheus_utilities</a> ::
+        <a href="fabmetheus_utilities.geometry-module.html">Package&nbsp;geometry</a> ::
+        <a href="fabmetheus_utilities.geometry.solids-module.html">Package&nbsp;solids</a> ::
+        <a href="fabmetheus_utilities.geometry.solids.triangle_mesh-module.html">Module&nbsp;triangle_mesh</a> ::
+        Class&nbsp;TriangleMesh
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class TriangleMesh</h1><p class="nomargin-top"><span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_fabmethe_43" name="uml_class_diagram_for_fabmethe_43">
+<area shape="rect" id="node188" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#__init__" title="Add empty lists." alt="" coords="40,473,264,492"/>
+<area shape="rect" id="node188" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#addXMLSection" title="Add the xml section for this object." alt="" coords="40,492,264,511"/>
+<area shape="rect" id="node188" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getCarveCornerMaximum" title="Get the corner maximum of the vertexes." alt="" coords="40,511,264,529"/>
+<area shape="rect" id="node188" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getCarveCornerMinimum" title="Get the corner minimum of the vertexes." alt="" coords="40,529,264,548"/>
+<area shape="rect" id="node188" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getCarveLayerThickness" title="Get the layer thickness." alt="" coords="40,548,264,567"/>
+<area shape="rect" id="node188" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getCarveRotatedBoundaryLayers" title="Get the rotated boundary layers." alt="" coords="40,567,264,585"/>
+<area shape="rect" id="node188" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getFabmetheusXML" title="Return the fabmetheus XML." alt="" coords="40,585,264,604"/>
+<area shape="rect" id="node188" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getGeometryOutput" title="Get geometry output dictionary." alt="" coords="40,604,264,623"/>
+<area shape="rect" id="node188" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getInterpretationSuffix" title="Return the suffix for a triangle mesh." alt="" coords="40,623,264,641"/>
+<area shape="rect" id="node188" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getLoops" title="Get loops sliced through shape." alt="" coords="40,641,264,660"/>
+<area shape="rect" id="node188" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getLoopsFromMesh" title="Get loops from a carve of a mesh." alt="" coords="40,660,264,679"/>
+<area shape="rect" id="node188" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getMinimumZ" title="Get the minimum z." alt="" coords="40,679,264,697"/>
+<area shape="rect" id="node188" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getTransformedVertexes" title="Get all transformed vertexes." alt="" coords="40,697,264,716"/>
+<area shape="rect" id="node188" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#setEdgesForAllFaces" title="Set the face edges of all the faces." alt="" coords="40,735,264,753"/>
+<area shape="rect" id="node1" href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html" title="A triangle mesh." alt="" coords="28,441,276,759"/>
+<area shape="rect" id="node189" href="fabmetheus_utilities.geometry.solids.group.Group-class.html#addXMLInnerSection" title="Add xml inner section for this object." alt="" coords="33,321,271,340"/>
+<area shape="rect" id="node189" href="fabmetheus_utilities.geometry.solids.group.Group-class.html#getMatrix4X4" title="Get the matrix4X4." alt="" coords="33,340,271,359"/>
+<area shape="rect" id="node189" href="fabmetheus_utilities.geometry.solids.group.Group-class.html#getMatrixChainTetragrid" title="Get the matrix chain tetragrid." alt="" coords="33,359,271,377"/>
+<area shape="rect" id="node189" href="fabmetheus_utilities.geometry.solids.group.Group-class.html#getVisible" title="Get visible." alt="" coords="33,377,271,396"/>
+<area shape="rect" id="node189" href="fabmetheus_utilities.geometry.solids.group.Group-class.html#setToXMLElement" title="Set to xmlElement." alt="" coords="33,396,271,415"/>
+<area shape="rect" id="node2" href="fabmetheus_utilities.geometry.solids.group.Group-class.html" title="A group." alt="" coords="21,289,283,421"/>
+<area shape="rect" id="node190" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#__repr__" title="Get the string representation of this object info." alt="" coords="17,39,287,57"/>
+<area shape="rect" id="node190" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#addXML" title="Add xml for this object." alt="" coords="17,57,287,76"/>
+<area shape="rect" id="node190" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#addXMLArchivableObjects" title="Add xml for this object." alt="" coords="17,76,287,95"/>
+<area shape="rect" id="node190" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#createShape" title="Create the shape." alt="" coords="17,95,287,113"/>
+<area shape="rect" id="node190" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getAttributeDictionary" title="Get attribute table." alt="" coords="17,113,287,132"/>
+<area shape="rect" id="node190" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getComplexTransformedPathLists" title="Get complex transformed path lists." alt="" coords="17,132,287,151"/>
+<area shape="rect" id="node190" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getFabricationExtension" title="Get fabrication extension." alt="" coords="17,151,287,169"/>
+<area shape="rect" id="node190" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getFabricationText" title="Get fabrication text." alt="" coords="17,169,287,188"/>
+<area shape="rect" id="node190" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getPaths" title="Get all paths." alt="" coords="17,188,287,207"/>
+<area shape="rect" id="node190" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getTransformedPaths" title="Get all transformed paths." alt="" coords="17,207,287,225"/>
+<area shape="rect" id="node190" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getType" title="Get type." alt="" coords="17,225,287,244"/>
+<area shape="rect" id="node190" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getXMLLocalName" title="Get xml local name." alt="" coords="17,244,287,263"/>
+<area shape="rect" id="node3" href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html" title="A dictionary object." alt="" coords="5,6,299,269"/>
+</map>
+  <img src="uml_class_diagram_for_fabmethe_43.gif" alt='' usemap="#uml_class_diagram_for_fabmethe_43" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<p>A triangle mesh.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Add empty lists.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#addXMLSection" class="summary-sig-name">addXMLSection</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">depth</span>,
+        <span class="summary-sig-arg">output</span>)</span><br />
+      Add the xml section for this object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.addXMLSection">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCarveCornerMaximum"></a><span class="summary-sig-name">getCarveCornerMaximum</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the corner maximum of the vertexes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getCarveCornerMaximum">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCarveCornerMinimum"></a><span class="summary-sig-name">getCarveCornerMinimum</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the corner minimum of the vertexes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getCarveCornerMinimum">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCarveLayerThickness"></a><span class="summary-sig-name">getCarveLayerThickness</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the layer thickness.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getCarveLayerThickness">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCarveRotatedBoundaryLayers"></a><span class="summary-sig-name">getCarveRotatedBoundaryLayers</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the rotated boundary layers.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getCarveRotatedBoundaryLayers">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getFabmetheusXML"></a><span class="summary-sig-name">getFabmetheusXML</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Return the fabmetheus XML.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getFabmetheusXML">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getGeometryOutput" class="summary-sig-name">getGeometryOutput</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get geometry output dictionary.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getGeometryOutput">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getInterpretationSuffix"></a><span class="summary-sig-name">getInterpretationSuffix</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Return the suffix for a triangle mesh.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getInterpretationSuffix">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getLoops" class="summary-sig-name">getLoops</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">importRadius</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Get loops sliced through shape.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getLoops">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getLoopsFromMesh"></a><span class="summary-sig-name">getLoopsFromMesh</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Get loops from a carve of a mesh.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getLoopsFromMesh">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getMinimumZ" class="summary-sig-name">getMinimumZ</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the minimum z.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getMinimumZ">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getTransformedVertexes" class="summary-sig-name">getTransformedVertexes</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get all transformed vertexes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getTransformedVertexes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getTriangleMeshes" class="summary-sig-name">getTriangleMeshes</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get all triangleMeshes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getTriangleMeshes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#getVertexes" class="summary-sig-name">getVertexes</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get all vertexes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getVertexes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getZAddExtruderPaths"></a><span class="summary-sig-name">getZAddExtruderPaths</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">z</span>)</span><br />
+      Get next z and add extruder loops.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getZAddExtruderPaths">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="liftByMinimumZ"></a><span class="summary-sig-name">liftByMinimumZ</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">minimumZ</span>)</span><br />
+      Lift the triangle mesh to the altitude.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.liftByMinimumZ">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setCarveInfillInDirectionOfBridge"></a><span class="summary-sig-name">setCarveInfillInDirectionOfBridge</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">infillInDirectionOfBridge</span>)</span><br />
+      Set the infill in direction of bridge.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.setCarveInfillInDirectionOfBridge">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setCarveLayerThickness"></a><span class="summary-sig-name">setCarveLayerThickness</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">layerThickness</span>)</span><br />
+      Set the layer thickness.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.setCarveLayerThickness">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setCarveImportRadius"></a><span class="summary-sig-name">setCarveImportRadius</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">importRadius</span>)</span><br />
+      Set the import radius.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.setCarveImportRadius">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setCarveIsCorrectMesh"></a><span class="summary-sig-name">setCarveIsCorrectMesh</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">isCorrectMesh</span>)</span><br />
+      Set the is correct mesh flag.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.setCarveIsCorrectMesh">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="setEdgesForAllFaces"></a><span class="summary-sig-name">setEdgesForAllFaces</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Set the face edges of all the faces.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.setEdgesForAllFaces">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="fabmetheus_utilities.geometry.solids.group.Group-class.html">group.Group</a></code></b>:
+      <code><a href="fabmetheus_utilities.geometry.solids.group.Group-class.html#addXMLInnerSection">addXMLInnerSection</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.solids.group.Group-class.html#getMatrix4X4">getMatrix4X4</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.solids.group.Group-class.html#getMatrixChainTetragrid">getMatrixChainTetragrid</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.solids.group.Group-class.html#getVisible">getVisible</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.solids.group.Group-class.html#setToXMLElement">setToXMLElement</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html">geometry_tools.dictionary.Dictionary</a></code></b>:
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#__repr__">__repr__</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#addXML">addXML</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#addXMLArchivableObjects">addXMLArchivableObjects</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#createShape">createShape</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getAttributeDictionary">getAttributeDictionary</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getComplexTransformedPathLists">getComplexTransformedPathLists</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getFabricationExtension">getFabricationExtension</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getFabricationText">getFabricationText</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getPaths">getPaths</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getTransformedPaths">getTransformedPaths</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getType">getType</a></code>,
+      <code><a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getXMLLocalName">getXMLLocalName</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add empty lists.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#__init__">geometry_tools.dictionary.Dictionary.__init__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="addXMLSection"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">addXMLSection</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">depth</span>,
+        <span class="sig-arg">output</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.addXMLSection">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add the xml section for this object.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.solids.group.Group-class.html#addXMLSection">group.Group.addXMLSection</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getGeometryOutput"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getGeometryOutput</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getGeometryOutput">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get geometry output dictionary.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getGeometryOutput">geometry_tools.dictionary.Dictionary.getGeometryOutput</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getLoops"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getLoops</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">importRadius</span>,
+        <span class="sig-arg">z</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getLoops">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get loops sliced through shape.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.solids.group.Group-class.html#getLoops">group.Group.getLoops</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getMinimumZ"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getMinimumZ</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getMinimumZ">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the minimum z.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getMinimumZ">geometry_tools.dictionary.Dictionary.getMinimumZ</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getTransformedVertexes"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getTransformedVertexes</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getTransformedVertexes">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get all transformed vertexes.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getTransformedVertexes">geometry_tools.dictionary.Dictionary.getTransformedVertexes</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getTriangleMeshes"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getTriangleMeshes</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getTriangleMeshes">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get all triangleMeshes.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getTriangleMeshes">geometry_tools.dictionary.Dictionary.getTriangleMeshes</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getVertexes"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getVertexes</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="fabmetheus_utilities.geometry.solids.triangle_mesh-pysrc.html#TriangleMesh.getVertexes">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get all vertexes.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#getVertexes">geometry_tools.dictionary.Dictionary.getVertexes</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Nov 16 14:33:44 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
