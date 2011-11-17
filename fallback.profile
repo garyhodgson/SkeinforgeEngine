@@ -8,7 +8,9 @@ file.extension=gcode
 file.extension.profile=true
 replace.filename=replace.csv
 export.slicedmodel=true
+export.slicedmodel.extension=slicedmodel.txt
 export.pickled.slicedmodel=false
+export.pickled.slicedmodel.extension=slicedmodel.pickled
 overwrite.pickled.slicedmodel=false
 
 

@@ -102,7 +102,7 @@ class SupportSkein:
 				boundaryLayer.loops.append(boundaryLoop)
 				for boundaryPoint in perimeter.boundaryPoints:
 					boundaryLoop.append(boundaryPoint.dropAxis())
-				self.boundaryLayers.append(boundaryLayer)
+			self.boundaryLayers.append(boundaryLayer)
 			
 		if len(self.boundaryLayers) < 0:
 			logger.error('This should never happen, there are no boundary layers in support')
@@ -131,9 +131,8 @@ class SupportSkein:
 	def setBoundaryLayers(self):
 		'Set the boundary layers.'
 		
-		if not self.debug:
-			if len(self.boundaryLayers) < 2:
-				return
+		if len(self.boundaryLayers) < 2:
+			return
 		
 		if self.supportLocation == 'EmptyLayersOnly':
 			supportLayer = SupportLayer([])
@@ -150,7 +149,8 @@ class SupportSkein:
 			supportLayer = SupportLayer(supportLoops)
 			self.supportLayers.append(supportLayer)
 				
-		for supportLayerIndex in xrange(len(self.supportLayers) - 1):
+
+		for supportLayerIndex in xrange(len(self.supportLayers) -1 ):
 			self.addSupportSegmentTable(supportLayerIndex)
 		
 		self.truncateSupportSegmentTables()
@@ -221,8 +221,10 @@ class SupportSkein:
 
 		if len(aboveLoops) < 1:
 			return
+		
 		boundaryLayer = self.boundaryLayers[layerIndex]
 		rise = aboveLayer.z - boundaryLayer.z
+		
 		outsetSupportLoops = intercircle.getInsetSeparateLoopsFromLoops(-self.minimumSupportRatio * rise, boundaryLayer.loops)
 		numberOfSubSteps = 4
 		subStepSize = self.interfaceStep / float(numberOfSubSteps)

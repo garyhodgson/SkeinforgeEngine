@@ -321,6 +321,8 @@ def getInsetLoopsFromVector3Loop(loop, radius, thresholdRatio=0.9):
 
 def getInsetSeparateLoopsFromLoops(inset, loops, thresholdRatio=0.9):
 	'Get the separate inset loops.'
+	
+	print "getInsetSeparateLoopsFromLoops inset, thresholdRatio", inset, thresholdRatio
 	isInset = inset > 0
 	insetSeparateLoops = []
 	radius = abs(inset)

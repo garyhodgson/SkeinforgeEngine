@@ -46,8 +46,10 @@ class ExportSkein:
 		self.fileExtension = config.get(name, 'file.extension')
 		self.nameOfReplaceFile = config.get(name, 'replace.filename')
 		self.exportSlicedModel = config.getboolean(name, 'export.slicedmodel')
+		self.exportSlicedModelExtension = config.get(name, 'export.slicedmodel.extension')
 		self.addProfileExtension = config.getboolean(name, 'file.extension.profile')
 		self.exportPickledSlicedModel = config.getboolean(name, 'export.pickled.slicedmodel')
+		self.exportPickledSlicedModelExtension = config.get(name, 'export.pickled.slicedmodel.extension')
 		self.overwritePickledSlicedModel = config.getboolean(name, 'overwrite.pickled.slicedmodel')
 		
 	def getReplaceableExportGcode(self, nameOfReplaceFile, replaceableExportGcode):
@@ -94,12 +96,12 @@ class ExportSkein:
 		archive.writeFileText(exportFileName, replaceableExportGcode)
 		
 		if self.exportSlicedModel:
-			fileNamePenultimate = filenamePrefix + '.slicedmodel'
+			fileNamePenultimate = filenamePrefix + '.' + self.exportSlicedModelExtension
 			archive.writeFileText(fileNamePenultimate, str(self.slicedModel))
 			logger.info('Sliced Model slicedModel exported to: %s', fileNamePenultimate)
 		
 		if self.exportPickledSlicedModel:
-			fileNamePickled = filenamePrefix + '.pickled_slicedmodel'
+			fileNamePickled = filenamePrefix + '.' + self.exportPickledSlicedModelExtension
 			if os.path.exists(fileNamePickled) and not self.overwritePickledSlicedModel:
 				backupFilename = '%s.%s.bak' % (fileNamePickled, datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f'))
 				os.rename(fileNamePickled, backupFilename)
