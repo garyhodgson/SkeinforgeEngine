@@ -60,19 +60,21 @@
 <a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
 <a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">Apply the cooling by moving the nozzle around the print.</tt> </tt>
 <a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
-<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module config=config-module.html,Variable config.config=config-module.html#config,Variable entities.GcodeCommand'.config=entities.GcodeCommand%27-module.html#config,Variable entities.Layer'.config=entities.Layer%27-module.html#config,Variable entities.NestedRing'.config=entities.NestedRing%27-module.html#config,Variable entities.RuntimeParameters'.config=entities.RuntimeParameters%27-module.html#config,Variable entities.SlicedModel'.config=entities.SlicedModel%27-module.html#config"><a title="config
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module config=config-module.html,Variable config.config=config-module.html#config,Variable entities.GcodeCommand'.config=entities.GcodeCommand%27-module.html#config,Variable entities.Layer'.config=entities.Layer%27-module.html#config,Variable entities.NestedRing'.config=entities.NestedRing%27-module.html#config,Variable entities.RuntimeParameters'.config=entities.RuntimeParameters%27-module.html#config,Variable entities.SlicedModel'.config=entities.SlicedModel%27-module.html#config,Variable skeinforge_engine_gui.config=skeinforge_engine_gui-module.html#config"><a title="config
 config.config
 entities.GcodeCommand'.config
 entities.Layer'.config
 entities.NestedRing'.config
 entities.RuntimeParameters'.config
-entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-0', 'config', 'link-0');">config</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name"><a title="config
+entities.SlicedModel'.config
+skeinforge_engine_gui.config" class="py-name" href="#" onclick="return doclink('link-0', 'config', 'link-0');">config</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name"><a title="config
 config.config
 entities.GcodeCommand'.config
 entities.Layer'.config
 entities.NestedRing'.config
 entities.RuntimeParameters'.config
-entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-1', 'config', 'link-0');">config</a></tt> </tt>
+entities.SlicedModel'.config
+skeinforge_engine_gui.config" class="py-name" href="#" onclick="return doclink('link-1', 'config', 'link-0');">config</a></tt> </tt>
 <a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">data_structures</tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class entities.GcodeCommand'.GcodeCommand=entities.GcodeCommand%27.GcodeCommand-class.html"><a title="entities.GcodeCommand'.GcodeCommand" class="py-name" href="#" onclick="return doclink('link-2', 'GcodeCommand', 'link-2');">GcodeCommand</a></tt> </tt>
 <a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name" targets="Package fabmetheus_utilities=fabmetheus_utilities-module.html"><a title="fabmetheus_utilities" class="py-name" href="#" onclick="return doclink('link-3', 'fabmetheus_utilities', 'link-3');">fabmetheus_utilities</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Module fabmetheus_utilities.euclidean=fabmetheus_utilities.euclidean-module.html"><a title="fabmetheus_utilities.euclidean" class="py-name" href="#" onclick="return doclink('link-4', 'euclidean', 'link-4');">euclidean</a></tt> </tt>
 <a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Module gcodes=gcodes-module.html"><a title="gcodes" class="py-name" href="#" onclick="return doclink('link-5', 'gcodes', 'link-5');">gcodes</a></tt> </tt>
@@ -92,7 +94,8 @@ entities.GcodeCommand'.config
 entities.Layer'.config
 entities.NestedRing'.config
 entities.RuntimeParameters'.config
-entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-7', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getfloat</tt><tt class="py-op">(</tt><tt class="py-string">'cool'</tt><tt class="py-op">,</tt><tt class="py-string">'minimum.layer.time'</tt><tt class="py-op">)</tt> </tt>
+entities.SlicedModel'.config
+skeinforge_engine_gui.config" class="py-name" href="#" onclick="return doclink('link-7', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getfloat</tt><tt class="py-op">(</tt><tt class="py-string">'cool'</tt><tt class="py-op">,</tt><tt class="py-string">'minimum.layer.time'</tt><tt class="py-op">)</tt> </tt>
 <a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">orbitalFeedRateSecond</tt> <tt class="py-op">=</tt> <tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">orbitalFeedRateSecond</tt> </tt>
 <a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">orbitalFeedRateMinute</tt> <tt class="py-op">=</tt> <tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">orbitalFeedRateMinute</tt> </tt>
 <a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oribitalMarginDistance</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="config
@@ -101,7 +104,8 @@ entities.GcodeCommand'.config
 entities.Layer'.config
 entities.NestedRing'.config
 entities.RuntimeParameters'.config
-entities.SlicedModel'.config" class="py-name" href="#" onclick="return doclink('link-8', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getfloat</tt><tt class="py-op">(</tt><tt class="py-string">'cool'</tt><tt class="py-op">,</tt><tt class="py-string">'orbital.margin'</tt><tt class="py-op">)</tt> </tt>
+entities.SlicedModel'.config
+skeinforge_engine_gui.config" class="py-name" href="#" onclick="return doclink('link-8', 'config', 'link-0');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">getfloat</tt><tt class="py-op">(</tt><tt class="py-string">'cool'</tt><tt class="py-op">,</tt><tt class="py-string">'orbital.margin'</tt><tt class="py-op">)</tt> </tt>
 <a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oribitalMargin</tt> <tt class="py-op">=</tt> <tt class="py-name">complex</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oribitalMarginDistance</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">oribitalMarginDistance</tt><tt class="py-op">)</tt> </tt>
 <a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt> <tt class="py-op">=</tt> <tt class="py-name">runtimeParameters</tt><tt class="py-op">.</tt><tt class="py-name">decimalPlaces</tt> </tt>
 </div><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">         </tt>
@@ -178,7 +182,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Nov 16 17:53:10 2011
+    Generated by Epydoc 3.0.1 on Sat Nov 19 12:44:42 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
