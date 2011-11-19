@@ -63,32 +63,12 @@ class SupportSkein:
 		self.interfaceInfillDensity = config.getfloat(name, 'interface.infill.density')
 		self.interfaceLayerThicknessRatio = config.getfloat(name, 'interface.layer.thickness.ratio')
 		interfaceExtrusionWidth = self.extrusionWidth * self.interfaceLayerThicknessRatio
-		self.interfaceStep = interfaceExtrusionWidth / self.interfaceInfillDensity
-		
+		self.interfaceStep = interfaceExtrusionWidth / self.interfaceInfillDensity		
 		
 		self.cornerMinimum = self.slicedModel.carvingCornerMinimum
 		self.cornerMaximum = self.slicedModel.carvingCornerMaximum
 		self.cornerMinimumComplex = self.cornerMinimum.dropAxis()
 		self.cornerMaximumComplex = self.cornerMaximum.dropAxis() 
-		
-		self.operatingNozzleLiftOverLayerThickness = config.getfloat(name, 'nozzle.clearance.ratio')
-		self.objectFirstLayerFeedRateInfillMultiplier = config.getfloat(name, 'firstlayer.feed.rate')
-		self.objectFirstLayerFeedRatePerimeterMultiplier = config.getfloat(name, 'firstlayer.feed.rate.perimeter')
-		self.objectFirstLayerFlowRateInfillMultiplier = config.getfloat(name, 'firstlayer.flow.rate.infill')
-		self.objectFirstLayerFlowRatePerimeterMultiplier = config.getfloat(name, 'firstlayer.flow.rate.perimeter')
-		self.objectFirstLayerTravelSpeed = config.getfloat(name, 'firstlayer.travel.rate')
-		self.interfaceLayers = config.getint(name, 'interface.layers')
-		self.interfaceFeedRateMultiplier = config.getfloat(name, 'interface.feed.rate.ratio')
-		self.interfaceFlowRateMultiplier = config.getfloat(name, 'interface.flow.rate.ratio')
-		self.interfaceNozzleLiftOverInterfaceLayerThickness = config.getfloat(name, 'interface.nozzle.clearance.ratio')
-		self.baseLayers = config.getint(name, 'base.layers')
-		self.baseFeedRateMultiplier = config.getfloat(name, 'base.feed.rate.ratio')
-		self.baseFlowRateMultiplier = config.getfloat(name, 'base.flow.rate.ratio')
-		self.baseInfillDensity = config.getfloat(name, 'base.infill.density.ratio')
-		self.baseLayerThicknessOverLayerThickness = config.getfloat(name, 'base.layer.thickness.ratio')
-		self.baseNozzleLiftOverBaseLayerThickness = config.getfloat(name, 'base.nozzle.clearance.ratio')
-		self.initialCircling = config.getboolean(name, 'initial.circling')
-		
 
 	def support(self):
 		'Add support layers to sliced model'
@@ -108,8 +88,6 @@ class SupportSkein:
 			logger.error('This should never happen, there are no boundary layers in support')
 			return
 		
-		baseExtrusionWidth = self.extrusionWidth * self.baseLayerThicknessOverLayerThickness
-		self.baseStep = baseExtrusionWidth / self.baseInfillDensity
 		originalExtent = self.cornerMaximumComplex - self.cornerMinimumComplex
 		self.raftOutsetRadius = self.raftMargin + (self.raftAdditionalMarginOverLengthPercent * 0.01) * max(originalExtent.real, originalExtent.imag)#todo ACT +0.1
 		self.setBoundaryLayers()
@@ -200,13 +178,8 @@ class SupportSkein:
 		paths = euclidean.getPathsFromEndpoints(endpoints, 1.5 * self.interfaceStep, aroundPixelTable, aroundWidth)
 		feedRateMinuteMultiplied = self.supportFeedRate * 60
 		supportFlowRateMultiplied = self.supportFlowRateRatio * self.supportFeedRate
-		if layer.index == 0:
-			feedRateMinuteMultiplied = self.objectFirstLayerFeedRatePerimeterMultiplier * 60
-			supportFlowRateMultiplied = self.objectFirstLayerFlowRatePerimeterMultiplier * self.objectFirstLayerFeedRatePerimeterMultiplier
-			self.travelFeedRateMinute = self.objectFirstLayerTravelSpeed * 60
 		
 		for path in paths:
-			#self.distanceFeedRate.addGcodeFromFeedRateThreadZ(feedRateMinuteMultiplied, path, self.travelFeedRateMinute, z)
 			supportPath = SupportPath(layer.z, self.slicedModel.runtimeParameters)
 			supportPath.addPath(path)
 			layer.supportPaths.append(supportPath)

@@ -105,7 +105,7 @@ debug=true
 ; 	EmptyLayersOnly: 		Support material will be only on the empty layers.  This is useful when making identical objects in a stack.
 ; 	Everywhere:			Support material will be added wherever there are overhangs, even inside the object.  Because support material inside objects is hard or impossible to remove, this option should only be chosen if the object has a cavity that needs support and there is some way to extract the support material.
 location=ExteriorOnly
-min.angle=30.0
+min.angle=40.0
 crosshatch=false
 gap.over.perimeter.extrusion.width.ratio=1.0
 extension.percent=0.0
@@ -115,25 +115,6 @@ support.start.file=support_start.gmc
 infill.overhang.ratio=3.0
 interface.infill.density=0.25
 interface.layer.thickness.ratio=1.0
-
-nozzle.clearance.ratio=0.0
-firstlayer.feed.rate=35.0
-firstlayer.feed.rate.perimeter=25.0
-firstlayer.flow.rate.infill=1.0
-firstlayer.flow.rate.perimeter=1.0
-firstlayer.travel.rate=50.0
-interface.layers=0
-interface.feed.rate.ratio=1.0
-interface.flow.rate.ratio=1.0
-interface.nozzle.clearance.ratio=0.45
-base.layers=0
-base.feed.rate.ratio=0.5
-base.flow.rate.ratio=0.5
-base.infill.density.ratio=0.5
-base.layer.thickness.ratio=2.0
-base.nozzle.clearance.ratio=0.4
-initial.circling=false
-
 
 [dimension]
 active=true
