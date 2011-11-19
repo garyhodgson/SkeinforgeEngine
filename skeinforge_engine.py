@@ -109,7 +109,8 @@ def main(argv=None):
     
     slicedModel.runtimeParameters.profileName = profileName
     slicedModel.runtimeParameters.inputFilename = inputFilename
-    getCraftedTextFromPlugins(pluginSequence[:], slicedModel)	
+    
+    getCraftedTextFromPlugins(pluginSequence[:], slicedModel)
     
     slicedModel.runtimeParameters.endTime = time.time()
     
@@ -124,6 +125,8 @@ def main(argv=None):
     	if config.getboolean('general', 'profile.memory.export.html'):
     		from pympler.classtracker_stats import HtmlStats
     		HtmlStats(tracker=memory_tracker.tracker).create_html('%s.memory_tracker.html' % inputFilename)
+            
+    return slicedModel
 
 def handleError(self, record):
 	traceback.print_stack()
