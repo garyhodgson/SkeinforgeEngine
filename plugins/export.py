@@ -91,6 +91,7 @@ class ExportSkein:
 			if self.addProfileExtension and profileName:
 				exportFileName += '.' + string.replace(profileName, ' ', '_')
 				exportFileName += '.' + self.fileExtension
+			self.slicedModel.runtimeParameters.outputFilename = exportFileName
 		
 		replaceableExportGcode = self.getReplaceableExportGcode(self.nameOfReplaceFile, GcodeWriter(self.slicedModel).getSlicedModelAsGcode())		
 		archive.writeFileText(exportFileName, replaceableExportGcode)
@@ -109,4 +110,4 @@ class ExportSkein:
 			logger.info('Pickled slicedmodel exported to: %s', fileNamePickled)
 			archive.writeFileText(fileNamePickled, pickle.dumps(self.slicedModel))
 			
-		logger.info('Gcode exported to: %s', archive.getSummarizedFileName(exportFileName))
+		logger.info('Gcode exported to: %s', os.path.basename(exportFileName))

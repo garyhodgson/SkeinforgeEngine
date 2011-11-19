@@ -102,7 +102,7 @@ active=true
 debug=true
 ; location
 ; 	ExteriorOnly: 		Support material will be added only the exterior of the object.  This is the best option for most objects which require support material.
-; 	EmptyLayersOnly: 		Support material will be only on the empty layers.  This is useful when making identical objects in a stack.
+; 	EmptyLayersOnly: 	Support material will be only on the empty layers.  This is useful when making identical objects in a stack.
 ; 	Everywhere:			Support material will be added wherever there are overhangs, even inside the object.  Because support material inside objects is hard or impossible to remove, this option should only be chosen if the object has a cavity that needs support and there is some way to extract the support material.
 location=ExteriorOnly
 min.angle=40.0
@@ -140,12 +140,3 @@ cool.end.file=cool_end.gmc
 strategy.path=plugins/strategies
 strategy=SlowDownCoolStrategy
 orbital.margin=10.0
-
-[stretch]
-active=true
-cross.limit.distance.ratio=5.0
-loop.stretch.ratio=0.11
-path.stretch.ratio=0.0
-perimeter.inside.stretch.ratio=0.64
-perimeter.outside.stretch.ratio=0.1
-stretch.from.distance.ratio=2.0
