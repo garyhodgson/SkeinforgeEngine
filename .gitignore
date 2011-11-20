@@ -5,3 +5,4 @@ sfact_profiles
 *.STL
 apidocs
 profiles/*.profile
+skeinforge_engine_gui.runtime

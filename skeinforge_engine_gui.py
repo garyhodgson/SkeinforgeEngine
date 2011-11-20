@@ -18,52 +18,12 @@ import printrun_utilities.gviz as gviz
 import printrun_utilities.SimpleEditor as SimpleEditor
 
 guiConfig = ConfigParser.ConfigParser(allow_no_value=True)
+guiConfigFilename="skeinforge_engine_gui.cfg"
+runtimeConfig = ConfigParser.ConfigParser(allow_no_value=True)
+runtimeConfigFilename="skeinforge_engine_gui.runtime"
 engineConfig = ConfigParser.ConfigParser(allow_no_value=True)
+engineConfigFilename="skeinforge_engine.cfg"
 
-class RedirectText:
-    '''Used to redirect the log output of skeinforge_engine to the GUI text control.'''
-    def __init__(self, aWxTextCtrl):
-        self.out = aWxTextCtrl
-
-    def write(self, string):
-        self.out.WriteText(string)
-
-class WxLog(logging.Handler):
-    def __init__(self, ctrl):
-       logging.Handler.__init__(self)
-       self.ctrl = ctrl
-    def emit(self, record):
-       self.ctrl.AppendText(self.format(record) + "\n")
-           
-class NewFileNameValidator(wx.PyValidator): 
-    def __init__(self, directory, parentDialog): 
-        wx.PyValidator.__init__(self)
-        self.directory = directory
-        self.parentDialog = parentDialog
-    
-    def Clone(self): 
-        '''Every validator must implement Clone() method!''' 
-        return NewFileNameValidator(self.directory, self.parentDialog) 
-    
-    def Validate(self, win): 
-        txtCtrl = self.Window       
-        newFilename = txtCtrl.GetValue()
-        newPath = os.path.join(self.directory, newFilename)
-        
-        if os.path.exists(newPath):
-            msgDlg = wx.MessageDialog(self.parentDialog, 'File already exists: %s' % newPath, 'Error', wx.OK | wx.ICON_ERROR)
-            msgDlg.ShowModal()
-            msgDlg.Destroy()
-            return False
-        else:
-            return True
-    
-    def TransferToWindow(self): 
-        return True 
-    
-    def TransferFromWindow(self): 
-        return True
-    
 class GuiFrame(wx.Frame):
     def __init__(self, *args, **kwds):
         kwds["style"] = wx.DEFAULT_DIALOG_STYLE | wx.MAXIMIZE_BOX | wx.MINIMIZE_BOX | wx.RESIZE_BORDER
@@ -71,13 +31,14 @@ class GuiFrame(wx.Frame):
         self.SetIcon(wx.Icon("SkeinforgeEngine.ico", wx.BITMAP_TYPE_ICO))
         self.SetBackgroundColour(wx.WHITE)
         self.dialogs = []
-        self.lastProfileName = guiConfig.get('runtime', 'last.profile')
-        self.lastShowGcode = guiConfig.getboolean('runtime', 'last.show.gcode')
+        self.lastProfileName = runtimeConfig.get('runtime', 'last.profile')
+        self.lastShowGcode = runtimeConfig.getboolean('runtime', 'last.show.gcode')
         self.openGcodeFilesVisualisation = guiConfig.getboolean('general', 'open.gcode.files.visualisation')
         self.lastProfileIndex = 0
 
-        lastPath = guiConfig.get('runtime','last.path')
+        lastPath = runtimeConfig.get('runtime','last.path')
         self.fileTxt = wx.TextCtrl(self, -1, lastPath, size=(300, -1))
+        
         self.logTxtCtrl = wx.TextCtrl(self, -1, "", style=wx.TE_MULTILINE | wx.TE_READONLY | wx.HSCROLL, size=(-1, 200))
         
         self.profilesDirectory = guiConfig.get('general', 'profiles.location')
@@ -358,8 +319,8 @@ class GuiFrame(wx.Frame):
 
     def onOpenFile(self, event):
         '''Shows the file choice dialog.'''
-        if guiConfig.get('runtime', 'last.path') != None:
-            startFolder = os.path.dirname(guiConfig.get('runtime', 'last.path'))
+        if runtimeConfig.get('runtime', 'last.path') != None:
+            startFolder = os.path.dirname(runtimeConfig.get('runtime', 'last.path'))
         else:
             startFolder = os.getcwd()
         dlg = wx.FileDialog(self, "Choose a file", startFolder, "", "*.*", wx.OPEN)
@@ -387,11 +348,46 @@ class GuiFrame(wx.Frame):
 
     def saveRuntimeParameter(self, option, value):
         '''Saves the options in the cfg file under the [runtime] section.'''
-        guiConfig.set('runtime', option, value)
-        with open("skeinforge_engine_gui.cfg", 'wb') as configfile:
-            guiConfig.write(configfile)
-            
+        runtimeConfig.set('runtime', option, value)
+        with open(runtimeConfigFilename, 'wb') as configfile:
+            runtimeConfig.write(configfile)
 
+class WxLog(logging.Handler):
+    def __init__(self, ctrl):
+       logging.Handler.__init__(self)
+       self.ctrl = ctrl
+    def emit(self, record):
+       self.ctrl.AppendText(self.format(record) + "\n")
+       self.ctrl.Update()
+           
+class NewFileNameValidator(wx.PyValidator): 
+    def __init__(self, directory, parentDialog): 
+        wx.PyValidator.__init__(self)
+        self.directory = directory
+        self.parentDialog = parentDialog
+    
+    def Clone(self): 
+        '''Every validator must implement Clone() method!''' 
+        return NewFileNameValidator(self.directory, self.parentDialog) 
+    
+    def Validate(self, win): 
+        txtCtrl = self.Window       
+        newFilename = txtCtrl.GetValue()
+        newPath = os.path.join(self.directory, newFilename)        
+        if os.path.exists(newPath):
+            msgDlg = wx.MessageDialog(self.parentDialog, 'File already exists: %s' % newPath, 'Error', wx.OK | wx.ICON_ERROR)
+            msgDlg.ShowModal()
+            msgDlg.Destroy()
+            return False
+        else:
+            return True
+            
+    def TransferToWindow(self): 
+        return True    
+    
+    def TransferFromWindow(self): 
+        return True
+    
 class SkeinforgeEngineGui(wx.App):
     def OnInit(self):
         wx.InitAllImageHandlers()
@@ -401,7 +397,8 @@ class SkeinforgeEngineGui(wx.App):
         return 1
 
 if __name__ == "__main__":
-    guiConfig.read("skeinforge_engine_gui.cfg")
-    engineConfig.read("skeinforge_engine.cfg")
+    guiConfig.read(guiConfigFilename)
+    runtimeConfig.read(runtimeConfigFilename)
+    engineConfig.read(engineConfigFilename)
     skeinforgeEngineGui = SkeinforgeEngineGui(0)
     skeinforgeEngineGui.MainLoop()

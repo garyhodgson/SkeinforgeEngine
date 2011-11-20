@@ -68,7 +68,8 @@ def main(argv=None):
     
     if args.p != None:
     	config.read(args.p)
-        profileName = os.path.basename(args.p)
+        if profileName == 'default':
+            profileName = os.path.basename(args.p)
     
     logger.info("Profile: %s", profileName)
         
