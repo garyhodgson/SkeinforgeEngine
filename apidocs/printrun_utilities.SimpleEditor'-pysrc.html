@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>printrun_utilities.SimpleEditor'</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="printrun_utilities-module.html">Package&nbsp;printrun_utilities</a> ::
+        Module&nbsp;SimpleEditor'
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="printrun_utilities.SimpleEditor%27-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="printrun_utilities.SimpleEditor%27-module.html">Module printrun_utilities.SimpleEditor'</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">Simple editor class extracted from macroed class in Printrun pronterface module.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">Credits:</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">    Original Author: Kliment (https://github.com/kliment/Printrun)</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">wx</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt class="py-name">_</tt><tt class="py-op">(</tt><tt class="py-string">"WX is not installed. This program requires WX to run."</tt><tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="SimpleEditor"></a><div id="SimpleEditor-def"><a name="L15"></a><tt class="py-lineno">15</tt> <a class="py-toggle" href="#" id="SimpleEditor-toggle" onclick="return toggle('SimpleEditor');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="printrun_utilities.SimpleEditor'.SimpleEditor-class.html">SimpleEditor</a><tt class="py-op">(</tt><tt class="py-base-class">wx</tt><tt class="py-op">.</tt><tt class="py-base-class">Dialog</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SimpleEditor-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="SimpleEditor-expanded"><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt class="py-docstring">"""Really simple editor"""</tt> </tt>
+<a name="SimpleEditor.__init__"></a><div id="SimpleEditor.__init__-def"><a name="L17"></a><tt class="py-lineno">17</tt> <a class="py-toggle" href="#" id="SimpleEditor.__init__-toggle" onclick="return toggle('SimpleEditor.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="printrun_utilities.SimpleEditor'.SimpleEditor-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">filename</tt><tt class="py-op">,</tt> <tt class="py-param">text</tt><tt class="py-op">,</tt> <tt class="py-param">callback</tt><tt class="py-op">,</tt> <tt class="py-param">readonly</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SimpleEditor.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="SimpleEditor.__init__-expanded"><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">originalText</tt> <tt class="py-op">=</tt> <tt class="py-name">text</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt class="py-name">filename</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">readonly</tt> <tt class="py-op">=</tt> <tt class="py-name">readonly</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">         </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">readonly</tt><tt class="py-op">:</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">title</tt> <tt class="py-op">=</tt> <tt class="py-string">'%s (readonly)'</tt><tt class="py-op">%</tt><tt class="py-name">filename</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt> <tt class="py-op">:</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">title</tt> <tt class="py-op">=</tt> <tt class="py-name">filename</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">         </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">Dialog</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Method LineFillStrategy.LineFillStrategy.__init__()=LineFillStrategy.LineFillStrategy-class.html#__init__,Method OrbitCoolStrategy.OrbitCoolStrategy.__init__()=OrbitCoolStrategy.OrbitCoolStrategy-class.html#__init__,Method SlowDownCoolStrategy.SlowDownCoolStrategy.__init__()=SlowDownCoolStrategy.SlowDownCoolStrategy-class.html#__init__,Method entities.GcodeCommand'.GcodeCommand.__init__()=entities.GcodeCommand%27.GcodeCommand-class.html#__init__,Method entities.Layer'.Layer.__init__()=entities.Layer%27.Layer-class.html#__init__,Method entities.NestedRing'.NestedRing.__init__()=entities.NestedRing%27.NestedRing-class.html#__init__,Method entities.RuntimeParameters'.RuntimeParameters.__init__()=entities.RuntimeParameters%27.RuntimeParameters-class.html#__init__,Method entities.SlicedModel'.SlicedModel.__init__()=entities.SlicedModel%27.SlicedModel-class.html#__init__,Method entities.paths.BoundaryPerimeter.__init__()=entities.paths.BoundaryPerimeter-class.html#__init__,Method entities.paths.InfillPath.__init__()=entities.paths.InfillPath-class.html#__init__,Method entities.paths.Loop.__init__()=entities.paths.Loop-class.html#__init__,Method entities.paths.Path.__init__()=entities.paths.Path-class.html#__init__,Method entities.paths.SupportPath.__init__()=entities.paths.SupportPath-class.html#__init__,Method entities.paths.TravelPath.__init__()=entities.paths.TravelPath-class.html#__init__,Method fabmetheus_utilities.euclidean.DistanceIndex.__init__()=fabmetheus_utilities.euclidean.DistanceIndex-class.html#__init__,Method fabmetheus_utilities.euclidean.LoopLayer.__init__()=fabmetheus_utilities.euclidean.LoopLayer-class.html#__init__,Method fabmetheus_utilities.euclidean.NestedBand.__init__()=fabmetheus_utilities.euclidean.NestedBand-class.html#__init__,Method fabmetheus_utilities.euclidean.NestedRing.__init__()=fabmetheus_utilities.euclidean.NestedRing-class.html#__init__,Method fabmetheus_utilities.euclidean.PathZ.__init__()=fabmetheus_utilities.euclidean.PathZ-class.html#__init__,Method fabmetheus_utilities.euclidean.ProjectiveSpace.__init__()=fabmetheus_utilities.euclidean.ProjectiveSpace-class.html#__init__,Method fabmetheus_utilities.euclidean.RotatedLoopLayer.__init__()=fabmetheus_utilities.euclidean.RotatedLoopLayer-class.html#__init__,Method fabmetheus_utilities.euclidean.XIntersectionIndex.__init__()=fabmetheus_utilities.euclidean.XIntersectionIndex-class.html#__init__,Method fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving.__init__()=fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary.__init__()=fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_tools.face.Edge.__init__()=fabmetheus_utilities.geometry.geometry_tools.face.Edge-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_tools.face.Face.__init__()=fabmetheus_utilities.geometry.geometry_tools.face.Face-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_tools.path.Path.__init__()=fabmetheus_utilities.geometry.geometry_tools.path.Path-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_tools.path.SVGFabricationCarving.__init__()=fabmetheus_utilities.geometry.geometry_tools.path.SVGFabricationCarving-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.BaseFunction.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.BaseFunction-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.ClassObject.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.ClassObject-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketRound.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketRound-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorClass.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorClass-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorElement.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorElement-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFalse.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFalse-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFunction.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFunction-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNone.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNone-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNumeric.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNumeric-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorTrue.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorTrue-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorValue.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorValue-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.Function.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.Function-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.FunctionVariable.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.FunctionVariable-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.KeyValue.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.KeyValue-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate.ModuleXMLElement.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate.ModuleXMLElement-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.Setting.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.Setting-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.__init__()=fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute-class.html#__init__,Method fabmetheus_utilities.geometry.geometry_utilities.matrix.Matrix.__init__()=fabmetheus_utilities.geometry.geometry_utilities.matrix.Matrix-class.html#__init__,Method fabmetheus_utilities.geometry.solids.group.Group.__init__()=fabmetheus_utilities.geometry.solids.group.Group-class.html#__init__,Method fabmetheus_utilities.geometry.solids.triangle_mesh.EdgePair.__init__()=fabmetheus_utilities.geometry.solids.triangle_mesh.EdgePair-class.html#__init__,Method fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh.__init__()=fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh-class.html#__init__,Method fabmetheus_utilities.geometry.solids.triangle_mesh.ZoneArrangement.__init__()=fabmetheus_utilities.geometry.solids.triangle_mesh.ZoneArrangement-class.html#__init__,Method fabmetheus_utilities.intercircle.CenterOutset.__init__()=fabmetheus_utilities.intercircle.CenterOutset-class.html#__init__,Method fabmetheus_utilities.intercircle.CircleIntersection.__init__()=fabmetheus_utilities.intercircle.CircleIntersection-class.html#__init__,Method fabmetheus_utilities.intercircle.CircleNode.__init__()=fabmetheus_utilities.intercircle.CircleNode-class.html#__init__,Method fabmetheus_utilities.svg_reader.FontReader.__init__()=fabmetheus_utilities.svg_reader.FontReader-class.html#__init__,Method fabmetheus_utilities.svg_reader.Glyph.__init__()=fabmetheus_utilities.svg_reader.Glyph-class.html#__init__,Method fabmetheus_utilities.svg_reader.MatrixSVG.__init__()=fabmetheus_utilities.svg_reader.MatrixSVG-class.html#__init__,Method fabmetheus_utilities.svg_reader.PathReader.__init__()=fabmetheus_utilities.svg_reader.PathReader-class.html#__init__,Method fabmetheus_utilities.svg_reader.SVGReader.__init__()=fabmetheus_utilities.svg_reader.SVGReader-class.html#__init__,Method fabmetheus_utilities.svg_writer.SVGWriter.__init__()=fabmetheus_utilities.svg_writer.SVGWriter-class.html#__init__,Method fabmetheus_utilities.vector3.Vector3.__init__()=fabmetheus_utilities.vector3.Vector3-class.html#__init__,Method fabmetheus_utilities.vector3index.Vector3Index.__init__()=fabmetheus_utilities.vector3index.Vector3Index-class.html#__init__,Method fabmetheus_utilities.xml_simple_reader.XMLElement.__init__()=fabmetheus_utilities.xml_simple_reader.XMLElement-class.html#__init__,Method fabmetheus_utilities.xml_simple_reader.XMLSimpleReader.__init__()=fabmetheus_utilities.xml_simple_reader.XMLSimpleReader-class.html#__init__,Method gcode_writer.GcodeWriter.__init__()=gcode_writer.GcodeWriter-class.html#__init__,Method plugins.bottom.BottomSkein.__init__()=plugins.bottom.BottomSkein-class.html#__init__,Method plugins.carve.CarveSkein.__init__()=plugins.carve.CarveSkein-class.html#__init__,Method plugins.comb.CombSkein.__init__()=plugins.comb.CombSkein-class.html#__init__,Method plugins.cool.CoolSkein.__init__()=plugins.cool.CoolSkein-class.html#__init__,Method plugins.export.ExportSkein.__init__()=plugins.export.ExportSkein-class.html#__init__,Method plugins.fill.FillSkein.__init__()=plugins.fill.FillSkein-class.html#__init__,Method plugins.inset.InsetSkein.__init__()=plugins.inset.InsetSkein-class.html#__init__,Method plugins.multiply.MultiplySkein.__init__()=plugins.multiply.MultiplySkein-class.html#__init__,Method plugins.preface.PrefaceSkein.__init__()=plugins.preface.PrefaceSkein-class.html#__init__,Method plugins.support.SupportLayer.__init__()=plugins.support.SupportLayer-class.html#__init__,Method plugins.support.SupportSkein.__init__()=plugins.support.SupportSkein-class.html#__init__,Method printrun_utilities.SimpleEditor'.SimpleEditor.__init__()=printrun_utilities.SimpleEditor%27.SimpleEditor-class.html#__init__,Method printrun_utilities.gviz.gviz.__init__()=printrun_utilities.gviz.gviz-class.html#__init__,Method printrun_utilities.gviz.window.__init__()=printrun_utilities.gviz.window-class.html#__init__,Method skeinforge_engine_gui.GuiFrame.__init__()=skeinforge_engine_gui.GuiFrame-class.html#__init__,Method skeinforge_engine_gui.NewFileNameValidator.__init__()=skeinforge_engine_gui.NewFileNameValidator-class.html#__init__,Method skeinforge_engine_gui.RedirectText.__init__()=skeinforge_engine_gui.RedirectText-class.html#__init__"><a title="LineFillStrategy.LineFillStrategy.__init__
+OrbitCoolStrategy.OrbitCoolStrategy.__init__
+SlowDownCoolStrategy.SlowDownCoolStrategy.__init__
+entities.GcodeCommand'.GcodeCommand.__init__
+entities.Layer'.Layer.__init__
+entities.NestedRing'.NestedRing.__init__
+entities.RuntimeParameters'.RuntimeParameters.__init__
+entities.SlicedModel'.SlicedModel.__init__
+entities.paths.BoundaryPerimeter.__init__
+entities.paths.InfillPath.__init__
+entities.paths.Loop.__init__
+entities.paths.Path.__init__
+entities.paths.SupportPath.__init__
+entities.paths.TravelPath.__init__
+fabmetheus_utilities.euclidean.DistanceIndex.__init__
+fabmetheus_utilities.euclidean.LoopLayer.__init__
+fabmetheus_utilities.euclidean.NestedBand.__init__
+fabmetheus_utilities.euclidean.NestedRing.__init__
+fabmetheus_utilities.euclidean.PathZ.__init__
+fabmetheus_utilities.euclidean.ProjectiveSpace.__init__
+fabmetheus_utilities.euclidean.RotatedLoopLayer.__init__
+fabmetheus_utilities.euclidean.XIntersectionIndex.__init__
+fabmetheus_utilities.fabmetheus_tools.interpret_plugins.svg.SVGCarving.__init__
+fabmetheus_utilities.geometry.geometry_tools.dictionary.Dictionary.__init__
+fabmetheus_utilities.geometry.geometry_tools.face.Edge.__init__
+fabmetheus_utilities.geometry.geometry_tools.face.Face.__init__
+fabmetheus_utilities.geometry.geometry_tools.path.Path.__init__
+fabmetheus_utilities.geometry.geometry_tools.path.SVGFabricationCarving.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.BaseFunction.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.ClassObject.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.Evaluator.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorBracketRound.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorClass.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorElement.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFalse.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorFunction.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNone.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorNumeric.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorTrue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.EvaluatorValue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.Function.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.FunctionVariable.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.KeyValue.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate.ModuleXMLElement.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_elements.setting.Setting.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.dictionary_attribute.DictionaryAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.list_attribute.ListAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.evaluate_enumerables.string_attribute.StringAttribute.__init__
+fabmetheus_utilities.geometry.geometry_utilities.matrix.Matrix.__init__
+fabmetheus_utilities.geometry.solids.group.Group.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.EdgePair.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.TriangleMesh.__init__
+fabmetheus_utilities.geometry.solids.triangle_mesh.ZoneArrangement.__init__
+fabmetheus_utilities.intercircle.CenterOutset.__init__
+fabmetheus_utilities.intercircle.CircleIntersection.__init__
+fabmetheus_utilities.intercircle.CircleNode.__init__
+fabmetheus_utilities.svg_reader.FontReader.__init__
+fabmetheus_utilities.svg_reader.Glyph.__init__
+fabmetheus_utilities.svg_reader.MatrixSVG.__init__
+fabmetheus_utilities.svg_reader.PathReader.__init__
+fabmetheus_utilities.svg_reader.SVGReader.__init__
+fabmetheus_utilities.svg_writer.SVGWriter.__init__
+fabmetheus_utilities.vector3.Vector3.__init__
+fabmetheus_utilities.vector3index.Vector3Index.__init__
+fabmetheus_utilities.xml_simple_reader.XMLElement.__init__
+fabmetheus_utilities.xml_simple_reader.XMLSimpleReader.__init__
+gcode_writer.GcodeWriter.__init__
+plugins.bottom.BottomSkein.__init__
+plugins.carve.CarveSkein.__init__
+plugins.comb.CombSkein.__init__
+plugins.cool.CoolSkein.__init__
+plugins.export.ExportSkein.__init__
+plugins.fill.FillSkein.__init__
+plugins.inset.InsetSkein.__init__
+plugins.multiply.MultiplySkein.__init__
+plugins.preface.PrefaceSkein.__init__
+plugins.support.SupportLayer.__init__
+plugins.support.SupportSkein.__init__
+printrun_utilities.SimpleEditor'.SimpleEditor.__init__
+printrun_utilities.gviz.gviz.__init__
+printrun_utilities.gviz.window.__init__
+skeinforge_engine_gui.GuiFrame.__init__
+skeinforge_engine_gui.NewFileNameValidator.__init__
+skeinforge_engine_gui.RedirectText.__init__" class="py-name" href="#" onclick="return doclink('link-0', '__init__', 'link-0');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">title</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">title</tt><tt class="py-op">,</tt> <tt class="py-name">style</tt><tt class="py-op">=</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">DEFAULT_DIALOG_STYLE</tt> <tt class="py-op">|</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">RESIZE_BORDER</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">callback</tt> <tt class="py-op">=</tt> <tt class="py-name">callback</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">panel</tt> <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">Panel</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-name">topsizer</tt> <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">BoxSizer</tt><tt class="py-op">(</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">VERTICAL</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">         </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">editorTxtCtrl</tt> <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">TextCtrl</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">panel</tt><tt class="py-op">,</tt> <tt class="py-name">style</tt><tt class="py-op">=</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">TE_MULTILINE</tt> <tt class="py-op">+</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">HSCROLL</tt><tt class="py-op">,</tt> <tt class="py-name">size</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-number">400</tt><tt class="py-op">,</tt> <tt class="py-number">300</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">editorTxtCtrl</tt><tt class="py-op">.</tt><tt class="py-name">SetValue</tt><tt class="py-op">(</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">editorTxtCtrl</tt><tt class="py-op">.</tt><tt class="py-name">SetEditable</tt><tt class="py-op">(</tt><tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">readonly</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">editorTxtCtrl</tt><tt class="py-op">.</tt><tt class="py-name">Bind</tt><tt class="py-op">(</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">EVT_TEXT</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Method printrun_utilities.SimpleEditor'.SimpleEditor.onTextChange()=printrun_utilities.SimpleEditor%27.SimpleEditor-class.html#onTextChange"><a title="printrun_utilities.SimpleEditor'.SimpleEditor.onTextChange" class="py-name" href="#" onclick="return doclink('link-1', 'onTextChange', 'link-1');">onTextChange</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">         </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-name">topsizer</tt><tt class="py-op">.</tt><tt class="py-name">Add</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">editorTxtCtrl</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">ALL</tt> <tt class="py-op">+</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">EXPAND</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">         </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-name">commandsizer</tt> <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">BoxSizer</tt><tt class="py-op">(</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">HORIZONTAL</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okBtn</tt> <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">Button</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">panel</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-string">"Save"</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okBtn</tt><tt class="py-op">.</tt><tt class="py-name">Bind</tt><tt class="py-op">(</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">EVT_BUTTON</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Method printrun_utilities.SimpleEditor'.SimpleEditor.save()=printrun_utilities.SimpleEditor%27.SimpleEditor-class.html#save"><a title="printrun_utilities.SimpleEditor'.SimpleEditor.save" class="py-name" href="#" onclick="return doclink('link-2', 'save', 'link-2');">save</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okBtn</tt><tt class="py-op">.</tt><tt class="py-name">Disable</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Bind</tt><tt class="py-op">(</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">EVT_CLOSE</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method printrun_utilities.SimpleEditor'.SimpleEditor.close()=printrun_utilities.SimpleEditor%27.SimpleEditor-class.html#close"><a title="printrun_utilities.SimpleEditor'.SimpleEditor.close" class="py-name" href="#" onclick="return doclink('link-3', 'close', 'link-3');">close</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Bind</tt><tt class="py-op">(</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">EVT_CHAR_HOOK</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method printrun_utilities.SimpleEditor'.SimpleEditor.onKeyPress()=printrun_utilities.SimpleEditor%27.SimpleEditor-class.html#onKeyPress"><a title="printrun_utilities.SimpleEditor'.SimpleEditor.onKeyPress" class="py-name" href="#" onclick="return doclink('link-4', 'onKeyPress', 'link-4');">onKeyPress</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt class="py-name">commandsizer</tt><tt class="py-op">.</tt><tt class="py-name">Add</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okBtn</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cancelBtn</tt> <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">Button</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">panel</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-string">"Cancel"</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cancelBtn</tt><tt class="py-op">.</tt><tt class="py-name">Bind</tt><tt class="py-op">(</tt><tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">EVT_BUTTON</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="printrun_utilities.SimpleEditor'.SimpleEditor.close" class="py-name" href="#" onclick="return doclink('link-5', 'close', 'link-3');">close</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt class="py-name">commandsizer</tt><tt class="py-op">.</tt><tt class="py-name">Add</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cancelBtn</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt class="py-name">topsizer</tt><tt class="py-op">.</tt><tt class="py-name">Add</tt><tt class="py-op">(</tt><tt class="py-name">commandsizer</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">EXPAND</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">         </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">panel</tt><tt class="py-op">.</tt><tt class="py-name">SetSizer</tt><tt class="py-op">(</tt><tt class="py-name">topsizer</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">        <tt class="py-name">topsizer</tt><tt class="py-op">.</tt><tt class="py-name">Layout</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt class="py-name">topsizer</tt><tt class="py-op">.</tt><tt class="py-name">Fit</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Show</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">editorTxtCtrl</tt><tt class="py-op">.</tt><tt class="py-name">SetFocus</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">editorTxtCtrl</tt><tt class="py-op">.</tt><tt class="py-name">SetSelection</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">         </tt>
+<a name="SimpleEditor.save"></a><div id="SimpleEditor.save-def"><a name="L58"></a><tt class="py-lineno">58</tt> <a class="py-toggle" href="#" id="SimpleEditor.save-toggle" onclick="return toggle('SimpleEditor.save');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="printrun_utilities.SimpleEditor'.SimpleEditor-class.html#save">save</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SimpleEditor.save-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="SimpleEditor.save-expanded"><a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Destroy</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">callback</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">editorTxtCtrl</tt><tt class="py-op">.</tt><tt class="py-name">GetValue</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">         </tt>
+<a name="SimpleEditor.close"></a><div id="SimpleEditor.close-def"><a name="L62"></a><tt class="py-lineno">62</tt> <a class="py-toggle" href="#" id="SimpleEditor.close-toggle" onclick="return toggle('SimpleEditor.close');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="printrun_utilities.SimpleEditor'.SimpleEditor-class.html#close">close</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SimpleEditor.close-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="SimpleEditor.close-expanded"><a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">Destroy</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"> </tt>
+<a name="SimpleEditor.onKeyPress"></a><div id="SimpleEditor.onKeyPress-def"><a name="L65"></a><tt class="py-lineno">65</tt> <a class="py-toggle" href="#" id="SimpleEditor.onKeyPress-toggle" onclick="return toggle('SimpleEditor.onKeyPress');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="printrun_utilities.SimpleEditor'.SimpleEditor-class.html#onKeyPress">onKeyPress</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SimpleEditor.onKeyPress-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="SimpleEditor.onKeyPress-expanded"><a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">GetKeyCode</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">x</tt> <tt class="py-op">==</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">WXK_ESCAPE</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">editorTxtCtrl</tt><tt class="py-op">.</tt><tt class="py-name">GetValue</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">originalText</tt><tt class="py-op">:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">                <tt class="py-name">msgDlg</tt> <tt class="py-op">=</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">MessageDialog</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-string">'Save changes?'</tt><tt class="py-op">,</tt> <tt class="py-string">'Confirm'</tt><tt class="py-op">,</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">YES_NO</tt> <tt class="py-op">|</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">CANCEL</tt> <tt class="py-op">|</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">ICON_QUESTION</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">                <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">msgDlg</tt><tt class="py-op">.</tt><tt class="py-name">ShowModal</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">                <tt class="py-name">msgDlg</tt><tt class="py-op">.</tt><tt class="py-name">Destroy</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">result</tt> <tt class="py-op">==</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">ID_YES</tt><tt class="py-op">:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="printrun_utilities.SimpleEditor'.SimpleEditor.save" class="py-name" href="#" onclick="return doclink('link-6', 'save', 'link-2');">save</a></tt><tt class="py-op">(</tt><tt class="py-name">event</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">result</tt> <tt class="py-op">==</tt> <tt class="py-name">wx</tt><tt class="py-op">.</tt><tt class="py-name">ID_NO</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="printrun_utilities.SimpleEditor'.SimpleEditor.close" class="py-name" href="#" onclick="return doclink('link-7', 'close', 'link-3');">close</a></tt><tt class="py-op">(</tt><tt class="py-name">event</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">        <tt class="py-name">event</tt><tt class="py-op">.</tt><tt class="py-name">Skip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">     </tt>
+<a name="SimpleEditor.onTextChange"></a><div id="SimpleEditor.onTextChange-def"><a name="L78"></a><tt class="py-lineno">78</tt> <a class="py-toggle" href="#" id="SimpleEditor.onTextChange-toggle" onclick="return toggle('SimpleEditor.onTextChange');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="printrun_utilities.SimpleEditor'.SimpleEditor-class.html#onTextChange">onTextChange</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SimpleEditor.onTextChange-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="SimpleEditor.onTextChange-expanded"><a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">editorTxtCtrl</tt><tt class="py-op">.</tt><tt class="py-name">GetValue</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">originalText</tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">SetTitle</tt><tt class="py-op">(</tt><tt class="py-string">"%s*"</tt><tt class="py-op">%</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">title</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okBtn</tt><tt class="py-op">.</tt><tt class="py-name">Enable</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">SetTitle</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">title</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okBtn</tt><tt class="py-op">.</tt><tt class="py-name">Disable</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sun Nov 20 18:29:26 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
