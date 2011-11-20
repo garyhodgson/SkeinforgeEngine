@@ -17,7 +17,7 @@ A fork of Enrique's [Skeinforge](http://skeinforge.com), taken from ahmetcemtura
   * Functionality has been removed as part of the simplification process.  For a fully developed modular system with a working GUI please refer to the original Skeinforge or SFACT derivative.
     * The following plugins are currently available: carve,bottom,preface,inset,fill,multiply,speed,dimension,cool,comb,support (from raft),export
   * Only python 2.7 is supported.
-  * <strike>No GUI</strike> Minimal GUI written in wxPython. Features:
+  * <del>No GUI</del> Minimal GUI written in wxPython. Features:
     * Profile selection
     * Profile copying, including effective profile (values from both the default profile and the selected profile)
     * Basic profile editing
@@ -44,6 +44,11 @@ A fork of Enrique's [Skeinforge](http://skeinforge.com), taken from ahmetcemtura
                   filename settings.
     -r reprocess  Comma seperated list of plugins to reprocess a pickled sliced model
                   file. The export plugin is automatically appended.  
+</pre>
+
+## GUI Usage
+<pre>
+  usage: skeinforge_engine_gui.py
 </pre>
 
 ## Configuration
