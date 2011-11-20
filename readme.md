@@ -17,7 +17,13 @@ A fork of Enrique's [Skeinforge](http://skeinforge.com), taken from ahmetcemtura
   * Functionality has been removed as part of the simplification process.  For a fully developed modular system with a working GUI please refer to the original Skeinforge or SFACT derivative.
     * The following plugins are currently available: carve,bottom,preface,inset,fill,multiply,speed,dimension,cool,comb,support (from raft),export
   * Only python 2.7 is supported.
-  * No GUI.
+  * <strike>No GUI</strike> Minimal GUI written in wxPython. Features:
+    * Profile selection
+    * Profile copying, including effective profile (values from both the default profile and the selected profile)
+    * Basic profile editing
+    * Skeining
+    * Gcode visualisation (using Gviz module from Kliment's Printrun)
+
   * Supports only stepper extruders and volumetric extrusion.
 
 ## Usage
@@ -56,6 +62,7 @@ A fork of Enrique's [Skeinforge](http://skeinforge.com), taken from ahmetcemtura
 
 ## Credits
   * Credit to Enrique and the original contributers in making Skeinforge available, and to Ahmet for his contributions through SFACT.
+  * SimpleEditor and GViz classes taken from Kliment's [Printrun](https://github.com/kliment/Printrun)
 
 ## License
 [GNU Affero General Public License](http://www.gnu.org/licenses/agpl.html)
