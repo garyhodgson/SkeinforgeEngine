@@ -6,7 +6,8 @@ import logging
 import os
 import skeinforge_engine
 import sys
-import shutil 
+import shutil
+import StringIO
 try:
     import wx
 except:
@@ -16,7 +17,8 @@ except:
 import printrun_utilities.gviz as gviz
 import printrun_utilities.SimpleEditor as SimpleEditor
 
-config = ConfigParser.ConfigParser(allow_no_value=True)
+guiConfig = ConfigParser.ConfigParser(allow_no_value=True)
+engineConfig = ConfigParser.ConfigParser(allow_no_value=True)
 
 class RedirectText:
     '''Used to redirect the log output of skeinforge_engine to the GUI text control.'''
@@ -42,7 +44,7 @@ class NewFileNameValidator(wx.PyValidator):
         newPath = os.path.join(self.directory, newFilename)
         
         if os.path.exists(newPath):
-            msgDlg = wx.MessageDialog(self.parentDialog, 'File already exists: %s.' % newPath, 'Error', wx.OK | wx.ICON_ERROR)
+            msgDlg = wx.MessageDialog(self.parentDialog, 'File already exists: %s' % newPath, 'Error', wx.OK | wx.ICON_ERROR)
             msgDlg.ShowModal()
             msgDlg.Destroy()
             return False
@@ -62,12 +64,12 @@ class GuiFrame(wx.Frame):
         self.SetIcon(wx.Icon("SkeinforgeEngine.ico", wx.BITMAP_TYPE_ICO))
         self.SetBackgroundColour(wx.WHITE)
         self.dialogs = []
-        self.lastProfileName = config.get('runtime', 'last.profile')
-        self.lastShowGcode = config.getboolean('runtime', 'last.show.gcode')
-        self.openGcodeFilesVisualisation = config.getboolean('general', 'open.gcode.files.visualisation')
+        self.lastProfileName = guiConfig.get('runtime', 'last.profile')
+        self.lastShowGcode = guiConfig.getboolean('runtime', 'last.show.gcode')
+        self.openGcodeFilesVisualisation = guiConfig.getboolean('general', 'open.gcode.files.visualisation')
         self.lastProfileIndex = 0
         
-        self.profilesDirectory = config.get('general', 'profiles.location')
+        self.profilesDirectory = guiConfig.get('general', 'profiles.location')
         
         self.profilesCB = wx.ComboBox(self, -1, size=(300, -1), style=wx.CB_READONLY)
         self.profilesCB.SetSelection(self.lastProfileIndex)
@@ -110,7 +112,7 @@ class GuiFrame(wx.Frame):
         openFile_id = wx.NewId()
         self.Bind(wx.EVT_MENU, self.onOpenFile, id=openFile_id)
         
-        self.accel_tbl = wx.AcceleratorTable([(wx.ACCEL_CTRL, ord('S'), skein_id),(wx.ACCEL_CTRL, ord('O'), openFile_id)])
+        self.accel_tbl = wx.AcceleratorTable([(wx.ACCEL_CTRL, ord('S'), skein_id), (wx.ACCEL_CTRL, ord('O'), openFile_id)])
         
         self.SetAcceleratorTable(self.accel_tbl)
         
@@ -178,13 +180,100 @@ class GuiFrame(wx.Frame):
         self.menustrip.Append(fileMenu, "&File")
 
         profilesMenu = wx.Menu()
-        self.Bind(wx.EVT_MENU, self.onEditProfile, profilesMenu.Append(-1, "&Edit...", " Edit profile"))
-        self.Bind(wx.EVT_MENU, self.onCopyProfile, profilesMenu.Append(-1, "&Copy", " Copy profile"))
-        self.Bind(wx.EVT_MENU, self.onRefreshProfilesList, profilesMenu.Append(-1, "&Refresh", " Refresh list"))
+        self.Bind(wx.EVT_MENU, self.onEditProfile, profilesMenu.Append(-1, "&Edit...", " Edit currently selected profile"))
+        self.Bind(wx.EVT_MENU, self.onCopyProfile, profilesMenu.Append(-1, "&Copy", " Make a new copy of the currently selected profile"))
+        self.Bind(wx.EVT_MENU, self.onRefreshProfilesList, profilesMenu.Append(-1, "&Refresh", " Refresh list of profiles"))
+        self.Bind(wx.EVT_MENU, self.onViewEffectiveProfile, profilesMenu.Append(-1, "&View effective profile", " View the complete profile the engine would use"))
+        self.Bind(wx.EVT_MENU, self.onCopyEffectiveProfile, profilesMenu.Append(-1, "Copy effective profile", " Make a new copy of the currently effective profile"))
         self.menustrip.Append(profilesMenu, "&Profiles")
+        
+        configMenu = wx.Menu()
+        self.Bind(wx.EVT_MENU, self.onEditEngineConfig, configMenu.Append(-1, "&Edit skeinforge_engine.cfg...", " Edit engine config"))
+        self.Bind(wx.EVT_MENU, self.onEditEngineGuiConfig, configMenu.Append(-1, "&Edit skeinforge_engine_gui.cfg...", " Edit engine gui config"))
+        self.menustrip.Append(configMenu, "&Config")
 
         self.SetMenuBar(self.menustrip)
 
+    def onViewEffectiveProfile(self, event):
+        se = SimpleEditor("Effective Profile", self.getEffectiveProfileString(self.getEffectiveProfile()).getvalue(), None, True)
+        self.dialogs.append(se)
+    
+    def getEffectiveProfileString(self, effectiveConfig):        
+        effectiveConfigString = StringIO.StringIO()
+        for section in effectiveConfig.sections():
+            effectiveConfigString.write("[%s]\n" % section)
+            for option in effectiveConfig.options(section):
+                value = effectiveConfig.get(section, option) 
+                effectiveConfigString.write("%s=%s\n" % (option, value))
+            effectiveConfigString.write("\n")
+        return effectiveConfigString
+            
+    def getEffectiveProfile(self):
+        defaultProfile = engineConfig.get('general', 'default.profile')
+        effectiveConfig = ConfigParser.ConfigParser(allow_no_value=True)
+        effectiveConfig.read(defaultProfile)
+        
+        profileSelectionIndex = self.profilesCB.GetSelection()
+        if profileSelectionIndex > 0:
+            profileName = self.profilesCB.GetString(profileSelectionIndex).encode()
+            profilePath = os.path.join(self.profilesDirectory, profileName)
+            effectiveConfig.read(profilePath)
+        return effectiveConfig
+    
+    def onCopyEffectiveProfile(self, event):
+        profileSelectionIndex = self.profilesCB.GetSelection()
+        if profileSelectionIndex < 1:
+            return
+        profileName = self.profilesCB.GetString(profileSelectionIndex).encode()
+        profilePath = os.path.join(self.profilesDirectory, profileName)
+        dlg = wx.TextEntryDialog(self, 'New profile name:', 'Copy Effective Profile', "%s.copy" % profileName)        
+        txtCtrl = dlg.FindWindowById(3000)
+        txtCtrl.Validator = NewFileNameValidator(self.profilesDirectory, dlg) 
+        if dlg.ShowModal() == wx.ID_OK:
+            newProfileName = txtCtrl.GetValue()
+            newProfilePath = os.path.join(self.profilesDirectory, newProfileName)
+            try:
+                fd = os.open( newProfilePath, os.O_RDWR|os.O_CREAT )
+                f = os.fdopen(fd, "w+")
+                effectiveProfile = self.getEffectiveProfile()
+                effectiveProfile.set('profile', 'name', newProfileName)
+                f.write (self.getEffectiveProfileString(effectiveProfile).getvalue())
+                f.close()
+                self.lastProfileName = newProfileName
+                self.updateProfileList()
+                self.GetEventHandler().ProcessEvent(wx.PyCommandEvent(wx.EVT_COMBOBOX.typeId, self.profilesCB.GetId()))                
+            except (IOError, os.error), why:
+                msgDlg = wx.MessageDialog(dlg, 'Unable to copy effective profile: %s.' % str(why), 'Error', wx.OK | wx.ICON_ERROR)
+                msgDlg.ShowModal()
+                msgDlg.Destroy()
+        dlg.Destroy()
+        
+    def onEditEngineGuiConfig(self,event):
+        self.editFile('skeinforge_engine_gui.cfg')
+        
+    def onEditEngineConfig(self, event):
+        self.editFile('skeinforge_engine.cfg')
+    
+    def onEditProfile(self, event):
+        '''Opens the profile for editing.'''
+        profileSelectionIndex = self.profilesCB.GetSelection()
+        if profileSelectionIndex < 1:
+            return
+        profileName = self.profilesCB.GetString(profileSelectionIndex).encode()
+        profilePath = os.path.join(self.profilesDirectory, profileName)
+        self.editFile(profilePath)
+        
+    def editFile(self, filePath):
+        f2 = open(filePath)
+        def saveFileCallback(text):
+            f = open(filePath, 'w+')
+            if len(text.strip()) == 0:
+                return
+            f.write(text)
+            f.close()
+        se = SimpleEditor(os.path.basename(filePath), f2.read(), saveFileCallback)
+        self.dialogs.append(se)
+        
     def onCopyProfile(self, event):
         profileSelectionIndex = self.profilesCB.GetSelection()
         if profileSelectionIndex < 1:
@@ -263,8 +352,8 @@ class GuiFrame(wx.Frame):
 
     def onOpenFile(self, event):
         '''Shows the file choice dialog.'''
-        if config.get('runtime', 'last.path') != None:
-            startFolder = os.path.dirname(config.get('runtime', 'last.path'))
+        if guiConfig.get('runtime', 'last.path') != None:
+            startFolder = os.path.dirname(guiConfig.get('runtime', 'last.path'))
         else:
             startFolder = os.getcwd()
         dlg = wx.FileDialog(self, "Choose a file", startFolder, "", "*.*", wx.OPEN)
@@ -277,24 +366,6 @@ class GuiFrame(wx.Frame):
                     self.saveRuntimeParameter('last.path', path)
                     self.fileTxt.SetValue(path)
         dlg.Destroy()
-    
-    def onEditProfile(self, event):
-        '''Opens the profile for editing.'''
-        profileSelectionIndex = self.profilesCB.GetSelection()
-        if profileSelectionIndex < 1:
-            return
-        profileName = self.profilesCB.GetString(profileSelectionIndex).encode()
-        profilePath = os.path.join(self.profilesDirectory, profileName)
-        
-        f2 = open(profilePath)
-        def cb(profileText):
-            f = open(profilePath, 'w+')
-            if len(profileText.strip()) == 0:
-                return
-            f.write(profileText)
-            f.close()
-        se = SimpleEditor(profileName, f2.read(), cb)
-        self.dialogs.append(se)
         
     def onProfileChange(self, event):
         self.lastProfileIndex = self.profilesCB.GetSelection()
@@ -310,9 +381,9 @@ class GuiFrame(wx.Frame):
 
     def saveRuntimeParameter(self, option, value):
         '''Saves the options in the cfg file under the [runtime] section.'''
-        config.set('runtime', option, value)
+        guiConfig.set('runtime', option, value)
         with open("skeinforge_engine_gui.cfg", 'wb') as configfile:
-            config.write(configfile)
+            guiConfig.write(configfile)
             
 
 class SkeinforgeEngineGui(wx.App):
@@ -324,6 +395,7 @@ class SkeinforgeEngineGui(wx.App):
         return 1
 
 if __name__ == "__main__":
-    config.read("skeinforge_engine_gui.cfg")
+    guiConfig.read("skeinforge_engine_gui.cfg")
+    engineConfig.read("skeinforge_engine.cfg")
     skeinforgeEngineGui = SkeinforgeEngineGui(0)
     skeinforgeEngineGui.MainLoop()
