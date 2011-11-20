@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>skeinforge_engine_gui.WxLog</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="skeinforge_engine_gui-module.html">Module&nbsp;skeinforge_engine_gui</a> ::
+        Class&nbsp;WxLog
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="skeinforge_engine_gui.WxLog-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class WxLog</h1><p class="nomargin-top"><span class="codelink"><a href="skeinforge_engine_gui-pysrc.html#WxLog">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_skeinfor_4" name="uml_class_diagram_for_skeinfor_4">
+<area shape="rect" id="node222" href="skeinforge_engine_gui.WxLog-class.html#__init__" title="Initializes the instance &#45; basically setting the formatter to None and the &#160;filter list to empty." alt="" coords="37,449,144,468"/>
+<area shape="rect" id="node222" href="skeinforge_engine_gui.WxLog-class.html#emit" title="Do whatever it takes to actually log the specified logging record." alt="" coords="37,468,144,487"/>
+<area shape="rect" id="node1" href="skeinforge_engine_gui.WxLog-class.html" title="skeinforge_engine_gui.WxLog" alt="" coords="25,417,156,493"/>
+<area shape="rect" id="node223" href="javascript:void(0);" title="logging.Handler.name" alt="" coords="17,145,163,164"/>
+<area shape="rect" id="node223" href="javascript:void(0);" title="logging.Handler.get_name" alt="" coords="17,167,163,185"/>
+<area shape="rect" id="node223" href="javascript:void(0);" title="logging.Handler.set_name" alt="" coords="17,185,163,204"/>
+<area shape="rect" id="node223" href="javascript:void(0);" title="Acquire a thread lock for serializing access to the underlying I/O." alt="" coords="17,204,163,223"/>
+<area shape="rect" id="node223" href="javascript:void(0);" title="Acquire the I/O thread lock." alt="" coords="17,223,163,241"/>
+<area shape="rect" id="node223" href="javascript:void(0);" title="Release the I/O thread lock." alt="" coords="17,241,163,260"/>
+<area shape="rect" id="node223" href="javascript:void(0);" title="Set the logging level of this handler." alt="" coords="17,260,163,279"/>
+<area shape="rect" id="node223" href="javascript:void(0);" title="Format the specified record." alt="" coords="17,279,163,297"/>
+<area shape="rect" id="node223" href="javascript:void(0);" title="Conditionally emit the specified logging record." alt="" coords="17,297,163,316"/>
+<area shape="rect" id="node223" href="javascript:void(0);" title="Set the formatter for this handler." alt="" coords="17,316,163,335"/>
+<area shape="rect" id="node223" href="javascript:void(0);" title="Ensure all logging output has been flushed." alt="" coords="17,335,163,353"/>
+<area shape="rect" id="node223" href="javascript:void(0);" title="Tidy up any resources used by the handler." alt="" coords="17,353,163,372"/>
+<area shape="rect" id="node223" href="javascript:void(0);" title="Handle errors which occur during an emit() call." alt="" coords="17,372,163,391"/>
+<area shape="rect" id="node2" href="javascript:void(0);" title="Handler instances dispatch logging events to specific destinations." alt="" coords="5,121,173,397"/>
+<area shape="rect" id="node224" href="javascript:void(0);" title="Add the specified filter to this handler." alt="" coords="21,39,159,57"/>
+<area shape="rect" id="node224" href="javascript:void(0);" title="Remove the specified filter from this handler." alt="" coords="21,57,159,76"/>
+<area shape="rect" id="node224" href="javascript:void(0);" title="Determine if a record is loggable by consulting all the filters." alt="" coords="21,76,159,95"/>
+<area shape="rect" id="node3" href="javascript:void(0);" title="A base class for loggers and handlers which allows them to share common code." alt="" coords="9,6,169,101"/>
+</map>
+  <img src="uml_class_diagram_for_skeinfor_4.gif" alt='' usemap="#uml_class_diagram_for_skeinfor_4" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="skeinforge_engine_gui.WxLog-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ctrl</span>)</span><br />
+      Initializes the instance - basically setting the formatter to None 
+      and the filter list to empty.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="skeinforge_engine_gui-pysrc.html#WxLog.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="skeinforge_engine_gui.WxLog-class.html#emit" class="summary-sig-name">emit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">record</span>)</span><br />
+      Do whatever it takes to actually log the specified logging record.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="skeinforge_engine_gui-pysrc.html#WxLog.emit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>logging.Handler</code></b>:
+      <code>acquire</code>,
+      <code>close</code>,
+      <code>createLock</code>,
+      <code>flush</code>,
+      <code>format</code>,
+      <code>get_name</code>,
+      <code>handle</code>,
+      <code>handleError</code>,
+      <code>release</code>,
+      <code>setFormatter</code>,
+      <code>setLevel</code>,
+      <code>set_name</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>logging.Filterer</code></b>:
+      <code>addFilter</code>,
+      <code>filter</code>,
+      <code>removeFilter</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>logging.Handler</code></b>:
+      <code>name</code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ctrl</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="skeinforge_engine_gui-pysrc.html#WxLog.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Initializes the instance - basically setting the formatter to None and
+  the filter list to empty.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="emit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">emit</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">record</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="skeinforge_engine_gui-pysrc.html#WxLog.emit">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Do whatever it takes to actually log the specified logging record.</p>
+  <p>This version is intended to be implemented by subclasses and so raises
+  a NotImplementedError.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        logging.Handler.emit
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/garyhodgson/SkeinforgeEngine">SkeinforgeEngine</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Nov 21 00:22:44 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
