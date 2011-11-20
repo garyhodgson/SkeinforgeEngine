@@ -27,7 +27,14 @@ class RedirectText:
 
     def write(self, string):
         self.out.WriteText(string)
-        
+
+class WxLog(logging.Handler):
+    def __init__(self, ctrl):
+       logging.Handler.__init__(self)
+       self.ctrl = ctrl
+    def emit(self, record):
+       self.ctrl.AppendText(self.format(record) + "\n")
+           
 class NewFileNameValidator(wx.PyValidator): 
     def __init__(self, directory, parentDialog): 
         wx.PyValidator.__init__(self)
@@ -68,6 +75,10 @@ class GuiFrame(wx.Frame):
         self.lastShowGcode = guiConfig.getboolean('runtime', 'last.show.gcode')
         self.openGcodeFilesVisualisation = guiConfig.getboolean('general', 'open.gcode.files.visualisation')
         self.lastProfileIndex = 0
+
+        lastPath = guiConfig.get('runtime','last.path')
+        self.fileTxt = wx.TextCtrl(self, -1, lastPath, size=(300, -1))
+        self.logTxtCtrl = wx.TextCtrl(self, -1, "", style=wx.TE_MULTILINE | wx.TE_READONLY | wx.HSCROLL, size=(-1, 200))
         
         self.profilesDirectory = guiConfig.get('general', 'profiles.location')
         
@@ -86,17 +97,12 @@ class GuiFrame(wx.Frame):
         self.fileBtn = wx.Button(self, -1, "&Open...", size=(100, -1))
         self.skeinBtn = wx.Button(self, -1, "&Skein", size=(100, -1))
         self.editProfileBtn = wx.Button(self, -1, "Edit...", size=(100, -1))
-        
-        
+                
         self.editProfileBtn.Enable(self.profilesCB.GetSelection() > 0)
         
         self.showGcodeCheckBox = wx.CheckBox(self, -1, 'Show Gcode', (10, 10))
         self.showGcodeCheckBox.SetValue(self.lastShowGcode)
         
-        self.fileTxt = wx.TextCtrl(self, -1, "testing/test.stl", size=(300, -1))
-        self.logTxtCtrl = wx.TextCtrl(self, -1, "", style=wx.TE_MULTILINE | wx.TE_READONLY | wx.HSCROLL, size=(-1, 200))
-        self.logLogTxtCtrl = RedirectText(self.logTxtCtrl)
-
         self.Bind(wx.EVT_BUTTON, self.onOpenFile, self.fileBtn)
         self.Bind(wx.EVT_BUTTON, self.onEditProfile, self.editProfileBtn)
         self.Bind(wx.EVT_BUTTON, self.onSkein, self.skeinBtn)
@@ -116,10 +122,10 @@ class GuiFrame(wx.Frame):
         
         self.SetAcceleratorTable(self.accel_tbl)
         
-        ch = logging.StreamHandler(self.logLogTxtCtrl)
-        ch.setLevel(logging.INFO)
         self.skeinforgeEngine = skeinforge_engine
-        self.skeinforgeEngine.logger.addHandler(ch)
+        logHandler = WxLog(self.logTxtCtrl)
+        logHandler.setLevel(logging.getLevelName(guiConfig.get('general','skeinforge.engine.log.handler.level')))
+        self.skeinforgeEngine.logger.addHandler(logHandler)
         
         self.prepMenu()
         
@@ -222,10 +228,10 @@ class GuiFrame(wx.Frame):
     
     def onCopyEffectiveProfile(self, event):
         profileSelectionIndex = self.profilesCB.GetSelection()
-        if profileSelectionIndex < 1:
-            return
-        profileName = self.profilesCB.GetString(profileSelectionIndex).encode()
-        profilePath = os.path.join(self.profilesDirectory, profileName)
+        if profileSelectionIndex > 0:
+            profileName = self.profilesCB.GetString(profileSelectionIndex).encode()
+        else:
+            profileName = "default.profile"
         dlg = wx.TextEntryDialog(self, 'New profile name:', 'Copy Effective Profile', "%s.copy" % profileName)        
         txtCtrl = dlg.FindWindowById(3000)
         txtCtrl.Validator = NewFileNameValidator(self.profilesDirectory, dlg) 
@@ -233,7 +239,7 @@ class GuiFrame(wx.Frame):
             newProfileName = txtCtrl.GetValue()
             newProfilePath = os.path.join(self.profilesDirectory, newProfileName)
             try:
-                fd = os.open( newProfilePath, os.O_RDWR|os.O_CREAT )
+                fd = os.open(newProfilePath, os.O_RDWR | os.O_CREAT)
                 f = os.fdopen(fd, "w+")
                 effectiveProfile = self.getEffectiveProfile()
                 effectiveProfile.set('profile', 'name', newProfileName)
@@ -248,7 +254,7 @@ class GuiFrame(wx.Frame):
                 msgDlg.Destroy()
         dlg.Destroy()
         
-    def onEditEngineGuiConfig(self,event):
+    def onEditEngineGuiConfig(self, event):
         self.editFile('skeinforge_engine_gui.cfg')
         
     def onEditEngineConfig(self, event):
