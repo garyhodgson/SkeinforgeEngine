@@ -48,7 +48,9 @@ class GcodeWriter:
             output.write(printCommand(preLayerGcodeCommand, verbose))
         
         if layer.runtimeParameters.combActive: 
-            combSkein = CombSkein(layer)            
+            combSkein = CombSkein(layer)
+        else:
+            combSkein = None                        
         
         pathList = layer.getOrderedPathList()        
         
