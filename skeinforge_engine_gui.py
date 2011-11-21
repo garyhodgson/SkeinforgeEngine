@@ -18,11 +18,11 @@ import printrun_utilities.gviz as gviz
 import printrun_utilities.SimpleEditor as SimpleEditor
 
 guiConfig = ConfigParser.ConfigParser(allow_no_value=True)
-guiConfigFilename="skeinforge_engine_gui.cfg"
+guiConfigFilename = "skeinforge_engine_gui.cfg"
 runtimeConfig = ConfigParser.ConfigParser(allow_no_value=True)
-runtimeConfigFilename="skeinforge_engine_gui.runtime"
+runtimeConfigFilename = "skeinforge_engine_gui.runtime"
 engineConfig = ConfigParser.ConfigParser(allow_no_value=True)
-engineConfigFilename="skeinforge_engine.cfg"
+engineConfigFilename = "skeinforge_engine.cfg"
 
 class GuiFrame(wx.Frame):
     def __init__(self, *args, **kwds):
@@ -36,7 +36,7 @@ class GuiFrame(wx.Frame):
         self.openGcodeFilesVisualisation = guiConfig.getboolean('general', 'open.gcode.files.visualisation')
         self.lastProfileIndex = 0
 
-        lastPath = runtimeConfig.get('runtime','last.path')
+        lastPath = runtimeConfig.get('runtime', 'last.path')
         self.fileTxt = wx.TextCtrl(self, -1, lastPath, size=(300, -1))
         
         self.logTxtCtrl = wx.TextCtrl(self, -1, "", style=wx.TE_MULTILINE | wx.TE_READONLY | wx.HSCROLL, size=(-1, 200))
@@ -85,7 +85,7 @@ class GuiFrame(wx.Frame):
         
         self.skeinforgeEngine = skeinforge_engine
         logHandler = WxLog(self.logTxtCtrl)
-        logHandler.setLevel(logging.getLevelName(guiConfig.get('general','skeinforge.engine.log.handler.level')))
+        logHandler.setLevel(logging.getLevelName(guiConfig.get('general', 'skeinforge.engine.log.handler.level')))
         self.skeinforgeEngine.logger.addHandler(logHandler)
         
         self.prepMenu()
@@ -216,7 +216,7 @@ class GuiFrame(wx.Frame):
         dlg.Destroy()
         
     def onEditEngineGuiConfig(self, event):
-        self.editFile('skeinforge_engine_gui.cfg')
+        self.editFile('skeinforge_engine_gui.cfg') 
         
     def onEditEngineConfig(self, event):
         self.editFile('skeinforge_engine.cfg')
@@ -238,6 +238,7 @@ class GuiFrame(wx.Frame):
                 return
             f.write(text)
             f.close()
+            guiConfig.read(guiConfigFilename)
         se = SimpleEditor(os.path.basename(filePath), f2.read(), saveFileCallback)
         self.dialogs.append(se)
         
@@ -282,6 +283,7 @@ class GuiFrame(wx.Frame):
     
     def onSkein(self, event):
         '''Calls skeinforge_engine and optionally shows the created gcode afterwards.'''
+        
         if self.fileTxt.GetValue() == "":
             self.logTxtCtrl.WriteText("No file given.\n")
             return
@@ -295,14 +297,39 @@ class GuiFrame(wx.Frame):
             args.append("-p")
             args.append(profilePath)
         
-        args.append(self.fileTxt.GetValue().encode())
+        if guiConfig.getboolean('general', 'use.pypy'):
+            self.pypySkein(args)
+        else:
+            self.skein(args)
+            
+            
+    def pypySkein(self, args):
+        '''Calls engine using system in order to use pypy.'''
+        pypyLocation = guiConfig.get('general', 'pypy.location')
         
-        self.logTxtCtrl.WriteText("Skeining...\n")
+        if pypyLocation == None or pypyLocation == '':
+            self.logTxtCtrl.WriteText("Pypy location not defined in %s.\n" % guiConfigFilename)
+            return
+        
+        args.append("\"%s\"" % self.fileTxt.GetValue().encode())
+        
+        self.logTxtCtrl.WriteText("Skeining...\nUsing PyPy: log output is delayed until skeining is finished\n")
+        
+        import subprocess
+        p=subprocess.Popen("%s skeinforge_engine.py %s" % (pypyLocation, ' '.join(args)), stdout=subprocess.PIPE, stderr=subprocess.STDOUT,shell=False)
+        p.wait()
+        self.logTxtCtrl.write(p.communicate()[0].replace('\r',''))
+        self.logTxtCtrl.WriteText("Done!\n\n")
+    
+    def skein(self, args):
+        '''Calls the engine to skein a file.'''
+        
+        args.append(self.fileTxt.GetValue().encode())
         
         slicedModel = self.skeinforgeEngine.main(args)
         
-        if self.showGcodeCheckBox.GetValue():
-            if slicedModel.runtimeParameters.outputFilename == None:
+        if slicedModel != None and self.showGcodeCheckBox.GetValue():
+            if slicedModel.runtimeParameters == None or slicedModel.runtimeParameters.outputFilename == None:
                 self.logTxtCtrl.WriteText("Unable to find output filename in sliced model. Cannot preview Gcode.\n")
             else:
                 self.showGcodeVisualisation(slicedModel.runtimeParameters.outputFilename)
