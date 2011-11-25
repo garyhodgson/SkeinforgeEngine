@@ -34,7 +34,7 @@ A fork of Enrique's [Skeinforge](http://skeinforge.com), taken from ahmetcemtura
 
   positional arguments:
     file          The file to skein. Files accepted: stl, obj, gts, and svg or
-                  pickled_slicedmodel files produced by Skeinforge.
+                  pickled_slicedmodel files produced by SkeinforgeEngine.
 
   optional arguments:
     -h, --help    show this help message and exit

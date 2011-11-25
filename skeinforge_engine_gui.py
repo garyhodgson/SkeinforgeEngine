@@ -33,8 +33,12 @@ class GuiFrame(wx.Frame):
         self.dialogs = []
         self.lastProfileName = runtimeConfig.get('runtime', 'last.profile')
         self.lastShowGcode = runtimeConfig.getboolean('runtime', 'last.show.gcode')
+        self.lastFiles = runtimeConfig.get('runtime', 'last.files').split(',')
         self.openGcodeFilesVisualisation = guiConfig.getboolean('general', 'open.gcode.files.visualisation')
         self.lastProfileIndex = 0
+        self.fileHistoryConfig = wx.Config("skeinforge_engine_gui", style=wx.CONFIG_USE_LOCAL_FILE)
+        self.fileHistory = wx.FileHistory()
+        self.fileHistory.Load(self.fileHistoryConfig)
 
         lastPath = runtimeConfig.get('runtime', 'last.path')
         self.fileTxt = wx.TextCtrl(self, -1, lastPath, size=(300, -1))
@@ -144,6 +148,13 @@ class GuiFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.onOpenFile, fileMenu.Append(-1, "&Open...", " Opens file"))
         self.Bind(wx.EVT_MENU, self.onClearOutput, fileMenu.Append(-1, "Clear log", " Clear log"))
         self.Bind(wx.EVT_MENU, self.onExit, fileMenu.Append(wx.ID_EXIT, "E&xit", " Closes the Window"))
+        fileMenu.AppendSeparator()
+        recent = wx.Menu()
+        self.fileHistory.UseMenu(recent)
+        self.fileHistory.AddFilesToMenu()
+        fileMenu.AppendMenu(wx.ID_ANY, "&Recent Files", recent)
+        self.Bind(wx.EVT_MENU_RANGE, self.onFileHistory, id=wx.ID_FILE1, id2=wx.ID_FILE9)
+        
         self.menustrip.Append(fileMenu, "&File")
 
         profilesMenu = wx.Menu()
@@ -161,6 +172,13 @@ class GuiFrame(wx.Frame):
 
         self.SetMenuBar(self.menustrip)
 
+    def onFileHistory(self, event):
+        fileNum = event.GetId() - wx.ID_FILE1
+        path = self.fileHistory.GetHistoryFile(fileNum)
+        self.fileHistory.AddFileToHistory(path)  # move up the list
+        self.openFile(path)
+        
+        
     def onViewEffectiveProfile(self, event):
         se = SimpleEditor("Effective Profile", self.getEffectiveProfileString(self.getEffectiveProfile()).getvalue(), None, True)
         self.dialogs.append(se)
@@ -353,14 +371,20 @@ class GuiFrame(wx.Frame):
         dlg = wx.FileDialog(self, "Choose a file", startFolder, "", "*.*", wx.OPEN)
         if dlg.ShowModal() == wx.ID_OK:
                 path = dlg.GetPath()
+                self.fileHistory.AddFileToHistory(path)
+                self.fileHistory.Save(self.fileHistoryConfig)
+                self.fileHistoryConfig.Flush()
                 
-                if path.endswith('.gcode') and self.openGcodeFilesVisualisation:
-                    self.showGcodeVisualisation(path)
-                else:
-                    self.saveRuntimeParameter('last.path', path)
-                    self.fileTxt.SetValue(path)
+                self.openFile(path)
         dlg.Destroy()
         
+    def openFile(self, path):
+        if path.endswith('.gcode') and self.openGcodeFilesVisualisation:
+            self.showGcodeVisualisation(path)
+        else:
+            self.saveRuntimeParameter('last.path', path)
+            self.fileTxt.SetValue(path)
+            
     def onProfileChange(self, event):
         self.lastProfileIndex = self.profilesCB.GetSelection()
         self.editProfileBtn.Enable(self.lastProfileIndex > 0)

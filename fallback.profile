@@ -98,7 +98,7 @@ feed.rate.support=15.0
 flow.rate.support.ratio=1.0
 
 [support]
-active=true
+active=false
 debug=true
 ; location
 ; 	ExteriorOnly: 		Support material will be added only the exterior of the object.  This is the best option for most objects which require support material.

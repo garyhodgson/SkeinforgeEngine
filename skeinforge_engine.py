@@ -81,7 +81,8 @@ def main(argv=None):
  
     logger.info("Processing file: %s", os.path.basename(inputFilename))
     
-    if inputFilename.endswith('.pickled_slicedmodel'):
+    pickledSlicedModelExtension = config.get('export', 'export.pickled.slicedmodel.extension')
+    if inputFilename.endswith(pickledSlicedModelExtension):
     	pickledSlicedModel = archive.getFileText(inputFilename)
     	slicedModel = pickle.loads(pickledSlicedModel)
     	slicedModel.runtimeParameters.startTime = time.time()
@@ -94,14 +95,16 @@ def main(argv=None):
     
     if args.r != None:
     	pluginSequence = args.r.split(',')
-    	if 'carve' in pluginSequence:
-    		logger.error('Reprocessing a pickled sliced model file with carve is not possible. Please process the original file instead.')
-    		return
     	if 'export' not in pluginSequence:
     		pluginSequence.append('export')
     else:
     	pluginSequence = config.get('general', 'plugin.sequence').split(',')
-    	
+    
+    
+    if inputFilename.endswith(pickledSlicedModelExtension) and 'carve' in pluginSequence:
+        logger.error('Reprocessing a pickled sliced model file with carve is not possible. Please process the original file or choose a different reprocessing sequence.')
+        return
+    
     logger.debug("Plugin Sequence: %s", pluginSequence)
     
     if slicedModel.runtimeParameters.profileMemory:
