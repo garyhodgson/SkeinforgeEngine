@@ -5,10 +5,11 @@ Skeins a 3D model into gcode.
 
 from config import config
 from datetime import timedelta
-from entities import SlicedModel
+from entities import SlicedModel, RuntimeParameters
 from fabmetheus_utilities import archive
 from importlib import import_module
 from utilities import memory_tracker
+import StringIO
 import argparse
 import logging
 import os
@@ -16,12 +17,11 @@ import re
 import sys
 import time
 import traceback
-import StringIO
-try:
-   import cPickle as pickle
+try: 
+    import cPickle as pickle
 except:
-   import pickle
-
+    import pickle
+    
 __plugins_path__ = 'plugins'
 logger = logging.getLogger('engine')
 
@@ -42,11 +42,11 @@ def getCraftedTextFromPlugins(pluginSequence, gcode):
 def main(argv=None):
     "Starting point for skeinforge engine."
     parser = argparse.ArgumentParser(description='Skeins a 3D model into slicedModel.')
-    parser.add_argument('file', help='The file to skein. Files accepted: stl, obj, gts, and svg or pickledgcode files produced by Skeinforge.')
+    parser.add_argument('file', help='The file to skein. Files accepted: stl, obj, gts, and svg. Or sliced model files produced by SkeinforgeEngine.')
     parser.add_argument('-c', metavar='config', help='Configuration for skeinforge engine.', default='skeinforge_engine.cfg')
     parser.add_argument('-p', metavar='profile', help='Profile for the skeining.')
     parser.add_argument('-o', metavar='output', help='Output filename. Overrides other export filename settings.')
-    parser.add_argument('-r', metavar='reprocess', help='Comma seperated list of plugins to reprocess a pickled slicedModel file. The export plugin is automatically appended.')
+    parser.add_argument('-r', metavar='reprocess', help='Comma seperated list of plugins to reprocess a sliced model file. The export plugin is automatically appended.')
 
     
     if argv is None: 
@@ -69,7 +69,7 @@ def main(argv=None):
     if args.p != None:
     	config.read(args.p)
         if profileName == 'default':
-            profileName = os.path.basename(args.p)
+            profileName = os.path.splitext(os.path.basename(args.p))[0]
     
     logger.info("Profile: %s", profileName)
         
@@ -81,12 +81,11 @@ def main(argv=None):
  
     logger.info("Processing file: %s", os.path.basename(inputFilename))
     
-    pickledSlicedModelExtension = config.get('export', 'export.pickled.slicedmodel.extension')
-    if inputFilename.endswith(pickledSlicedModelExtension):
-    	pickledSlicedModel = archive.getFileText(inputFilename)
-    	slicedModel = pickle.loads(pickledSlicedModel)
-    	slicedModel.runtimeParameters.startTime = time.time()
-    	slicedModel.runtimeParameters.endTime = None
+    exportedSlicedModelExtension = config.get('export', 'export.slicedmodel.extension')
+    if inputFilename.endswith(exportedSlicedModelExtension):
+        slicedModel = pickle.load(open(inputFilename))
+        slicedModel.runtimeParameters = RuntimeParameters()
+        inputFilename = inputFilename.replace('.'+exportedSlicedModelExtension, '')
     else:
     	slicedModel = SlicedModel()
     
@@ -100,9 +99,8 @@ def main(argv=None):
     else:
     	pluginSequence = config.get('general', 'plugin.sequence').split(',')
     
-    
-    if inputFilename.endswith(pickledSlicedModelExtension) and 'carve' in pluginSequence:
-        logger.error('Reprocessing a pickled sliced model file with carve is not possible. Please process the original file or choose a different reprocessing sequence.')
+    if inputFilename.endswith(exportedSlicedModelExtension) and 'carve' in pluginSequence:
+        logger.error('Reprocessing a sliced model file with carve is not possible. Please process the original file or choose a different reprocessing sequence.')
         return
     
     logger.debug("Plugin Sequence: %s", pluginSequence)

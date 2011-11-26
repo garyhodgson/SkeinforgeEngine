@@ -2,16 +2,14 @@
 name=default
 
 [export]
-debug=false
+debug=true
 delete.comments=true
 file.extension=gcode
 file.extension.profile=true
 replace.filename=replace.csv
 export.slicedmodel=true
-export.slicedmodel.extension=slicedmodel.txt
-export.pickled.slicedmodel=false
-export.pickled.slicedmodel.extension=slicedmodel.pickled
-overwrite.pickled.slicedmodel=false
+export.slicedmodel.extension=slicedmodel.pickle
+overwrite.exported.slicedmodel=true
 
 
 [preface]

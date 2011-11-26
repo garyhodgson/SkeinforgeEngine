@@ -14,8 +14,8 @@ except:
     print "WX is not installed. This program requires WX to run."
     raise
 
-import printrun_utilities.gviz as gviz
-import printrun_utilities.SimpleEditor as SimpleEditor
+import utilities.printrun.gviz as gviz
+import utilities.printrun.SimpleEditor as SimpleEditor
 
 guiConfig = ConfigParser.ConfigParser(allow_no_value=True)
 guiConfigFilename = "skeinforge_engine_gui.cfg"

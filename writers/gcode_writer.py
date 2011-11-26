@@ -8,42 +8,41 @@ import sys
 import time
 
 class GcodeWriter:
-    '''Writes the gcode for a sliced model.'''
+    '''Writes the slicedModel for a sliced model.'''
     
-    def __init__(self, gcode):
-        self.gcode = gcode
+    def __init__(self, slicedModel):
+        self.slicedModel = slicedModel
         
         
-    def getSlicedModelAsGcode(self, verbose=False):
-        '''Final gcode representation.'''
+    def getSlicedModel(self, verbose=False):
+        '''Final Gcode representation.'''
         output = StringIO.StringIO()
                     
-        for startCommand in self.gcode.startGcodeCommands:
+        for startCommand in self.slicedModel.startGcodeCommands:
             output.write(printCommand(startCommand, verbose))
             
         lookaheadStartVector = None
         lookaheadKeyIndex = 0
-        layerCount = len(self.gcode.layers)
-        for key in sorted(self.gcode.layers.iterkeys()):
+        layerCount = len(self.slicedModel.layers)
+        for key in sorted(self.slicedModel.layers.iterkeys()):
             lookaheadStartPoint = None
             lookaheadKeyIndex = lookaheadKeyIndex + 1
             if lookaheadKeyIndex < layerCount:
-                lookaheadKey = self.gcode.layers.keys()[lookaheadKeyIndex]
-                lookaheadLayer = self.gcode.layers[lookaheadKey]
+                lookaheadKey = self.slicedModel.layers.keys()[lookaheadKeyIndex]
+                lookaheadLayer = self.slicedModel.layers[lookaheadKey]
                 lookaheadStartPoint = lookaheadLayer.getStartPoint()
                 lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, lookaheadLayer.z)
 
-            self.getLayerAsGcode(self.gcode.layers[key], output, lookaheadStartVector, verbose)
+            self.getLayer(self.slicedModel.layers[key], output, lookaheadStartVector, verbose)
             
-        for endCommand in self.gcode.endGcodeCommands:
+        for endCommand in self.slicedModel.endGcodeCommands:
             output.write(printCommand(endCommand, verbose))
                         
         return output.getvalue()
     
     
-    def getLayerAsGcode(self, layer, output, parentLookaheadStartVector=None, verbose=False):
+    def getLayer(self, layer, output, parentLookaheadStartVector=None, verbose=False):
         '''Final Gcode representation.'''
-        
         for preLayerGcodeCommand in layer.preLayerGcodeCommands:
             output.write(printCommand(preLayerGcodeCommand, verbose))
         
@@ -71,16 +70,17 @@ class GcodeWriter:
             nextVector = Vector3(nextPoint.real, nextPoint.imag, layer.z)
             
             travelPath = TravelPath(layer.z, layer.runtimeParameters, previousVector, nextVector, combSkein)
-            self.getPathAsGcode(travelPath, output, lookaheadVector, layer.feedAndFlowRateMultiplier, verbose)
             
-            self.getPathAsGcode(path, output, lookaheadVector, layer.feedAndFlowRateMultiplier, verbose)
+            self.getPath(travelPath, output, lookaheadVector, layer.feedAndFlowRateMultiplier, verbose)
+            
+            self.getPath(path, output, lookaheadVector, layer.feedAndFlowRateMultiplier, verbose)
         
         for postLayerGcodeCommand in layer.postLayerGcodeCommands:
             output.write(printCommand(postLayerGcodeCommand, verbose))
             
-    def getPathAsGcode(self, path, output, lookaheadStartVector=None, feedAndFlowRateMultiplier=1.0, verbose=False):
+    def getPath(self, path, output, lookaheadStartVector=None, feedAndFlowRateMultiplier=1.0, verbose=False):
         '''Final Gcode representation.'''
-        path.generateGcode(lookaheadStartVector, feedAndFlowRateMultiplier)
+        path.generateGcode(lookaheadStartVector, feedAndFlowRateMultiplier, self.slicedModel.runtimeParameters)
             
         for command in path.gcodeCommands:
             output.write('%s' % printCommand(command, verbose))

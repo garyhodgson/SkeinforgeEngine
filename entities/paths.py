@@ -19,47 +19,49 @@ class Path:
     def __init__(self, z, runtimeParameters):
         
         self.z = z
-        self.runtimeParameters = runtimeParameters
         
         self.type = None
         self.startPoint = None
         self.points = []
         self.gcodeCommands = []
         
-        self.decimalPlaces = self.runtimeParameters.decimalPlaces
-        self.dimensionDecimalPlaces = self.runtimeParameters.dimensionDecimalPlaces
-        self.speedActive = self.runtimeParameters.speedActive
-        self.bridgeFeedRateMinute = self.runtimeParameters.bridgeFeedRateMinute
-        self.perimeterFeedRateMinute = self.runtimeParameters.perimeterFeedRateMinute
-        self.extrusionFeedRateMinute = self.runtimeParameters.extrusionFeedRateMinute
-        self.travelFeedRateMinute = self.runtimeParameters.travelFeedRateMinute
-        self.extrusionUnitsRelative = self.runtimeParameters.extrusionUnitsRelative
-        self.supportFeedRateMinute = self.runtimeParameters.supportFeedRateMinute
+        self._setParameters(runtimeParameters)
         
-        self.dimensionActive = self.runtimeParameters.dimensionActive
+    def _setParameters(self, runtimeParameters):
+        self.decimalPlaces = runtimeParameters.decimalPlaces
+        self.dimensionDecimalPlaces = runtimeParameters.dimensionDecimalPlaces
+        self.speedActive = runtimeParameters.speedActive
+        self.bridgeFeedRateMinute = runtimeParameters.bridgeFeedRateMinute
+        self.perimeterFeedRateMinute = runtimeParameters.perimeterFeedRateMinute
+        self.extrusionFeedRateMinute = runtimeParameters.extrusionFeedRateMinute
+        self.travelFeedRateMinute = runtimeParameters.travelFeedRateMinute
+        self.extrusionUnitsRelative = runtimeParameters.extrusionUnitsRelative
+        self.supportFeedRateMinute = runtimeParameters.supportFeedRateMinute
         
-        self.oozeRate = self.runtimeParameters.oozeRate
+        self.dimensionActive = runtimeParameters.dimensionActive
+        
+        self.oozeRate = runtimeParameters.oozeRate
         self.zDistanceRatio = 5.0
-        self.extruderRetractionSpeedMinute = round(60.0 * self.runtimeParameters.extruderRetractionSpeed, self.dimensionDecimalPlaces)
+        self.extruderRetractionSpeedMinute = round(60.0 * runtimeParameters.extruderRetractionSpeed, self.dimensionDecimalPlaces)
 
-        self.layerThickness = self.runtimeParameters.layerThickness
-        self.perimeterWidth = self.runtimeParameters.perimeterWidth
-        self.filamentDiameter = self.runtimeParameters.filamentDiameter
-        self.filamentPackingDensity = self.runtimeParameters.filamentPackingDensity
+        self.layerThickness = runtimeParameters.layerThickness
+        self.perimeterWidth = runtimeParameters.perimeterWidth
+        self.filamentDiameter = runtimeParameters.filamentDiameter
+        self.filamentPackingDensity = runtimeParameters.filamentPackingDensity
         self.absolutePositioning = config.getboolean('preface', 'positioning.absolute')
-        self.flowRate = self.runtimeParameters.flowRate
-        self.perimeterFlowRate = self.runtimeParameters.perimeterFlowRate
-        self.bridgeFlowRate = self.runtimeParameters.bridgeFlowRate
-        
+        self.flowRate = runtimeParameters.flowRate
+        self.perimeterFlowRate = runtimeParameters.perimeterFlowRate
+        self.bridgeFlowRate = runtimeParameters.bridgeFlowRate
+        self.combActive = runtimeParameters.combActive
         filamentRadius = 0.5 * self.filamentDiameter
         filamentPackingArea = pi * filamentRadius * filamentRadius * self.filamentPackingDensity
         self.flowScaleSixty = 60.0 * ((((self.layerThickness + self.perimeterWidth) / 4) ** 2 * pi) / filamentPackingArea)
         
-        self.minimumBridgeFeedRateMultiplier = self.runtimeParameters.minimumBridgeFeedRateMultiplier
-        self.minimumPerimeterFeedRateMultiplier = self.runtimeParameters.minimumPerimeterFeedRateMultiplier
-        self.minimumExtrusionFeedRateMultiplier = self.runtimeParameters.minimumExtrusionFeedRateMultiplier
-        self.minimumTravelFeedRateMultiplier = self.runtimeParameters.minimumTravelFeedRateMultiplier
-        self.minimumLayerFeedRateMinute = self.runtimeParameters.minimumLayerFeedRateMinute
+        self.minimumBridgeFeedRateMultiplier = runtimeParameters.minimumBridgeFeedRateMultiplier
+        self.minimumPerimeterFeedRateMultiplier = runtimeParameters.minimumPerimeterFeedRateMultiplier
+        self.minimumExtrusionFeedRateMultiplier = runtimeParameters.minimumExtrusionFeedRateMultiplier
+        self.minimumTravelFeedRateMultiplier = runtimeParameters.minimumTravelFeedRateMultiplier
+        self.minimumLayerFeedRateMinute = runtimeParameters.minimumLayerFeedRateMinute
         
     def __str__(self):
         '''Get the string representation.'''
@@ -75,11 +77,11 @@ class Path:
     def getDistanceAndDuration(self):
         '''Returns the time taken to follow the path and the distance'''
         oldLocation = self.startPoint
-        feedRate = self.travelFeedRateMinute
+        feedRate = self.getFeedRateMinute()
+        feedRateSecond = feedRate / 60.0
         duration = 0.0
         distance = 0.0
         for point in self.points:
-            feedRateSecond = feedRate / 60.0
             
             separationX = point.real - oldLocation.real
             separationY = point.imag - oldLocation.imag
@@ -88,10 +90,6 @@ class Path:
             duration += segmentDistance / feedRateSecond
             distance += segmentDistance
             oldLocation = point
-            if isinstance(self, BoundaryPerimeter):
-                feedRate = self.perimeterFeedRateMinute
-            else:
-                feedRate = self.extrusionFeedRateMinute
                 
         return (distance, duration)
         
@@ -107,11 +105,18 @@ class Path:
     def getFeedRateMinute(self):
         '''Allows subclasses to override the relevant feedrate method so we don't have to use large if statements.'''
         return self.extrusionFeedRateMinute
+    
+    def getFlowRate(self):
+        '''Allows subclasses to override the relevant flowrate method so we don't have to use large if statements.'''
+        return self.flowRate
 
-    def generateGcode(self, lookaheadStartVector=None, feedAndFlowRateMultiplier=1.0):
+    def generateGcode(self, lookaheadStartVector=None, feedAndFlowRateMultiplier=1.0, runtimeParameters=None):
         'Transforms paths and points to gcode'
         global _previousPoint
         self.gcodeCommands = []
+        
+        if runtimeParameters != None:
+            self._setParameters(runtimeParameters)
         
         if _previousPoint == None:
             _previousPoint = self.startPoint
@@ -123,14 +128,15 @@ class Path:
                          ('Z', round(self.z, self.decimalPlaces))]
             
             pathFeedRateMinute = self.getFeedRateMinute()
-
+            flowRate = self.getFlowRate()
+            
             (pathFeedRateMinute, pathFeedRateMultiplier) = self.getFeedRateAndMultiplier(pathFeedRateMinute, feedAndFlowRateMultiplier)
             
             if self.speedActive:
                 gcodeArgs.append(('F', pathFeedRateMinute))
                 
             if self.dimensionActive:
-                extrusionDistance = self.getExtrusionDistance(point, self.flowRate * pathFeedRateMultiplier, pathFeedRateMinute)
+                extrusionDistance = self.getExtrusionDistance(point, flowRate * pathFeedRateMultiplier, pathFeedRateMinute)
                 gcodeArgs.append(('E', '%s' % extrusionDistance))
                 
             self.gcodeCommands.append(
@@ -163,8 +169,7 @@ class Path:
                 logger.warning('There was no absolute location when the G91 command was parsed, so the absolute location will be set to the origin.')
                 _previousPoint = Vector3()
             distance = abs(point)
-            _previousPoint += point
-            
+            _previousPoint += point            
         
         scaledFlowRate = flowRate * self.flowScaleSixty
         extrusionDistance = scaledFlowRate / feedRateMinute * distance
@@ -244,7 +249,7 @@ class TravelPath(Path):
         '''
         startPointPath = []
         
-        if self.runtimeParameters.combActive and self.fromLocation != None and self.combSkein != None: 
+        if self.combActive and self.fromLocation != None and self.combSkein != None: 
             
             additionalCommands = self.combSkein.getPathsBetween(self.z, self.fromLocation.dropAxis(), self.toLocation.dropAxis())
             startPointPath.extend(additionalCommands)
@@ -262,9 +267,12 @@ class TravelPath(Path):
                 
             self.gcodeCommands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
                         
-    def generateGcode(self, lookaheadStartVector=None, feedAndFlowRateMultiplier=1.0):
+    def generateGcode(self, lookaheadStartVector=None, feedAndFlowRateMultiplier=1.0, runtimeParameters=None):
         'Transforms paths and points to gcode'
         lastRetractionExtrusionDistance = 0.0
+        
+        if runtimeParameters != None:
+            self._setParameters(runtimeParameters)
         
         if self.dimensionActive:
             
@@ -324,7 +332,10 @@ class TravelPath(Path):
         if not self.extrusionUnitsRelative:
             commands.append(self.getResetExtruderDistanceCommand())
         return commands        
-
+    
+    def getFeedRateMinute(self):
+        return self.travelFeedRateMinute
+    
 class BoundaryPerimeter(Path):
     
     def __init__(self, z, runtimeParameters):
@@ -346,3 +357,6 @@ class BoundaryPerimeter(Path):
         
     def getFeedRateMinute(self):
         return self.perimeterFeedRateMinute
+    
+    def getFlowRate(self):
+        return self.perimeterFlowRate
