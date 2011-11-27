@@ -14,6 +14,13 @@ import time
 _totalExtrusionDistance = 0.0
 _previousPoint = None
 
+def resetExtrusionStats():
+    global _totalExtrusionDistance
+    global _previousPoint
+    
+    _totalExtrusionDistance = 0.0
+    _previousPoint = None
+    
 class Path:
     ''' A Path the tool will follow within a nested ring.'''
     def __init__(self, z, runtimeParameters):
@@ -120,7 +127,7 @@ class Path:
         
         if _previousPoint == None:
             _previousPoint = self.startPoint
-            
+        
         for point in self.points:
             
             gcodeArgs = [('X', round(point.real, self.decimalPlaces)),
@@ -158,8 +165,9 @@ class Path:
     def getExtrusionDistance(self, point, flowRate, feedRateMinute):
         global _totalExtrusionDistance
         global _previousPoint
-        distance = 0.0
+        distance = 0.0        
         
+        print "getExtrusionDistance _previousPoint", _previousPoint
         if self.absolutePositioning:
             if _previousPoint != None:
                 distance = abs(point - _previousPoint)
@@ -248,6 +256,7 @@ class TravelPath(Path):
             If comb is active the path will dodge all open spaces.
         '''
         startPointPath = []
+        global _previousPoint
         
         if self.combActive and self.fromLocation != None and self.combSkein != None: 
             
@@ -264,15 +273,27 @@ class TravelPath(Path):
             if self.speedActive:
                 travelFeedRateMinute, travelFeedRateMultiplier = self.getFeedRateAndMultiplier(self.travelFeedRateMinute, feedAndFlowRateMultiplier)
                 gcodeArgs.append(('F', self.travelFeedRateMinute * travelFeedRateMultiplier))
+            
+            print "getExtrusionDistance _previousPoint", _previousPoint
+            if self.absolutePositioning:
+                _previousPoint = point
+            else:
+                _previousPoint += point            
                 
             self.gcodeCommands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
                         
     def generateGcode(self, lookaheadStartVector=None, feedAndFlowRateMultiplier=1.0, runtimeParameters=None):
         'Transforms paths and points to gcode'
         lastRetractionExtrusionDistance = 0.0
+        global _previousPoint
+        
+        print "travel generateGcode _previousPoint", _previousPoint
         
         if runtimeParameters != None:
             self._setParameters(runtimeParameters)
+            
+        if _previousPoint == None:
+            _previousPoint = self.startPoint
         
         if self.dimensionActive:
             
@@ -297,7 +318,7 @@ class TravelPath(Path):
         self.moveToStartPoint(feedAndFlowRateMultiplier)
     
         if self.dimensionActive:
-            self.previousPoint = self.startPoint
+            #_previousPoint = self.startPoint            
             self.gcodeCommands.extend(self.getRetractReverseCommands(lastRetractionExtrusionDistance))
             
         self.gcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_ON))        

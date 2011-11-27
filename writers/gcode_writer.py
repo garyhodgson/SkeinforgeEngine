@@ -6,6 +6,7 @@ import StringIO
 import gcodes
 import sys
 import time
+import entities.paths as paths
 
 class GcodeWriter:
     '''Writes the slicedModel for a sliced model.'''
@@ -51,7 +52,8 @@ class GcodeWriter:
         else:
             combSkein = None                        
         
-        pathList = layer.getOrderedPathList()        
+        pathList = layer.getOrderedPathList()
+        paths.resetExtrusionStats()
         
         pathListCount = len(pathList)
         for (index, path) in enumerate(pathList):
