@@ -167,7 +167,6 @@ class Path:
         global _previousPoint
         distance = 0.0        
         
-        print "getExtrusionDistance _previousPoint", _previousPoint
         if self.absolutePositioning:
             if _previousPoint != None:
                 distance = abs(point - _previousPoint)
@@ -274,7 +273,6 @@ class TravelPath(Path):
                 travelFeedRateMinute, travelFeedRateMultiplier = self.getFeedRateAndMultiplier(self.travelFeedRateMinute, feedAndFlowRateMultiplier)
                 gcodeArgs.append(('F', self.travelFeedRateMinute * travelFeedRateMultiplier))
             
-            print "getExtrusionDistance _previousPoint", _previousPoint
             if self.absolutePositioning:
                 _previousPoint = point
             else:
@@ -286,8 +284,6 @@ class TravelPath(Path):
         'Transforms paths and points to gcode'
         lastRetractionExtrusionDistance = 0.0
         global _previousPoint
-        
-        print "travel generateGcode _previousPoint", _previousPoint
         
         if runtimeParameters != None:
             self._setParameters(runtimeParameters)
