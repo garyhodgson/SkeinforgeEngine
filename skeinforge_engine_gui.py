@@ -19,8 +19,6 @@ import utilities.printrun.SimpleEditor as SimpleEditor
 
 guiConfig = ConfigParser.ConfigParser(allow_no_value=True)
 guiConfigFilename = "skeinforge_engine_gui.cfg"
-runtimeConfig = ConfigParser.ConfigParser(allow_no_value=True)
-runtimeConfigFilename = "skeinforge_engine_gui.runtime"
 engineConfig = ConfigParser.ConfigParser(allow_no_value=True)
 engineConfigFilename = "skeinforge_engine.cfg"
 
@@ -31,16 +29,16 @@ class GuiFrame(wx.Frame):
         self.SetIcon(wx.Icon("SkeinforgeEngine.ico", wx.BITMAP_TYPE_ICO))
         self.SetBackgroundColour(wx.WHITE)
         self.dialogs = []
-        self.lastProfileName = runtimeConfig.get('runtime', 'last.profile')
-        self.lastShowGcode = runtimeConfig.getboolean('runtime', 'last.show.gcode')
-        self.lastFiles = runtimeConfig.get('runtime', 'last.files').split(',')
+        self.guiConfig = wx.Config("skeinforge_engine_gui", style=wx.CONFIG_USE_LOCAL_FILE)
+        self.lastProfileName = self.guiConfig.Read('last.profile', '')
+        self.lastShowGcode = self.guiConfig.ReadBool('last.show.gcode', True)
         self.openGcodeFilesVisualisation = guiConfig.getboolean('general', 'open.gcode.files.visualisation')
         self.lastProfileIndex = 0
-        self.fileHistoryConfig = wx.Config("skeinforge_engine_gui", style=wx.CONFIG_USE_LOCAL_FILE)
+        
         self.fileHistory = wx.FileHistory()
-        self.fileHistory.Load(self.fileHistoryConfig)
+        self.fileHistory.Load(self.guiConfig)
 
-        lastPath = runtimeConfig.get('runtime', 'last.path')
+        lastPath = self.guiConfig.Read('last.path', '')
         self.fileTxt = wx.TextCtrl(self, -1, lastPath, size=(300, -1))
         
         self.logTxtCtrl = wx.TextCtrl(self, -1, "", style=wx.TE_MULTILINE | wx.TE_READONLY | wx.HSCROLL, size=(-1, 200))
@@ -334,9 +332,9 @@ class GuiFrame(wx.Frame):
         self.logTxtCtrl.WriteText("Skeining...\nUsing PyPy: log output is delayed until skeining is finished\n")
         
         import subprocess
-        p=subprocess.Popen("%s skeinforge_engine.py %s" % (pypyLocation, ' '.join(args)), stdout=subprocess.PIPE, stderr=subprocess.STDOUT,shell=False)
+        p = subprocess.Popen("%s skeinforge_engine.py %s" % (pypyLocation, ' '.join(args)), stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
         p.wait()
-        self.logTxtCtrl.write(p.communicate()[0].replace('\r',''))
+        self.logTxtCtrl.write(p.communicate()[0].replace('\r', ''))
         self.logTxtCtrl.WriteText("Done!\n\n")
     
     def skein(self, args):
@@ -364,17 +362,16 @@ class GuiFrame(wx.Frame):
 
     def onOpenFile(self, event):
         '''Shows the file choice dialog.'''
-        if runtimeConfig.get('runtime', 'last.path') != None:
-            startFolder = os.path.dirname(runtimeConfig.get('runtime', 'last.path'))
+        if self.guiConfig.HasEntry('last.path'):
+            startFolder = os.path.dirname(self.guiConfig.Read('last.path'))
         else:
             startFolder = os.getcwd()
         dlg = wx.FileDialog(self, "Choose a file", startFolder, "", "*.*", wx.OPEN)
         if dlg.ShowModal() == wx.ID_OK:
                 path = dlg.GetPath()
                 self.fileHistory.AddFileToHistory(path)
-                self.fileHistory.Save(self.fileHistoryConfig)
-                self.fileHistoryConfig.Flush()
-                
+                self.fileHistory.Save(self.guiConfig)
+                self.guiConfig.Flush()
                 self.openFile(path)
         dlg.Destroy()
         
@@ -382,7 +379,8 @@ class GuiFrame(wx.Frame):
         if path.endswith('.gcode') and self.openGcodeFilesVisualisation:
             self.showGcodeVisualisation(path)
         else:
-            self.saveRuntimeParameter('last.path', path)
+            self.guiConfig.Write('last.path', path)
+            self.guiConfig.Flush()
             self.fileTxt.SetValue(path)
             
     def onProfileChange(self, event):
@@ -390,18 +388,14 @@ class GuiFrame(wx.Frame):
         self.editProfileBtn.Enable(self.lastProfileIndex > 0)
         self.lastProfileName = self.profilesCB.GetString(self.lastProfileIndex).encode()
         if self.lastProfileIndex > 0:
-            self.saveRuntimeParameter('last.profile', self.lastProfileName)
+            self.guiConfig.Write('last.profile', self.lastProfileName)
         else:
-            self.saveRuntimeParameter('last.profile', '')           
+            self.guiConfig.Write('last.profile', '')
+        self.guiConfig.Flush()
 
     def onShowGcodeChange(self, event):
-        self.saveRuntimeParameter('last.show.gcode', self.showGcodeCheckBox.GetValue())
-
-    def saveRuntimeParameter(self, option, value):
-        '''Saves the options in the cfg file under the [runtime] section.'''
-        runtimeConfig.set('runtime', option, value)
-        with open(runtimeConfigFilename, 'wb') as configfile:
-            runtimeConfig.write(configfile)
+        self.guiConfig.WriteBool('last.show.gcode', self.showGcodeCheckBox.GetValue())
+        self.guiConfig.Flush()
 
 class WxLog(logging.Handler):
     def __init__(self, ctrl):
@@ -449,7 +443,6 @@ class SkeinforgeEngineGui(wx.App):
 
 if __name__ == "__main__":
     guiConfig.read(guiConfigFilename)
-    runtimeConfig.read(runtimeConfigFilename)
     engineConfig.read(engineConfigFilename)
     skeinforgeEngineGui = SkeinforgeEngineGui(0)
     skeinforgeEngineGui.MainLoop()
