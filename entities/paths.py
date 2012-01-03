@@ -15,10 +15,7 @@ _totalExtrusionDistance = 0.0
 _previousPoint = None
 
 def resetExtrusionStats():
-    global _totalExtrusionDistance
-    global _previousPoint
-    
-    _totalExtrusionDistance = 0.0
+    global _previousPoint    
     _previousPoint = None
     
 class Path:
