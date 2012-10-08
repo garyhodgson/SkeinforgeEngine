@@ -320,7 +320,7 @@ class TravelPath(Path):
         global _totalExtrusionDistance
         commands = []
         if self.extrusionUnitsRelative:
-            retractDistance = round(extrusionDistance, self.dimensionDecimalPlaces)
+            retractDistance = round(-extrusionDistance, self.dimensionDecimalPlaces)
         else:
             _totalExtrusionDistance -= extrusionDistance
             retractDistance = round(_totalExtrusionDistance, self.dimensionDecimalPlaces)
