@@ -151,7 +151,7 @@ class Path:
         if (feedRateMultiplier * feedRateMinute) < self.minimumLayerFeedRateMinute:
             return (self.minimumLayerFeedRateMinute, self.minimumLayerFeedRateMinute / feedRateMinute)
         else:
-            return (feedRateMinute, feedRateMultiplier)
+            return (feedRateMinute * feedRateMultiplier, feedRateMultiplier)
     
     def getResetExtruderDistanceCommand(self):
         global _totalExtrusionDistance
