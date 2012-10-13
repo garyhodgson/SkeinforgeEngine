@@ -15,7 +15,7 @@ class Layer:
         self.nestedRings = []
         self.preLayerGcodeCommands = []
         self.postLayerGcodeCommands = []
-        self.feedAndFlowRateMultiplier = 1.0
+        self.feedAndFlowRateMultiplier = [1.0, 1.0]
         
         self.preSupportGcodeCommands = []
         self.postSupportGcodeCommands = []

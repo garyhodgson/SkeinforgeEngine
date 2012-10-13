@@ -80,7 +80,7 @@ class GcodeWriter:
         for postLayerGcodeCommand in layer.postLayerGcodeCommands:
             output.write(printCommand(postLayerGcodeCommand, verbose))
             
-    def getPath(self, path, output, lookaheadStartVector=None, feedAndFlowRateMultiplier=1.0, verbose=False):
+    def getPath(self, path, output, lookaheadStartVector=None, feedAndFlowRateMultiplier=[1.0, 1.0], verbose=False):
         '''Final Gcode representation.'''
         path.generateGcode(lookaheadStartVector, feedAndFlowRateMultiplier, self.slicedModel.runtimeParameters)
             
