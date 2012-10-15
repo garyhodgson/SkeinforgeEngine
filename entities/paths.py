@@ -59,7 +59,9 @@ class Path:
         self.combActive = runtimeParameters.combActive
         filamentRadius = 0.5 * self.filamentDiameter
         filamentPackingArea = pi * filamentRadius * filamentRadius * self.filamentPackingDensity
-        self.flowScaleSixty = 60.0 * ((((self.layerThickness + self.perimeterWidth) / 4) ** 2 * pi) / filamentPackingArea)
+        extrusionArea = pi * self.layerThickness ** 2 / 4 + self.layerThickness * (self.perimeterWidth - self.layerThickness)
+            #http://hydraraptor.blogspot.sk/2011/03/spot-on-flow-rate.html
+        self.flowScaleSixty = 60.0 * extrusionArea / filamentPackingArea
         
         self.minimumBridgeFeedRateMultiplier = runtimeParameters.minimumBridgeFeedRateMultiplier
         self.minimumPerimeterFeedRateMultiplier = runtimeParameters.minimumPerimeterFeedRateMultiplier
@@ -114,7 +116,7 @@ class Path:
         '''Allows subclasses to override the relevant flowrate method so we don't have to use large if statements.'''
         return self.flowRate
 
-    def generateGcode(self, lookaheadStartVector=None, feedAndFlowRateMultiplier=1.0, runtimeParameters=None):
+    def generateGcode(self, lookaheadStartVector=None, feedAndFlowRateMultiplier=[1.0, 1.0], runtimeParameters=None):
         'Transforms paths and points to gcode'
         global _previousPoint
         self.gcodeCommands = []
@@ -134,13 +136,13 @@ class Path:
             pathFeedRateMinute = self.getFeedRateMinute()
             flowRate = self.getFlowRate()
             
-            (pathFeedRateMinute, pathFeedRateMultiplier) = self.getFeedRateAndMultiplier(pathFeedRateMinute, feedAndFlowRateMultiplier)
+            (pathFeedRateMinute, pathFeedRateMultiplier) = self.getFeedRateAndMultiplier(pathFeedRateMinute, feedAndFlowRateMultiplier[0])
             
             if self.speedActive:
                 gcodeArgs.append(('F', pathFeedRateMinute))
                 
             if self.dimensionActive:
-                extrusionDistance = self.getExtrusionDistance(point, flowRate * pathFeedRateMultiplier, pathFeedRateMinute)
+                extrusionDistance = self.getExtrusionDistance(point, flowRate * feedAndFlowRateMultiplier[1], pathFeedRateMinute)
                 gcodeArgs.append(('E', '%s' % extrusionDistance))
                 
             self.gcodeCommands.append(
@@ -277,7 +279,7 @@ class TravelPath(Path):
                 
             self.gcodeCommands.append(GcodeCommand(gcodes.LINEAR_GCODE_MOVEMENT, gcodeArgs))
                         
-    def generateGcode(self, lookaheadStartVector=None, feedAndFlowRateMultiplier=1.0, runtimeParameters=None):
+    def generateGcode(self, lookaheadStartVector=None, feedAndFlowRateMultiplier=[1.0, 1.0], runtimeParameters=None):
         'Transforms paths and points to gcode'
         lastRetractionExtrusionDistance = 0.0
         global _previousPoint
@@ -308,7 +310,7 @@ class TravelPath(Path):
             
         self.gcodeCommands.append(GcodeCommand(gcodes.TURN_EXTRUDER_OFF))
         
-        self.moveToStartPoint(feedAndFlowRateMultiplier)
+        self.moveToStartPoint(feedAndFlowRateMultiplier[0])
     
         if self.dimensionActive:
             #_previousPoint = self.startPoint            

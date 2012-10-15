@@ -26,5 +26,6 @@ class SlowDownCoolStrategy:
         '''
         
         (layerDistance, layerDuration) = layer.getDistanceAndDuration()
-        layer.feedAndFlowRateMultiplier = min(1.0, layerDuration / self.minimumLayerTime)
+        layer.feedAndFlowRateMultiplier[0] = min(1.0, layerDuration / self.minimumLayerTime)
+        layer.feedAndFlowRateMultiplier[1] = layer.feedAndFlowRateMultiplier[0]
         

@@ -94,6 +94,8 @@ acceleration.rate.bridge=1000.0
 feed.rate.travel=130.0
 feed.rate.support=15.0
 flow.rate.support.ratio=1.0
+feed.rate.first.layer.ratio=1.0
+flow.rate.first.layer.ratio=1.0
 
 [support]
 active=false
