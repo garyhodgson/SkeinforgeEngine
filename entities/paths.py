@@ -59,7 +59,9 @@ class Path:
         self.combActive = runtimeParameters.combActive
         filamentRadius = 0.5 * self.filamentDiameter
         filamentPackingArea = pi * filamentRadius * filamentRadius * self.filamentPackingDensity
-        self.flowScaleSixty = 60.0 * ((((self.layerThickness + self.perimeterWidth) / 4) ** 2 * pi) / filamentPackingArea)
+        extrusionArea = pi * self.layerThickness ** 2 / 4 + self.layerThickness * (self.perimeterWidth - self.layerThickness)
+            #http://hydraraptor.blogspot.sk/2011/03/spot-on-flow-rate.html
+        self.flowScaleSixty = 60.0 * extrusionArea / filamentPackingArea
         
         self.minimumBridgeFeedRateMultiplier = runtimeParameters.minimumBridgeFeedRateMultiplier
         self.minimumPerimeterFeedRateMultiplier = runtimeParameters.minimumPerimeterFeedRateMultiplier
