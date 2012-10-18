@@ -174,7 +174,7 @@ class LineFillStrategy:
         if layerIndex < 0 or layerIndex >= len(self.slicedModel.layers):
             return
         
-        layer = self.slicedModel.layers.values()[layerIndex]
+        layer = self.slicedModel.layers[layerIndex]
         
         nestedRings = layer.nestedRings
         rotatedCarve = []

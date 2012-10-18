@@ -66,8 +66,7 @@ class MultiplySkein:
 		elementOffsetsCount = len(elementOffsets)
 		self.slicedModel.elementOffsets = elementOffsets
 		
-		for key in self.slicedModel.layers.iterkeys():
-			layer = self.slicedModel.layers[key]
+		for layer in self.slicedModel.layers:
 			offsetNestedRings = []
 			for nestedRing in layer.nestedRings:
 				for (index,elementOffset) in enumerate(elementOffsets):

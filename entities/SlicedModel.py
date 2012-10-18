@@ -1,4 +1,3 @@
-from collections import OrderedDict
 from config import config
 from StringIO import StringIO
 import gcodes
@@ -14,7 +13,7 @@ class SlicedModel:
     def __init__(self):
 
         self.runtimeParameters = RuntimeParameters()
-        self.layers = OrderedDict()
+        self.layers = []
         
         self.startGcodeCommands = []
         self.endGcodeCommands = []
@@ -44,8 +43,8 @@ class SlicedModel:
             output.write(GcodeCommand.printCommand(startGcodeCommand, self.runtimeParameters.verboseGcode))
         
         output.write("\nlayers:\n")
-        for key in sorted(self.layers.iterkeys()):
-            output.write('%s\n' % self.layers[key])
+        for layer in self.layers:
+            output.write('%s\n' % layer)
        
         output.write("\nendGcodeCommands:\n")
         for endGcodeCommand in self.endGcodeCommands:

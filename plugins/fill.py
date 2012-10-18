@@ -58,7 +58,7 @@ class FillSkein:
 		except Exception as inst:
 			logger.warning("Exception reading strategy %s: %s", self.fillStrategyName, inst)
 
-		for layer in self.slicedModel.layers.values():
+		for layer in self.slicedModel.layers:
 			
 			if fillStrategy != None:
 				fillStrategy.fill(layer)

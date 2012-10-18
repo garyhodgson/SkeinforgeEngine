@@ -61,7 +61,7 @@ class CoolSkein:
 		except Exception as inst:
 			logger.warning("Exception reading strategy %s: %s", self.coolStrategyName, inst)
 		
-		for layer in self.slicedModel.layers.values():
+		for layer in self.slicedModel.layers:
 			for line in self.coolStartLines:
 				layer.preLayerGcodeCommands.append(line)
 	            

@@ -59,7 +59,7 @@ class InsetSkein:
 		
 		if self.multiprocess:
 			manager = Manager()
-			sharedLayers = manager.list(self.slicedModel.layers.values())
+			sharedLayers = manager.list(self.slicedModel.layers)
 			
 			p = Pool()
 			resultLayers = p.map(self.addInsetForLayer, sharedLayers)
@@ -67,12 +67,12 @@ class InsetSkein:
 			p.join()
 			
 			for resultLayer in resultLayers:
-				self.slicedModel.layers[resultLayer.z] = resultLayer
+				self.slicedModel.layers[resultLayer.index] = resultLayer
 			
 		else:
 			
-			for x in self.slicedModel.layers.values():
-				self.addInsetForLayer(x)
+			for layer in self.slicedModel.layers:
+				self.addInsetForLayer(layer)
 			
 	def addInsetForLayer(self, layer):
 		halfWidth = self.halfPerimeterWidth * 0.7853

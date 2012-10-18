@@ -79,10 +79,7 @@ class ExportSkein:
 		return output.getvalue()
 
 	def setFirstLayerRates(self):
-		for layer in self.slicedModel.layers.values():
-			if layer.index == 0:
-				layer.feedAndFlowRateMultiplier = [self.firstLayerFeedRateRatio, self.firstLayerFlowRateRatio]
-				break
+		self.slicedModel.layers[0].feedAndFlowRateMultiplier = [self.firstLayerFeedRateRatio, self.firstLayerFlowRateRatio]
 
 	def export(self):
 		'Perform final modifications to slicedModel and performs export.'

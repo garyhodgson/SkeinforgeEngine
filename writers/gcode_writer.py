@@ -25,16 +25,15 @@ class GcodeWriter:
         lookaheadStartVector = None
         lookaheadKeyIndex = 0
         layerCount = len(self.slicedModel.layers)
-        for key in sorted(self.slicedModel.layers.iterkeys()):
+        for layer in self.slicedModel.layers:
             lookaheadStartPoint = None
-            lookaheadKeyIndex = lookaheadKeyIndex + 1
-            if lookaheadKeyIndex < layerCount:
-                lookaheadKey = self.slicedModel.layers.keys()[lookaheadKeyIndex]
-                lookaheadLayer = self.slicedModel.layers[lookaheadKey]
+            lookaheadIndex = layer.index + 1
+            if lookaheadIndex < layerCount:
+                lookaheadLayer = self.slicedModel.layers[lookaheadIndex]
                 lookaheadStartPoint = lookaheadLayer.getStartPoint()
                 lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, lookaheadLayer.z)
 
-            self.getLayer(self.slicedModel.layers[key], output, lookaheadStartVector, verbose)
+            self.getLayer(layer, output, lookaheadStartVector, verbose)
             
         for endCommand in self.slicedModel.endGcodeCommands:
             output.write(printCommand(endCommand, verbose))

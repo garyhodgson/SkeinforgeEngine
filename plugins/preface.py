@@ -75,7 +75,7 @@ class PrefaceSkein:
 				parentNestedRing = nestRingPlaceholder[str(internalLoops[internalLoop])]
 				parentNestedRing.innerNestedRings.append(childNestedRing)
 				 
-		self.slicedModel.layers[z] = layer
+		self.slicedModel.layers.append(layer)
 
 	def createLoopHierarchy(self, loops):
 		internalLoops = {}

@@ -73,7 +73,7 @@ class SupportSkein:
 	def support(self):
 		'Add support layers to sliced model'
 		
-		for layer in self.slicedModel.layers.values():
+		for layer in self.slicedModel.layers:
 			perimeters = []
 			layer.getPerimeterPaths(perimeters)
 			boundaryLayer = euclidean.LoopLayer(layer.z) # TODO refactor out
@@ -92,7 +92,7 @@ class SupportSkein:
 		self.raftOutsetRadius = self.raftMargin + (self.raftAdditionalMarginOverLengthPercent * 0.01) * max(originalExtent.real, originalExtent.imag)#todo ACT +0.1
 		self.setBoundaryLayers()
 
-		for layer in self.slicedModel.layers.values():
+		for layer in self.slicedModel.layers:
 			endpoints = self.getSupportEndpoints(layer.index)
 			if len(endpoints) > 0:
 				self.addSupportLayer(endpoints, layer)

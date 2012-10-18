@@ -1,6 +1,5 @@
 from GcodeCommand import GcodeCommand
 from StringIO import StringIO
-from collections import OrderedDict
 from config import config
 from fabmetheus_utilities.vector3 import Vector3
 from math import pi

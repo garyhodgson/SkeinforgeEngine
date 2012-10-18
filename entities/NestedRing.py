@@ -1,5 +1,4 @@
 from StringIO import StringIO
-from collections import OrderedDict
 from config import config
 from fabmetheus_utilities import euclidean
 from fabmetheus_utilities.vector3 import Vector3
