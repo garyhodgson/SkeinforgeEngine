@@ -76,10 +76,10 @@ class SupportSkein:
 		for layer in self.slicedModel.layers:
 			perimeters = []
 			layer.getPerimeterPaths(perimeters)
-			boundaryLayer = euclidean.LoopLayer(layer.z) # TODO refactor out
+			boundaryLayer = []
 			for perimeter in perimeters:				
 				boundaryLoop = []
-				boundaryLayer.loops.append(boundaryLoop)
+				boundaryLayer.append(boundaryLoop)
 				for boundaryPoint in perimeter.boundaryPoints:
 					boundaryLoop.append(boundaryPoint.dropAxis())
 			self.boundaryLayers.append(boundaryLayer)
@@ -123,7 +123,7 @@ class SupportSkein:
 		
 		for boundaryLayer in self.boundaryLayers:
 			# thresholdRadius of 0.8 is needed to avoid the ripple inset bug http://hydraraptor.blogspot.com/2010/12/crackers.html
-			supportLoops = intercircle.getInsetSeparateLoopsFromLoops(-self.supportOutset, boundaryLayer.loops, 0.8)
+			supportLoops = intercircle.getInsetSeparateLoopsFromLoops(-self.supportOutset, boundaryLayer, 0.8)
 			supportLayer = SupportLayer(supportLoops)
 			self.supportLayers.append(supportLayer)
 				
@@ -134,7 +134,7 @@ class SupportSkein:
 		self.truncateSupportSegmentTables()
 		
 		for supportLayerIndex in xrange(len(self.supportLayers) - 1):
-			boundaryLoops = self.boundaryLayers[supportLayerIndex].loops
+			boundaryLoops = self.boundaryLayers[supportLayerIndex]
 			self.extendXIntersections(boundaryLoops, self.supportOutset, self.supportLayers[supportLayerIndex].xIntersectionsTable)
 			
 		for supportLayer in self.supportLayers:
@@ -170,7 +170,7 @@ class SupportSkein:
 		
 		aroundPixelTable = {}
 		aroundWidth = 0.25 * self.interfaceStep
-		boundaryLoops = self.boundaryLayers[layer.index].loops
+		boundaryLoops = self.boundaryLayers[layer.index]
 		halfSupportOutset = 0.5 * self.supportOutset
 		aroundBoundaryLoops = intercircle.getAroundsFromLoops(boundaryLoops, halfSupportOutset)
 		for aroundBoundaryLoop in aroundBoundaryLoops:
@@ -188,17 +188,16 @@ class SupportSkein:
 	
 	def addSupportSegmentTable(self, layerIndex):
 		'Add support segments from the boundary layers.'
-		aboveLayer = self.boundaryLayers[ layerIndex + 1 ]
-		aboveLoops = aboveLayer.loops
+		aboveLoops = self.boundaryLayers[ layerIndex + 1 ]
 		supportLayer = self.supportLayers[layerIndex]
 
 		if len(aboveLoops) < 1:
 			return
 		
 		boundaryLayer = self.boundaryLayers[layerIndex]
-		rise = aboveLayer.z - boundaryLayer.z
+		rise = self.slicedModel.layers[layerIndex + 1 ].z - self.slicedModel.layers[layerIndex].z
 		
-		outsetSupportLoops = intercircle.getInsetSeparateLoopsFromLoops(-self.minimumSupportRatio * rise, boundaryLayer.loops)
+		outsetSupportLoops = intercircle.getInsetSeparateLoopsFromLoops(-self.minimumSupportRatio * rise, boundaryLayer)
 		numberOfSubSteps = 4
 		subStepSize = self.interfaceStep / float(numberOfSubSteps)
 		aboveIntersectionsTable = {}
@@ -227,7 +226,7 @@ class SupportSkein:
 		'Add support material to a layer if it is empty.'
 		supportLayer = SupportLayer([])
 		self.supportLayers.append(supportLayer)
-		if len(self.boundaryLayers[ boundaryLayerIndex ].loops) > 0:
+		if len(self.boundaryLayers[ boundaryLayerIndex ]) > 0:
 			return
 		aboveXIntersectionsTable = {}
 		euclidean.addXIntersectionsFromLoopsForTable(self.getInsetLoopsAbove(boundaryLayerIndex), aboveXIntersectionsTable, self.interfaceStep)
