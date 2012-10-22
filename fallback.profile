@@ -106,7 +106,7 @@ debug=true
 ; 	Everywhere:			Support material will be added wherever there are overhangs, even inside the object.  Because support material inside objects is hard or impossible to remove, this option should only be chosen if the object has a cavity that needs support and there is some way to extract the support material.
 location=ExteriorOnly
 min.angle=40.0
-crosshatch=false
+crosshatch.every.nth.layer=0
 gap.over.perimeter.extrusion.width.ratio=1.0
 extension.percent=0.0
 extension.distance=2.0

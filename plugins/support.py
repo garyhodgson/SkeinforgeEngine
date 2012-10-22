@@ -41,7 +41,7 @@ class SupportSkein:
 		self.supportLocation = config.get(name, 'location')
 		self.supportMinimumAngle = config.getfloat(name, 'min.angle')
 		self.minimumSupportRatio = math.tan(math.radians(self.supportMinimumAngle))
-		self.supportCrossHatch = config.getboolean(name, 'crosshatch')
+		self.supportCrossHatchNthLayer = config.getint(name, 'crosshatch.every.nth.layer')
 		self.supportFeedRate = config.getfloat('speed', 'feed.rate.support')
 		self.supportFlowRateRatio = config.getfloat('speed', 'flow.rate.support.ratio')
 		
@@ -102,7 +102,7 @@ class SupportSkein:
 		if len(self.supportLayers) <= layerIndex:
 			return []
 		supportSegmentTable = self.supportLayers[layerIndex].supportSegmentTable
-		if layerIndex % 2 == 1 and self.supportCrossHatch:
+		if self.supportCrossHatchNthLayer and (layerIndex + 1) % self.supportCrossHatchNthLayer == 0:
 			return getVerticalEndpoints(supportSegmentTable, self.interfaceStep, 0.1 * self.extrusionWidth, self.interfaceStep)
 		return euclidean.getEndpointsFromSegmentTable(supportSegmentTable)
 	
