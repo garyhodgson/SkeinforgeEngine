@@ -73,10 +73,17 @@ class Layer:
         '''Returns the amount of time needed to print the layer, and the distance to travel. Note, this currently ignores commands in the pre and post layer list.'''
         duration = 0.0
         distance = 0.0
+        
         for nestedRing in self.nestedRings:
             (nestedRingDistance, nestedRingDuration) = nestedRing.getDistanceAndDuration()
             distance += nestedRingDistance
             duration += nestedRingDuration
+        
+        for supportPath in self.supportPaths:
+            (supportPathDistance, supportPathDuration) = supportPath.getDistanceAndDuration()
+            distance += supportPathDistance
+            duration += supportPathDuration
+        
         return (distance, duration)
     
 
