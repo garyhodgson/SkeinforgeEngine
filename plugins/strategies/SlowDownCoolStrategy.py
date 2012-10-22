@@ -26,6 +26,10 @@ class SlowDownCoolStrategy:
         '''
         
         (layerDistance, layerDuration) = layer.getDistanceAndDuration()
-        layer.feedAndFlowRateMultiplier[0] = min(1.0, layerDuration / self.minimumLayerTime)
-        layer.feedAndFlowRateMultiplier[1] = layer.feedAndFlowRateMultiplier[0]
+        
+        if layerDuration != 0:
+                #can't increase empty layer duration by slowing down
+                
+                layer.feedAndFlowRateMultiplier[0] = min(1.0, layerDuration / self.minimumLayerTime)
+                layer.feedAndFlowRateMultiplier[1] = layer.feedAndFlowRateMultiplier[0]
         

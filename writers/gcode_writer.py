@@ -31,7 +31,8 @@ class GcodeWriter:
             if lookaheadIndex < layerCount:
                 lookaheadLayer = self.slicedModel.layers[lookaheadIndex]
                 lookaheadStartPoint = lookaheadLayer.getStartPoint()
-                lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, lookaheadLayer.z)
+                if lookaheadStartPoint != None:
+                        lookaheadStartVector = Vector3(lookaheadStartPoint.real, lookaheadStartPoint.imag, lookaheadLayer.z)
 
             self.getLayer(layer, output, lookaheadStartVector, verbose)
             
